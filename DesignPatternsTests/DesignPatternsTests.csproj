@@ -57,10 +57,15 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestClasses\IApplication.cs" />
-    <Compile Include="TestClasses\Application.cs" />
+    <Compile Include="Singleton\TestClasses\EmailService.cs" />
+    <Compile Include="Singleton\TestClasses\IEmailService.cs" />
+    <Compile Include="Singleton\TestClasses\ILogger.cs" />
+    <Compile Include="Singleton\TestClasses\Logger.cs" />
+    <Compile Include="Singleton\TestClasses\IApplication.cs" />
+    <Compile Include="Singleton\TestClasses\Application.cs" />
     <Compile Include="Singleton\SingletonTests.cs" />
-    <Compile Include="TestClasses\QueryTypeEventArgs.cs" />
+    <Compile Include="Singleton\TestClasses\QueryTypeEventArgs.cs" />
+    <Compile Include="Singleton\TestClasses\Widget.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

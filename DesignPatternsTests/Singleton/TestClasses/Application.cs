@@ -9,11 +9,12 @@ namespace DesignPatterns.Tests
     public class Application : IApplication
     {
         private Application() { }  //permitted.
-        public static Application Instance { get { return Singleton<Application>.Instance; } }
+        public static Application Instance => Singleton<Application>.Instance; //use this with generic singleton
         public string Name { get; } = "Notepad++";
         public string Version { get; } = "1.0.0";
         public static event EventHandler<QueryTypeEventArgs> QueryType;
 
+        //use to make Interface singletons
         private static IApplication CreateInstance()
         {
             var handler = QueryType;
