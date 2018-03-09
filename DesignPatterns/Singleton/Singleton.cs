@@ -3,18 +3,15 @@ using System.Reflection;
 
 namespace DesignPatterns
 {
-    //source: http://richardpianka.com/2011/01/generic-singleton-pattern-in-c-with-reflection/
-    public static class Singleton<T>
-       where T : class, ISingleton
+    //original source: http://richardpianka.com/2011/01/generic-singleton-pattern-in-c-with-reflection/
+    public static class Singleton<T> where T : class, ISingleton
     {
         static volatile T _instance;
         static object _lock = new object();
         const BindingFlags FLAGS = BindingFlags.Instance |
                       BindingFlags.NonPublic;
 
-        static Singleton()
-        {
-        }
+        static Singleton() { }
 
         public static T Instance
         {
