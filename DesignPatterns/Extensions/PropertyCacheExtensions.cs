@@ -1,10 +1,9 @@
-﻿using System;
+﻿using DesignPatterns;
 using System.Collections.Concurrent;
-using System.Reflection;
 
-namespace DesignPatterns
+namespace System.Reflection
 {
-    public static partial class Extensions
+    public static class Extensions
     {
         public static ConcurrentDictionary<Type, PropertyInfo[]> Cache(this Type type)
         {

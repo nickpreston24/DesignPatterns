@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using DesignPatterns;
+using System.Collections.Generic;
 using System.Linq;
 
-namespace DesignPatterns
+namespace System
 {
-    public static partial class Extensions
+    public static class Extensions
     {
         public static Maybe<T> ToMaybe<T>(this T value) where T : class => value != null
                 ? Maybe.Some(value)
