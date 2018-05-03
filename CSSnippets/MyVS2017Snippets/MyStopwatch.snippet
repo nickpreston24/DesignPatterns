@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">  
+    <CodeSnippet Format="1.0.0">  
+        <Header>			
+            <Title>MyStopwatch</Title>          
+			<Shortcut>stopwatch</Shortcut>			
+			<Description></Description>
+			<HelpUrl></HelpUrl>
+			<!-- <Type>Extension</Type> -->
+			<Type>Surrounds</Type>
+		</Header>  
+        <Snippet> 						
+			<Code Language="CSharp" >  
+                <![CDATA[#if DEBUG
+				var watch = new Stopwatch();				
+				watch.Start();
+				#endif
+				
+				$selected$ 
+				
+				#if DEBUG
+				watch.Stop();
+				var elapsedTime = watch.Elapsed;
+				Debug.WriteLine($$"{ MethodBase.GetCurrentMethod().Name }() Time Elapsed: {elapsedTime.TotalMilliseconds} ms");
+				$end$#endif]]>  
+				<!-- Debug.WriteLine("{0}() Time Elapsed: {1} ", MethodBase.GetCurrentMethod().Name, elapsedTime); -->
+			</Code>  
+        </Snippet>  
+    </CodeSnippet>  
+	<CodeSnippet Format="1.0.0">  
+        <Header>			
+            <Title>CWMetrics</Title>          
+			<Shortcut>cw_metrics</Shortcut>			
+			<Description></Description>
+			<HelpUrl></HelpUrl>
+		</Header>  		
+		<Snippet> 						
+			<Code Language="CSharp" >  
+                <![CDATA[	
+				return Logger.Measure(MethodBase.GetCurrentMethod().Name, () =>
+				{
+				$selected$ 
+				});
+				$end$ 
+				]]>  
+			</Code>  
+        </Snippet>  		
+    </CodeSnippet>  
+</CodeSnippets>  

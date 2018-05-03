@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<!--NOTE: be sure to make this file's extension a .snippet, otherwise VS won't recognize it as a snippet!-->
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">  
+    <CodeSnippet Format="1.0.0">  
+        <Header>			
+            <Title>getsetprivate</Title>          
+			<Shortcut>gsp</Shortcut>			
+			<Description></Description>
+			<HelpUrl></HelpUrl>
+		</Header>  
+        <Snippet> 		
+			<Declarations>  			
+			<Literal>  
+				<ID>MyPropertyName</ID>  
+				<ToolTip>Replace with property name.</ToolTip>  
+				<Default>MyPropertyName</Default>  
+			</Literal>  
+			<Literal>  
+				<ID>MyType</ID>  
+				<ToolTip>Replace with property type.</ToolTip>  
+				<Default>MyType</Default>  
+			</Literal>  
+		</Declarations> 			
+			<Code Language="CSharp" >  
+                <![CDATA[				
+			 private $MyType$ _$MyPropertyName$;  
+			 public $MyType$ $MyPropertyName$  
+			 {get{return _$MyPropertyName$;} set{ if(value!=null) _$MyPropertyName$ = value;}} 				
+				$end$
+				]]>  
+			</Code>  
+        </Snippet>  
+    </CodeSnippet>  
+	<CodeSnippet Format="1.0.0">  
+        <Header>			
+            <Title>gs</Title>          
+			<Shortcut>gs</Shortcut>			
+			<Description></Description>
+			<HelpUrl></HelpUrl>
+		</Header>  
+        <Snippet> 								
+			<Code Language="CSharp" >  
+                <![CDATA[ { get; set; }$end$]]>  
+			</Code>  
+        </Snippet>  
+    </CodeSnippet>  
+	<CodeSnippet Format="1.0.0">  
+        <Header>			
+            <Title>get</Title>          
+			<Shortcut>get</Shortcut>			
+			<Description></Description>
+			<HelpUrl></HelpUrl>
+		</Header>  
+        <Snippet> 		
+			<Declarations>  
+			<Literal>  
+				<ID>expression</ID>  
+				<ToolTip>Write an expression here.</ToolTip>  
+				<Default>expression</Default>  
+			</Literal>  
+			</Declarations>  						
+			<Code Language="CSharp" >  
+                <![CDATA[
+				get { return $expression$; } 
+				]]>  
+			</Code>  
+        </Snippet>  
+    </CodeSnippet>  
+		<CodeSnippet Format="1.0.0">  
+        <Header>			
+            <Title>set</Title>          
+			<Shortcut>set</Shortcut>			
+			<Description></Description>
+			<HelpUrl></HelpUrl>
+		</Header>  
+        <Snippet> 		
+			<Declarations>  
+			<Literal>  
+				<ID>expression</ID>  
+				<ToolTip>Write an expression here.</ToolTip>  
+				<Default>expression</Default>  
+			</Literal>  
+			</Declarations>  						
+			<Code Language="CSharp" >  
+                <![CDATA[
+				set { $expression$ = value; } 
+				]]>  
+			</Code>  
+        </Snippet>  
+    </CodeSnippet>  
+</CodeSnippets>  

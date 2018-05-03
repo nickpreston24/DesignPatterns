@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">  
+    <CodeSnippet Format="1.0.0">  
+        <Header>			
+            <Title>MyDispose</Title>          
+			<Shortcut>MyDispose</Shortcut>			
+			<Description>Dispose done right</Description>
+			<HelpUrl></HelpUrl>
+		</Header>  
+        <Snippet> 				
+		<Declarations>  			
+			<Literal>  
+				<ID>MyClassName</ID>  
+				<ToolTip></ToolTip>  
+				<Default>MyClassName</Default>  
+			</Literal>  		
+		</Declarations>  	
+			<Imports>
+				<Import>
+					<Namespace></Namespace>
+				</Import>
+			</Imports>			
+			
+			<Code Language="CSharp" >  
+                <![CDATA[
+				private bool _disposed;
+				
+				$end$
+				
+				~$MyClassName$()
+					{					
+						Dispose (false);
+					}
+				
+				 /// <summary>
+        /// References:
+        /// https://lostechies.com/chrispatterson/2012/11/29/idisposable-done-right/
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+             if (_disposed)
+                return;
+
+            if (disposing)
+            {
+                //free managed objects that implement IDisposable only
+            }
+            //release any unmanaged objects here and set object references to null
+
+            _disposed = true;			
+        }
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);			
+        }						
+				]]>  
+			</Code>  
+        </Snippet>  
+    </CodeSnippet>  
+</CodeSnippets>  

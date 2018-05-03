@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<!--NOTE: be sure to make this file's extension a .snippet, otherwise VS won't recognize it as a snippet!-->
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">  
+    <CodeSnippet Format="1.0.0">  
+        <Header>			
+            <Title>MyDebugWriteLine_w_Exception</Title>          
+			<Shortcut>dwe</Shortcut>			
+			<Description></Description>
+			<HelpUrl></HelpUrl>
+		</Header>  
+        <Snippet> 					
+			<Imports>
+				<Import>
+					<Namespace>System.Reflection</Namespace>
+				</Import>
+				<Import>
+					<Namespace>System.Diagnostics</Namespace>
+				</Import>
+				<Import>
+					<Namespace>System</Namespace>
+				</Import>
+			</Imports>		
+			<Code Language="CSharp" >  
+                <![CDATA[Debug.WriteLine(string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.ToString()));$end$]]>  
+			</Code>  
+        </Snippet>  
+    </CodeSnippet>  
+	<CodeSnippet Format="1.0.0">  
+        <Header>  
+            <Title>MyDebugWriteLine</Title>          
+			<Shortcut>dw</Shortcut>
+			<Type>Extension</Type>			
+		</Header>  		
+        <Snippet> 
+			<Imports>				
+				<Import>
+					<Namespace>System.Diagnostics</Namespace>
+				</Import>
+				<Import>
+					<Namespace>System</Namespace>
+				</Import>
+			</Imports>			
+            <Code Language="CSharp">  
+                <![CDATA[
+				Debug.WriteLine($selected$$end$);
+				]]>  
+            </Code>  
+        </Snippet>  
+    </CodeSnippet>  
+	
+	<CodeSnippet Format="1.0.0">  
+        <Header>			
+            <Title>title</Title>          
+			<Shortcut>dwv</Shortcut>			
+			<Description></Description>
+			<HelpUrl></HelpUrl>
+		</Header>  
+        <Snippet> 		
+			<Imports>
+				<Import>
+					<Namespace>System.Reflection</Namespace>
+				</Import>
+				<Import>
+					<Namespace>System.Diagnostics</Namespace>
+				</Import>
+				<Import>
+					<Namespace>System</Namespace>
+				</Import>
+			</Imports>	
+			<Declarations>  
+			<Literal>  
+				<ID>MyVariableName</ID>  
+				<ToolTip>Replace with Variable name.</ToolTip>  
+				<Default>MyVariableName</Default>  
+			</Literal>  			
+		</Declarations>  		
+			<Imports>
+				<Import>
+					<Namespace></Namespace>
+				</Import>
+			</Imports>					
+			<Code Language="CSharp" >  
+                <![CDATA[				
+				Debug.WriteLine(string.Format("{0}() - $MyVariableName$: {1}", MethodBase.GetCurrentMethod().Name,  $MyVariableName$));
+				$end$ 
+				]]>  
+			</Code>  
+        </Snippet>  
+    </CodeSnippet>  
+</CodeSnippets>  

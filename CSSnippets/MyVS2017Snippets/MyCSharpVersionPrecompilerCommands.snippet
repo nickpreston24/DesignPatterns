@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<!--NOTE: be sure to make this file's extension a .snippet, otherwise VS won't recognize it as a snippet!-->
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">  
+    <CodeSnippet Format="1.0.0">  
+        <Header>			
+            <Title>CSVersion6.0</Title>          
+			<Shortcut>cs6</Shortcut>			
+			<Description>Designate your code as C# 6.0 with precompiler commands.</Description>
+			<HelpUrl></HelpUrl>
+		</Header>  
+        <Snippet> 					
+			<Imports>
+				<Import>
+					<Namespace></Namespace>
+				</Import>
+			</Imports>				
+			<Code Language="CSharp" >  
+                <![CDATA[				
+				#if !(NET20 || NET35 || NET40 || NET45 || NET451 || NET452)
+                        //todo: code goes here for CSharp version >= 6.0.
+						$selected$
+						$end$
+				#else
+                        //todo:code goes here for CSharp version < 6.0.
+				#endif]]>  
+			</Code>  
+        </Snippet>  
+    </CodeSnippet>  
+	
+	 <CodeSnippet Format="1.0.0">  
+        <Header>			
+            <Title>CSVersion6.0</Title>          
+			<Shortcut>cs7</Shortcut>			
+			<Description>Designate your code as C# 6.0 with precompiler commands.</Description>
+			<HelpUrl></HelpUrl>
+		</Header>  
+        <Snippet> 					
+			<Imports>
+				<Import>
+					<Namespace></Namespace>
+				</Import>
+			</Imports>				
+			<Code Language="CSharp" >  
+                <![CDATA[				
+				#if !(NET20 || NET35 || NET40 || NET45 || NET451 || NET452) && (NET46 || NET461 || NET47 || NET471)
+                        //todo: code goes here for CSharp version >= 6.0 <=7.1.
+						$selected$
+						$end$
+				#else
+                        //todo:code goes here for CSharp version < 7.1
+				#endif]]>  
+			</Code>  
+        </Snippet>  
+    </CodeSnippet>  
+	
+</CodeSnippets>  

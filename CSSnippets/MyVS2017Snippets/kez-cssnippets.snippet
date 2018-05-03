@@ -1,0 +1,2044 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>simple singleton</Title>
+			<Shortcut>dpsingleton</Shortcut>
+			<Author>Khoder Elzein</Author>
+			<Description>singleton pattern multithreaded</Description>
+		</Header>
+		<Snippet>
+			<Declarations>
+				<Literal Editable="true">
+					<ID>ClassName</ID>
+					<ToolTip>Replaces with class name</ToolTip>
+					<Default>Singleton</Default>
+				</Literal>
+			</Declarations>
+			<Code Language="CSharp" Kind="type decl">
+				<![CDATA[public class $ClassName$
+	{
+		// declare singleton field
+		private volatile static $ClassName$ instance;
+        // Lock synchronization object
+        private static object syncLock = new object();
+		
+		// private constructor.
+		private $ClassName$() 
+		{
+		}
+		
+		// Get instance
+		public static $ClassName$ GetInstance()
+		{			
+            if (instance == null)
+            {
+                lock (syncLock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new $ClassName$();
+                    }
+                }
+            }    
+            return instance;
+		// class implementation
+		$end$
+		}
+	}
+	]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+	
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Abstract Factory </Title>
+			<Shortcut>dpabstractfactory</Shortcut>
+			<Author>Khoder Elzein</Author>
+			<Description>abstract factory</Description>
+		</Header>
+		<Snippet>
+			<Declarations>
+				<Literal Editable="true">
+					<ID>AbstractFactory</ID>
+					<ToolTip>Replaces with class name</ToolTip>
+					<Default>AbstractFactory</Default>
+				</Literal>
+				<Literal Editable="true">
+					<ID>AbstractProductA</ID>
+					<ToolTip>Replaces with class name</ToolTip>
+					<Default>AbstractProductA</Default>
+				</Literal>
+				<Literal Editable="true">
+					<ID>AbstractProductB</ID>
+					<ToolTip>Replaces with class name</ToolTip>
+					<Default>AbstractProductB</Default>
+				</Literal>
+				<Literal Editable="true">
+					<ID>ConcreteFactory1</ID>
+					<ToolTip>Replaces with class name</ToolTip>
+					<Default>ConcreteFactory1</Default>
+				</Literal>
+				<Literal Editable="true">
+					<ID>ConcreteFactory2</ID>
+					<ToolTip>Replaces with class name</ToolTip>
+					<Default>ConcreteFactory2</Default>
+				</Literal>
+				<Literal Editable="true">
+					<ID>ConcreteProductA1</ID>
+					<ToolTip>Replaces with class name</ToolTip>
+					<Default>ConcreteProductA1</Default>
+				</Literal>
+				<Literal Editable="true">
+					<ID>ConcreteProductA2</ID>
+					<ToolTip>Replaces with class name</ToolTip>
+					<Default>ConcreteProductA2</Default>
+				</Literal>
+				<Literal Editable="true">
+					<ID>ConcreteProductB1</ID>
+					<ToolTip>Replaces with class name</ToolTip>
+					<Default>ConcreteProductB1</Default>
+				</Literal>
+				<Literal Editable="true">
+					<ID>ConcreteProductB2</ID>
+					<ToolTip>Replaces with class name</ToolTip>
+					<Default>ConcreteProductB2</Default>
+				</Literal>
+
+			</Declarations>
+			<Code Language="CSharp" Kind="type decl">
+				<![CDATA[
+    // $AbstractFactory$
+    abstract class $AbstractFactory$
+    {
+        public abstract $AbstractProductA$ CreateProductA();
+        public abstract $AbstractProductB$ CreateProductB();
+    }
+
+    // $ConcreteFactory1$
+    class $ConcreteFactory1$ : $AbstractFactory$
+    {
+        public override $AbstractProductA$ CreateProductA()
+        {
+            return new $ConcreteProductA1$();
+        }
+        public override $AbstractProductB$ CreateProductB()
+        {
+            return new $ConcreteProductB1$();
+        }
+    }
+
+    // $ConcreteFactory2$
+    class $ConcreteFactory2$ : $AbstractFactory$
+    {
+        public override $AbstractProductA$ CreateProductA()
+        {
+            return new $ConcreteProductA2$();
+        }
+        public override $AbstractProductB$ CreateProductB()
+        {
+            return new $ConcreteProductB2$();
+        }
+    }
+
+    // $AbstractProductA$
+    abstract class $AbstractProductA$
+    {
+    }
+
+    // $AbstractProductB$
+    abstract class $AbstractProductB$
+    {
+    }
+
+    // $ConcreteProductA1$
+    class $ConcreteProductA1$ : $AbstractProductA$
+    {
+    }
+
+    // $ConcreteProductB1$
+    class $ConcreteProductB1$ : $AbstractProductB$
+    {
+    }
+
+    // $ConcreteProductA2$
+    class $ConcreteProductA2$ : $AbstractProductA$
+    {
+    }
+
+    // $ConcreteProductB2$
+    class $ConcreteProductB2$ : $AbstractProductB$
+    {
+    }
+				]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Adapter</Title>
+      <Shortcut>dpadapter</Shortcut>
+      <Author>Khoder Elzein</Author>
+      <Description>Adapter pattern</Description>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>Adapter</ID>
+          <ToolTip>Replaces with class name</ToolTip>
+          <Default>Adapter</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Adaptee</ID>
+          <ToolTip>Replaces with class name</ToolTip>
+          <Default>Adaptee</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Target</ID>
+          <ToolTip>Replaces with class name</ToolTip>
+          <Default>Target</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>AdapteeRequest</ID>
+          <ToolTip>Replaces with class name</ToolTip>
+          <Default>AdapteeRequest</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>TargetRequest</ID>
+          <ToolTip>Replaces with class name</ToolTip>
+          <Default>TargetRequest</Default>
+        </Literal>
+
+      </Declarations>
+      <Code Language="CSharp" Kind="type decl">
+        <![CDATA[
+    // $Target$ 
+    class $Target$
+    {
+        public virtual void $TargetRequest$()
+        {
+        }
+    }
+
+    // $Adapter$ 
+    class $Adapter$ : $Target$
+    {
+        private $Adaptee$ adaptee = new $Adaptee$();
+        public override void $TargetRequest$()
+        {
+            // Possibly do some other work
+            //   and then call $AdapteeRequest$
+            adaptee.$AdapteeRequest$();
+        }
+    }
+
+    // $Adaptee$
+    class $Adaptee$
+    {
+        public void $AdapteeRequest$()
+        {
+        }
+    }
+
+
+				]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Bridge</Title>
+      <Shortcut>dpbridge</Shortcut>
+      <Author>Khoder Elzein</Author>
+      <Description>Bridge</Description>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>Abstraction</ID>
+          <ToolTip>Replaces with class name</ToolTip>
+          <Default>Abstraction</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>RefinedAbstraction</ID>
+          <ToolTip>Replaces with class name</ToolTip>
+          <Default>RefinedAbstraction</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Implementation</ID>
+          <ToolTip>Replaces with class name</ToolTip>
+          <Default>Implementation</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>RefinedImplementationA</ID>
+          <ToolTip>Replaces with class name</ToolTip>
+          <Default>RefinedImplementationA</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>RefinedImplementationB</ID>
+          <ToolTip>Replaces with class name</ToolTip>
+          <Default>RefinedImplementationB</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Operation</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Operation</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>implementation</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>implementation</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="CSharp" Kind="type decl">
+        <![CDATA[
+    // $Abstraction$
+    class $Abstraction$
+    {
+        protected $Implementation$ $implementation$;
+
+        // Property
+        public $Implementation$ $Implementation$
+        {
+            set{ $implementation$ = value; }
+        }
+
+        public virtual void $Operation$()
+        {
+            $implementation$.$Operation$();
+        }
+    }
+
+    // $Implementation$ 
+    abstract class $Implementation$
+    {
+        public abstract void $Operation$();
+    }
+
+    // $RefinedAbstraction$
+
+    class $RefinedAbstraction$ : $Abstraction$
+    {
+        public override void $Operation$()
+        {
+            $implementation$.$Operation$();
+        }
+    }
+
+    // $RefinedImplementationA$
+    class $RefinedImplementationA$ : $Implementation$
+    {
+        public override void $Operation$()
+        {
+        }
+    }
+
+    // $RefinedImplementationB$
+    class $RefinedImplementationB$ : $Implementation$
+    {
+        public override void $Operation$()
+        {
+        }
+    }
+				]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Builder</Title>
+      <Shortcut>dpbuilder</Shortcut>
+      <Author>Khoder Elzein</Author>
+      <Description>Builder pattern</Description>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>Director</ID>
+          <ToolTip>Replaces with class name</ToolTip>
+          <Default>Director</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Builder</ID>
+          <ToolTip>Replaces with class name</ToolTip>
+          <Default>Builder</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>builder</ID>
+          <ToolTip>Replaces with class name</ToolTip>
+          <Default>builder</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteBuilder1</ID>
+          <ToolTip>Replaces with class name</ToolTip>
+          <Default>ConcreteBuilder1</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteBuilder2</ID>
+          <ToolTip>Replaces with class name</ToolTip>
+          <Default>ConcreteBuilder2</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>BuildA</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>BuildA</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>BuildB</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>BuildB</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Product</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Product</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>product</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>product</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Build</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Build</Default>
+        </Literal>
+
+      </Declarations>
+      <Code Language="CSharp" Kind="type decl">
+        <![CDATA[
+    //$Director$ 
+    class $Director$
+    {
+        // $Builder$ uses a complex series of steps
+        public void Construct($Builder$ $builder$)
+        {
+            $builder$.$BuildA$();
+            $builder$.$BuildB$();
+        }
+    }
+
+    // $Builder$
+    abstract class $Builder$
+    {
+        public abstract void $BuildA$();
+        public abstract void $BuildB$();
+        public abstract $Product$ GetResult();
+    }
+
+    // $ConcreteBuilder1$
+    class $ConcreteBuilder1$ : $Builder$
+    {
+        private $Product$ $product$ = new $Product$();
+
+        public override void $BuildA$()
+        {
+            $product$.$Build$("Part1A");
+        }
+
+        public override void $BuildB$()
+        {
+            $product$.$Build$("Part1B");
+        }
+
+        public override $Product$ GetResult()
+        {
+            return $product$;
+        }
+    }
+
+    // $ConcreteBuilder2$
+    class $ConcreteBuilder2$ : $Builder$
+    {
+        private $Product$ $product$ = new $Product$();
+
+        public override void $BuildA$()
+        {
+            $product$.$Build$("Part2A");
+        }
+
+        public override void $BuildB$()
+        {
+            $product$.$Build$("Part2B");
+        }
+
+        public override $Product$ GetResult()
+        {
+            return $product$;
+        }
+    }
+
+    // $Product$
+    class $Product$
+    {
+        public void $Build$(string part)
+        {
+        }
+    }
+      ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Chain</Title>
+      <Shortcut>dpchain</Shortcut>
+      <Author>Khoder Elzein</Author>
+      <Description>Chain of Responsibility Design Pattern</Description>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>Handler</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Handler</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteHandler1</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ConcreteHandler1</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteHandler2</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ConcreteHandler2</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteHandler3</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ConcreteHandler3</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Handle</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Handle</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>successor</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>successor</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>request</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>request</Default>
+        </Literal>
+
+      </Declarations>
+      <Code Language="CSharp" Kind="type decl">
+        <![CDATA[
+    // $Handler$ 
+    abstract class $Handler$ 
+    {
+        protected $Handler$ $successor$;
+  
+        public void SetSuccessor($Handler$ $successor$)
+        {
+            this.$successor$ = $successor$;
+        }
+
+        public abstract void $Handle$(int $request$);
+    }
+
+    // $ConcreteHandler1$
+    class $ConcreteHandler1$ : $Handler$
+    {
+        public override void $Handle$(int $request$)
+        {
+            if ($request$ == 0)
+            {
+            // process
+            }
+            else if ($successor$ != null)
+            {
+                $successor$.$Handle$($request$);
+            }
+        }
+    }
+
+    // $ConcreteHandler2$
+    class $ConcreteHandler2$ : $Handler$
+    {
+        public override void $Handle$(int $request$)
+        {
+            if ($request$ > 0)
+            {
+            // process
+            }
+            else if ($successor$ != null)
+            {
+                $successor$.$Handle$($request$);
+            }
+        }
+    }
+
+    // $ConcreteHandler3$
+    class $ConcreteHandler3$ : $Handler$
+    {
+        public override void $Handle$(int $request$)
+        {
+            if ($request$ < 0)
+            {
+            // process
+            }
+            else if ($successor$ != null)
+            {
+                $successor$.$Handle$($request$);
+            }
+        }
+    }
+
+      ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Command</Title>
+      <Shortcut>dpcommand</Shortcut>
+      <Author>Khoder Elzein</Author>
+      <Description>Command Design Pattern</Description>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>Command</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Command</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Receiver</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Receiver</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>receiver</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>receiver</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>command</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>command</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Execute</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Execute</Default>
+        </Literal>
+
+      </Declarations>
+      <Code Language="CSharp" Kind="type decl">
+        <![CDATA[
+    // $Command$ 
+    abstract class $Command$ 
+    {
+        protected $Receiver$ $receiver$;
+
+        public $Command$($Receiver$ $receiver$)
+        {
+            this.$receiver$ = $receiver$;
+        }
+
+        public abstract void $Execute$();
+    }
+
+    // ConcreteCommand 
+    class ConcreteCommand : $Command$
+    {
+        public ConcreteCommand($Receiver$ $receiver$) : 
+            base($receiver$) 
+        {    
+        }
+
+        public override void $Execute$()
+        {
+            $receiver$.Action();
+        }
+    }
+
+    // $Receiver$
+    class $Receiver$ 
+    {
+        public void Action()
+        {
+        }
+    }
+
+    // Invoker 
+    class Invoker 
+    {
+        private $Command$ $command$;
+
+        public void SetCommand($Command$ $command$)
+        {
+            this.$command$ = $command$;
+        }
+
+        public void ExecuteCommand()
+        {
+            $command$.$Execute$();
+        }        
+    }
+
+      ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Composite</Title>
+      <Shortcut>dpcomposite</Shortcut>
+      <Author>Khoder Elzein</Author>
+      <Description>Composite Design Pattern</Description>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>Component</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Component</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>component</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>component</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Composite</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Composite</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Leaf</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Leaf</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Add</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Add</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Remove</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Remove</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Display</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Display</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="CSharp" Kind="type decl">
+        <![CDATA[
+    // $Component$ 
+    abstract class $Component$
+    {
+        protected string name;
+
+        // Constructor
+        public $Component$(string name)
+        {
+            this.name = name;
+        }
+
+        public abstract void $Add$($Component$ c);
+        public abstract void $Remove$($Component$ c);
+        public abstract void $Display$(int depth);
+    }
+
+    // $Composite$ 
+    class $Composite$ : $Component$
+    {
+        private IList<$Component$> children = new List<$Component$>();
+
+        // Constructor
+        public $Composite$(string name) : base(name) 
+        {    
+        }
+
+        public override void $Add$($Component$ $component$)
+        {
+            children.$Add$($component$);
+        }
+
+        public override void $Remove$($Component$ $component$)
+        {
+            children.$Remove$($component$);
+        }
+
+        public override void $Display$(int depth)
+        {
+            // Recursively display child nodes
+            foreach ($Component$ $component$ in children)
+            {
+              $component$.$Display$($component$);
+            }
+        }
+    }
+
+    // $Leaf$
+    class $Leaf$ : $Component$
+    {
+        // Constructor
+        public $Leaf$(string name) : base(name) 
+        {    
+        }
+
+        public override void $Add$($Component$ c)
+        {
+        }
+
+        public override void $Remove$($Component$ c)
+        {
+        }
+
+        public override void $Display$(int depth)
+        {
+        }
+    }
+      ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Decorator</Title>
+      <Shortcut>dpdecorator</Shortcut>
+      <Author>Khoder Elzein</Author>
+      <Description>Decortor Design Pattern</Description>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>Component</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Component</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteComponent</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ConcreteComponent</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Decorator</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Decorator</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteDecorator</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ConcreteDecorator</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteDecoratorA</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ConcreteDecoratorA</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteDecoratorB</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ConcreteDecoratorB</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>component</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>component</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Operation</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Operation</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="CSharp" Kind="type decl">
+        <![CDATA[
+     // $Component$
+    abstract class $Component$
+    {
+        public abstract void Operation();
+    }
+
+    // $ConcreteComponent$
+    class $ConcreteComponent$ : $Component$
+    {
+        public override void Operation()
+        {
+            Console.WriteLine("$ConcreteComponent$.Operation()");
+        }
+    }
+
+    // $Decorator$
+    abstract class $Decorator$ : $Component$
+    {
+        protected $Component$ component;
+
+        public void SetComponent($Component$ component)
+        {
+            this.component = component;
+        }
+
+        public override void Operation()
+        {
+            if (component != null)
+            {
+                component.Operation();
+            }
+        }
+    }
+
+    // $ConcreteDecoratorA$
+    class $ConcreteDecoratorA$ : $Decorator$
+    {
+
+        public override void Operation()
+        {
+            base.Operation();
+        }
+    }
+
+    // $ConcreteDecoratorB$
+    class $ConcreteDecoratorB$ : $Decorator$
+    {
+        public override void Operation()
+        {
+            base.Operation();
+        }
+
+        void AddedBehavior()
+        {
+        }
+    }
+
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Facade</Title>
+      <Shortcut>dpfacade</Shortcut>
+      <Author>Khoder Elzein</Author>
+      <Description>Facade Design Pattern</Description>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>Facade</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Facade</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>SubSystemA</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>SubSystemA</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>SubSystemB</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>SubSystemB</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="CSharp" Kind="type decl">
+        <![CDATA[
+    // $SubSystemA$ 
+    class $SubSystemA$
+    {
+        public void MethodA()
+        {
+        }
+    }
+
+    // $SubSystemB$
+    class $SubSystemB$
+    {
+        public void MethodB()
+        {
+        }
+    }
+   
+    // $Facade$
+    class $Facade$
+    {
+        $SubSystemA$ A;
+        $SubSystemB$ B;
+
+        public $Facade$()
+        {
+            A = new $SubSystemA$();
+            B = new $SubSystemB$();
+        }
+
+        public void Method1()
+        {
+        }
+
+        public void Method2()
+        {
+        }
+    }
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+
+
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Flyweight</Title>
+      <Shortcut>dpflyweight</Shortcut>
+      <Author>Khoder Elzein</Author>
+      <Description>FlyweightDesign Pattern</Description>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>Flyweight</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Flyweight</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>FlyweightFactory</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>FlyweightFactory</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>GetFlyweight</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>GetFlyweight</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Operation</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Operation</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>SharedConcreteFlyweight</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>SharedConcreteFlyweight</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>UnsharedConcreteFlyweight</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>UnsharedConcreteFlyweight</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="CSharp" Kind="type decl">
+        <![CDATA[
+    // $FlyweightFactory$ 
+    class $FlyweightFactory$ 
+    {
+
+        // Constructor
+        public $FlyweightFactory$()
+        {
+        }
+
+        public $Flyweight$ $GetFlyweight$()
+        {
+        }
+    }
+
+    // $Flyweight$ 
+    abstract class $Flyweight$ 
+    {
+        public abstract void $Operation$();
+    }
+
+    //$SharedConcreteFlyweight$ 
+    class $SharedConcreteFlyweight$ : $Flyweight$
+    {
+        public override void $Operation$()
+        {
+        }
+    }
+
+    // $UnsharedConcreteFlyweight$
+    class $UnsharedConcreteFlyweight$ : $Flyweight$
+    {
+        public override void $Operation$()
+        {
+        }
+    }
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+
+
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Factory Method</Title>
+      <Shortcut>dpfactorymethod</Shortcut>
+      <Author>Khoder Elzein</Author>
+      <Description>Factory Method Design Pattern</Description>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>Product</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Product</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteProductA</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ConcreteProductA</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteProductB</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ConcreteProductB</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Creator</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Creator</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteCreatorA</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ConcreteCreatorA</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteCreatorB</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ConcreteCreatorB</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>FactoryMethod</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>FactoryMethod</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="CSharp" Kind="type decl">
+        <![CDATA[
+    //$Product$
+    abstract class $Product$
+    {
+    }
+
+    //$ConcreteProductA$
+    class $ConcreteProductA$ : $Product$
+    {
+    }
+
+    //$ConcreteProductB$ 
+    class $ConcreteProductB$ : $Product$
+    {
+    }
+
+    //$Creator$
+    abstract class $Creator$
+    {
+        public abstract $Product$ $FactoryMethod$();
+    }
+
+    //$ConcreteCreatorA$
+    class $ConcreteCreatorA$ : $Creator$
+    {
+        public override $Product$ $FactoryMethod$()
+        {
+            return new $ConcreteProductA$();
+        }
+    }
+
+    //$ConcreteCreatorB$
+    class $ConcreteCreatorB$ : $Creator$
+    {
+        public override $Product$ $FactoryMethod$()
+        {
+            return new $ConcreteProductB$();
+        }
+    }
+      ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+
+
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Interpreter</Title>
+      <Shortcut>dpinterpreter</Shortcut>
+      <Author>Khoder Elzein</Author>
+      <Description>Interpreter Design Pattern</Description>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>Context</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Context</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>AbstractExpression</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>AbstractExpression</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteExpressionA</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ConcreteExpressionA</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteExpressionB</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ConcreteExpressionB</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteCreatorA</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ConcreteCreatorA</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteCreatorB</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ConcreteCreatorB</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Interpret</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Interpret</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="CSharp" Kind="type decl">
+        <![CDATA[
+    //$Context$ 
+    class $Context$ 
+    {
+    }
+
+    //$AbstractExpression$
+    abstract class $AbstractExpression$ 
+    {
+        public abstract void $Interpret$($Context$ context);
+    }
+
+    //$ConcreteExpressionA$
+    class $ConcreteExpressionA$: $AbstractExpression$
+    {
+        public override void $Interpret$($Context$ context)    
+        {
+        }
+    }
+
+    //$ConcreteExpressionB$ 
+    class $ConcreteExpressionB$ : $AbstractExpression$
+    {
+        public override void $Interpret$($Context$ context)    
+        {
+        }    
+    }      ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+
+
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Mediator</Title>
+      <Shortcut>dpmediator</Shortcut>
+      <Author>Khoder Elzein</Author>
+      <Description>Mediator Design Pattern</Description>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>Mediator</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Mediator</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteMediator</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ConcreteMediator</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Colleague</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Colleague</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteColleague1</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ConcreteColleague1</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteColleague2</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ConcreteColleague2</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="CSharp" Kind="type decl">
+        <![CDATA[
+    //$Mediator$ 
+    abstract class $Mediator$
+    {
+        public abstract void Send(string message, 
+            $Colleague$ colleague);
+    }
+
+    //$ConcreteMediator$
+    class $ConcreteMediator$ : $Mediator$
+    {
+        private $ConcreteColleague1$ colleague1;
+        private $ConcreteColleague2$ colleague2;
+
+        public $ConcreteColleague1$ Colleague1
+        {
+            set{ colleague1 = value; }
+        }
+
+        public $ConcreteColleague2$ Colleague2
+        {
+            set{ colleague2 = value; }
+        }
+
+        public override void Send(string message, 
+            $Colleague$ colleague)
+        {
+            if (colleague == colleague1)
+            {
+                colleague2.Notify(message);
+            }
+            else
+            {
+                colleague1.Notify(message);
+            }
+        }
+    }
+
+    //$Colleague$ 
+    abstract class $Colleague$
+    {
+        protected $Mediator$ mediator;
+
+        //Constructor
+        public $Colleague$($Mediator$ mediator)
+        {
+            this.mediator = mediator;
+        }
+    }
+
+    //$ConcreteColleague1$
+    class $ConcreteColleague1$ : $Colleague$
+    {
+        // Constructor
+        public $ConcreteColleague1$($Mediator$ mediator) 
+            : base(mediator) 
+        { 
+        }
+
+        public void Send(string message)
+        {
+            mediator.Send(message, this);
+        }
+
+        public void Notify(string message)
+        {
+        }
+    }
+
+    //$ConcreteColleague2$
+    class $ConcreteColleague2$ : $Colleague$
+    {
+        // Constructor
+        public $ConcreteColleague2$($Mediator$ mediator) 
+            : base(mediator) 
+        { 
+        }
+  
+        public void Send(string message)
+        {
+            mediator.Send(message, this);
+        }
+
+        public void Notify(string message)
+        {
+        }
+    }                        
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+
+
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Memento</Title>
+      <Shortcut>dpmemento</Shortcut>
+      <Author>Khoder Elzein</Author>
+      <Description>Memento Design Pattern</Description>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>Memento</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Memento</Default>
+        </Literal>
+        <Literal Editable="true">          
+          <ID>Originator</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Originator</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Caretaker</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Caretaker</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="CSharp" Kind="type decl">
+        <![CDATA[
+    //$Originator$
+    class $Originator$
+    {
+        private string state;
+
+        // Property
+        public string State
+        {
+            get{ return state; }
+            set{ state = value;}
+        }
+
+        public $Memento$ CreateMemento()
+        {
+            return (new $Memento$(state));
+        }
+
+        public void SetMemento($Memento$ memento)
+        {
+            State = memento.State;
+        }
+    }
+    //$Memento$
+    class $Memento$
+    {
+        private string state;
+
+        // Constructor
+        public $Memento$(string state)
+        {
+            this.state = state;
+        }
+
+        // Property
+        public string State
+        {
+            get{ return state; }
+        }
+    }
+
+    //$Caretaker$ 
+    class $Caretaker$
+    {
+        private $Memento$ memento;
+
+        // Property
+        public $Memento$ $Memento$
+        {
+            set{ memento = value; }
+            get{ return memento; }
+        }
+    }
+
+      ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+
+
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Observer</Title>
+      <Shortcut>dpobserver</Shortcut>
+      <Author>Khoder Elzein</Author>
+      <Description>Observer Design Pattern</Description>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>Subject</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Subject</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteSubject</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ConcreteSubject</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Observer</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Observer</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteObserver</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ConcreteObserver</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="CSharp" Kind="type decl">
+        <![CDATA[
+    //$Subject$
+    abstract class $Subject$
+    {
+        private ArrayList observers = new ArrayList();
+
+        public void Attach($Observer$ observer)
+        {
+            observers.Add(observer);
+        }
+
+        public void Detach($Observer$ observer)
+        {
+            observers.Remove(observer);
+        }
+
+        public void Notify()
+        {
+            foreach ($Observer$ o in observers)
+            {
+                o.Update();
+            }
+        }
+    }
+
+    //$ConcreteSubject$
+    class $ConcreteSubject$ : $Subject$
+    {
+        private string subjectState;
+
+        // Property
+        public string SubjectState
+        {
+            get{ return subjectState; }
+            set{ subjectState = value; }
+        }
+    }
+
+    //$Observer$ 
+    abstract class $Observer$
+    {
+        public abstract void Update();
+    }
+
+    //$ConcreteObserver$
+    class $ConcreteObserver$ : $Observer$
+    {
+        private string name;
+        private string observerState;
+        private $ConcreteSubject$ subject;
+
+        // Constructor
+        public $ConcreteObserver$(
+            $ConcreteSubject$ subject, string name)
+        {
+            this.subject = subject;
+            this.name = name;
+        }
+
+        public override void Update()
+        {
+            observerState = subject.SubjectState;
+            Console.WriteLine("$Observer$ {0}'s new state is {1}",
+                name, observerState);
+        }
+
+        // Property
+        public $ConcreteSubject$ $Subject$
+        {
+            get { return subject; }
+            set { subject = value; }
+        }
+    }
+      ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+
+
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Proxy</Title>
+      <Shortcut>dpproxy</Shortcut>
+      <Author>Khoder Elzein</Author>
+      <Description>Proxy Design Pattern</Description>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>Subject</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Subject</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>RealSubject</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>RealSubject</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Proxy</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Proxy</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Request</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Request</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="CSharp" Kind="type decl">
+        <![CDATA[
+    //$Subject$
+    abstract class $Subject$ 
+    {
+        public abstract void $Request$();        
+    }
+
+    //$RealSubject$
+    class $RealSubject$ : $Subject$
+    {
+        public override void $Request$()
+        {
+        }
+    }
+
+    //$Proxy$
+    class $Proxy$ : $Subject$
+    {
+        $RealSubject$ realSubject;
+        public override void $Request$()
+        {
+            // Use 'lazy initialization'
+            if (realSubject == null)
+            {
+                realSubject = new $RealSubject$();
+            }
+            realSubject.$Request$();
+        }    
+    }
+
+      ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>State</Title>
+      <Shortcut>dpstate</Shortcut>
+      <Author>Khoder Elzein</Author>
+      <Description>State Design Pattern</Description>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>State</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>State</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteStateA</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ConcreteStateA</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteStateB</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ConcreteStateB</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Context</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Context</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Handle</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Handle</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Request</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Request</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="CSharp" Kind="type decl">
+        <![CDATA[
+    //$State$
+    abstract class $State$
+    {
+        public abstract void $Handle$($Context$ context);
+    }
+
+    //$ConcreteStateA$
+    class $ConcreteStateA$ : $State$
+    {
+        public override void $Handle$($Context$ context)
+        {
+            context.$State$ = new $ConcreteStateA$();
+        }
+    }
+
+    //$ConcreteStateB$ 
+    class $ConcreteStateB$ : $State$
+    {
+        public override void $Handle$($Context$ context)
+        {
+            context.$State$ = new $ConcreteStateB$();
+        }
+    }
+
+    //$Context$
+    class $Context$
+    {
+        private $State$ state;
+
+        // Constructor
+        public $Context$($State$ state)
+        {
+            this.$State$ = state;
+        }
+
+        // Property
+        public $State$ $State$
+        {
+            get{ return state; }
+            set{ state = value;}
+        }
+
+        public void $Request$()
+        {
+            state.$Handle$(this);
+        }
+    }
+
+      ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Strategy</Title>
+      <Shortcut>dpstrategy</Shortcut>
+      <Author>Khoder Elzein</Author>
+      <Description>Strategy Design Pattern</Description>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>Strategy</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Strategy</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteStrategyA</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ConcreteStrategyA</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteStrategyB</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ConcreteStrategyB</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>AlgorithmInterface</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>AlgorithmInterface</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Context</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Context</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ContextInterface</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ContextInterface</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="CSharp" Kind="type decl">
+        <![CDATA[
+    //$Strategy$
+    abstract class $Strategy$
+    {
+        public abstract void $AlgorithmInterface$();
+    }
+
+    //$ConcreteStrategyA$
+    class $ConcreteStrategyA$ : $Strategy$
+    {
+        public override void $AlgorithmInterface$()
+        {
+        }
+    }
+
+    //$ConcreteStrategyB$
+    class $ConcreteStrategyB$ : $Strategy$
+    {
+        public override void $AlgorithmInterface$()
+        {
+        }
+    }
+
+    //$Context$ 
+    class $Context$
+    {
+        $Strategy$ strategy;
+
+        // Constructor
+        public $Context$($Strategy$ strategy)
+        {
+            this.strategy = strategy;
+        }
+
+        public void $ContextInterface$()
+        {
+            strategy.$AlgorithmInterface$();
+        }
+    }
+
+      ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Template</Title>
+      <Shortcut>dptemplate</Shortcut>
+      <Author>Khoder Elzein</Author>
+      <Description>Template Design Pattern</Description>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>Strategy</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Strategy</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>AbstractClass</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>AbstractClass</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>PrimitiveOperation1</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>PrimitiveOperation1</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>PrimitiveOperation2</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>PrimitiveOperation2</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>TemplateMethod</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>TemplateMethod</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="CSharp" Kind="type decl">
+        <![CDATA[
+    //$AbstractClass$
+    abstract class $AbstractClass$
+    {
+        public abstract void $PrimitiveOperation1$();
+        public abstract void $PrimitiveOperation2$();
+
+        // The $TemplateMethod$
+        public void $TemplateMethod$()
+        {
+            $PrimitiveOperation1$();
+            $PrimitiveOperation2$();
+        }
+    }
+
+    //ConcreteClassA
+    class ConcreteClassA : $AbstractClass$
+    {
+        public override void $PrimitiveOperation1$()
+        {
+        }
+        public override void $PrimitiveOperation2$()
+        {
+        }
+    }
+    
+    //ConcreteClassB
+    class ConcreteClassB : $AbstractClass$
+    {
+        public override void $PrimitiveOperation1$()
+        {
+        }
+        public override void $PrimitiveOperation2$()
+        {
+        }
+    }
+      ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Visitor</Title>
+      <Shortcut>dpvisitor</Shortcut>
+      <Author>Khoder Elzein</Author>
+      <Description>Visitor Design Pattern</Description>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>Visitor</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Visitor</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteVisitor1</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ConcreteVisitor1</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteVisitor2</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ConcreteVisitor2</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Element</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>Element</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteElementA</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ConcreteElementA</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ConcreteElementB</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ConcreteElementB</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>VisitConcreteElementA</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>VisitConcreteElementA</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>VisitConcreteElementB</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>VisitConcreteElementB</Default>
+        </Literal>
+        <Literal Editable="true">
+          <ID>ObjectStructure</ID>
+          <ToolTip>Replaces with name</ToolTip>
+          <Default>ObjectStructure</Default>
+        </Literal>
+
+      </Declarations>
+      <Code Language="CSharp" Kind="type decl">
+        <![CDATA[
+    //$Visitor$
+    abstract class $Visitor$
+    {
+        public abstract void $VisitConcreteElementA$(
+            $ConcreteElementA$ concreteElementA);
+        public abstract void $VisitConcreteElementB$(
+            $ConcreteElementB$ concreteElementB);
+    }
+
+    //$ConcreteVisitor1$
+    class $ConcreteVisitor1$ : $Visitor$
+    {
+        public override void $VisitConcreteElementA$(
+            $ConcreteElementA$ concreteElementA)
+        {
+        }
+
+        public override void $VisitConcreteElementB$(
+            $ConcreteElementB$ concreteElementB)
+        {
+        }
+    }
+
+    //$ConcreteVisitor2$
+    class $ConcreteVisitor2$ : $Visitor$
+    {
+        public override void $VisitConcreteElementA$(
+            $ConcreteElementA$ concreteElementA)
+        {
+        }
+
+        public override void $VisitConcreteElementB$(
+            $ConcreteElementB$ concreteElementB)
+        {
+        }
+    }
+
+    //$Element$
+    abstract class $Element$
+    {
+        public abstract void Accept($Visitor$ visitor);
+    }
+
+    //$ConcreteElementA$
+    class $ConcreteElementA$ : $Element$
+    {
+        public override void Accept($Visitor$ visitor)
+        {
+            visitor.$VisitConcreteElementA$(this);
+        }
+    }
+
+    //$ConcreteElementB$
+    class $ConcreteElementB$ : $Element$
+    {
+        public override void Accept($Visitor$ visitor)
+        {
+            visitor.$VisitConcreteElementB$(this);
+        }
+    }
+
+    //$ObjectStructure$
+    class $ObjectStructure$
+    {
+        private ArrayList elements = new ArrayList();
+
+        public void Attach($Element$ element)
+        {
+            elements.Add(element);
+        }
+
+        public void Detach($Element$ element)
+        {
+            elements.Remove(element);
+        }
+
+        public void Accept($Visitor$ visitor)
+        {
+            foreach ($Element$ e in elements)
+            {
+                e.Accept(visitor);
+            }
+        }
+    }
+      ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  
+</CodeSnippets>

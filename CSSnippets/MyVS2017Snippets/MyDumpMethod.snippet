@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<!--NOTE: be sure to make this file's extension a .snippet, otherwise VS won't recognize it as a snippet!-->
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">  
+    <CodeSnippet Format="1.0.0">  
+        <Header>			
+            <Title>title</Title>          
+			<Shortcut>MyDumper</Shortcut>			
+			<Description></Description>
+			<HelpUrl></HelpUrl>
+		</Header>  
+        <Snippet> 		
+			<Declarations>  			
+			</Declarations>  		
+			<Imports>
+			<Import>
+				<Namespace>System</Namespace>	
+			</Import>
+			<Import>
+				<Namespace>System.Diagnostics</Namespace>	
+			</Import>
+			<Import>
+				<Namespace>Newtonsoft.Json</Namespace>	
+			</Import>
+			<Import>
+				<Namespace>System.Collections.Generic</Namespace>	
+			</Import>
+		</Imports>			
+			<!-- Sepecify the code language and the actual snippet content. -->
+			<Code Language="CSharp" >  
+                <![CDATA[			
+				public static T Dump<T>(this T obj, string displayName = null, bool ignoreNulls = false)
+				{
+					if (obj == null)
+					{
+						if (!string.IsNullOrWhiteSpace(displayName))
+						{
+							Debug.WriteLine(string.Format("Object '{0}'{1}", displayName, " is null."));
+						}
+					}
+					else if (obj != null)
+					{
+						if (string.IsNullOrWhiteSpace(displayName))
+						{
+							displayName = obj.GetType().Name;
+						}
+
+						string prettyJson = JsonConvert.SerializeObject(
+							obj,
+							Formatting.Indented,
+							new JsonSerializerSettings
+							{
+								Converters = new List<JsonConverter> { new Newtonsoft.Json.Converters.StringEnumConverter() },
+								NullValueHandling = (ignoreNulls) ? NullValueHandling.Ignore : NullValueHandling.Include,
+								ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+							});
+						Debug.WriteLine(string.Format("{0}:\n{1}", displayName, prettyJson));
+					}
+					return obj;
+				}]]>  
+			</Code>  
+        </Snippet>  
+    </CodeSnippet>  
+</CodeSnippets>  

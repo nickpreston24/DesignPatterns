@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<!--NOTE: be sure to make this file's extension a .snippet, otherwise VS won't recognize it as a snippet!-->
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">  
+    <CodeSnippet Format="1.0.0">  
+        <Header>			
+            <Title>MySqlTransaction</Title>          
+			<Shortcut>MyTransactSql</Shortcut>			
+			<Description></Description>
+			<HelpUrl></HelpUrl>
+		</Header>  
+        <Snippet> 		
+			<Declarations>  
+			<!--Example Literals-->
+			<Literal>  
+				<ID>ConnectionString</ID>
+				<Default>ConnectionString</Default>
+			</Literal>  
+			<Literal>  
+				<ID>Sql</ID>  				
+				<Default>Sql</Default>  
+			</Literal>  
+		</Declarations>  		
+			<Imports>
+				<Import>
+					<Namespace>System.Data</Namespace>
+					<Namespace>System.Data.SqlClient</Namespace>
+					<Namespace>System.Collections.Generic</Namespace>
+				</Import>
+			</Imports>		
+		
+			<!-- /* Sample code with literals (goes in CDATA[])*/ -->
+			<!-- private $MyType$ _$MyPropertyName$;  -->
+			<!-- public $MyType$ $MyPropertyName$  -->
+			<!-- {get{return _$MyPropertyName$;} set{SetValue(ref _$MyPropertyName$, value);}} -->
+			
+			<!-- Sepecify the code language and the actual snippet content. -->
+			<Code Language="CSharp" >  
+                <![CDATA[				
+				string connectionString = $ConnectionString$;
+				string commandText = "$Sql$";
+				int rowsChanged = 0;
+
+				using (var connection = new SqlConnection(connectionString))
+				{
+					try
+					{
+						connection.Open();
+						SqlTransaction trans = connection.BeginTransaction();
+						using (var command = new SqlCommand())
+						{
+							command.Transaction = trans;
+							foreach (var item in items)
+							{
+								try
+								{
+									command.Parameters.Clear();
+									command.Connection = connection;
+									command.CommandText = commandText;
+									rowsChanged += command.ExecuteNonQuery();
+								}
+								catch (Exception)
+								{
+									trans.Rollback();
+									connection.Close();
+									break;
+									throw;
+								}
+							}
+						}
+						if (rowsChanged > 0)
+						{
+							trans.Commit();
+						}
+					}
+					catch (Exception)
+					{
+						connection.Close();
+						throw;
+					}
+				}
+				
+				$end$
+				]]>  
+			</Code>  
+        </Snippet>  
+    </CodeSnippet>  
+</CodeSnippets>  

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">  
+    <CodeSnippet Format="1.0.0">  
+        <Header>  
+            <Title>MyViewModelStoredProperty</Title>          
+			<Shortcut>MyViewModelStoredProperty</Shortcut>
+		</Header>  
+        <Snippet> 
+			<Declarations>  
+			<Literal>  
+				<ID>MyPropertyName</ID>  
+				<ToolTip>Replace with property name.</ToolTip>  
+				<Default>MyPropertyName</Default>  
+			</Literal>  
+			<Literal>  
+				<ID>MyType</ID>  
+				<ToolTip>Replace with property type.</ToolTip>  
+				<Default>MyType</Default>  
+			</Literal>  
+		</Declarations>  		
+		<Imports>
+			<Import>
+				<Namespace></Namespace>
+			</Import>
+		</Imports>				
+            <Code Language="CSharp" >  
+                <![CDATA[				
+				private $MyType$ _$MyPropertyName$; 
+				public $MyType$ $MyPropertyName$ 
+					{
+						get{ return GetValue(()=> _$MyPropertyName$); }
+						set{ SetValue(()=> $MyPropertyName$, value); }
+					}
+				]]>  
+            </Code>  
+				<!-- private $MyType$ _$MyPropertyName$;  -->
+				<!-- public $MyType$ $MyPropertyName$  -->
+					<!-- { -->
+						<!-- get{()=> $MyPropertyName$;} -->
+						<!-- set{()=> $MyPropertyName$, value} -->
+					<!-- } -->
+				
+        </Snippet>  
+    </CodeSnippet>  
+	<CodeSnippet Format="1.0.0">  
+        <Header>  
+            <Title>MyViewModelProperty</Title>          
+			<Shortcut>MyViewModelProperty</Shortcut>
+		</Header>  
+        <Snippet> 
+			<Declarations>  
+			<Literal>  
+				<ID>MyPropertyName</ID>  
+				<ToolTip>Replace with property name.</ToolTip>  
+				<Default>MyPropertyName</Default>  
+			</Literal>  
+			<Literal>  
+				<ID>MyType</ID>  
+				<ToolTip>Replace with property type.</ToolTip>  
+				<Default>MyType</Default>  
+			</Literal>  
+		</Declarations>  		
+		<Imports>
+			<Import>
+				<Namespace></Namespace>
+			</Import>
+		</Imports>		
+            <Code Language="CSharp" >  
+                <![CDATA[				
+				private $MyType$ _$MyPropertyName$; 
+				public $MyType$ $MyPropertyName$ 
+				{get{return _$MyPropertyName$;} 
+				set{SetValue(ref _$MyPropertyName$, value);}}				 								
+				]]>  
+            </Code>  
+        </Snippet>  
+    </CodeSnippet>  
+</CodeSnippets>  
