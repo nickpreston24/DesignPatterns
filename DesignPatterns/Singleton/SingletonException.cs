@@ -11,6 +11,7 @@ namespace DesignPatterns
 
         public SingletonException(Exception exception)
         {
+            throw exception;
         }
     }
 }
