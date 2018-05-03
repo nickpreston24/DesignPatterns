@@ -6,8 +6,8 @@ namespace DesignPatterns
     //original source: http://richardpianka.com/2011/01/generic-singleton-pattern-in-c-with-reflection/
     public static class Singleton<T> where T : class, ISingleton
     {
-        static volatile T _instance;
-        static object _lock = new object();
+        static volatile T instance;
+        static readonly object @lock = new object();
         const BindingFlags FLAGS = BindingFlags.Instance |
                       BindingFlags.NonPublic;
 
@@ -17,14 +17,14 @@ namespace DesignPatterns
         {
             get
             {
-                if (_instance != null)
+                if (instance != null)
                 {
-                    return _instance;
+                    return instance;
                 }
 
-                lock (_lock)
+                lock (@lock)
                 {
-                    if (_instance == null)
+                    if (instance == null)
                     {
                         ConstructorInfo constructor = null;
 
@@ -43,11 +43,11 @@ namespace DesignPatterns
                             throw new SingletonException(string.Format("A private or " +
                                   "protected empty parameterless constructor is missing for '{0}'.", typeof(T).Name));
 
-                        _instance = (T)constructor.Invoke(null);
+                        instance = (T)constructor.Invoke(null);
                     }
                 }
 
-                return _instance;
+                return instance;
             }
         }
     }
