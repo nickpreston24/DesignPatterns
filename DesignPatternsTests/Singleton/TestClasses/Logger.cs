@@ -3,20 +3,30 @@ using System.Diagnostics;
 
 namespace DesignPatterns.Tests
 {
-    public class Logger : ILogger
+    public class ClientLogger : ILogger
     {
-        public string Name { get; set; }
-        private Logger() { }
+        public string Name { get; set; } = nameof(ClientLogger);
+        private ClientLogger() { }
 
-        public static Logger Instance
+        public static ClientLogger Instance
         {
             get
             {
-                return Singleton<Logger>.Instance;
+                return Singleton<ClientLogger>.Instance;
             }
         }
 
-        public void Log(Exception ex) => Debug.WriteLine(ex.ToString());
+        public void Log(Exception exception) => Debug.WriteLine(exception.ToString());
+
+        public void Log(string message) => Debug.WriteLine(message);
+    }
+
+    public class EmailLogger : ILogger
+    {
+        private EmailLogger() { }
+        public string Name { get; set; } = nameof(EmailLogger);
+
+        public void Log(Exception exception) => Debug.WriteLine(exception.ToString());
 
         public void Log(string message) => Debug.WriteLine(message);
     }
