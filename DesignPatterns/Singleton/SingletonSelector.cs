@@ -1,11 +1,28 @@
 ﻿using System;
 using System.Collections.Concurrent;
 
-namespace DesignPatterns.Singleton
+namespace DesignPatterns
 {
     public class SingletonSelector
     {
-        public static ConcurrentDictionary<Type, object> _singletons = new ConcurrentDictionary<Type, object>();
-        //todo: make this into a multiton with string/type keys for selecting singletons.
+        private static readonly ConcurrentDictionary<Type, ISingleton> _instances = new ConcurrentDictionary<Type, ISingleton>();
+
+        private SingletonSelector() { }
+
+        public static T GetInstance<T>() where T : class, ISingleton
+        {
+            lock (_instances)
+            {
+                var key = typeof(T);
+
+                if (!_instances.TryGetValue(key, out ISingleton instance))
+                {
+                    instance = Singleton<T>.Instance as ISingleton;
+                    _instances.TryAdd(key, instance);
+                }
+
+                return instance as T;
+            }
+        }
     }
 }

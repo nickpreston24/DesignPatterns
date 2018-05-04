@@ -1,0 +1,162 @@
+﻿using NLog;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Reflection;
+
+namespace Common.Extensions
+{
+    public static partial class Extensions
+    {
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
+
+        public static T PopAt<T>(this IList<T> list, int index)
+        {
+            var result = list[index];
+            list.RemoveAt(index);
+            return result;
+        }
+
+        public static T Pop<T>(this IList<T> list, T item)
+        {
+            return list.Remove(item) ? item : throw new Exception($"{MethodBase.GetCurrentMethod().Name}: could not remove item");
+        }
+
+        public static IList<T> Pop<T>(this IList<T> list, int count)
+        {           
+            var last = list.TakeLast(count).ToList();
+            for (int i = 0; i < count; i++)
+            {
+                list.RemoveAt(list.Count - 1);
+            }
+            return last;
+        }
+
+        public static void AddMany<T>(this List<T> list, IEnumerable<T> elements)
+        {
+            list?.AddRange(elements ?? Enumerable.Empty<T>());
+        }
+
+        // Shuffles an IList in place.        
+        public static IList<T> Shuffle<T>(this IList<T> list)
+        {
+            return list == null || list.Count == 0 ?
+                list.Shuffle(new Random(Guid.NewGuid().GetHashCode())) : new List<T>();
+        }
+
+        // Shuffles an IList in place.
+        public static IList<T> Shuffle<T>(this IList<T> list, Random random)
+        {
+            int count = list.Count;
+
+            while (count > 1)
+            {
+                int i = random.Next(count--);
+                var temp = list[count];
+                list[count] = list[i];
+                list[i] = temp;
+            }
+
+            return list;
+        }
+
+        // Append a single item of type T to a given list
+        public static List<T> Append<T>(this List<T> list, T item)
+        {
+            list.Add(item);
+            return list;
+        }
+
+        public static IList<T> Swap<T>(this IList<T> list, int indexA, int indexB)
+        {
+            var tmp = list[indexA];
+            list[indexA] = list[indexB];
+            list[indexB] = tmp;
+            return list;
+        }
+
+        public static DataTable ToDatatable<T>(this List<T> list, string name = "")
+        {
+            var table = string.IsNullOrWhiteSpace(name) ? new DataTable(typeof(T).Name) : new DataTable(name);
+
+            if (list.Count == 0)
+            {
+                return table;
+            }
+
+            //var properties = typeof(T).GetProperties();
+            var properties = propertyCache[typeof(T)];
+
+            foreach (var property in properties)
+            {
+                table.Columns.Add(property.Name.SplitCamelCase(), property.PropertyType);
+            }
+
+            foreach (var item in list ?? Enumerable.Empty<T>())
+            {
+                object[] rowValues = new object[properties.Length];
+
+                for (int i = 0; i < rowValues.Length; i++)
+                {
+                    rowValues[i] = properties[i].GetValue(item);
+                }
+
+                table.Rows.Add(rowValues);
+            }
+
+            return table;
+        }
+
+        //public static DataTable ToDatatable<T>(this List<T> list)
+        //{
+        //    var table = new DataTable();
+
+        //    Debug.WriteLine($"to datatable() list count: {list.Count}");
+
+        //    if (list == null || list.Count == 0)
+        //    {
+        //        return table;
+        //    }
+
+        //    var properties = typeof(T).GetProperties();
+        //    //var properties = PropertyCache[typeof(T)];
+
+        //    if (properties.Length == 0)
+        //    {
+        //        return table;
+        //    }
+
+        //    var values = new object[properties.Count()];
+
+        //    try
+        //    {
+        //        foreach (var item in list ?? Enumerable.Empty<T>())
+        //        {
+        //            Debug.WriteLine("item");
+
+        //            for (int i = 0; i < values.Length; i++)
+        //            {
+
+        //                values[i] = properties[i].GetValue(item);
+        //                Debug.WriteLine("values");
+        //            }
+
+        //            table.Rows.Add(values);
+        //            Debug.WriteLine("item added to table");
+
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        logger.Error(ex);
+        //    }
+        //    return table;
+        //}
+
+        public static IList<T> RemoveDuplicates<T>(this IList<T> items)
+        {
+            return items.Distinct().ToList();
+        }
+    }
+}

@@ -8,8 +8,7 @@ namespace DesignPatterns
     {
         static volatile T instance;
         static readonly object @lock = new object();
-        const BindingFlags FLAGS = BindingFlags.Instance |
-                      BindingFlags.NonPublic;
+        const BindingFlags FLAGS = BindingFlags.Instance | BindingFlags.NonPublic;
 
         static Singleton() { }
 
