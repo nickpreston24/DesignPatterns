@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Windows.Markup;
 
 namespace Common
 {
-    public static partial class Extensions
+    public static partial class CommonExtensions
     {
         public static IEnumerable<TEnum> GetValues<TEnum>()
             where TEnum : struct, IConvertible, IFormattable, IComparable => Enum.GetValues(typeof(TEnum)).Cast<TEnum>();
@@ -32,8 +30,6 @@ namespace Common
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.ToString()));
-                _logger.Error(ex);
                 throw;
             }
         }

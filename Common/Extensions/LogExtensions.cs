@@ -3,9 +3,9 @@ using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
-namespace Common.Extensions
+namespace Common
 {
-    public static partial class Extensions
+    public static partial class CommonExtensions
     {
         private static readonly Logger NLogger = LogManager.GetCurrentClassLogger();
 

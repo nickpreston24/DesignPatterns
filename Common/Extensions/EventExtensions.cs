@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Common
 {
-    public static partial class Extensions
+    public static partial class CommonExtensions
     {
         /// 
         /// Raises an event thread-safely if the event has subscribers. 

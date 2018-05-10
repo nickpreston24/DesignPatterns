@@ -5,11 +5,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace Common.Extensions
+namespace Common
 {
-    public static partial class Extensions
+    public static partial class CommonExtensions
     {
-
         public static IEnumerable<T> Slice<T>(this IEnumerable<T> sequence, int startIndex, int count)
         {
             if (sequence == null)
@@ -164,9 +163,9 @@ namespace Common.Extensions
                     table.Rows.Add(values);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                logger.Error(ex);
+                throw;
             }
             return table;
         }

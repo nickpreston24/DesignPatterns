@@ -1,16 +1,13 @@
-﻿using NLog;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
 
-namespace Common.Extensions
+namespace Common
 {
-    public static partial class Extensions
+    public static partial class CommonExtensions
     {
-        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
-
         public static T PopAt<T>(this IList<T> list, int index)
         {
             var result = list[index];
@@ -24,7 +21,7 @@ namespace Common.Extensions
         }
 
         public static IList<T> Pop<T>(this IList<T> list, int count)
-        {           
+        {
             var last = list.TakeLast(count).ToList();
             for (int i = 0; i < count; i++)
             {
@@ -107,52 +104,6 @@ namespace Common.Extensions
 
             return table;
         }
-
-        //public static DataTable ToDatatable<T>(this List<T> list)
-        //{
-        //    var table = new DataTable();
-
-        //    Debug.WriteLine($"to datatable() list count: {list.Count}");
-
-        //    if (list == null || list.Count == 0)
-        //    {
-        //        return table;
-        //    }
-
-        //    var properties = typeof(T).GetProperties();
-        //    //var properties = PropertyCache[typeof(T)];
-
-        //    if (properties.Length == 0)
-        //    {
-        //        return table;
-        //    }
-
-        //    var values = new object[properties.Count()];
-
-        //    try
-        //    {
-        //        foreach (var item in list ?? Enumerable.Empty<T>())
-        //        {
-        //            Debug.WriteLine("item");
-
-        //            for (int i = 0; i < values.Length; i++)
-        //            {
-
-        //                values[i] = properties[i].GetValue(item);
-        //                Debug.WriteLine("values");
-        //            }
-
-        //            table.Rows.Add(values);
-        //            Debug.WriteLine("item added to table");
-
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        logger.Error(ex);
-        //    }
-        //    return table;
-        //}
 
         public static IList<T> RemoveDuplicates<T>(this IList<T> items)
         {

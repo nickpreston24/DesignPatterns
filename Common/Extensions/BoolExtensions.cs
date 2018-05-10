@@ -1,6 +1,6 @@
-﻿namespace Common.Extensions
+﻿namespace Common
 {
-    public static partial class Extensions
+    public static partial class CommonExtensions
     {
         public static string ToLetter(this bool value, bool isUpper) => value ? isUpper ? "T" : "t" : isUpper ? "F" : "f";
         public static string ToYesOrNo(this bool value, bool isLetter, bool isUpper)

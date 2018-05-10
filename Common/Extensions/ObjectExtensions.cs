@@ -5,9 +5,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
-namespace Common.Extensions
+namespace Common
 {
-    public static partial class Extensions
+    public static partial class CommonExtensions
     {
         private static JsonConverter _jsonConverter = new Newtonsoft.Json.Converters.StringEnumConverter();
         private static JsonSerializerSettings _jsonSerializerSettings = new JsonSerializerSettings

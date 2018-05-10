@@ -16,15 +16,4 @@ namespace Common
 
         internal static bool TryAdd(Type type, PropertyInfo[] propertyInfo) => Cache.TryAdd(type, propertyInfo);
     }
-
-    public static partial class Extensions
-    {
-        public static PropertyCache propertyCache = new PropertyCache();
-
-        public static ConcurrentDictionary<Type, PropertyInfo[]> Cache(this Type type)
-        {
-            propertyCache.TryAdd(type, type.GetProperties());
-            return propertyCache;
-        }
-    }
 }

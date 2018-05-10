@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace Common
 {
+    //from: https://www.pluralsight.com/tech-blog/maybe
     public struct Maybe<T>
     {
         readonly IEnumerable<T> values;

@@ -15,7 +15,7 @@ namespace DesignPatterns
             {
                 var key = typeof(T);
 
-                if (!_instances.TryGetValue(key, out ISingleton instance))
+                if (!_instances.TryGetValue(key, out var instance))
                 {
                     instance = Singleton<T>.Instance as ISingleton;
                     _instances.TryAdd(key, instance);

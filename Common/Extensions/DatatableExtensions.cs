@@ -8,9 +8,9 @@ using System.Dynamic;
 using System.Linq;
 using System.Reflection;
 
-namespace Common.Extensions
+namespace Common
 {
-    public static partial class Extensions
+    public static partial class CommonExtensions
     {
         public static ObservableCollection<T> ToObservableCollection<T>(this DataTable table)
             where T : class, new()
@@ -21,7 +21,7 @@ namespace Common.Extensions
             {
                 return observableCollection;
             }
-                        
+
             var properties = propertyCache[typeof(T)];
 
             string propertyName = "";
@@ -50,7 +50,6 @@ namespace Common.Extensions
                     }
                     catch (Exception ex)
                     {
-                        _logger.Error(ex);
                         continue;
                     }
                 }
@@ -90,9 +89,9 @@ namespace Common.Extensions
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                _logger.Error(ex);
+                throw;
             }
 
             return lines;
@@ -110,9 +109,8 @@ namespace Common.Extensions
 
                 return table.Columns.Cast<DataColumn>().Select(column => column.ColumnName).ToList();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                _logger.Error(ex);
                 return new List<string>();
             }
         }
@@ -178,7 +176,7 @@ namespace Common.Extensions
             {
                 return list;
             }
-                        
+
             var properties = propertyCache[typeof(T)];
 
             if (properties == null || properties.Length == 0)
@@ -226,7 +224,6 @@ namespace Common.Extensions
                     }
                     catch (Exception ex)
                     {
-                        logger.Error(ex);
                         continue;
                     }
                 }
@@ -284,12 +281,9 @@ namespace Common.Extensions
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.Message));
-                logger.Error(ex);
                 throw;
             }
         }
-
     }
 
 }

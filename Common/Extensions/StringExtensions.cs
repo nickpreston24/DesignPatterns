@@ -9,9 +9,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 
-namespace Common.Extensions
+namespace Common
 {
-    public static partial class Extensions
+    public static partial class CommonExtensions
     {
         public static string Append(this string input, string text) => new StringBuilder(input).Append(text).ToString();
         public static string Reverse(this string str) => new string(str.ToCharArray().Reverse().ToArray());
@@ -41,9 +41,8 @@ namespace Common.Extensions
                     return writer.ToString();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                _logger.Error(ex);
                 throw;
             }
         }

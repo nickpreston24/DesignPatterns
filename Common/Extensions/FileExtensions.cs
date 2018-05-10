@@ -4,9 +4,9 @@ using System;
 using System.IO;
 using System.Reflection;
 
-namespace Common.Extensions
+namespace Common
 {
-    public static partial class Extensions
+    public static partial class CommonExtensions
     {
         public static void CreateStartupFolderShortcut()
         {

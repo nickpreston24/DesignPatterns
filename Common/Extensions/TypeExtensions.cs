@@ -4,12 +4,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
-namespace Common.Extensions
+namespace Common
 {
-    public static partial class Extensions
+    public static partial class CommonExtensions
     {
-        
-
         public static IEnumerable<Type> GetAssignableTypes<T>()
         {
             try
@@ -50,7 +48,6 @@ namespace Common.Extensions
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
-                _logger.Error(ex);
             }
         }
 
@@ -88,7 +85,6 @@ namespace Common.Extensions
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
-                _logger.Error(ex);
             }
         }
     }

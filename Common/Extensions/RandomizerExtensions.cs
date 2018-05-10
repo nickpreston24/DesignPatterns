@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace Common.Extensions
+namespace Common
 {
     public static class RandomizerExtensions
     {
@@ -21,7 +21,10 @@ namespace Common.Extensions
 
         public static IEnumerable<int> Random(Random rand)
         {
-            if (rand == null) throw new ArgumentNullException(nameof(rand));
+            if (rand == null)
+            {
+                throw new ArgumentNullException(nameof(rand));
+            }
 
             return RandomImpl(rand, r => r.Next());
         }
