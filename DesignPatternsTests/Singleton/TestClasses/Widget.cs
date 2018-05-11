@@ -4,7 +4,7 @@ namespace DesignPatterns.Tests
 {
     class Widget
     {
-        private IEmailService service;
+        private readonly IEmailService service;
         private ILogger Logger { get; }
 
         public Widget(IEmailService service)

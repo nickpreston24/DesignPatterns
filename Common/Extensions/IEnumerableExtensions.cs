@@ -31,8 +31,8 @@ namespace Common
                  ? sequence.Skip(startIndex).Take(count)
                  : _(count); IEnumerable<T> _(int countdown)
             {
-                var listCount = list.Count;
-                var index = startIndex;
+                int listCount = list.Count;
+                int index = startIndex;
                 while (index < listCount && countdown-- > 0)
                 {
                     yield return list[index++];
@@ -85,8 +85,15 @@ namespace Common
         public static TSource MaxBy<TSource, TKey>(this IEnumerable<TSource> source,
            Func<TSource, TKey> selector, IComparer<TKey> comparer)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (selector == null)
+            {
+                throw new ArgumentNullException(nameof(selector));
+            }
 
             comparer = comparer ?? Comparer<TKey>.Default;
             return ExtremumBy(source, selector, (x, y) => comparer.Compare(x, y));
@@ -98,7 +105,9 @@ namespace Common
             using (var sourceIterator = source.GetEnumerator())
             {
                 if (!sourceIterator.MoveNext())
+                {
                     throw new InvalidOperationException("Sequence contains no elements");
+                }
 
                 var extremum = sourceIterator.Current;
                 var key = selector(extremum);
@@ -126,8 +135,15 @@ namespace Common
         public static TSource MinBy<TSource, TKey>(this IEnumerable<TSource> source,
            Func<TSource, TKey> selector, IComparer<TKey> comparer)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (selector == null)
+            {
+                throw new ArgumentNullException(nameof(selector));
+            }
 
             comparer = comparer ?? Comparer<TKey>.Default;
             return ExtremumBy(source, selector, (x, y) => -Math.Sign(comparer.Compare(x, y)));
@@ -149,7 +165,7 @@ namespace Common
                 return table;
             }
 
-            var values = new object[properties.Length];
+            object[] values = new object[properties.Length];
 
             try
             {
@@ -359,7 +375,7 @@ namespace Common
         {
             try
             {
-                Func<T, bool> funcWhere = expression.Compile();
+                var funcWhere = expression.Compile();
                 return collection.Where(funcWhere).Take(numDesired);
             }
             catch (Exception)
@@ -372,7 +388,7 @@ namespace Common
         {
             try
             {
-                Func<T, bool> funcWhere = where.Compile();
+                var funcWhere = where.Compile();
                 return collection.Where(funcWhere);
             }
             catch (Exception)
@@ -385,7 +401,7 @@ namespace Common
         {
             try
             {
-                Func<T, bool> funcWhere = whereclause.Compile();
+                var funcWhere = whereclause.Compile();
                 return collection.Where(funcWhere).OrderBy(c => Guid.NewGuid()).Take(count);
             }
             catch (Exception)

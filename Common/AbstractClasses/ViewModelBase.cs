@@ -64,7 +64,7 @@ namespace Common
                 throw new ArgumentException("Invalid lambda expression", "Lambda expression return value can't be null");
             }
 
-            var propertyName = GetPropertyNameFrom(lambdaExpression);
+            string propertyName = GetPropertyNameFrom(lambdaExpression);
             var storedValue = GetValue<T>(propertyName);
 
             if (Equals(storedValue, value))
@@ -85,7 +85,7 @@ namespace Common
                 throw new ArgumentException("Invalid lambda expression", "Lambda expression return value can't be null");
             }
 
-            var propertyName = GetPropertyNameFrom(lambdaExpression);
+            string propertyName = GetPropertyNameFrom(lambdaExpression);
             return GetValue<T>(propertyName);
         }
 
@@ -212,7 +212,7 @@ namespace Common
 
             var dependentProperties = _dependencies[propertyName];
 
-            foreach (var dependentProperty in dependentProperties)
+            foreach (string dependentProperty in dependentProperties)
             {
                 if (!calledProperties.Contains(dependentProperty))
                 {
@@ -231,9 +231,9 @@ namespace Common
             foreach (var propertyInfo in propertyInfoWithDependencies)
             {
                 var currentAttributes = propertyInfo.GetCustomAttributes(false).OfType<DependentPropertiesAttribute>().Single();
-                if (currentAttributes.Properties != null)
+                if (currentAttributes.DependentProperties != null)
                 {
-                    foreach (string prop in currentAttributes.Properties)
+                    foreach (string prop in currentAttributes.DependentProperties)
                     {
                         if (!_dependencies.ContainsKey(prop))
                         {
@@ -272,7 +272,7 @@ namespace Common
 
             var dependentProperties = _dependencies[propertyName];
 
-            foreach (var dependentProperty in dependentProperties)
+            foreach (string dependentProperty in dependentProperties)
             {
                 if (!calledProperties.Contains(dependentProperty))
                 {
@@ -286,20 +286,12 @@ namespace Common
 
     public class DependentPropertiesAttribute : Attribute
     {
-        private readonly string[] properties;
-
-        public DependentPropertiesAttribute(params string[] dp)
+        public DependentPropertiesAttribute(params string[] properties)
         {
-            properties = dp;
+            DependentProperties = properties;
         }
 
-        public string[] Properties
-        {
-            get
-            {
-                return properties;
-            }
-        }
+        public string[] DependentProperties { get; }
     }
 
 }

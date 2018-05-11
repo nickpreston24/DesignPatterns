@@ -52,8 +52,8 @@ namespace Common
                 throw new ArgumentNullException("expression");
             }
 
-            string propertyName = this.GetPropertyName(expression);
-            if (String.IsNullOrEmpty(propertyName))
+            string propertyName = GetPropertyName(expression);
+            if (string.IsNullOrEmpty(propertyName))
             {
                 throw new ArgumentException("'expression' did not provide a property name.");
             }
@@ -63,7 +63,7 @@ namespace Common
                 throw new ArgumentNullException("handler");
             }
 
-            var propertySource = this.GetPropertySource();
+            var propertySource = GetPropertySource();
             if (propertySource != null)
             {
                 _propertyNameToHandlerMap[propertyName] = handler;
@@ -86,7 +86,7 @@ namespace Common
             }
 
             string propertyName = GetPropertyName(expression);
-            if (String.IsNullOrEmpty(propertyName))
+            if (string.IsNullOrEmpty(propertyName))
             {
                 throw new ArgumentException("'expression' did not provide a property name.");
             }
@@ -149,7 +149,7 @@ namespace Common
                 string propertyName = ((PropertyChangedEventArgs)e).PropertyName;
                 var propertySource = (TPropertySource)sender;
 
-                if (String.IsNullOrEmpty(propertyName))
+                if (string.IsNullOrEmpty(propertyName))
                 {
                     // When the property name is empty, all properties are considered to be invalidated.
                     // Iterate over a copy of the list of handlers, in case a handler is registered by a callback.

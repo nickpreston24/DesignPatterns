@@ -171,11 +171,8 @@ namespace MarkupConverter
             {
                 htmlNode = AddImplicitParagraph(xamlParentElement, htmlNode, inheritedProperties, stylesheet, sourceContext);
             }
-            else if (htmlNode is XmlElement)
+            else if (htmlNode is XmlElement htmlElement) // Identify element name
             {
-                // Identify element name
-                var htmlElement = (XmlElement)htmlNode;
-
                 string htmlElementName = htmlElement.LocalName; // Keep the name case-sensitive to check xml names
                 string htmlElementNamespace = htmlElement.NamespaceURI;
 
@@ -372,7 +369,7 @@ namespace MarkupConverter
                 }
 
                 // Recurse into element subtree
-                for (var htmlChildNode = htmlElement.FirstChild; htmlChildNode != null; htmlChildNode = htmlChildNode != null ? htmlChildNode.NextSibling : null)
+                for (var htmlChildNode = htmlElement.FirstChild; htmlChildNode != null; htmlChildNode = htmlChildNode?.NextSibling)
                 {
                     htmlChildNode = AddBlock(xamlElement, htmlChildNode, currentProperties, stylesheet, sourceContext);
                 }
@@ -506,9 +503,8 @@ namespace MarkupConverter
             {
                 AddTextRun(xamlParentElement, htmlNode.Value);
             }
-            else if (htmlNode is XmlElement)
+            else if (htmlNode is XmlElement htmlElement)
             {
-                var htmlElement = (XmlElement)htmlNode;
 
                 // Check whether this is an html element
                 if (htmlElement.NamespaceURI != HtmlParser.XhtmlNamespace)
@@ -597,7 +593,7 @@ namespace MarkupConverter
             // Remove control characters
             for (int i = 0; i < textData.Length; i++)
             {
-                if (Char.IsControl(textData[i]))
+                if (char.IsControl(textData[i]))
                 {
                     textData = textData.Remove(i--, 1);  // decrement i to compensate for character removal
                 }
@@ -632,7 +628,7 @@ namespace MarkupConverter
                 var xamlElement = xamlParentElement.OwnerDocument.CreateElement(/*prefix:*/null, /*localName:*/HtmlToXamlConverter.Xaml_Hyperlink, _xamlNamespace);
                 ApplyLocalProperties(xamlElement, localProperties, /*isBlock:*/false);
 
-                var hrefParts = href.Split(new char[] { '#' });
+                string[] hrefParts = href.Split(new char[] { '#' });
                 if (hrefParts.Length > 0 && hrefParts[0].Trim().Length > 0)
                 {
                     xamlElement.SetAttribute(HtmlToXamlConverter.Xaml_Hyperlink_NavigateUri, hrefParts[0].Trim());
@@ -828,7 +824,7 @@ namespace MarkupConverter
             }
 
             XmlNode htmlChildNode = htmlLIElement;
-            string htmlChildNodeName = htmlChildNode == null ? null : htmlChildNode.LocalName.ToLower();
+            string htmlChildNodeName = htmlChildNode?.LocalName.ToLower();
 
             //  Current element properties missed here.
             //currentProperties = GetElementProperties(htmlLIElement, inheritedProperties, out localProperties, stylesheet);
@@ -840,7 +836,7 @@ namespace MarkupConverter
                 AddListItem(xamlListElement, (XmlElement)htmlChildNode, inheritedProperties, stylesheet, sourceContext);
                 lastProcessedListItemElement = (XmlElement)htmlChildNode;
                 htmlChildNode = htmlChildNode.NextSibling;
-                htmlChildNodeName = htmlChildNode == null ? null : htmlChildNode.LocalName.ToLower();
+                htmlChildNodeName = htmlChildNode?.LocalName.ToLower();
             }
 
             return lastProcessedListItemElement;
@@ -875,7 +871,7 @@ namespace MarkupConverter
             // TODO: process local properties for li element
 
             // Process children of the ListItem
-            for (var htmlChildNode = htmlLIElement.FirstChild; htmlChildNode != null; htmlChildNode = htmlChildNode != null ? htmlChildNode.NextSibling : null)
+            for (var htmlChildNode = htmlLIElement.FirstChild; htmlChildNode != null; htmlChildNode = htmlChildNode?.NextSibling)
             {
                 htmlChildNode = AddBlock(xamlListItemElement, htmlChildNode, currentProperties, stylesheet, sourceContext);
             }
@@ -925,7 +921,7 @@ namespace MarkupConverter
                 sourceContext.Add(singleCell);
 
                 // Add the cell's content directly to parent
-                for (var htmlChildNode = singleCell.FirstChild; htmlChildNode != null; htmlChildNode = htmlChildNode != null ? htmlChildNode.NextSibling : null)
+                for (var htmlChildNode = singleCell.FirstChild; htmlChildNode != null; htmlChildNode = htmlChildNode?.NextSibling)
                 {
                     htmlChildNode = AddBlock(xamlParentElement, htmlChildNode, currentProperties, stylesheet, sourceContext);
                 }
@@ -1382,7 +1378,7 @@ namespace MarkupConverter
             Debug.Assert(xamlTableCellElement.LocalName == Xaml_TableCell);
             Debug.Assert(currentProperties != null);
 
-            for (var htmlChildNode = htmlDataStartNode; htmlChildNode != null; htmlChildNode = htmlChildNode != null ? htmlChildNode.NextSibling : null)
+            for (var htmlChildNode = htmlDataStartNode; htmlChildNode != null; htmlChildNode = htmlChildNode?.NextSibling)
             {
                 // Process a new html element and add it to the td element
                 htmlChildNode = AddBlock(xamlTableCellElement, htmlChildNode, currentProperties, stylesheet, sourceContext);
@@ -1731,7 +1727,7 @@ namespace MarkupConverter
             rowSpanAsString = GetAttribute((XmlElement)htmlTDElement, "rowspan");
             if (rowSpanAsString != null)
             {
-                if (!Int32.TryParse(rowSpanAsString, out rowSpan))
+                if (!int.TryParse(rowSpanAsString, out rowSpan))
                 {
                     // Ignore invalid value of rowspan; treat it as 1
                     rowSpan = 1;
@@ -2490,7 +2486,7 @@ namespace MarkupConverter
         /// <returns></returns>
         private static bool TryGetLengthValue(string lengthAsString, out double length)
         {
-            length = Double.NaN;
+            length = double.NaN;
 
             if (lengthAsString != null)
             {
@@ -2500,33 +2496,33 @@ namespace MarkupConverter
                 if (lengthAsString.EndsWith("pt"))
                 {
                     lengthAsString = lengthAsString.Substring(0, lengthAsString.Length - 2);
-                    if (Double.TryParse(lengthAsString, out length))
+                    if (double.TryParse(lengthAsString, out length))
                     {
                         length = (length * 96.0) / 72.0; // convert from points to pixels
                     }
                     else
                     {
-                        length = Double.NaN;
+                        length = double.NaN;
                     }
                 }
                 else if (lengthAsString.EndsWith("px"))
                 {
                     lengthAsString = lengthAsString.Substring(0, lengthAsString.Length - 2);
-                    if (!Double.TryParse(lengthAsString, out length))
+                    if (!double.TryParse(lengthAsString, out length))
                     {
-                        length = Double.NaN;
+                        length = double.NaN;
                     }
                 }
                 else
                 {
-                    if (!Double.TryParse(lengthAsString, out length)) // Assuming pixels
+                    if (!double.TryParse(lengthAsString, out length)) // Assuming pixels
                     {
-                        length = Double.NaN;
+                        length = double.NaN;
                     }
                 }
             }
 
-            return !Double.IsNaN(length);
+            return !double.IsNaN(length);
         }
 
         // .................................................................
@@ -2660,7 +2656,7 @@ namespace MarkupConverter
 
         #region Private Fields
 
-        static string _xamlNamespace = "http://schemas.microsoft.com/winfx/2006/xaml/presentation";
+        static readonly string _xamlNamespace = "http://schemas.microsoft.com/winfx/2006/xaml/presentation";
 
         #endregion Private Fields
     }

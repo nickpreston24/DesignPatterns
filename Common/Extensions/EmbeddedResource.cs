@@ -40,7 +40,7 @@ namespace Common.Extensions
 
                 if (reader == null)
                 {
-                    return String.Empty;
+                    return string.Empty;
                 }
 
                 string data = reader.ReadToEnd();
@@ -54,7 +54,7 @@ namespace Common.Extensions
                 _logger.Error(ex);
             }
 
-            return String.Empty;
+            return string.Empty;
         }
 
         public static string GetAsEmbeddedResource(this string resourceName)

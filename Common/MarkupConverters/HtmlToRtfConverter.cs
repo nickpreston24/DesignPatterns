@@ -10,7 +10,7 @@ namespace MarkupConverter
 
         public static string ConvertHtmlToRtf(string htmlText)
         {
-            var xamlText = HtmlToXamlConverter.ConvertHtmlToXaml(htmlText, false);
+            string xamlText = HtmlToXamlConverter.ConvertHtmlToXaml(htmlText, false);
 
             return ConvertXamlToRtf(xamlText);
         }

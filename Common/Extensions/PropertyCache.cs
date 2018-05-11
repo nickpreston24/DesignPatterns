@@ -6,7 +6,7 @@ namespace Common
 {
     public class PropertyCache
     {
-        public PropertyInfo[] this[Type type] => Cache.TryGetValue(type, out PropertyInfo[] properties)
+        public PropertyInfo[] this[Type type] => Cache.TryGetValue(type, out var properties)
             ? properties
             : type.Cache()[type];
 

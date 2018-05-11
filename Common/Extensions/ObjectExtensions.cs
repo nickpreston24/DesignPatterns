@@ -196,8 +196,8 @@ namespace Common
 
             foreach (var property in properties ?? Enumerable.Empty<PropertyInfo>())
             {
-                var objValue = property.GetValue(@object);
-                var anotherValue = property.GetValue(another);
+                object objValue = property.GetValue(@object);
+                object anotherValue = property.GetValue(another);
 
                 //Recursion
                 if (!objValue.DeepCompare(anotherValue))
@@ -227,8 +227,8 @@ namespace Common
                 return false;
             }
 
-            var objJson = JsonConvert.SerializeObject(obj);
-            var anotherJson = JsonConvert.SerializeObject(another);
+            string objJson = JsonConvert.SerializeObject(obj);
+            string anotherJson = JsonConvert.SerializeObject(another);
 
             return objJson == anotherJson;
         }
@@ -251,7 +251,7 @@ namespace Common
                 return false;
             }
 
-            var result = true;
+            bool result = true;
 
             //Get all properties of obj
             //And compare each other
@@ -259,8 +259,8 @@ namespace Common
 
             foreach (var property in properties ?? Enumerable.Empty<PropertyInfo>())
             {
-                var objValue = property.GetValue(obj);
-                var anotherValue = property.GetValue(another);
+                object objValue = property.GetValue(obj);
+                object anotherValue = property.GetValue(another);
 
                 if (!objValue.Equals(anotherValue))
                 {
@@ -285,7 +285,7 @@ namespace Common
                     _jsonSerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                 }
 
-                var prettyJson = JsonConvert.SerializeObject(obj, Formatting.Indented, _jsonSerializerSettings);
+                string prettyJson = JsonConvert.SerializeObject(obj, Formatting.Indented, _jsonSerializerSettings);
                 Debug.WriteLine(string.Format("{0}:\n{1}", displayName, prettyJson));
             }
             else if (obj == null)

@@ -11,7 +11,7 @@ namespace MarkupConverter
 
         public static string ConvertRtfToHtml(string rtfText)
         {
-            var xamlText = string.Format(FlowDocumentFormat, ConvertRtfToXaml(rtfText));
+            string xamlText = string.Format(FlowDocumentFormat, ConvertRtfToXaml(rtfText));
 
             return HtmlFromXamlConverter.ConvertXamlToHtml(xamlText, false);
         }

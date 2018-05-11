@@ -36,7 +36,7 @@ namespace Common
                     {
                         propertyName = property.Name;
 
-                        var value = row[propertyName];
+                        object value = row[propertyName];
 
                         if (value == DBNull.Value)
                         {
@@ -48,7 +48,7 @@ namespace Common
                         }
 
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         continue;
                     }
@@ -130,7 +130,7 @@ namespace Common
             int columnIndex = 0;
             var columnNames = table.GetColumnNames();
 
-            foreach (var columnName in orderedColumnNames.Except(columnNames ?? Enumerable.Empty<string>()))
+            foreach (string columnName in orderedColumnNames.Except(columnNames ?? Enumerable.Empty<string>()))
             {
                 try
                 {
@@ -203,7 +203,7 @@ namespace Common
                             continue;
                         }
 
-                        var value = row[propertyName];
+                        object value = row[propertyName];
 
                         if (value == DBNull.Value)
                         {
@@ -222,7 +222,7 @@ namespace Common
                             property.SetValue(item, Convert.ChangeType(value, property.PropertyType), null);
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         continue;
                     }
@@ -255,7 +255,7 @@ namespace Common
             // contained DataRow.
             public override bool TryGetMember(GetMemberBinder binder, out object result)
             {
-                var retVal = _row.Table.Columns.Contains(binder.Name);
+                bool retVal = _row.Table.Columns.Contains(binder.Name);
                 result = retVal ? _row[binder.Name] : null;
                 return retVal;
             }
@@ -279,7 +279,7 @@ namespace Common
                     da.Fill(table);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

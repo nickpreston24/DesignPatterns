@@ -281,7 +281,7 @@ namespace MarkupConverter
 
         private static string ParseXamlThickness(string thickness)
         {
-            var values = thickness.Split(',');
+            string[] values = thickness.Split(',');
 
             for (int i = 0; i < values.Length; i++)
             {

@@ -28,7 +28,7 @@ namespace Common
 
                 return Convert.ToString(((attributes.Length > 0) ? attributes[0].Description : value.ToString()));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -100,13 +100,13 @@ namespace Common
     /// </summary>
     public class EnumBindingSourceExtension : MarkupExtension
     {
-        private Type _enumType;
+        private Type enumType;
         public Type EnumType
         {
-            get { return this._enumType; }
+            get { return enumType; }
             set
             {
-                if (value != this._enumType)
+                if (value != enumType)
                 {
                     if (null != value)
                     {
@@ -116,7 +116,7 @@ namespace Common
                             throw new ArgumentException("Type must be for an Enum.");
                         }
                     }
-                    this._enumType = value;
+                    enumType = value;
                 }
             }
         }
@@ -130,16 +130,16 @@ namespace Common
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            if (null == this._enumType)
+            if (null == enumType)
             {
                 throw new InvalidOperationException("The EnumType must be specified.");
             }
 
-            var actualEnumType = Nullable.GetUnderlyingType(this._enumType) ?? this._enumType;
+            var actualEnumType = Nullable.GetUnderlyingType(enumType) ?? enumType;
             //Get all the enum values to an array:
             var enumValues = Enum.GetValues(actualEnumType);
             //If enum type matches, return:
-            if (actualEnumType == this._enumType)
+            if (actualEnumType == enumType)
             {
                 return enumValues;
             }

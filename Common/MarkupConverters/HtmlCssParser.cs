@@ -33,7 +33,7 @@ namespace MarkupConverter
 
             // Combine styles from stylesheet and from inline attribute.
             // The order is important - the latter styles will override the former.
-            string style = styleFromStylesheet != null ? styleFromStylesheet : null;
+            string style = styleFromStylesheet ?? null;
             if (styleInline != null)
             {
                 style = style == null ? styleInline : (style + ";" + styleInline);
@@ -42,7 +42,7 @@ namespace MarkupConverter
             // Apply local style to current formatting properties
             if (style != null)
             {
-                var styleValues = style.Split(';');
+                string[] styleValues = style.Split(';');
                 for (int i = 0; i < styleValues.Length; i++)
                 {
                     string[] styleNameValue;
@@ -198,7 +198,7 @@ namespace MarkupConverter
         // Skips whitespaces in style values
         private static void ParseWhiteSpace(string styleValue, ref int nextIndex)
         {
-            while (nextIndex < styleValue.Length && Char.IsWhiteSpace(styleValue[nextIndex]))
+            while (nextIndex < styleValue.Length && char.IsWhiteSpace(styleValue[nextIndex]))
             {
                 nextIndex++;
             }
@@ -220,7 +220,7 @@ namespace MarkupConverter
                 }
             }
 
-            if (nextIndex + word.Length < styleValue.Length && Char.IsLetterOrDigit(styleValue[nextIndex + word.Length]))
+            if (nextIndex + word.Length < styleValue.Length && char.IsLetterOrDigit(styleValue[nextIndex + word.Length]))
             {
                 return false;
             }
@@ -266,9 +266,9 @@ namespace MarkupConverter
                 nextIndex++;
             }
 
-            if (nextIndex < styleValue.Length && Char.IsDigit(styleValue[nextIndex]))
+            if (nextIndex < styleValue.Length && char.IsDigit(styleValue[nextIndex]))
             {
-                while (nextIndex < styleValue.Length && (Char.IsDigit(styleValue[nextIndex]) || styleValue[nextIndex] == '.'))
+                while (nextIndex < styleValue.Length && (char.IsDigit(styleValue[nextIndex]) || styleValue[nextIndex] == '.'))
                 {
                     nextIndex++;
                 }
@@ -354,7 +354,7 @@ namespace MarkupConverter
                     nextIndex++;
                     while (nextIndex < styleValue.Length)
                     {
-                        character = Char.ToUpper(styleValue[nextIndex]);
+                        character = char.ToUpper(styleValue[nextIndex]);
                         if (!('0' <= character && character <= '9' || 'A' <= character && character <= 'F'))
                         {
                             break;
@@ -379,7 +379,7 @@ namespace MarkupConverter
                     }
                     color = "gray"; // return bogus color
                 }
-                else if (Char.IsLetter(character))
+                else if (char.IsLetter(character))
                 {
                     color = ParseWordEnumeration(_colors, styleValue, ref nextIndex);
                     if (color == null)
@@ -798,7 +798,7 @@ namespace MarkupConverter
         //
         // .................................................................
 
-        private static string[] _blocks = new string[] { "block", "inline", "list-item", "none" };
+        private static readonly string[] _blocks = new string[] { "block", "inline", "list-item", "none" };
 
         // .................................................................
         //
@@ -819,7 +819,7 @@ namespace MarkupConverter
         {
             if (htmlElement != null)
             {
-                this.DiscoverStyleDefinitions(htmlElement);
+                DiscoverStyleDefinitions(htmlElement);
             }
         }
 
@@ -841,7 +841,7 @@ namespace MarkupConverter
                 {
                     if (htmlChildNode is XmlElement)
                     {
-                        this.DiscoverStyleDefinitions((XmlElement)htmlChildNode);
+                        DiscoverStyleDefinitions((XmlElement)htmlChildNode);
                     }
                 }
                 return;
@@ -897,7 +897,7 @@ namespace MarkupConverter
                     // Define a style
                     if (nextCharacterIndex - definitionStart > 2)
                     {
-                        this.AddStyleDefinition(
+                        AddStyleDefinition(
                             stylesheetBuffer.ToString(selectorStart, definitionStart - selectorStart),
                             stylesheetBuffer.ToString(definitionStart + 1, nextCharacterIndex - definitionStart - 2));
                     }
@@ -945,7 +945,7 @@ namespace MarkupConverter
                 _styleDefinitions = new List<StyleDefinition>();
             }
 
-            var simpleSelectors = selector.Split(',');
+            string[] simpleSelectors = selector.Split(',');
 
             for (int i = 0; i < simpleSelectors.Length; i++)
             {
@@ -969,7 +969,7 @@ namespace MarkupConverter
                 {
                     string selector = _styleDefinitions[i].Selector;
 
-                    var selectorLevels = selector.Split(' ');
+                    string[] selectorLevels = selector.Split(' ');
 
                     int indexInSelector = selectorLevels.Length - 1;
                     int indexInContext = sourceContext.Count - 1;
@@ -1041,8 +1041,8 @@ namespace MarkupConverter
         {
             public StyleDefinition(string selector, string definition)
             {
-                this.Selector = selector;
-                this.Definition = definition;
+                Selector = selector;
+                Definition = definition;
             }
 
             public string Selector;

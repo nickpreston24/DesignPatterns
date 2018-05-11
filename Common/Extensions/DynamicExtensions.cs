@@ -228,7 +228,7 @@ namespace Common
 
                 //child = list as IEnumerable;
                 var childArray = Array.CreateInstance(elementType, list.Count);
-                var source = list.Cast<object>().ToArray();
+                object[] source = list.Cast<object>().ToArray();
                 Array.Copy(source, childArray, list.Count);
 
                 child = childArray;
@@ -327,8 +327,8 @@ namespace Common
     {
         public static string GetFirstNode(this XDocument xmlDocument, string nodeTag)
         {
-            XElement node = (from xml in xmlDocument.Descendants(nodeTag)
-                             select xml).FirstOrDefault();
+            var node = (from xml in xmlDocument.Descendants(nodeTag)
+                        select xml).FirstOrDefault();
 
             return node?.ToString();
         }
@@ -359,11 +359,10 @@ namespace Common
 
     public class DynamicAliasAttribute : Attribute
     {
-        private string alias;
-        public string Alias { get => alias; set => alias = value; }
+        public string Alias { get; set; }
         public DynamicAliasAttribute(string alias)
         {
-            this.alias = alias;
+            Alias = alias;
         }
     }
 }

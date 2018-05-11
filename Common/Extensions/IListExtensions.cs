@@ -35,6 +35,24 @@ namespace Common
             list?.AddRange(elements ?? Enumerable.Empty<T>());
         }
 
+        public static void BubbleSort<T>(this IList<T> list)
+        {
+            for (int i = list.Count - 1; i >= 0; i--)
+            {
+                for (int j = 1; j <= i; j++)
+                {
+                    var object1 = list[j - 1];
+                    var object2 = list[j];
+
+                    if (((IComparable)object1).CompareTo(object2) > 0)
+                    {
+                        list.Remove(object1);
+                        list.Insert(j, object1);
+                    }
+                }
+            }
+        }
+
         // Shuffles an IList in place.        
         public static IList<T> Shuffle<T>(this IList<T> list)
         {
