@@ -8,6 +8,11 @@ namespace Common
 {
     public static partial class CommonExtensions
     {
+        public static string ResolveRelativePath(string referencePath, string relativePath)
+        {
+            return Path.GetFullPath(Path.Combine(referencePath, relativePath));
+        }
+
         public static void CreateStartupFolderShortcut()
         {
             var wshShell = new WshShellClass();
