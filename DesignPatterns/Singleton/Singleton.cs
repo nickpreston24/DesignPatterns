@@ -4,6 +4,8 @@ using System.Reflection;
 namespace DesignPatterns
 {
     //original source: http://richardpianka.com/2011/01/generic-singleton-pattern-in-c-with-reflection/
+
+    /// Factory    
     public static class Singleton<T> where T : class, ISingleton
     {
         static volatile T instance;
@@ -52,4 +54,6 @@ namespace DesignPatterns
             }
         }
     }
+
+    
 }

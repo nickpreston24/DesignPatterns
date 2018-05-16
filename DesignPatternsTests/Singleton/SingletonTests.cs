@@ -1,8 +1,5 @@
-﻿using Common.Extensions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
-using System.Reflection;
 
 namespace DesignPatterns.Tests
 {
@@ -10,7 +7,7 @@ namespace DesignPatterns.Tests
     public class SingletonTests
     {
         [TestMethod]
-        public void CreateSingletonInstance()
+        public void Can_Create_SingletonInstance()
         {
             var app1 = Application.Instance;
             var app2 = Application.Instance;
@@ -24,7 +21,7 @@ namespace DesignPatterns.Tests
         }
 
         [TestMethod]
-        public void InjectSingletons()
+        public void Can_Inject_Singletons()
         {
             var logger = ClientLogger.Instance;
             logger.Name = "┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴";
@@ -37,7 +34,7 @@ namespace DesignPatterns.Tests
         }
 
         [TestMethod]
-        public void CanUseSingletonSelector()
+        public void Can_Use_SingletonSelector()
         {
             var logger = SingletonSelector.GetInstance<ClientLogger>();
             ILogger emaillogger = SingletonSelector.GetInstance<EmailLogger>();
@@ -45,7 +42,7 @@ namespace DesignPatterns.Tests
             Debug.WriteLine(logger.Name);
             Debug.WriteLine(emaillogger.Name);
 
-            emaillogger.Log("hi");
+            emaillogger.Log("hi from email logger");
             emaillogger.Name = "new name";
             logger.Log("hello");
             Debug.WriteLine(logger.Name);
@@ -54,9 +51,34 @@ namespace DesignPatterns.Tests
         }
 
         [TestMethod]
-        public void CreateSingletonInterfaceInstance()
+        public void Can_CreateISingleton_of_T()
         {
-            throw new NotImplementedException(MethodBase.GetCurrentMethod().Name);
+            LunchBox lunchbox = LunchBox.Instance;
+            var selector = lunchbox.Selector;
+
+            Debug.WriteLine(lunchbox.OwnerName);
+            lunchbox.Open();
+
+            var loggerInstance = selector.GetInstance<ClientLogger>();
+
+            Assert.IsNotNull(selector);
+            Assert.IsNotNull(loggerInstance);
+
+            Assert.IsTrue(lunchbox is ISingleton);
+            Assert.IsTrue(lunchbox is ISingleton<Apple>);
+
+            string thiefName = "Jack", originalOwner = lunchbox.OwnerName;
+            Assert.IsTrue(lunchbox.OwnerName.Equals(originalOwner));
+
+            lunchbox.OwnerName = thiefName;
+            Assert.IsTrue(lunchbox.OwnerName.Equals(thiefName));
+
         }
+
+        //[TestMethod]
+        //public void CreateSingletonInterfaceInstance()
+        //{
+        //    throw new NotImplementedException(MethodBase.GetCurrentMethod().Name);
+        //}
     }
 }
