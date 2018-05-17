@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DesignPatterns.Tests
+﻿namespace DesignPatterns.Tests
 {
     public interface ILogger : ISingleton
     {

@@ -3,11 +3,11 @@ using System.Collections.Concurrent;
 
 namespace DesignPatterns
 {
-    public class SingletonSelector
+    public class Multiton
     {
         private static readonly ConcurrentDictionary<Type, ISingleton> instances = new ConcurrentDictionary<Type, ISingleton>();
 
-        private SingletonSelector() { }
+        private Multiton() { }
 
         public static T GetInstance<T>() where T : class, ISingleton
         {
@@ -27,24 +27,19 @@ namespace DesignPatterns
     }
 
     ///Wrapper-Instance (Holds Implemenation)
-    public class Selector<T>  //: SelectorImplementationBase
+    public class Selector : ISelector
     {
         ISelector Implementation { get; set; }
-
-        public ISingleton GetInstance<T>() where T : class, ISingleton
-        {
-            return Implementation.GetInstance<T>();
-        }
 
         public Selector()
         {
             Implementation = new SelectorImplementation();
         }
-    }
 
-    public interface ISelector
-    {
-        ISingleton GetInstance<T>() where T : class, ISingleton;
+        public ISingleton GetInstance<T>() where T : class, ISingleton
+        {
+            return Implementation.GetInstance<T>();
+        }
     }
 
     ///Implements
@@ -52,7 +47,7 @@ namespace DesignPatterns
     {
         public virtual ISingleton GetInstance<T>() where T : class, ISingleton
         {
-            return SingletonSelector.GetInstance<T>();
+            return Multiton.GetInstance<T>();
         }
     }
 }

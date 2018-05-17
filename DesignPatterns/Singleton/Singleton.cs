@@ -47,6 +47,7 @@ namespace DesignPatterns
                         }
 
                         instance = (T)constructor.Invoke(null);
+                        instance.Selector = instance.Selector ?? new Selector();
                     }
                 }
 
@@ -55,5 +56,5 @@ namespace DesignPatterns
         }
     }
 
-    
+
 }

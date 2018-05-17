@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace Common
 {
-    public static class RandomizerExtensions
+    public static partial class CommonExtensions
     {
         public static IEnumerable<int> Random()
         {

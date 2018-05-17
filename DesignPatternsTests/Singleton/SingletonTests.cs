@@ -1,11 +1,19 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace DesignPatterns.Tests
 {
     [TestClass]
     public class SingletonTests
     {
+        private static int maxCount = 132;
+
         [TestMethod]
         public void Can_Create_SingletonInstance()
         {
@@ -36,8 +44,8 @@ namespace DesignPatterns.Tests
         [TestMethod]
         public void Can_Use_SingletonSelector()
         {
-            var logger = SingletonSelector.GetInstance<ClientLogger>();
-            ILogger emaillogger = SingletonSelector.GetInstance<EmailLogger>();
+            var logger = Multiton.GetInstance<ClientLogger>();
+            ILogger emaillogger = Multiton.GetInstance<EmailLogger>();
 
             Debug.WriteLine(logger.Name);
             Debug.WriteLine(emaillogger.Name);
@@ -65,14 +73,51 @@ namespace DesignPatterns.Tests
             Assert.IsNotNull(loggerInstance);
 
             Assert.IsTrue(lunchbox is ISingleton);
-            Assert.IsTrue(lunchbox is ISingleton<Apple>);
 
             string thiefName = "Jack", originalOwner = lunchbox.OwnerName;
             Assert.IsTrue(lunchbox.OwnerName.Equals(originalOwner));
 
             lunchbox.OwnerName = thiefName;
             Assert.IsTrue(lunchbox.OwnerName.Equals(thiefName));
+        }
 
+        [TestMethod]
+        public void Can_CreateMultithreadSingletons()
+        {
+            EmailLogger.Instance.Name = "start";
+            var thread = new Thread(Write1);
+            thread.Start();
+            Write2();
+            Debug.WriteLine("Done");
+        }
+
+        private static void Write2()
+        {
+            foreach (int count in Enumerable.Range(1, maxCount))
+            {
+                var emailLogger = EmailLogger.Instance;
+
+                if (!string.IsNullOrWhiteSpace(emailLogger.Name))
+                {
+                    emailLogger.Name = "mike";
+                }
+
+                emailLogger.Log($"Thread 2, count {count}");
+            }
+        }
+
+        private static void Write1()
+        {
+            foreach (int count in Enumerable.Range(1, maxCount))
+            {
+                var emailLogger = EmailLogger.Instance;
+                if (!string.IsNullOrWhiteSpace(emailLogger.Name))
+                {
+                    emailLogger.Name = "bob";
+                }
+
+                emailLogger.Log($"Thread 1, count {count}");
+            }
         }
 
         //[TestMethod]

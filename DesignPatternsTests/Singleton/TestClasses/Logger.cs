@@ -6,7 +6,6 @@ namespace DesignPatterns.Tests
     public class ClientLogger : ILogger
     {
         public string Name { get; set; } = nameof(ClientLogger);
-        private ClientLogger() { }
 
         public static ClientLogger Instance
         {
@@ -16,15 +15,24 @@ namespace DesignPatterns.Tests
             }
         }
 
-        public void Log(Exception exception) => Debug.WriteLine(exception.ToString());
+        public ISelector Selector { get; set; }
 
-        public void Log(string message) => Debug.WriteLine(message);
+        private ClientLogger() { }
+
+        public void Log(Exception exception) => Console.WriteLine(exception.ToString());
+
+        public void Log(string message) => Console.WriteLine(message);
     }
 
     public class EmailLogger : ILogger
     {
-        private EmailLogger() { }
         public string Name { get; set; } = nameof(EmailLogger);
+
+        public ISelector Selector { get; set; }
+
+        public static EmailLogger Instance => Singleton<EmailLogger>.Instance;
+
+        private EmailLogger() { }
 
         public void Log(Exception exception) => Debug.WriteLine(exception.ToString());
 
