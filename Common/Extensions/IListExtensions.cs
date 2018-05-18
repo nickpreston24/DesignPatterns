@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Reflection;
 
-namespace Common
+namespace Shared
 {
     public static partial class CommonExtensions
     {

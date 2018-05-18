@@ -5,7 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace Common
+namespace Shared
 {
     public static partial class CommonExtensions
     {

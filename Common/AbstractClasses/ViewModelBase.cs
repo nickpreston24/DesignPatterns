@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-namespace Common
+namespace Shared
 {
     public abstract class ViewModelBase : INotifyPropertyChanged
     {

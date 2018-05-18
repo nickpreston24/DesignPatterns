@@ -1,4 +1,4 @@
-﻿namespace Common
+﻿namespace Shared
 {
     /// <summary>
     /// Contract for implemented classes to use logging methods

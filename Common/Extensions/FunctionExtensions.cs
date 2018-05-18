@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Common
+namespace Shared
 {
     //
     /// The Following is a series of Funcs for the purpose of handling functional programming in C#

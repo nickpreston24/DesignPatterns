@@ -2,7 +2,7 @@
 using System.Collections.Specialized;
 using System.ComponentModel;
 
-namespace Common.Classes
+namespace Shared.Classes
 {
     public class ViewableCollection<T> : ViewableCollectionBase<T> where T : INotifyPropertyChanged
     {

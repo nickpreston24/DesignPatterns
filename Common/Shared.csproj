@@ -7,8 +7,8 @@
     <ProjectGuid>{5E4D9F12-A069-4979-9EE1-944FF27C1BF0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Common</RootNamespace>
-    <AssemblyName>Common</AssemblyName>
+    <RootNamespace>Shared</RootNamespace>
+    <AssemblyName>Shared</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -65,7 +65,9 @@
   <ItemGroup>
     <Compile Include="Classes\ApiMethodController.cs" />
     <Compile Include="AbstractClasses\ViewableCollectionBase.cs" />
+    <Compile Include="Classes\ConsoleColor.cs" />
     <Compile Include="Classes\Maybe.cs" />
+    <Compile Include="Classes\TimeIt.cs" />
     <Compile Include="Extensions\DynamicExtensions.cs" />
     <Compile Include="Extensions\EmbeddedResource.cs" />
     <Compile Include="Classes\ViewableCollection.cs" />

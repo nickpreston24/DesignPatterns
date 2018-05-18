@@ -46,7 +46,7 @@
     <Compile Include="Singleton\ISingleton.cs" />
     <Compile Include="Singleton\Singleton.cs" />
     <Compile Include="Singleton\SingletonException.cs" />
-    <Compile Include="Singleton\SingletonSelector.cs" />
+    <Compile Include="Singleton\Multiton.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Classes\" />

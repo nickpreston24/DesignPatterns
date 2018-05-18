@@ -10,7 +10,7 @@ using System.Reflection;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
-namespace Common
+namespace Shared
 {
     public static partial class DynamicExtensions
     {

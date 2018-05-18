@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Common
+namespace Shared
 {
     public static partial class CommonExtensions
     {

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading;
 
-namespace Common
+namespace Shared
 {
     public static partial class CommonExtensions
     {

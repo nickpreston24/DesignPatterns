@@ -1,4 +1,4 @@
-﻿namespace Common
+﻿namespace Shared
 {
     public class Rule
     {

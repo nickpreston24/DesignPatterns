@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Web.Http;
 
-namespace Common
+namespace Shared
 {
     public class ApiMethodController : ApiController
     {

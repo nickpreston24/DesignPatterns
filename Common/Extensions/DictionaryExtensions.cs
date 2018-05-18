@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Common
+namespace Shared
 {
     public static partial class CommonExtensions
     {

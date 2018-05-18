@@ -9,7 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 
-namespace Common
+namespace Shared
 {
     public static partial class CommonExtensions
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Common
+namespace Shared
 {
     //from: https://www.pluralsight.com/tech-blog/maybe
     public struct Maybe<T>

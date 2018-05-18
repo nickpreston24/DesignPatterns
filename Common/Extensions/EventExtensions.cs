@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Common
+namespace Shared
 {
     public static partial class CommonExtensions
     {

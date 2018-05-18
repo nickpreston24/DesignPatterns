@@ -1,4 +1,4 @@
-﻿namespace Common
+﻿namespace Shared
 {
     //Common test class
     public class Person

@@ -25,29 +25,4 @@ namespace DesignPatterns
             }
         }
     }
-
-    ///Wrapper-Instance (Holds Implemenation)
-    public class Selector : ISelector
-    {
-        ISelector Implementation { get; set; }
-
-        public Selector()
-        {
-            Implementation = new SelectorImplementation();
-        }
-
-        public ISingleton GetInstance<T>() where T : class, ISingleton
-        {
-            return Implementation.GetInstance<T>();
-        }
-    }
-
-    ///Implements
-    public class SelectorImplementation : ISelector
-    {
-        public virtual ISingleton GetInstance<T>() where T : class, ISingleton
-        {
-            return Multiton.GetInstance<T>();
-        }
-    }
 }

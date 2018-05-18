@@ -3,7 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
-namespace Common
+namespace Shared
 {
     public static partial class CommonExtensions
     {

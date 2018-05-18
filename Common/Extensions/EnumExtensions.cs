@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Markup;
 
-namespace Common
+namespace Shared
 {
     public static partial class CommonExtensions
     {

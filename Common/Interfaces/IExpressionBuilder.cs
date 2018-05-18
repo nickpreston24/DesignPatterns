@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Common
+namespace Shared
 {
     //TODO:  Create a service class that builds conditions for Dynamic Expressions using operators and operands and given types.  This service must be applicable to any object whose properties can be stringified or have some value.
     public interface IExpressionBuilder
