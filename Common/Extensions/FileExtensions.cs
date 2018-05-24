@@ -3,11 +3,55 @@ using Shell32;
 using System;
 using System.IO;
 using System.Reflection;
+using System.Security.Cryptography;
 
 namespace Shared
 {
     public static partial class CommonExtensions
     {
+        public static bool Equals(this FileInfo first, FileInfo second, bool useHash = false)
+        {
+            return useHash
+                ? FilesAreEqual_Hash(first, second)
+                : FilesAreEqual_OneByte(first, second);
+        }
+
+        private static bool FilesAreEqual_OneByte(this FileInfo first, FileInfo second)
+        {
+            if (first.Length != second.Length)
+                return false;
+
+            if (string.Equals(first.FullName, second.FullName, StringComparison.OrdinalIgnoreCase))
+                return true;
+
+            using (FileStream fs1 = first.OpenRead())
+            using (FileStream fs2 = second.OpenRead())
+            {
+                for (int i = 0; i < first.Length; i++)
+                {
+                    if (fs1.ReadByte() != fs2.ReadByte())
+                        return false;
+                }
+            }
+
+            return true;
+        }
+
+        private static bool FilesAreEqual_Hash(this FileInfo first, FileInfo second)
+        {
+            byte[] firstHash = MD5.Create().ComputeHash(first.OpenRead());
+            byte[] secondHash = MD5.Create().ComputeHash(second.OpenRead());
+
+            for (int i = 0; i < firstHash.Length; i++)
+            {
+                if (firstHash[i] != secondHash[i])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        
         public static string ResolveRelativePath(string referencePath, string relativePath)
         {
             return Path.GetFullPath(Path.Combine(referencePath, relativePath));
