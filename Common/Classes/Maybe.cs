@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Shared
+namespace System
 {
     //from: https://www.pluralsight.com/tech-blog/maybe
     public struct Maybe<T>
