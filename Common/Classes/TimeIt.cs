@@ -10,6 +10,7 @@ namespace Shared
         private readonly Stopwatch watch;
         private TimeSpan elapsed;
         public TimeSpan Elapsed { get { return elapsed; } }
+        public static TimeIt GetTimer([CallerMemberName] string name = "") => new TimeIt(name);
 
         public TimeIt([CallerMemberName] string name = "")
         {
