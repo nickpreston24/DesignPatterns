@@ -1,9 +1,6 @@
-﻿using System;
-using System.Linq.Expressions;
-
-namespace Shared
+﻿namespace System.Linq.Expressions
 {
-    public static partial class CommonExtensions
+    public static partial class Extensions
     {
         //https://stackoverflow.com/questions/654153/c-sharp-how-to-convert-an-expressionfuncsometype-to-an-expressionfuncother
         public static Func<T, object> ExpressionConversion<T, U>(this Expression<Func<T, U>> expression)

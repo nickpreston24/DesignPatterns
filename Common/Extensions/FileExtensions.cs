@@ -1,13 +1,11 @@
 ﻿using IWshRuntimeLibrary;
 using Shell32;
-using System;
-using System.IO;
 using System.Reflection;
 using System.Security.Cryptography;
 
-namespace Shared
+namespace System.IO
 {
-    public static partial class CommonExtensions
+    public static partial class Extensions
     {
         public static bool Equals(this FileInfo first, FileInfo second, bool useHash = false)
         {
@@ -51,7 +49,7 @@ namespace Shared
             }
             return true;
         }
-        
+
         public static string ResolveRelativePath(string referencePath, string relativePath)
         {
             return Path.GetFullPath(Path.Combine(referencePath, relativePath));

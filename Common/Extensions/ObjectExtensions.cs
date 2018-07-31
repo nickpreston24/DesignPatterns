@@ -5,9 +5,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
-namespace Shared
+namespace System
 {
-    public static partial class CommonExtensions
+    public static partial class Extensions
     {
         private static JsonConverter _jsonConverter = new Newtonsoft.Json.Converters.StringEnumConverter();
         private static JsonSerializerSettings _jsonSerializerSettings = new JsonSerializerSettings
@@ -38,8 +38,9 @@ namespace Shared
 
             var destinationType = destination.GetType();
             var sourceType = source.GetType();
+            var sourceProperties = sourceType.GetProperties();
 
-            var properties_to_map = from sourceProperty in propertyCache[sourceType]
+            var properties_to_map = from sourceProperty in sourceProperties
                                     let destinationProperty = destinationType.GetProperty(sourceProperty.Name)
                                     where sourceProperty.CanRead
                                     && destinationProperty != null
@@ -67,8 +68,9 @@ namespace Shared
         {
             var destinationType = destination.GetType();
             var sourceType = source.GetType();
+            var sourceProperties = sourceType.GetProperties();
 
-            var mappableProperties = from sourceProperty in propertyCache[sourceType]
+            var mappableProperties = from sourceProperty in sourceProperties
                                      let targetProperty = destinationType.GetProperty(sourceProperty.Name)
                                      where sourceProperty.CanRead
                                      && targetProperty != null
@@ -103,8 +105,9 @@ namespace Shared
 
             var destinationType = destination.GetType();
             var sourceType = source.GetType();
+            var sourceProperties = sourceType.GetProperties();
 
-            var mappableProperties = from sourceProperty in propertyCache[sourceType]
+            var mappableProperties = from sourceProperty in sourceProperties
                                      let destinationProperty = destinationType.GetProperty(sourceProperty.Name)
                                      where sourceProperty.CanRead
                                      && destinationProperty != null
@@ -128,7 +131,7 @@ namespace Shared
             var sourceType = source.GetType();
             var destinationType = destination.GetType();
 
-            var sourceProperties = propertyCache[sourceType];
+            var sourceProperties = sourceType.GetProperties();
 
             var mappableProperties = from sourceProperty in sourceProperties
                                      let destinationProperty = destinationType.GetProperty(sourceProperty.Name)
@@ -159,14 +162,19 @@ namespace Shared
         //Combine 2 different class instances into an out instance, R.
         public static R Merge<T, U, R>(T first, U second, out R result) => throw new NotImplementedException();
 
-        public static void ToPropertyDictionary(object @object) => propertyCache[@object?.GetType()]
-            ?.ToDictionary(property => property.Name, property => property.GetValue(@object));
+        public static void ToPropertyDictionary(object @object) => @object?.GetType()
+            .GetProperties()?
+            .ToDictionary(property => property.Name, property => property
+            .GetValue(@object));
 
-        public static void ToPropertyLookup(object @object) => propertyCache[@object?.GetType()]
-            ?.ToLookup(property => property.Name, property => property.GetValue(@object));
+        public static void ToPropertyLookup(object @object) => @object?.GetType()
+            .GetProperties()?
+            .ToLookup(property => property.Name, property => property
+            .GetValue(@object));
 
-        public static object GetPropertyValue<T>(this T @object, string propertyName) => propertyCache[typeof(T)]
-            ?.Single(pi => pi.Name == propertyName)?.GetValue(@object, null);
+        public static object GetPropertyValue<T>(this T @object, string propertyName) => typeof(T).GetProperties()?
+            .Single(pi => pi.Name == propertyName)?
+            .GetValue(@object, null);
 
         public static bool Compare(this object @object, object another)
         {
@@ -192,7 +200,8 @@ namespace Shared
                 return @object.Equals(another);
             }
 
-            var properties = propertyCache[@object?.GetType()];
+            var properties = @object?.GetType()
+                .GetProperties();
 
             foreach (var property in properties ?? Enumerable.Empty<PropertyInfo>())
             {
@@ -255,7 +264,8 @@ namespace Shared
 
             //Get all properties of obj
             //And compare each other
-            var properties = propertyCache[obj?.GetType()];
+            var properties = obj?.GetType()
+                .GetProperties();
 
             foreach (var property in properties ?? Enumerable.Empty<PropertyInfo>())
             {
@@ -298,5 +308,7 @@ namespace Shared
 
             return obj;
         }
+
+        public static bool IsNullable<T>(this T @object) where T : class => typeof(T).GetGenericTypeDefinition() == typeof(Nullable<>);
     }
 }

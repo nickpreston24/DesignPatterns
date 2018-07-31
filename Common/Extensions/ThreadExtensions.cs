@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 
-namespace Shared
+namespace System.Threading
 {
-    public static partial class CommonExtensions
+    public static partial class Extensions
     {
         public static void WaitAll(this IEnumerable<Thread> threads)
         {

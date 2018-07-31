@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Markup;
 
-namespace Shared
+namespace System
 {
-    public static partial class CommonExtensions
+    public static class EnumExtensions
     {
         public static IEnumerable<TEnum> GetValues<TEnum>()
             where TEnum : struct, IConvertible, IFormattable, IComparable => Enum.GetValues(typeof(TEnum)).Cast<TEnum>();

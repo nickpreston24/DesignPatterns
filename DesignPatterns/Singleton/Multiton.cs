@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 
 namespace DesignPatterns
 {
-    public class Multiton
+    public sealed class Multiton
     {
         private static readonly ConcurrentDictionary<Type, ISingleton> instances = new ConcurrentDictionary<Type, ISingleton>();
 

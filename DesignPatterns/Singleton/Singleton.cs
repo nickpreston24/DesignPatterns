@@ -47,7 +47,7 @@ namespace DesignPatterns
                         }
 
                         instance = (T)constructor.Invoke(null);
-                        instance.Selector = instance.Selector ?? new Selector();
+                        //instance.Selector = new Selector();
                     }
                 }
 
@@ -55,30 +55,37 @@ namespace DesignPatterns
             }
         }
 
+        #region For Use in C# 8
+        //Todo: Replace with Selector's implementation when C# 8.0 comes out.
+        /////Wrapper-Instance (Holds Implemenation)
+        //class Selector : ISelector
+        //{
+        //    ISelector Implementation { get; set; }
 
-        ///Wrapper-Instance (Holds Implemenation)
-        class Selector : ISelector
-        {
-            ISelector Implementation { get; set; }
+        //    public Selector()
+        //    {
+        //        Implementation = new SelectorImplementation();
+        //    }
 
-            public Selector()
-            {
-                Implementation = new SelectorImplementation();
-            }
-
-            public ISingleton GetInstance<T>() where T : class, ISingleton
-            {
-                return Implementation.GetInstance<T>();
-            }
-        }
+        //    public ISingleton GetInstance<T>() where T : class, ISingleton
+        //    {
+        //        return Implementation.GetInstance<T>();
+        //    }
+        //}
+        #endregion For Use in C# 8
     }
 
-    ///Implements
-    internal class SelectorImplementation : ISelector
+    /////Implements
+    //internal class SelectorImplementation : ISelector
+    //{
+    //    public virtual ISingleton GetInstance<T>() where T : class, ISingleton
+    //    {
+    //        return Multiton.GetInstance<T>();
+    //    }
+    //}
+
+    public static class SingletonExtensions
     {
-        public virtual ISingleton GetInstance<T>() where T : class, ISingleton
-        {
-            return Multiton.GetInstance<T>();
-        }
+        public static ISingleton Get<T>(this ISingleton singleton) where T : class, ISingleton => Multiton.GetInstance<T>();
     }
 }

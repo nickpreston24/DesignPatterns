@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 
-namespace Shared
+namespace System.Collections.Generic
 {
-    public static partial class CommonExtensions
+    public static partial class Extensions
     {
         //https://damieng.com/blog/2012/10/29/8-things-you-probably-didnt-know-about-csharp
         public static object GetValue<TKey>(this Dictionary<TKey, object> dictionary, TKey key) => dictionary[key];

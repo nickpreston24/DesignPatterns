@@ -1,9 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
-
-namespace Shared
+﻿namespace System.Threading.Tasks
 {
-    public static partial class CommonExtensions
+    public static partial class Extensions
     {
         public static Task AsTask(this Action action) => new Task(action);
 

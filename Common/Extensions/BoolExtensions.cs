@@ -1,6 +1,6 @@
-﻿namespace Shared
+﻿namespace System
 {
-    public static partial class CommonExtensions
+    public static partial class Extensions
     {
         public static string ToLetter(this bool value, bool isUpper) => value ? isUpper ? "T" : "t" : isUpper ? "F" : "f";
         public static string ToYesOrNo(this bool value, bool isLetter, bool isUpper)

@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Shared;
 using System.Data;
 using System.Linq;
 using System.Reflection;
 
-namespace Shared
+namespace System.Collections.Generic
 {
-    public static partial class CommonExtensions
+    public static partial class Extensions
     {
         public static T PopAt<T>(this IList<T> list, int index)
         {
@@ -100,8 +99,7 @@ namespace Shared
                 return table;
             }
 
-            //var properties = typeof(T).GetProperties();
-            var properties = propertyCache[typeof(T)];
+            var properties = typeof(T).GetProperties();
 
             foreach (var property in properties)
             {

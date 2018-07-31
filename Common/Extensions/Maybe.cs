@@ -11,31 +11,30 @@ namespace System
 
         public bool HasValue => values != null && values.Any();
 
-        public static Maybe<T> Some(T value) => value == null
-                ? throw new InvalidOperationException()
-                : new Maybe<T>(new[] { value });
+        public static Maybe<T> Some(T value) => value == null ? throw new InvalidOperationException() : new Maybe<T>(new[] { value });
 
         public static Maybe<T> None => new Maybe<T>(new T[0]);
 
-        public T Value => (HasValue)
-                ? values.Single()
-                : throw new InvalidOperationException($"Maybe<{typeof(T).Name}> does not have a value!");
+        public T Value => (HasValue) ? values.Single() : throw new InvalidOperationException($"Maybe<{typeof(T).Name}> does not have a value!");
 
         /// <summary>
         /// From: https://mikhail.io/2016/01/monads-explained-in-csharp/
         /// </summary>
         /// <param name="value"></param>
-        public Maybe(T value) => values = new[] { value };
+        public Maybe(T value)
+        {
+            values = new[] { value };
+        }
 
-        Maybe(IEnumerable<T> values) => this.values = values;
+        Maybe(IEnumerable<T> values)
+        {
+            this.values = values;
+        }
 
-        public T ValueOrDefault(T @default) => !HasValue
-                ? @default
-                : values.Single();
 
-        public T ValueOrThrow(Exception ex) => HasValue
-                ? Value
-                : throw ex;
+        public T ValueOrDefault(T @default) => !HasValue ? @default : values.Single();
+
+        public T ValueOrThrow(Exception ex) => HasValue ? Value : throw ex;
 
         //Handle the cases where there is some value or there is none:
         public U Case<U>(Func<T, U> some, Func<U> none) => HasValue
@@ -100,13 +99,19 @@ namespace System
         /// Maybe<string> maybeFirstName = maybeAccount.Map(account => account.FirstName);
         /// Maybe<IList<string>> emails = maybeAccount.Map(account => repository.GetEmailAddresses(account));
         /// </summary>
-        public Maybe<U> Map<U>(Func<T, Maybe<U>> map) => HasValue
+        public Maybe<U> Map<U>(Func<T, Maybe<U>> map)
+        {
+            return HasValue
                 ? map(Value)
                 : Maybe<U>.None;
+        }
 
-        public Maybe<U> Map<U>(Func<T, U> map) => HasValue
+        public Maybe<U> Map<U>(Func<T, U> map)
+        {
+            return HasValue
                 ? Maybe.Some(map(Value))
                 : Maybe<U>.None;
+        }
     }
 
     public static class Maybe

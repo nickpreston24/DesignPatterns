@@ -2,18 +2,16 @@
 using System.Collections.Concurrent;
 using System.Reflection;
 
-namespace Shared
+namespace System.Reflection
 {
-    public static partial class CommonExtensions
+    public static partial class Extensions
     {
         public static PropertyCache propertyCache = new PropertyCache();
 
         public static ConcurrentDictionary<Type, PropertyInfo[]> Cache(this Type type)
         {
-            //propertyCache.TryAdd(type, type.GetProperties());
-            //return propertyCache;
-            throw new NotImplementedException(MethodBase.GetCurrentMethod().Name);
-
+            propertyCache.TryAdd(type, type.GetProperties());
+            return propertyCache.Cache;
         }
     }
 }

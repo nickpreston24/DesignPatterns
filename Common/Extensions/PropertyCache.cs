@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Reflection;
+﻿using System.Collections.Concurrent;
 
-namespace Shared
+namespace System.Reflection
 {
     public class PropertyCache
     {
@@ -10,10 +8,10 @@ namespace Shared
             ? properties
             : type.Cache()[type];
 
-        public static ConcurrentDictionary<Type, PropertyInfo[]> Cache { get; private set; } = new ConcurrentDictionary<Type, PropertyInfo[]>();
+        public ConcurrentDictionary<Type, PropertyInfo[]> Cache { get; private set; } = new ConcurrentDictionary<Type, PropertyInfo[]>();
 
         public int Count => Cache.Count;
 
-        internal static bool TryAdd(Type type, PropertyInfo[] propertyInfo) => Cache.TryAdd(type, propertyInfo);
+        internal bool TryAdd(Type type, PropertyInfo[] propertyInfo) => Cache.TryAdd(type, propertyInfo);
     }
 }

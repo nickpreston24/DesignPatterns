@@ -1,9 +1,8 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 
-namespace Shared
+namespace System
 {
-    public static partial class CommonExtensions
+    public static partial class Extensions
     {
         /// 
         /// Raises an event thread-safely if the event has subscribers. 

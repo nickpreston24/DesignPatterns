@@ -64,9 +64,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\ApiMethodController.cs" />
-    <Compile Include="AbstractClasses\ViewableCollectionBase.cs" />
+    <Compile Include="Extensions\ArrayExtensions.cs" />
+    <Compile Include="ViewModel\ViewableCollectionBase.cs" />
     <Compile Include="Classes\ConsoleColor.cs" />
+    <Compile Include="Classes\InstanceExtractor.cs" />
     <Compile Include="Classes\Maybe.cs" />
+    <Compile Include="Classes\PatternAttribute.cs" />
     <Compile Include="Classes\TimeIt.cs" />
     <Compile Include="Extensions\DynamicExtensions.cs" />
     <Compile Include="Extensions\EmbeddedResource.cs" />
@@ -76,7 +79,7 @@
     <Compile Include="Classes\Person.cs" />
     <Compile Include="Classes\PropertyObserver.cs" />
     <Compile Include="Classes\SmtpEmailService.cs" />
-    <Compile Include="AbstractClasses\ViewModelBase.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="Constants\RegexPatterns.cs" />
     <Compile Include="Extensions\ActionExtensions.cs" />
     <Compile Include="Extensions\BoolExtensions.cs" />
@@ -90,7 +93,6 @@
     <Compile Include="Extensions\FileExtensions.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\IListExtensions.cs" />
-    <Compile Include="Extensions\LogExtensions.cs" />
     <Compile Include="Extensions\MaybeExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\ObservableCollectionExtensions.cs" />
@@ -119,6 +121,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="app.config" />
+    <None Include="Fonts\Monda-Bold.ttf" />
+    <None Include="Fonts\Monda-Regular.ttf" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

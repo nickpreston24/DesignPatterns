@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace Shared
+﻿namespace System
 {
     //
     /// The Following is a series of Funcs for the purpose of handling functional programming in C#
     ////
-    public static partial class CommonExtensions
+    public static partial class Extensions
     {
         public static Func<T> Cache<T>(this Func<T> function, int cacheInterval)
         {

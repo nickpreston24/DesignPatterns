@@ -58,14 +58,12 @@ namespace DesignPatterns.Tests
         public void Can_CreateISingleton_of_T()
         {
             LunchBox lunchbox = LunchBox.Instance;
-            var selector = lunchbox.Selector;
 
             Debug.WriteLine(lunchbox.OwnerName);
             lunchbox.Open();
 
-            var loggerInstance = selector.GetInstance<ClientLogger>();
+            var loggerInstance = lunchbox.Get<ClientLogger>();
 
-            Assert.IsNotNull(selector);
             Assert.IsNotNull(loggerInstance);
 
             Assert.IsTrue(lunchbox is ISingleton);

@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace Shared
+namespace System.Collections.ObjectModel
 {
-    public static partial class CommonExtensions
+    public static partial class Extensions
     {
         public static void AddRange<T>(this ObservableCollection<T> observableCollection, IEnumerable<T> collection)
         {

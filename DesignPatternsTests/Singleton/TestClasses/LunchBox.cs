@@ -6,7 +6,6 @@ namespace DesignPatterns.Tests
     {
         private Apple apple;
         public string OwnerName { get; set; } = "Bob";
-        public ISelector Selector { get; set; }
 
         public static LunchBox Instance
         {

@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
-namespace Shared
+namespace System
 {
-    public static partial class CommonExtensions
+    public static partial class Extensions
     {
         public static IEnumerable<Type> GetAssignableTypes<T>()
         {

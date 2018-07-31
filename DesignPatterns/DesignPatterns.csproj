@@ -42,6 +42,10 @@
   <ItemGroup>
     <Compile Include="Minion\Minion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\IUnitOfWork.cs" />
+    <Compile Include="Repository\Repository.cs" />
+    <Compile Include="Repository\UnitOfWork.cs" />
     <Compile Include="Singleton\ISelector.cs" />
     <Compile Include="Singleton\ISingleton.cs" />
     <Compile Include="Singleton\Singleton.cs" />

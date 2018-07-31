@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
@@ -8,9 +7,9 @@ using System.Dynamic;
 using System.Linq;
 using System.Reflection;
 
-namespace Shared
+namespace System.Data
 {
-    public static partial class CommonExtensions
+    public static partial class Extensions
     {
         public static ObservableCollection<T> ToObservableCollection<T>(this DataTable table)
             where T : class, new()
@@ -22,7 +21,7 @@ namespace Shared
                 return observableCollection;
             }
 
-            var properties = propertyCache[typeof(T)];
+            var properties = typeof(T).GetProperties();
 
             string propertyName = "";
 
@@ -177,7 +176,7 @@ namespace Shared
                 return list;
             }
 
-            var properties = propertyCache[typeof(T)];
+            var properties = typeof(T).GetProperties();
 
             if (properties == null || properties.Length == 0)
             {

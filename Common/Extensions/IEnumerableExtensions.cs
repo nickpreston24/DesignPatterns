@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace Shared
+namespace System
 {
-    public static partial class CommonExtensions
+    public static partial class Extensions
     {
         public static IEnumerable<T> Slice<T>(this IEnumerable<T> sequence, int startIndex, int count)
         {
@@ -158,7 +157,7 @@ namespace Shared
                 return table;
             }
 
-            var properties = propertyCache[typeof(T)];
+            var properties = typeof(T).GetProperties();
 
             if (properties.Length == 0)
             {
@@ -279,7 +278,7 @@ namespace Shared
            where T : class
         {
             var csvBuilder = new StringBuilder();
-            var properties = propertyCache[typeof(T)];
+            var properties = typeof(T).GetProperties();
 
             foreach (var item in items ?? Enumerable.Empty<T>())
             {

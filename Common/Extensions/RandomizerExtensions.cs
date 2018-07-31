@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading;
 
-namespace Shared
+namespace System.Collections.Generic
 {
-    public static partial class CommonExtensions
+    public static partial class Extensions
     {
         public static IEnumerable<int> Random()
         {
