@@ -1,1 +1,0 @@
-﻿Upgrade this class library to a VSIX extension library specifically for installing snippets
