@@ -1,4 +1,8 @@
-﻿
+﻿/* Author: Michael Preston
+ * License: N/A
+ * Last Update: 8/30/2018
+ */
+
 namespace Shared
 {
     using System;
@@ -11,7 +15,7 @@ namespace Shared
     using System.Text.RegularExpressions;
 
     /// <summary>
-    /// Extracts object(s) T from given Regular Expressions
+    /// The following is a DSL for extracting class object from regular expressions and strings.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class Extractor<T>
@@ -118,14 +122,14 @@ namespace Shared
             PropertyInfo property;
             string line;
 
-            for (int p = 0; p < properties.Length; p++)
+            for (int propIndex = 0; propIndex < properties.Length; propIndex++)
             {
-                property = properties[p];
+                property = properties[propIndex];
                 regex = patternsMap.GetValue(property.Name);
 
-                for (int i = 0; i < lines.Length; i++)
+                for (int index = 0; index < lines.Length; index++)
                 {
-                    line = lines[i];
+                    line = lines[index];
 
                     try
                     {
@@ -252,13 +256,6 @@ namespace Shared
             }
 
             return memberExpression.Member.Name;
-        }
-    }
-    public static class DictionaryExtensions
-    {
-        public static TV GetValue<TK, TV>(this IDictionary<TK, TV> dictionary, TK key, TV defaultValue = default(TV))
-        {
-            return dictionary.TryGetValue(key, out TV value) ? value : defaultValue;
         }
     }
 }

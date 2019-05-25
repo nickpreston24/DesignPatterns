@@ -281,34 +281,66 @@ namespace System
             return result;
         }
 
-        public static T Dump<T>(this T obj, string displayName = null, bool showNulls = true)
+        internal static void Log(string message, LogTo logTo)
         {
-            if (obj != null)
+            switch (logTo)
             {
-                if (string.IsNullOrWhiteSpace(displayName))
-                {
-                    displayName = obj.GetType().Name;
-                }
-
-                if (!showNulls)
-                {
-                    _jsonSerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-                }
-
-                string prettyJson = JsonConvert.SerializeObject(obj, Formatting.Indented, _jsonSerializerSettings);
-                Debug.WriteLine(string.Format("{0}:\n{1}", displayName, prettyJson));
+                default:
+                case LogTo.BOTH:
+                    Debug.WriteLine(message);
+                    Console.WriteLine(message);
+                    break;
+                case LogTo.CONSOLE:
+                    Console.WriteLine(message);
+                    break;
+                case LogTo.DEBUG:
+                    Debug.WriteLine(message);
+                    break;
             }
-            else if (obj == null)
+        }
+
+        /// <summary>
+        /// Dump an object's properties to Debug in JSON format        
+        /// Null values will be ignored by default
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="item">Instance of any passed object</param>
+        /// <param name="name">Custom Name of passed object</param>        
+        /// <param name="showNulls">if true, show null properties</param>
+        /// <returns>T</returns>
+        public static T Dump<T>(this T item, string name = "", bool showNulls = true, LogTo log = LogTo.BOTH)
+        {
+            if (item == null)
             {
-                if (!string.IsNullOrWhiteSpace(displayName))
-                {
-                    Debug.WriteLine(string.Format("Object '{0}'{1}", displayName, " is null.")); //Optional
-                }
+                Log(!string.IsNullOrWhiteSpace(name) ? string.Format("Object '{0}'{1}", name, " is null.") : "Object is null", log);
+                return item;
             }
 
-            return obj;
+            if (string.IsNullOrWhiteSpace(name))
+                name = item.GetType().Name;
+
+            string prettyJson = JsonConvert.SerializeObject(
+                item,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    Converters = new List<JsonConverter> { new Newtonsoft.Json.Converters.StringEnumConverter() },
+                    NullValueHandling = !showNulls ? NullValueHandling.Ignore : NullValueHandling.Include,
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+
+            Log(string.Format("{0}:\n{1}", name, prettyJson), log);
+
+            return item;
         }
 
         public static bool IsNullable<T>(this T @object) where T : class => typeof(T).GetGenericTypeDefinition() == typeof(Nullable<>);
+    }
+
+    public enum LogTo
+    {
+        BOTH,
+        CONSOLE,
+        DEBUG,
     }
 }

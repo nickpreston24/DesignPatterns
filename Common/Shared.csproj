@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\ApiMethodController.cs" />
+    <Compile Include="Classes\DictionaryExtensions.cs" />
     <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="ViewModel\ViewableCollectionBase.cs" />
     <Compile Include="Classes\ConsoleColor.cs" />
