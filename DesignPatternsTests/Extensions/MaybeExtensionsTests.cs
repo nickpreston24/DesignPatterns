@@ -37,7 +37,7 @@ namespace System.Tests
         [TestMethod()]
         public void FirstOrNoneTest()
         {
-            List<object> list = new List<object> { "string", 'c', null };
+            var list = new List<object> { "string", 'c', null };
             var maybe = list.FirstOrNone();
             Assert.IsTrue(maybe.HasValue);
         }
@@ -45,7 +45,7 @@ namespace System.Tests
         [TestMethod()]
         public void ReturnTest()
         {
-
+            //TODO: You left this blank; figure out what you meant by Return and implement it.
         }
     }
 }
