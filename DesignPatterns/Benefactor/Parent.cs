@@ -2,9 +2,13 @@ using System;
 using System.Diagnostics;
 
 /// <summary>
-/// An example of the logical class that shall be generated as a logical link between benefactors (multiple inherited classes), their children (base classes) and grandchildren (derived classes).
-/// Given benefactor classes A and B, generate a class that C will inherit from P, P being the arbiter of that code logic by implicitly (unknowingly) passing on the methods from A & B to C.
-/// All P requires is an IBenefactor interface tag.  The heavy lifting is done by Reflection and extension methods that generate and pass on the functionality from A,B ==> C 'through' P.  C still iherits from P as well.
+/// An example of the logical class that shall be generated as a logical link between benefactors (multiple inherited classes),
+/// their children (base classes) and grandchildren (derived classes).
+/// Given benefactor classes A and B, generate a class that C will inherit from P, 
+/// P being the arbiter of that code logic by implicitly (unknowingly) passing on the methods from A & B to C.
+/// All P requires is an IBenefactor interface tag.  
+/// The heavy lifting is done by Reflection and extension methods that generate and pass on the functionality from A,B ==> C 'through' P.
+/// C still iherits from P as well.
 /// </summary>
 public abstract class BenefactorLogic : IIntrafactor
 {
