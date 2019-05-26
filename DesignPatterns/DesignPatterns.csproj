@@ -58,7 +58,12 @@
     <Compile Include="Singleton\SingletonException.cs" />
     <Compile Include="Singleton\Multiton.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Shared.csproj">
+      <Project>{5e4d9f12-a069-4979-9ee1-944ff27c1bf0}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Singleton\singleton_impl.PNG" />
   </ItemGroup>

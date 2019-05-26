@@ -330,7 +330,7 @@ namespace System
 
         public static IEnumerable<T> TakeRandom<T>(this IEnumerable<T> collection, int count) => collection.OrderBy(g => Guid.NewGuid()).Take(count);
 
-        public static T TakeFirstRandom<T>(this IEnumerable<T> collection) => collection.OrderBy(c => Guid.NewGuid()).FirstOrDefault();
+        public static T FirstRandom<T>(this IEnumerable<T> collection) => collection.OrderBy(c => Guid.NewGuid()).FirstOrDefault();
 
         public static IEnumerable<T> MoveUp<T>(this IEnumerable<T> enumerable, int itemIndex)
         {
