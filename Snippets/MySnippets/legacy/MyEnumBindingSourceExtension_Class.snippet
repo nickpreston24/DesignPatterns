@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyEnumBindingSourceExtension_Class</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyEnumBindingSourceExtension_Class
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyEnumBindingSourceExtension_Class</ID>
+          <ToolTip>Enables Binding of any enum from any namespace to a component's ItemSource</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+		<Literal>
+			<ID>YourLocalNamespaceHere</ID>
+			<ToolTip>Enter your local namespace here.</ToolTip>
+			<Default>YourLocalNamespaceHere</Default>
+		</Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[ /// <summary>
+    /// Enum Binding Source
+    /// 
+    /// Allows the Binding of any enum you specify via namespace
+	/// Example XAML: ItemsSource="{Binding Source={local:EnumBindingSource EnumType=regexns:RegexOptions}}"
+	/// Paste This XAML to your WPF: 	
+	///		xmlns:local="clr-namespace:$YourLocalNamespaceHere$"
+    /// </summary>
+    public class EnumBindingSourceExtension : MarkupExtension
+    {
+        private Type _enumType;
+        public Type EnumType
+        {
+            get { return this._enumType; }
+            set
+            {
+                if (value != this._enumType)
+                {
+                    if (null != value)
+                    {
+                        Type enumType = Nullable.GetUnderlyingType(value) ?? value;
+                        if (!enumType.IsEnum)
+                            throw new ArgumentException("Type must be for an Enum.");
+                    }
+
+                    this._enumType = value;
+                }
+            }
+        }
+        /// <summary>
+        /// Enum Binding Source Extension
+        /// </summary>
+        public EnumBindingSourceExtension() { }
+        /// <summary>
+        /// Enum Binding Source Extension
+        /// </summary>
+        /// <param name="enumType"></param>
+        public EnumBindingSourceExtension(Type enumType)
+        {
+            this.EnumType = enumType;
+        }
+        /// <summary>
+        /// Provide Value
+        /// </summary>
+        /// <param name="serviceProvider"></param>
+        /// <returns></returns>
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            if (null == this._enumType)
+                throw new InvalidOperationException("The EnumType must be specified.");
+
+            Type actualEnumType = Nullable.GetUnderlyingType(this._enumType) ?? this._enumType;
+            //Get all the enum values to an array:
+            Array enumValues = Enum.GetValues(actualEnumType);
+            //If enum type matches, return:
+            if (actualEnumType == this._enumType)
+                return enumValues;
+
+            Array tempArray = Array.CreateInstance(actualEnumType, enumValues.Length + 1);
+            enumValues.CopyTo(tempArray, 1);
+            return tempArray;
+        }
+    }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

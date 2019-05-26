@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyRemoveDuplicateRowsByColumn</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyRemoveDuplicateRowsByColumn
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyRemoveDuplicateRowsByColumn</ID>
+          <ToolTip>Removes duplicate rows from a given datatable</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[        /// <summary>
+        /// Remove any duplicate rows by the column name
+        /// </summary>
+        /// <param name="dTable"></param>
+        /// <param name="colName"></param>
+        /// <returns></returns>
+        public DataTable RemoveDuplicateRows(DataTable dTable, string colName)
+        {
+            Hashtable hTable = new Hashtable();
+            ArrayList duplicateList = new ArrayList();
+
+            //Add list of all the unique item value to hashtable, which stores combination of key, value pair.
+            //And add duplicate item value in arraylist.
+            foreach (DataRow drow in dTable.Rows)
+            {
+                if (hTable.Contains(drow[colName]))
+                    duplicateList.Add(drow);
+                else
+                    hTable.Add(drow[colName], string.Empty);
+            }
+
+            //Removing a list of duplicate items from datatable.
+            foreach (DataRow dRow in duplicateList)
+                dTable.Rows.Remove(dRow);
+
+            //Datatable which contains unique records will be return as output.
+            return dTable;
+        }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>SnippetFile1</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyTestConnection
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyTestConnection</ID>
+          <ToolTip>
+          </ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[/// <summary>
+        /// <summary>
+        /// Test a connection string
+        /// </summary>
+        /// <param name="connectionString"></param>
+        /// <returns></returns>
+        public static bool TestConnection(string server, string database, string username, string password)
+        {
+            string connectionString = $$"Persist Security Info = false; Integrated Security = false; Server ={server}; Database ={database}; User ID ={username}; Password={password}";
+            try
+            {
+                using (SqlConnection testConnection = new SqlConnection(connectionString))
+                {
+                    testConnection.Open();
+                    return true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine(string.Format("{0}:Line({1})\t{2}", MethodBase.GetCurrentMethod().Name, ex.LineNumber, ex.Message));
+                return false;
+            }
+        }
+        /// <summary>
+        /// Test a connection string
+        /// </summary>
+        /// <param name="connectionString"></param>
+        /// <returns></returns>
+        public static bool TestConnection(this string connectionString)
+        {
+            try
+            {
+                using (SqlConnection testConnection = new SqlConnection(connectionString))
+                {
+                    testConnection.Open();
+                    return true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine(string.Format("{0}:Line({1})\t{2}", MethodBase.GetCurrentMethod().Name, ex.LineNumber, ex.Message));
+                return false;
+            }
+        }
+    ]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyPathSizeMethod</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyPathSizeMethod
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyPathSizeMethod</ID>
+          <ToolTip>Returns the size of a given path</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[        /// <summary>
+        /// Path Size
+        /// Return the size of a given path whether it is a file or directory.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        internal static long Size(this string path)
+        {
+            long size = 0;
+            try
+            {
+                if (Directory.Exists(path) || File.Exists(path))
+                {
+                    //get the file attributes for file or directory
+                    FileAttributes attr = File.GetAttributes(path);
+                    //detect whether its a directory or file
+                    if ((attr & FileAttributes.Directory) == FileAttributes.Directory)
+                    {
+                        string[] a = Directory.GetFiles(path, "*.*");
+                        foreach (string name in a)
+                        {
+                            FileInfo info = new FileInfo(name);
+                            size += info.Length;
+                        }
+                    }
+                    else
+                        size = new FileInfo(path).Length;
+                }
+                return size;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.ToString()));
+                return -1;
+            }
+
+        }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

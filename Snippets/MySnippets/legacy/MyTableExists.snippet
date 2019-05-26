@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>SnippetFile1</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyTableExists
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyTableExists</ID>
+          <ToolTip>
+          </ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+		/// <summary>
+        /// Check if a table exists in the given database
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="cnnStr"></param>
+        /// <returns></returns>
+        public static bool TableExists(string tableName, string connectionString)
+        {
+            try
+            {
+                using (SqlConnection SC = new SqlConnection(connectionString))
+                {
+                    SC.Open();
+                    string cmdText = string.Format(@"IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME='{0}') SELECT 1 ELSE SELECT 0", tableName);
+                    SqlCommand Check = new SqlCommand(cmdText, SC);
+                    int x = Convert.ToInt32(Check.ExecuteScalar());
+                    return x == 1 ? true : false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.ToString()));
+                MessageBox.Show(string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.Message));
+                NLogger.Error(ex);
+                return false;
+            }
+        }
+		]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

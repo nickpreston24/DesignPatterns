@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyGeneralHelperFuncs</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyGeneralHelperFuncs
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyGeneralHelperFuncs</ID>
+          <ToolTip></ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+		Func<object, object[]> GetObjectPropertyValues = item =>
+        {
+            try
+            {
+                List<object> list = new List<object>();
+                foreach (var prop in item.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public))
+                    list.Add(prop.GetValue(item, null));
+                return list.ToArray();
+            }
+            catch (Exception ex)
+            {
+                string errMsg = string.Format($$"{MethodBase.GetCurrentMethod().Name}: {ex.ToString()}");
+                Debug.WriteLine(errMsg);
+                return null;
+            }
+        };
+	  ]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

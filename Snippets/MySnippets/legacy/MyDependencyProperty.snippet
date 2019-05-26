@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyDependencyProperty</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  dp
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+		<Literal Editable="true">
+          <ID>MyDependencyProperty</ID>
+          <ToolTip>Creates a simple Depedency Property template</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+		
+		<Literal>
+			<ID>PropertyName</ID>
+			<ToolTip>Enter your Property Name(name only)</ToolTip>
+			<Default>MyPropertyName</Default>
+		</Literal>
+		
+		<Literal>
+			<ID>PropertyValue</ID>
+			<ToolTip>Enter the default value for this Property</ToolTip>
+			<Default>MyPropertyValue</Default>
+		</Literal>
+		
+		<Literal>
+			<ID>PropertyType</ID>
+			<ToolTip>Enter your Property Object Type</ToolTip>
+			<Default>MyPropertyType</Default>
+		</Literal>
+		
+		<Literal>
+			<ID>Owner</ID>
+			<ToolTip>Enter the Owner (Parent control) of this property (e.g.: MyForm)</ToolTip>
+			<Default>MyOwner</Default>
+		</Literal>
+		
+		
+	  </Declarations>
+	<Code Language="csharp" Delimiter="$"><![CDATA[	
+		/// <summary>
+		/// $PropertyName$ Setter and Getter:
+		/// </summary>
+		public $PropertyType$ $PropertyName$
+		{
+			get { return ($PropertyType$)GetValue($PropertyName$Property); }
+			set { SetValue($PropertyName$Property, value); }
+		}
+		/// <summary>
+        /// $PropertyName$Property Registration:
+		/// </summary>
+		public static DependencyProperty $PropertyName$Property = DependencyProperty.Register(
+			"$PropertyName$", 
+			typeof($PropertyType$),
+			typeof($Owner$),
+			new UIPropertyMetadata($PropertyValue$)); //$PropertyName$ Property
+		$end$
+		]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

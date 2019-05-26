@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyDbEntityValidationCatchBlock</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyDbEntityValidationCatchBlock
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Code Language="csharp" Delimiter="$"><![CDATA[			
+			catch (DbEntityValidationException ex)
+            {
+				foreach (var eve in ex.EntityValidationErrors)
+				{
+					Debug.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+						eve.Entry.Entity.GetType().Name, eve.Entry.State);
+					foreach (var ve in eve.ValidationErrors)
+					{
+						Debug.WriteLine("- Property: \"{0}\", Value: \"{1}\", Error: \"{2}\"",
+							ve.PropertyName,
+							eve.Entry.CurrentValues.GetValue<object>(ve.PropertyName),
+							ve.ErrorMessage);
+					}
+				}
+            }            
+				]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

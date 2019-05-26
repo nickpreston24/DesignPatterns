@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyIsFileOrDirectory</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyIsFileOrDirectory
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyIsFileOrDirectory</ID>
+          <ToolTip>Check a path if file or directory</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+		<Literal>
+			<ID>Path</ID>
+			<Default>@"C:\"</Default>
+			<ToolTip>Enter the Path you want to check here.</ToolTip>
+		</Literal>
+		
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+			// Get the file attributes for file or directory
+            FileAttributes attr = File.GetAttributes($Path$);
+            //detect whether its a directory or file
+            if ((attr & FileAttributes.Directory) == FileAttributes.Directory)
+            {
+                //If Directory:
+                $end$
+            }
+            else
+            {
+                //If File:
+
+            }
+			]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

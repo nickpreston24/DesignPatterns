@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+		<SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+      <Title>MyTryCatchWithScreenshot</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyTryCatchWithScreenshot
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyTryCatchWithScreenshot</ID>
+          <ToolTip>Place this try/catch wrapper around critical code in case of failure - saves a screenshot(s) of the failure(s)</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+		try
+		{
+			$selected$
+		}
+		catch (Exception ex)
+		{
+			string errMsg = string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.ToString());
+			new Thread(new ThreadStart(() =>
+			{
+				System.Windows.MessageBox.Show(errMsg, "Message", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+			})).Start();
+			//
+			/// Post-Messagebox.Show() Screenshot Save
+			////
+			Thread.Sleep(500);
+			ImageFormat format = ImageFormat.Png;
+			string imgPath = Path.Combine(
+					Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+					"Screenshots",
+					string.Format("error_screenshot_{0}.{1}", DateTime.Now.ToString("mmddyyyy_hhmmss"),
+					format.ToString().ToLower()));
+			string localDir = Path.GetDirectoryName(imgPath);
+			if (!Directory.Exists(localDir)) Directory.CreateDirectory(localDir);
+			ScreenCapture screencapture = new ScreenCapture();
+			// capture entire screen, and save it to a file
+			Image img = screencapture.CaptureScreen();
+			img.Save(imgPath);
+			Process.Start(localDir, string.Format("/select, \"{0}\"", localDir)); //Optional
+			Debug.WriteLine(errMsg);
+			NLogger.Error(errMsg);
+		}$end$
+	  ]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

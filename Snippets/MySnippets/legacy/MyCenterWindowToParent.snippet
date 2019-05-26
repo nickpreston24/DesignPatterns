@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyCenterWindowToParent</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyCenterWindowToParent
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyCenterWindowToParent</ID>
+          <ToolTip>Center a Form to its parent!</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[/// <summary>
+        /// Center a window to parent programmatically
+        /// </summary>
+        /// <param name="window"></param>
+        public static void CenterToParent(this Window window)
+        {
+            Application curApp = Application.Current;
+            Window mainWindow = curApp.MainWindow;
+            window.Left = mainWindow.Left + (mainWindow.Width - window.ActualWidth) / 2;
+            window.Top = mainWindow.Top + (mainWindow.Height - window.ActualHeight) / 2;
+        }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

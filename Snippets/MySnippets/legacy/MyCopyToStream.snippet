@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyCopyToStream</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyCopyToStream
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyCopyToStream</ID>
+          <ToolTip>Append the contents of one filestream to another</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+	    /// <summary>
+        /// Copy To Stream
+        /// Copies one stream to another.
+        /// Ex: Use to append the contents of one large file to another
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="output"></param>
+	    public static void CopyTo(this Stream input, Stream output)
+        {
+            if (input == null)
+            {
+                throw new ArgumentNullException("input");
+            }
+            if (output == null)
+            {
+                throw new ArgumentNullException("output");
+            }
+            byte[] buffer = new byte[8192];
+            int bytesRead;
+            while ((bytesRead = input.Read(buffer, 0, buffer.Length)) > 0)
+            {
+                try
+                {
+                    output.Write(buffer, 0, bytesRead);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.ToString());
+                }
+            }
+        }
+		]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyGetMaxValue</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyGetMaxValue
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyGetMaxValue</ID>
+          <ToolTip></ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+		/// <summary>
+        /// Get Maximum Value
+        /// Returns the Maximum Value of a type instance
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value"></param>
+        /// <returns></returns>
+		public static T GetMaxValue<T>(this T value)
+           where T : struct
+        {
+			try
+			{
+				FieldInfo maxValueField = typeof(T).GetField("MaxValue", BindingFlags.Public
+					| BindingFlags.Static);
+				if (maxValueField == null)
+					throw new NotSupportedException(typeof(T).Name);
+				T maxValue = (T)maxValueField.GetValue(null);
+				return maxValue;
+			}
+            catch (Exception ex)
+            {
+                string errMsg = string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.ToString());
+                Debug.WriteLine(errMsg);
+                return value;
+            }
+        }
+	  ]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

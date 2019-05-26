@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyObjectToDatatable</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyObjectToDatatable
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="false">
+          <ID>MyObjectToDatatable</ID>
+          <ToolTip>Transform any object into a datatable</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+        /// <summary>
+        /// Transform any class object into a datatable with members as the columns
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static DataTable ObjectToNewDatatable(this object obj)
+        {
+            DataTable dt = new DataTable();
+            DataRow dr = dt.NewRow();
+            obj.GetType().GetProperties().ToList().ForEach(f =>
+            {
+                try
+                {
+                    dt.Columns.Add(f.Name, f.PropertyType);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.ToString());
+                }
+            });
+            return dt;
+        }
+		]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

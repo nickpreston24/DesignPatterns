@@ -5,7 +5,7 @@ using System.Diagnostics;
 namespace DesignPatterns
 {
     /// <summary>
-    /// @Me: Yes, I, Michael Preston wrote this code.
+    /// @Me: Yes, I wrote this code.
     /// Don't let the #region confuse.
     /// I'm trying to create a 'Minion' pattern combining Adapter + Facade + Observer and maybe Singleton.
     /// Steps:

@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyProgressbarForegroundConverter</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyProgressbarForegroundConverter
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyProgressbarForegroundConverter</ID>
+          <ToolTip>
+          </ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[ /// <summary>
+    /// Optional Color changer for progress bars
+    /// </summary>
+    public class ProgressbarForegroundConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            double progress = (double)value;
+            Brush foreground = Brushes.DarkRed;
+            if (progress == 100d)
+                foreground = Brushes.Green;
+            else if (progress >= 90d)
+                foreground = Brushes.LightGreen;
+            else if (progress >= 80d)
+                foreground = Brushes.Yellow;
+            else if (progress >= 60d)
+                foreground = Brushes.Orange;
+            else if (progress >= 40d)
+                foreground = Brushes.OrangeRed;
+            else if (progress >= 20d)
+                foreground = Brushes.Red;
+            return foreground;
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            //throw new NotImplementedException();
+            return value; //do nothing, we don't ever convert back progress color
+        }
+    }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyFindVisualChildByName</Title>
+      <Author>Mike</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyFindVisualChildByName
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyFindVisualChildByName</ID>
+          <ToolTip>Find a visual child component by its name</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[/// <summary>
+        /// Find Visual Child By Name
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="parent"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        private T FindVisualChildByName<T>(DependencyObject parent, string name) where T : FrameworkElement
+        {
+            T child = default(T);
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var ch = VisualTreeHelper.GetChild(parent, i);
+                child = ch as T;
+                if (child != null && child.Name == name)
+                    break;
+                else
+                    child = FindVisualChildByName<T>(ch, name);
+
+                if (child != null) break;
+            }
+            return child;
+        }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+      <Title>MyIfNotNull</Title>
+      <Author>Viiar Consulting</Author>
+      <Description>Code snippet for checking whether is argument null</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>MyIfNotNull</Shortcut>
+    </Header>
+    <Snippet>
+      <Imports>
+        <Import>
+          <Namespace>System</Namespace>
+        </Import>
+      </Imports>
+      <Declarations>
+    <Literal>
+        <ID>selected</ID>
+        <ToolTip>Enter the var name</ToolTip>
+        <Default>MySelected</Default>
+    </Literal>
+</Declarations>
+      <Code Language="csharp"><![CDATA[
+		if ($selected$ != null)
+		{
+			$end$
+		}]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

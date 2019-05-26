@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyWinFormPaintEvents</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyWinFormPaintEvents
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyDoPaintEvents</ID>
+          <ToolTip>Static Class for helping refresh your windows</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[    /// <summary> System.Windows.Forms utilities </summary>
+    public static class WinFormUtils
+    {
+        /// <summary> Processes all Paint events only </summary>
+        public static void DoPaintEvents()
+        {
+            //MessageFilter registration
+            Application.AddMessageFilter(PaintMessageFilter.Instance);
+            //Process messages in the queue
+            Application.DoEvents();
+            //MessageFilter desregistration
+            Application.RemoveMessageFilter(PaintMessageFilter.Instance);
+        }
+        /// <summary> Custom message filter </summary>
+        private class PaintMessageFilter : IMessageFilter
+        {
+            static public IMessageFilter Instance = new PaintMessageFilter();
+            #region IMessageFilter Members
+            /// <summary> Message filter function </summary>
+            public bool PreFilterMessage(ref System.Windows.Forms.Message m)
+            {
+                return (m.Msg != 0x000F); //WM_PAINT -> we only let WM_PAINT messages through
+            }
+            #endregion
+        }
+    }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyTextboxIsNumericOnlyServiceClass</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyTextboxIsNumericOnlyServiceClass
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyTextboxIsNumericOnlyServiceClass</ID>
+          <ToolTip>Numeric only class with attached dependency properties</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+		<Literal Editable="true">
+			<ID>MyNamespacePath</ID>
+			<ToolTip>Enter the Path of the namespace that contains the 'TextboxNumericOnlyServiceClass'</ToolTip>
+			<Default>MyNamespacePath</Default>
+		</Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+	  
+	  /*
+	    //Place at top of the appropriate .cs file
+		using System;
+		using System.Windows;
+		using System.Windows.Controls;
+		using System.Windows.Input;
+	  */
+	  
+	  /*
+	  <!--Place in the appropriate .xml file-->
+	  xmlns:custom="clr-namespace:$MyNamespacePath$"
+	  <!--Paste everywhere there is a textbox, or put in a global style-->
+	   custom:TextBoxService.IsNumericOnly="True" 
+	  */
+	  
+	/// <summary>
+    /// Class that provides the TextBox attached property
+    /// </summary>
+    public static class TextBoxService
+    {
+        //private static readonly Logger NLogger = LogManager.GetCurrentClassLogger();
+        /// <summary>
+        /// Attached Dependency Property - TextBox (generic text)
+        /// </summary>
+        public static readonly DependencyProperty IsNumericOnlyProperty = DependencyProperty.RegisterAttached(
+           "IsNumericOnly",
+           typeof(bool),
+           typeof(TextBoxService),
+           new UIPropertyMetadata(false, OnIsNumericOnlyChanged));
+        #region SETTERS AND GETTERS
+        /// <summary>
+        /// Gets the IsNumericOnly property.  This dependency property indicates the text box only allows numeric or not.
+        /// </summary>
+        /// <param name="d">DependencyObject to get the property from</param>
+        /// <returns>The value of the StatusBarContent property</returns>
+        public static bool GetIsNumericOnly(DependencyObject d)
+        {
+            return (bool)d.GetValue(IsNumericOnlyProperty);
+        }
+        /// <summary>
+        /// Sets the IsNumericOnly property.  This dependency property indicates the text box only allows numeric or not.
+        /// </summary>
+        /// <param name="d"><see cref="DependencyObject"/> to set the property on</param>
+        /// <param name="value">value of the property</param>
+        public static void SetIsNumericOnly(DependencyObject d, bool value)
+        {
+            d.SetValue(IsNumericOnlyProperty, value);
+        }
+        #endregion SETTERS AND GETTERS
+        #region PROPERTY CHANGES
+        /// <summary>
+        /// Handles changes to the IsNumericOnly property.
+        /// </summary>
+        /// <param name="dependencyObj">fired the event</param>
+        /// <param name="eventArgs">contains the event data.</param>
+        private static void OnIsNumericOnlyChanged(DependencyObject dependencyObj, DependencyPropertyChangedEventArgs e)
+        {
+            bool isNumericOnly = (bool)e.NewValue;
+            TextBox textBox = (TextBox)dependencyObj;
+            if (isNumericOnly)
+            {
+                textBox.PreviewTextInput += BlockNonDigitCharacters;
+                textBox.PreviewKeyDown += ReviewKeyDown;
+            }
+            else
+            {
+                textBox.PreviewTextInput -= BlockNonDigitCharacters;
+                textBox.PreviewKeyDown -= ReviewKeyDown;
+            }
+        }
+        #endregion Property Changes
+        #region VERIFICATION METHODS
+        /// <summary>
+        /// Disallows non-digit character.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">contains the event data.</param>
+        private static void BlockNonDigitCharacters(object sender, TextCompositionEventArgs e)
+        {
+            foreach (char ch in e.Text)
+            {
+                if (!Char.IsDigit(ch))
+                {
+                    e.Handled = true;
+                }
+            }
+        }
+        /// <summary>
+        /// Disallows a space key.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">contains the event data.</param>
+        private static void ReviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                // Disallow the space key, which doesn't raise a PreviewTextInput event.
+                e.Handled = true;
+            }
+        }
+        #endregion Verification Methods
+    }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

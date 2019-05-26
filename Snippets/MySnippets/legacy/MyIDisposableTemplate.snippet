@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">  
+    <CodeSnippet Format="1.0.0">  
+        <Header>			
+            <Title>MyDisposableClass</Title>          
+			<Shortcut>MyDisposableClass</Shortcut>			
+			<Description></Description>
+			<HelpUrl></HelpUrl>
+		</Header>  
+        <Snippet> 		
+			<Declarations>  			
+			<Literal>  
+				<ID>MyClassName</ID>  
+				<ToolTip></ToolTip>  
+				<Default>MyClassName</Default>  
+			</Literal>  			
+		</Declarations>  		
+			<Imports>
+				<Import>
+					<Namespace></Namespace>
+				</Import>
+			</Imports>		
+			<Code Language="CSharp" >  
+                <![CDATA[
+				public class $MyClassName$ : IDisposable
+				{	
+					private bool _disposed = false;
+					
+					$end$
+					
+					~$MyClassName$()
+					{					
+						Dispose (false);
+					}
+					
+					public void Dispose()
+					{
+						Dispose(true);
+						GC.SuppressFinalize(this);
+					}
+
+					protected virtual void Dispose(bool disposing)
+					{
+						if(_disposed)
+							return;
+							
+						if (!_disposed)
+						{
+							if (disposing)
+							{
+								// Free other state (managed objects).
+							}
+							// Free your own state (unmanaged objects).
+							// Set large fields to null.
+							_disposed = true;
+						}
+					}   					
+				}
+				]]>  
+			</Code>  
+        </Snippet>  
+    </CodeSnippet>  
+</CodeSnippets>  

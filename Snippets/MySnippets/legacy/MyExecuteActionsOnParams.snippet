@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyExecuteActionsOnParams</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyExecuteActionsOnParams
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyExecuteActionsOnParams</ID>
+          <ToolTip></ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+		/// <summary>
+        /// ExecuteActionDictionary
+        /// Runs all Actions and their param lists
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="dictionary"></param>
+        public static void ExecuteActionDictionary<T>(Dictionary<Action<List<T>>, List<T>> dictionary)
+        {
+            foreach (var entry in dictionary)
+            {
+                try
+                {
+                    Action<List<T>> action = entry.Key;
+                    action(entry.Value);
+                }
+                catch (Exception ex)
+                {
+                    string errMsg = string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.ToString());
+                    Debug.WriteLine(errMsg);
+                }
+            }
+        }
+	  ]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

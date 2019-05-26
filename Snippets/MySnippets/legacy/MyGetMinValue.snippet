@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyGetMinValue</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyGetMinValue
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyGetMinValue</ID>
+          <ToolTip></ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+		/// <summary>
+        /// Get Minimum Value
+        /// Returns the Minimum Value of a type instance
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value"></param>
+        /// <returns></returns>
+		public static T GetMinValue<T>(this T value)
+           where T : struct
+        {
+			try
+			{
+				FieldInfo minValueField = typeof(T).GetField("MinValue", BindingFlags.Public
+					| BindingFlags.Static);
+				if (minValueField == null)
+					throw new NotSupportedException(typeof(T).Name);
+				T minValue = (T)minValueField.GetValue(null);
+				return minValue;
+			}
+            catch (Exception ex)
+            {
+                string errMsg = string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.ToString());
+                Debug.WriteLine(errMsg);
+                return value;
+            }
+        }
+	  ]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

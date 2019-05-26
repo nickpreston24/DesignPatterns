@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyFlattenTreeOfClassObjects</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyFlattenTreeOfClassObjects
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyFlattenTreeOfClassObjects</ID>
+          <ToolTip>Flatten Any Tree of Custom Class Objects</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[        
+	  /*Has an issue with looping infinitely.  Fix this.*/
+        /// <summary>
+        /// Flatten any Tree of custom Class Objects
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="enumerable"></param>
+        /// <param name="function"></param>
+        /// <example>
+        ///     public class MyClassNode{
+        ///         int Property1; 
+        ///         List < MyClassNode > Items = new List < MyClassNode >();
+        ///         };
+        ///     IEnumerable<MyClassNode> results = sourceList.Flatten(node => root.Items);
+        /// </example>
+        /// <returns></returns>
+        public static IEnumerable<T> Flatten<T>(
+            this IEnumerable<T> enumerable,
+            Func<T, IEnumerable<T>> function)
+        {
+            return enumerable.SelectMany(c => function(c).Flatten(function)).Concat(enumerable);
+        }
+				
+		/*Has an issue with looping infinitely.  Fix this.*/
+        /// <summary>
+        /// Flatten any Tree of custom Class Objects
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="enumerable"></param>
+        /// <param name="function"></param>
+        /// <example>
+        ///     public class MyClassNode{
+        ///         int Property1; 
+        ///         List < MyClassNode > Items = new List < MyClassNode >();
+        ///         };
+        ///     IEnumerable<MyClassNode> results = sourceList.Flatten(node => root.Items);
+        /// </example>
+        /// <returns></returns>
+		public static IEnumerable<T> Flatten<T>(
+        this IEnumerable<T> items,
+        Func<T, IEnumerable<T>> getChildren)
+        {
+            var stack = new Stack<T>();
+            foreach (var item in items)
+                stack.Push(item);
+
+            while (stack.Count > 0)
+            {
+                var current = stack.Pop();
+                yield return current;
+
+                var children = getChildren(current);
+                if (children == null) continue;
+
+                foreach (var child in children)
+                    stack.Push(child);
+            }
+        }
+		$end$
+]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

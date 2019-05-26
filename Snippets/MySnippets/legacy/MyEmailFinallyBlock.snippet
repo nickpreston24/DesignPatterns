@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyEmailFinallyBlock</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyEmailFinallyBlock
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyEmailFinallyBlock</ID>
+          <ToolTip></ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+		//StringBuilder errorsFound = new StringBuilder();
+		finally
+            {
+                if (errorsFound.Length > 0)
+                {
+                    Debug.WriteLine(errorsFound.ToString());
+                    NLogger.Info(errorsFound.ToString());
+                    //If enabled, send out an email with errors:
+                    if (Properties.Settings.Default.EmailsEnabled)
+                    {
+                        string appName = AppDomain.CurrentDomain.FriendlyName;
+                        Email mail = new Email("", Properties.Settings.Default.SentFrom, Properties.Settings.Default.SendList);
+                        mail.SendEmail(appName.ToUpper(), appName,
+                            Properties.Settings.Default.SendList.ToString(),
+                            "", $$"{appName} Encountered errors!", null, errorsFound.ToString(),
+                            "Fail", Properties.Settings.Default.SentFrom.ToString());
+                    }
+                }
+            }
+	  ]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyLinqGetFirstRowEqualColumnVal</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyLinqGetFirstRow
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="false">
+          <ID>MyLinqGetFirstRowEqualColumnVal</ID>
+          <ToolTip>Grabs the first or default row by specified column value</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+		<Literal>
+			<ID>MyDataTable</ID>
+			<ToolTip>Enter the DataTable Name</ToolTip>
+			<Default>MyDataTable</Default>
+		</Literal>
+		<Literal>
+			<ID>MyCheckVariable</ID>
+			<ToolTip>Enter the Value to compare</ToolTip>
+			<Default>MyCheckVariable</Default>
+		</Literal>
+		<Literal>
+			<ID>MyType</ID>
+			<ToolTip>Enter the Type</ToolTip>
+			<Default>MyType</Default>
+		</Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+	  var firstMatchingRow = $MyDataTable$.Rows
+			  .Cast<DataRow>()
+			  .Where(x => ($MyType$)x["Id"] == ($MyType$)$MyCheckVariable$)
+			  .FirstOrDefault();$end$
+			  ]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

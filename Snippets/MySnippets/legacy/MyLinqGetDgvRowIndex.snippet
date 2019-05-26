@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyLinqGetDgvRowIndex</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyLinqGetDgvRowIndex
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyLinqDgvGetRowIndex</ID>
+          <ToolTip>
+          </ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+		<Literal>
+			<ID>MyDataGridSource</ID>
+			<ToolTip>Enter the Grid Name</ToolTip>
+			<Default>MyDataGridSource</Default>
+		</Literal>
+		<Literal>
+			<ID>MyStringSearchVal</ID>
+			<ToolTip>Enter the Value to check</ToolTip>
+			<Default>MyStringSearchVal</Default>
+		</Literal>
+		<Literal>
+			<ID>MyColumn</ID>
+			<ToolTip>Enter the Column Name to check</ToolTip>
+			<Default>MyColumn</Default>
+		</Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+			int rowIndex = -1;
+			DataGridViewRow row = $MyDataGridSource$.Rows
+				.Cast<DataGridViewRow>()
+				.Where(r => r.Cells["$MyColumn$"].Value.ToString().Equals($MyStringSearchVal$))
+				.First();
+			rowIndex = row.Index;]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

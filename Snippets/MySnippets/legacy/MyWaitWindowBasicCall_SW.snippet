@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+		<SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+      <Title>MyWaitWindowBasicCall_SW</Title>
+      <Author>Mike</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyWaitWindowBasicCall_SW</ID>
+          <ToolTip>A basic call (w/ message) of the WaitWindow class.</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+		<Literal>
+			<ID>Message</ID>
+			<ToolTip>Enter your message here.</ToolTip>
+			<Default>Please Wait...</Default>
+		</Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+	  WaitWindow.Show((s, args) =>
+	  {
+	  	$selected$
+	  }, "$Message$");$end$]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

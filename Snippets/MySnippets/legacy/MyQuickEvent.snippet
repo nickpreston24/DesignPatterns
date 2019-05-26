@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+		<SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+      <Title>MyQuickEvent</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyQuickEvent
+      </Shortcut>
+    </Header>
+    <Snippet>
+      	<Declarations>
+			<Literal>
+				<ID>ComponentName</ID>
+				<ToolTip>Enter the Component Name</ToolTip>
+				<Default>MyComponent</Default>
+			</Literal>
+			<Literal>
+				<ID>EventName</ID>
+				<ToolTip>Enter the Event Name</ToolTip>
+				<Default>MyEvent</Default>
+			</Literal>
+		</Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[$ComponentName$.$EventName$ += (s,e) =>{ $end$ };]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

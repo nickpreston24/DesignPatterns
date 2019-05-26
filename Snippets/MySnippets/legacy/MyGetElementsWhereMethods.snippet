@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyGetElementsWhereMethods</Title>
+      <Author>pcadmin</Author>
+      <Description>
+	  A library (Technically) of methods related to IEnumerable that return modified or queried collections
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyGetElementsWhereMethods
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyGetElementsWhereMethods</ID>
+          <ToolTip></ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+	    /// <summary>
+        /// Get Elements Where
+        /// - Gets elements from an IEnumerable those that match the lambda expression
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="collection"></param>
+        /// <param name="lambda"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> GetElementsWhere<T>(this IEnumerable<T> collection, LambdaExpression lambda)
+        {
+            try
+            {
+                var compiledLambda = lambda.Compile();
+                return collection.Where(x => (bool)compiledLambda.DynamicInvoke(x));
+            }
+            catch (Exception ex)
+            {
+                string errMsg = string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.ToString());
+                Debug.WriteLine(errMsg);
+                return collection;
+            }
+        }
+		/// <summary>
+        /// Get Where
+        /// Gets elements from an IEnumerable those that match the 'where' expression
+        /// </summary>
+        /// <param name="collection"></param>
+        /// <param name="where"></param>
+        /// <param name="numDesired"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> GetElementsWhere<T>(this IEnumerable<T> collection, Expression<Func<T, bool>> where, int numDesired = 1)
+        {
+            Func<T, bool> funcWhere = where.Compile();
+            return collection.Where(funcWhere).Take(numDesired);
+        }
+		/// <summary>
+        /// Get Where
+        /// Gets elements from an IEnumerable those that match the 'where' expression
+        /// </summary>
+        /// <param name="collection"></param>
+        /// <param name="where"></param>
+        /// <param name="numDesired"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> GetElementsWhere<T>(this IEnumerable<T> collection, Expression<Func<T, bool>> where)
+        {
+            Func<T, bool> funcWhere = where.Compile();
+            return collection.Where(funcWhere);
+        }
+		        /// <summary>
+        /// Take random elements from a IEnumerable collection
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="collection"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> GetRandomElements<T>(this IEnumerable<T> collection, int count)
+        {
+            return collection.OrderBy(c => Guid.NewGuid()).Take(count);
+        }        
+        /// <summary>
+        /// Randomize
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> Randomize<T>(this IEnumerable<T> source)
+        {
+            return source.OrderBy(s => Guid.NewGuid());
+        }
+	  ]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

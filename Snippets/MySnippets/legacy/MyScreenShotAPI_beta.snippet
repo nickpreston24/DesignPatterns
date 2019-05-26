@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyScreenShotAPI_beta</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyScreenShotAPI_beta
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyScreenShotAPI_beta</ID>
+          <ToolTip>Run a method in a backgroundworker with callback method</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[ public class ScreenShotAPI
+    {
+        [DllImport("user32.dll", ExactSpelling = true, SetLastError = true)]
+        public static extern IntPtr GetDC(IntPtr hWnd);
+        [DllImport("user32.dll", ExactSpelling = true)]
+        public static extern IntPtr ReleaseDC(IntPtr hWnd, IntPtr hDC);
+        [DllImport("gdi32.dll", ExactSpelling = true)]
+        public static extern IntPtr BitBlt(IntPtr hDestDC, int x, int y, int nWidth, int nHeight, IntPtr hSrcDC, int xSrc, int ySrc, int dwRop);
+        [DllImport("user32.dll", EntryPoint = "GetDesktopWindow")]
+        public static extern IntPtr GetDesktopWindow();
+    }
+    internal class ScreenShot
+    {
+        private static readonly int _COPY_CONSTANT = 13369376;
+        private static readonly Logger NLogger = LogManager.GetCurrentClassLogger();
+        /// <summary>
+        /// Check if a path exists (must be a FULL Path), create it if not [and allowed].
+        /// </summary>
+        /// <param name="pathIn"></param>
+        /// <param name="allowCreate"></param>
+        /// <returns></returns>
+        public static bool CheckDirectoryPath(string pathIn, bool allowCreate)
+        {
+            if (string.IsNullOrEmpty(pathIn))
+                return false;
+            if (Directory.Exists(pathIn))
+                return true;
+            else
+            {
+                if (allowCreate)
+                {
+                    try
+                    {
+                        Directory.CreateDirectory(pathIn);
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex.Message);
+                        NLogger.Debug(ex.Message);
+                        return false;
+                    }
+                }
+                else
+                    return false;
+            }
+        }
+        /// <summary>
+        /// Take a Screenshot and Save relative to executable
+        /// </summary>
+        public static void TakeAndSaveScreenshot()
+        {
+            try
+            {
+                ImageFormat format = ImageFormat.Png;
+                string bmpName = string.Format("screenshot_{0}.{1}", DateTime.Now.ToString("mmddyyyy_hhmmss"), format.ToString().ToLower());
+                string localDir = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Screenshots");
+                string fullPath = Path.Combine(localDir, bmpName);
+                CheckDirectoryPath(localDir, true);
+                Bitmap bmp = ScreenShot.TakeScreenShot();
+                bmp.Save(fullPath, format);
+                Process.Start(localDir, string.Format("/select, \"{0}\"", localDir));
+            }
+            catch (Exception ex)
+            {
+                string errMsg = string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.ToString());
+                Debug.WriteLine(errMsg);
+                //MessageBox.Show(errMsg);
+                //NLogger.Error(errMsg);
+            }
+        }
+        private static Bitmap TakeScreenShot()
+        {
+            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
+            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
+            Bitmap screenBmp = new Bitmap(screenWidth, screenHeight);
+            Graphics g = Graphics.FromImage(screenBmp);
+            IntPtr dc1 = ScreenShotAPI.GetDC(ScreenShotAPI.GetDesktopWindow());
+            IntPtr dc2 = g.GetHdc();
+            //Main drawing, copies the screen to the bitmap
+            //last number is the copy constant
+            ScreenShotAPI.BitBlt(dc2, 0, 0, screenWidth, screenHeight, dc1, 0, 0, _COPY_CONSTANT);
+            //Clean up
+            ScreenShotAPI.ReleaseDC(ScreenShotAPI.GetDesktopWindow(), dc1);
+            g.ReleaseHdc(dc2);
+            g.Dispose();
+            return screenBmp;
+        }
+    }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

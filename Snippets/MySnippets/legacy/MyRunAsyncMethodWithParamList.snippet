@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyRunAsyncMethodWithParamList</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyRunAsyncMethodWithParamList
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyRunAsyncMethodWithParamList</ID>
+          <ToolTip>Run a method with a List of parameters T in a backgroundworker with callback method</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+		/// <summary>
+        /// Run a method asynchronously in its own backgroundworker with a List of parameters.
+        /// Can be used as extension method or normal method.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="function"></param>
+        /// <param name="callback"></param>
+        /// <param name="parameters"></param>
+        public static void RunAsync<T>(Action<List<T>> function, Action callback, List<T> parameters)
+        {
+            using(BackgroundWorker worker = new BackgroundWorker())
+			{
+				worker.DoWork += (s, e) => { function(parameters); };
+				worker.RunWorkerCompleted += (s, e) => { callback(); };
+				try{worker.RunWorkerAsync();}catch(Exception ex){Debug.WriteLine(ex.Message);}
+			}
+        }
+		]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

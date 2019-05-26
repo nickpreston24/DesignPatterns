@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyCheckDirectoryPath</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyCheckDirectoryPath
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="false">
+          <ID>MyCheckDirectoryPath</ID>
+          <ToolTip>checks and creates the path if allowed</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[ /// <summary>
+        /// Check if a path exists (must be a FULL Path), create it if not [and allowed].
+        /// </summary>
+        /// <param name="pathIn"></param>
+        /// <param name="allowCreate"></param>
+        /// <returns></returns>
+        public bool CheckDirectoryPath(string pathIn, bool allowCreate)
+        {
+            if (string.IsNullOrEmpty(pathIn))
+                return false;
+            if (Directory.Exists(pathIn))
+                return true;
+            else
+            {
+                if (allowCreate)
+                {
+                    try
+                    {
+                        Directory.CreateDirectory(pathIn);
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex.Message);
+                        NLogger.Debug(ex.Message);
+                        return false;
+                    }
+                }
+                else
+                    return false;
+            }
+        }
+]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

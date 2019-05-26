@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MySettingsManagerClass</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MySettingsManagerClass
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MySettingsManagerClass</ID>
+          <ToolTip></ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+		public static class SettingsManager
+    {
+        public static void ChangeSetting(string name, dynamic value)
+        {
+            if (string.IsNullOrWhiteSpace(name)) return;
+            Properties.Settings.Default[name] = value;
+            Properties.Settings.Default.Save();
+        }
+        public static dynamic GetSetting(string name)
+        {
+            try
+            {
+                return Properties.Settings.Default[name];
+            }
+            catch (Exception ex)
+            {
+                string errMsg = string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.ToString());
+                Debug.WriteLine(errMsg);
+                return null;
+            }
+        }
+        public static void ChangeSetting<T>(Expression<Func<T>> expression, dynamic value)
+        {
+            var memberExpression = expression.Body as MemberExpression;
+            if (memberExpression == null) return;
+            Properties.Settings.Default[memberExpression.Member.Name] = value;
+            Properties.Settings.Default.Save();
+        }
+        public static T GetSetting<T>(Expression<Func<T>> expression)
+        {
+            try
+            {
+                var memberExpression = expression.Body as MemberExpression;
+                return (T)Properties.Settings.Default[memberExpression.Member.Name];
+            }
+            catch (Exception ex)
+            {
+                string errMsg = string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.ToString());
+                Debug.WriteLine(errMsg);
+                return default(T);
+            }
+        }
+    }
+	  ]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

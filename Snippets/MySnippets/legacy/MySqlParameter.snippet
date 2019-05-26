@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MySqlParameter</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MySqlParameter
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MySqlParameter</ID>
+          <ToolTip>Run any SQL statement with parameterized queries</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>		
+		<Literal>
+			<ID>MyColumnName</ID>
+			<ToolTip>Enter the Column Name</ToolTip>
+			<Default>MyColumnName</Default>
+		</Literal>
+		<Literal>
+			<ID>MyValue</ID>
+			<ToolTip>Enter the Value</ToolTip>
+			<Default>MyValue</Default>
+		</Literal>
+		<Literal>
+			<ID>MyDatabaseType</ID>
+			<ToolTip>Enter the DatabaseType</ToolTip>
+			<Default>MyDatabaseType</Default>
+		</Literal> 
+		<Literal>
+			<ID>MyVariableSize</ID>
+			<ToolTip>Enter the VarChar Size</ToolTip>
+			<Default>MyVariableSize</Default>
+		</Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+		command.Parameters.Add
+		("@$MyColumnName$", SqlDbType.$MyDatabaseType$ 
+			//, $MyVariableSize$
+		).Value = $MyValue$;
+		]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

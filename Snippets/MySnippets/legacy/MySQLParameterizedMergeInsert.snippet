@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MySQLParameterizedMergeInsert</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MySQLParameterizedMergeInsert
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MySQLParameterizedMergeInsert</ID>
+          <ToolTip>Run any SQL statement with parameterized queries</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+		<Literal>
+			<ID>MyConnectionString</ID>
+			<ToolTip>Enter the Connection String</ToolTip>
+			<Default>MyConnectionString</Default>
+		</Literal> 
+		<Literal>
+			<ID>MyTableName</ID>
+			<ToolTip>Enter the Table Name</ToolTip>
+			<Default>MyTableName</Default>
+		</Literal>				
+		<Literal>
+			<ID>MyDatabaseType1</ID>
+			<ToolTip>Enter the DatabaseType</ToolTip>
+			<Default>MyDatabaseType1</Default>
+		</Literal> 
+		<Literal>
+			<ID>MyDatabaseType2</ID>
+			<ToolTip>Enter the DatabaseType</ToolTip>
+			<Default>MyDatabaseType2</Default>
+		</Literal> 		
+		<Literal>
+			<ID>MyParamVarName1</ID>
+			<ToolTip>Enter a name for Parameter in query</ToolTip>
+			<Default>MyParamVarName1</Default>
+		</Literal>
+		<Literal>
+			<ID>MyParamVarName2</ID>
+			<ToolTip>Enter a name for Parameter in query</ToolTip>
+			<Default>MyParamVarName2</Default>
+		</Literal>
+		<Literal>
+			<ID>MyParamValue1</ID>
+			<ToolTip>Enter a value for Parameter in query</ToolTip>
+			<Default>MyParamValue1</Default>
+		</Literal>
+		<Literal>
+			<ID>MyParamValue2</ID>
+			<ToolTip>Enter a value for Parameter in query</ToolTip>
+			<Default>MyParamValue2</Default>
+		</Literal>		
+		<Literal>
+			<ID>MyVariableSize1</ID>
+			<ToolTip>Enter a size for Parameter in query</ToolTip>
+			<Default>MyVariableSize1</Default>
+		</Literal>				
+		<Literal>
+			<ID>MyVariableSize2</ID>
+			<ToolTip>Enter a size for Parameter in query</ToolTip>
+			<Default>MyVariableSize2</Default>
+		</Literal>	
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+			StringBuilder sql = new StringBuilder();
+			sql.AppendLine("MERGE $MyTableName$ AS T");
+			sql.AppendLine(" USING (SELECT ");
+			sql.AppendLine("  @$MyParamVarName1$ AS $MyParamVarName1$");
+			sql.AppendLine("  @$MyParamVarName2$ AS $MyParamVarName2$");
+			sql.AppendLine(" ) AS S");
+			sql.AppendLine(" ON S.$MyParamVarName1$ = T.$MyParamVarName1$");
+			sql.AppendLine(" ADD S.$MyParamVarName2$ = T.$MyParamVarName2$");
+			sql.AppendLine(" WHEN NOT MATCHED BY TARGET THEN");
+			sql.AppendLine("INSERT (");
+			sql.AppendLine("$MyParamVarName1$, $MyParamVarName2$");
+			sql.AppendLine(") VALUES (");
+			sql.AppendLine(" @$MyParamVarName1$, @$MyParamVarName1$ ");
+			sql.AppendLine(");"); //query end
+			using (SqlConnection connection = new SqlConnection($MyConnectionString$))
+			{
+				connection.Open();
+				connection.CreateCommand();
+				using (SqlCommand command = new SqlCommand())
+				{
+					command.Connection = connection;
+					command.CommandText = sql.ToString();
+					try
+					{
+						command.Connection.Open();
+						command.Parameters.Clear();
+						command.Parameters.Add
+						("@$MyParamVarName1$", SqlDbType.$MyDatabaseType1$ 
+							//, $MyVariableSize1$
+							).Value = $MyParamValue1$;
+						command.Parameters.Add
+						("@$MyParamVarName2$", SqlDbType.$MyDatabaseType2$ 
+							//, $MyVariableSize2$
+							).Value = $MyParamValue2$;							
+						
+						$end$
+						
+						Debug.WriteLine(string.Format("{0}: Running Query:  {1}", MethodBase.GetCurrentMethod().Name.ToUpper(), sql.ToString()));
+						command.ExecuteNonQuery();
+					}
+					catch (Exception ex)
+					{
+						Debug.WriteLine(string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.Message));
+					}
+				}
+			}
+			]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

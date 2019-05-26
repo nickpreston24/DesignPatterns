@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyINotifyPropertyChangedEventWithPropertyCheck</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyINotifyPropertyChangedEventWithPropertyCheck
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyINotifyPropertyChangedEventWithPropertyCheck</ID>
+          <ToolTip>Set up a INotifyPropertyChanged Event, complete with a Name checker for your properties</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+        public event PropertyChangedEventHandler PropertyChanged;	  
+		/// <summary>
+        /// Raise Property Changed
+        /// </summary>
+        /// <param name="propertyName"></param>
+		protected virtual void RaisePropertyChanged(string propertyName)
+        {
+            CheckPropertyName(propertyName);
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        /// <summary>
+        /// Check the property Name (Debug only) to report a property that does not exist
+        /// </summary>
+        /// <param name="propertyName"></param>
+        [Conditional("DEBUG")]
+        private void CheckPropertyName(string propertyName)
+        {
+            PropertyDescriptor propertyDescriptor = TypeDescriptor.GetProperties(this)[propertyName];
+            if (propertyDescriptor == null)
+            {
+                throw new InvalidOperationException(string.Format(null, "The property with the propertyName '{0}' doesn't exist.", propertyName));
+            }
+        }
+		]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyDumper</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyDumper
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyDumper</ID>
+          <ToolTip>Dumps the contents of any object to a serialized Json format</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+		 /// <summary>
+        /// Dump an object's properties to Debug in JSON format
+        /// Note: JSON nuget package required
+        /// Null values will be ignored by default
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="item">Instance of any passed object</param>
+        /// <param name="displayName">Custom Name of passed object</param>        
+        /// <returns></returns>
+        public static T Dump<T>(this T item, string displayName = "", bool ignoreNulls = false)
+        {
+            if (item != null)
+            {
+                if (string.IsNullOrWhiteSpace(displayName))
+                    displayName = item.GetType().Name;
+                var prettyJson = JsonConvert.SerializeObject(
+                    item,
+                    Formatting.Indented,
+                    new JsonSerializerSettings
+                    {
+                        Converters = new List<JsonConverter> { new Newtonsoft.Json.Converters.StringEnumConverter() },
+                        NullValueHandling = (ignoreNulls) ? NullValueHandling.Ignore : NullValueHandling.Include,
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+                Debug.WriteLine(string.Format("{0}:\n{1}", displayName, prettyJson));
+            }
+            else if (item == null)
+            {
+                if (!string.IsNullOrWhiteSpace(displayName))
+                    Debug.WriteLine(string.Format("Object '{0}'{1}", displayName, " is null.")); //Optional
+            }
+            return item;
+        }
+	  ]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

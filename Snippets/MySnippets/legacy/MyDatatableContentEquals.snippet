@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyDatatableContentEquals</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyDatatableContentEquals</ID>
+          <ToolTip>Checks if two datatables have the same data content</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[        /// <summary>
+        /// Checks if two DataTable objects have the same content.
+        /// </summary>
+        /// <param name="thisDataTable"></param>
+        /// <param name="otherDataTable"></param>
+        /// <returns></returns>
+        public static bool ContentEquals(this DataTable thisDataTable, DataTable otherDataTable)
+        {
+            // Compare row count.
+            if (thisDataTable.Rows.Count != otherDataTable.Rows.Count)
+            {
+                return false;
+            }
+
+            // Compare column count.
+            if (thisDataTable.Columns.Count != otherDataTable.Columns.Count)
+            {
+                return false;
+            }
+
+            // Compare data in each cell of each row.
+            for (int i = 0; i < thisDataTable.Rows.Count; i++)
+            {
+                for (int j = 0; j < thisDataTable.Columns.Count; j++)
+                {
+                    if (!thisDataTable.Rows[i][j].Equals(otherDataTable.Rows[i][j]))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            // The two DataTables contain the same data.
+            return true;
+        }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

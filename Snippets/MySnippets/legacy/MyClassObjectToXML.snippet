@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyClassObjectToXML</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyClassObjectToXML
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyClassObjectToXML</ID>
+          <ToolTip>Convert a class object to XML if serializable</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[        /// <summary>
+        /// Class Object To XML
+        /// </summary>
+        /// <param name="classObject"></param>
+        /// <returns></returns>
+        public static string ClassObjectToXML(this Object classObject)
+        {
+             XmlDocument xmlDoc = new XmlDocument();
+            XmlSerializer xmlSerializer = new XmlSerializer(classObject.GetType());
+            // Creates a stream whose backing store is memory. 
+            using (MemoryStream xmlStream = new MemoryStream())
+            {
+                try
+                {
+                    xmlSerializer.Serialize(xmlStream, classObject);
+                    xmlStream.Position = 0;
+                    //Loads the XML document from the specified string.
+                    xmlDoc.Load(xmlStream);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.ToString()));
+                    NLogger.Error(ex);
+                }
+                return xmlDoc.InnerXml;
+            }
+        }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

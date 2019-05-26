@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyDynamicObject</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>MyDynamicObject
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyDynamicObject</ID>
+          <ToolTip>Create Dynamic objects</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[        
+		public static dynamic GetDynamicObject(Dictionary<string, object> properties)
+        {
+            return new MyDynObject(properties);
+        }
+        public sealed class MyDynObject : DynamicObject
+        {
+            private readonly Dictionary<string, object> _properties;
+            public MyDynObject(Dictionary<string, object> properties)
+            {
+                _properties = properties;
+            }
+            public override IEnumerable<string> GetDynamicMemberNames()
+            {
+                return _properties.Keys;
+            }
+            public override bool TryGetMember(GetMemberBinder binder, out object result)
+            {
+                if (_properties.ContainsKey(binder.Name))
+                {
+                    result = _properties[binder.Name];
+                    return true;
+                }
+                else
+                {
+                    result = null;
+                    return false;
+                }
+            }
+            public override bool TrySetMember(SetMemberBinder binder, object value)
+            {
+                if (_properties.ContainsKey(binder.Name))
+                {
+                    _properties[binder.Name] = value;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+		]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

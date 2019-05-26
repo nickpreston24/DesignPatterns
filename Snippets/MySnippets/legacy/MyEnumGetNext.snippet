@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyEnumGetNext</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyEnumGetNext
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="false">
+          <ID>MyEnumGetNext</ID>
+          <ToolTip>Enum.Next() - Gets next enum in set</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+	/// <summary>
+	/// Gets the next enum from the set defined
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	/// <param name="src"></param>
+	/// <returns></returns>
+	public static T Next<T>(this T src) where T : struct
+	{
+		if (!typeof(T).IsEnum) throw new ArgumentException(String.Format("Argumnent {0} is not an Enum", typeof(T).FullName));
+		T[] Arr = (T[])Enum.GetValues(src.GetType());
+		int j = Array.IndexOf<T>(Arr, src) + 1;
+		return (Arr.Length==j) ? Arr[0] : Arr[j];            
+	}
+	  
+	  ]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

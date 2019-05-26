@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyRunAsyncMethod</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyRunAsyncMethod
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyRunAsyncMethod</ID>
+          <ToolTip>Run a method in a backgroundworker with callback method</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+		/// <summary>
+        /// Run a method asynchronously in its own backgroundworker.
+		/// Can be used as extension method or normal method.
+        /// </summary>
+        /// <param name="function"></param>
+        /// <param name="callback"></param>
+        public static void RunAsync(Action function, Action callback)
+        {
+            using(BackgroundWorker worker = new BackgroundWorker())
+			{
+				worker.RunWorkerCompleted += (s, e) => { callback(); };
+				worker.DoWork += delegate (object sender, DoWorkEventArgs e) { function(); };
+				try{worker.RunWorkerAsync();}catch(Exception ex){Debug.WriteLine(ex.Message);}
+			}
+        }
+		]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

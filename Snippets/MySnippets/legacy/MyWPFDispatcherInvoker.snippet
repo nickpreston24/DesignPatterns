@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+		<SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+      <Title>MyDispatcherInvoker_WPF</Title>
+      <Author>Mike</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyDispatcherInvoker_WPF
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyDispatcherInvoker_WPF</ID>
+          <ToolTip>Calls the Dispatcher.Invoke method which handles Invoking of a selection of code</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+	    Dispatcher.Invoke(DispatcherPriority.Send, new Action(() =>
+		{
+			$selected$
+		}));
+			]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

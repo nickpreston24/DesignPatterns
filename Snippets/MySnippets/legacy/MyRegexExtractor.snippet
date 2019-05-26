@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyRegexExtractor</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyRegexExtractor
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyRegexExtractor</ID>
+          <ToolTip>Extracts all fields from a string that match a given regular expression.</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[        
+	    /// <summary>
+		/// ExtractRegex()
+		///
+        /// Extracts all fields from a string that match a certain regex. 
+        /// Will convert to desired type through a standard TypeConverter.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="text"></param>
+        /// <param name="regex"></param>
+        /// <returns></returns>
+        public static T[] ExtractRegex<T>(this string text, string regex)
+        {
+            try
+            {
+                TypeConverter tc = TypeDescriptor.GetConverter(typeof(T));
+                if (!tc.CanConvertFrom(typeof(string)))
+                {
+                    throw new ArgumentException("Type does not have a TypeConverter from string", "T");
+                }
+                if (!string.IsNullOrEmpty(text))
+                {
+                    return
+                        Regex.Matches(text, regex)
+                        .Cast<Match>()
+                        .Select(f => f.ToString())
+                        .Select(f => (T)tc.ConvertFrom(f))
+                        .ToArray();
+                }
+                else
+                    return new T[0];
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.ToString()));
+                return new T[0];
+            }
+        }
+		$end$
+		]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MySqlBasicSelect</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MySqlBasicSelect
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MySqlBasicSelect</ID>
+          <ToolTip>Run any SQL statement with parameterized queries</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+		<Literal>
+			<ID>MyConnectionString</ID>
+			<ToolTip>Enter the Connection String</ToolTip>
+			<Default>MyConnectionString</Default>
+		</Literal> 
+		<Literal>
+			<ID>MyTableName</ID>
+			<ToolTip>Enter the Table Name</ToolTip>
+			<Default>MyTableName</Default>
+		</Literal>				
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+			StringBuilder sql = new StringBuilder("SELECT * FROM $$MyTableName$$");
+			int rowsChanged;
+			using (SqlConnection connection = new SqlConnection(connectionStr))
+            {
+                using (SqlCommand command = new SqlCommand(sql.ToString(), connection))
+                {
+                    try
+                    {
+                        command.Connection.Open();
+                        Debug.WriteLine(string.Format("{0}: Running Query:  {1}", MethodBase.GetCurrentMethod().Name.ToUpper(), sql.ToString()));
+                        rowsChanged = command.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.Message));
+                    }
+                }
+            }
+			]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyDatatableRenameColumn</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyDatatableRenameColumn
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyDatatableRenameColumn</ID>
+          <ToolTip>Rename a column in a datable</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[        /// <summary>
+        /// Rename a column by oldName to newName
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="oldName"></param>
+        /// <param name="newName"></param>
+        public static void RenameColumn(this DataTable dt, string oldName, string newName)
+        {
+            if (dt != null && !string.IsNullOrEmpty(oldName) && !string.IsNullOrEmpty(newName) && oldName != newName)
+            {
+                int idx = dt.Columns.IndexOf(oldName);
+                dt.Columns[idx].ColumnName = newName;
+                dt.AcceptChanges();
+            }
+        }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

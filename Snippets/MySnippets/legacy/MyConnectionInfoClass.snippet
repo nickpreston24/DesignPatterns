@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>		
+      </SnippetTypes>
+      <Title>MyConnectionInfoClass</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyConnectionInfoClass
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyConnectionInfoClass</ID>
+          <ToolTip>This is a helper class for extracting and holding the individual pieces of a connectionstring as individual properties.</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+	/// <summary>    
+    /// This is a helper class for extracting and holding the individual pieces of a connectionstring as individual properties.
+    /// </summary>
+    public class ConnectionInfo
+    {
+        public ConnectionInfo(string connStr)
+        {
+            try
+            {
+                var csb = new SqlConnectionStringBuilder(connStr);
+                this.Server = csb.DataSource;
+                this.Database = csb.InitialCatalog;
+                this.User = csb.UserID;
+                this.Password = csb.Password;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.ToString()));
+            }
+        }
+        public ConnectionInfo()
+        {
+        }
+        public string Server { get; set; }
+        public string Database { get; set; }
+        public string User { get; set; }
+        public string Password { get; set; }
+        public string ConnectionString
+        {
+            get
+            {
+                return string.Format(
+                "Application Name={0};\nPersist Security Info=false;\nIntegrated Security=false;\nServer={1};\nDatabase={2};\nUser ID={3};\nPassword={4}",
+                AppDomain.CurrentDomain.FriendlyName, //0
+                Server, //1
+                Database, //2
+                User, //3
+                Password //4
+                );
+            }
+            set { }
+        }
+    }	
+	]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>   

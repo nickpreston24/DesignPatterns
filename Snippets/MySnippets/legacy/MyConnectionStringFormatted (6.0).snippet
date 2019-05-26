@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>		
+      </SnippetTypes>
+      <Title>MyConnectionStringFormatted</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyConnectionStringFormatted
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyConnectionStringFormatted</ID>
+          <ToolTip>Connection String</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+		<Literal>
+			<ID>MyServerName</ID>
+			<ToolTip>Enter the Server Name</ToolTip>
+			<Default>MyServer</Default>
+		</Literal>
+		<Literal>
+			<ID>MyDatabaseName</ID>
+			<ToolTip>Enter the Database Name</ToolTip>
+			<Default>MyDatabase</Default>
+		</Literal>		
+		<Literal>
+			<ID>MyPassword</ID>
+			<ToolTip>Enter the Password</ToolTip>
+			<Default>ayoh*noisiv</Default>
+		</Literal>
+		<Literal>
+			<ID>MyUsername</ID>
+			<ToolTip>Enter the Password</ToolTip>
+			<Default>hoyaapp</Default>
+		</Literal>
+		
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+	  $$"Persist Security Info=false;Integrated Security=false;Server={$MyServerName$};Database={$MyDatabaseName$};User ID=$MyUsername$;Password=$MyPassword$"$end$
+	  ]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

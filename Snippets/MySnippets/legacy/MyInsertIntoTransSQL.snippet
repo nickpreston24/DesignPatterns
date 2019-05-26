@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyInsertIntoTransSQL</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyInsertIntoTransSQL
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyInsertIntoTransSQL</ID>
+          <ToolTip></ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+			string connectionstr = "";
+			StringBuilder sql = new StringBuilder("INSERT INTO Database.dbo.Table");
+			sql.Append("(Field1, Field2)");
+			sql.Append("VALUES (@Field1, @Field2)");
+            int rowsChanged = 0;
+            using (SqlConnection connection = new SqlConnection(connectionstr))
+            {
+                try
+                {
+                    connection.Open();
+                    SqlTransaction trans = connection.BeginTransaction();
+                    //Debug.WriteLine(string.Format("{0}: Running Query:  {1}", MethodBase.GetCurrentMethod().Name.ToUpper(), sql.ToString()));
+                    using (SqlCommand command = new SqlCommand(sql.ToString(), connection))
+                    {
+                        command.Transaction = trans;					
+                        foreach (var item in collection)
+                        {
+                            try
+                            {
+                                command.Parameters.Clear();
+                                command.Parameters.Add("@Field1", SqlDbType.VarChar, 50).Value = item.Field1;
+                                command.Parameters.Add("@Field2", SqlDbType.VarChar, 50).Value = item.Field2;                                
+                                rowsChanged += command.ExecuteNonQuery();
+                            }
+                            catch (Exception ex)
+                            {
+                                string errMsg = $$"{MethodBase.GetCurrentMethod().Name}: {ex.ToString()}";
+                                Debug.WriteLine(errMsg);
+                                NLogger.Error(errMsg);
+                                trans.Rollback();
+                            }
+                        }
+                        if (rowsChanged > 0)
+                        {
+                            trans.Commit();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string errMsg = $$"{MethodBase.GetCurrentMethod().Name}: {ex.ToString()}";
+                    Debug.WriteLine(errMsg);
+                    NLogger.Error(errMsg);
+                }
+            }
+			]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

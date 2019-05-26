@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MySerializeObjectToXMLFile</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MySerializeObjectToXMLFile_Method
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MySerializeObjectToXMLFile_Method</ID>
+          <ToolTip>Serializes a class object instance to an XML format and saves to file.</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+	    /// <summary>
+        /// Serializes a Class Object instance to XML and saves to 'filePath'
+        /// Assumes coder assigns 'filePath' to an actual file containing XML, 
+        ///     not necessarily a file with the XML extension.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="item"></param>
+        /// <param name="filePath"></param>
+	    public static void SerializeObjectToXMLFile<T>(this T item, string FilePath)
+        {
+            try
+            {
+                XmlSerializer xs = new XmlSerializer(typeof(T));
+                using (StreamWriter wr = new StreamWriter(FilePath))
+                {
+                    xs.Serialize(wr, item);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.ToString());
+                MessageBox.Show(string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.Message));
+                NLogger.Error(ex);
+            }
+        }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

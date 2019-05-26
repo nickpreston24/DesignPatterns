@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyGeneralExtensionsClass</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyGeneralExtensionsClass
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyGeneralExtensionsClass</ID>
+          <ToolTip></ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+	  public static class Extensions{
+	  /// <summary>
+        /// To Custom Date Format
+        /// Converts raw string date to whatever format is specified
+        /// </summary>
+        /// <param name="time"></param>
+        /// <param name="format"></param>
+        /// <returns></returns>
+        public static string ToDateFormat(this string time, string format = "MM/dd/yyyy")
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(time) || DateTime.Parse(time) == NullTime)
+                    return ""; //or null, etc.
+                DateTime rawDate = DateTime.Parse(time);
+                return (rawDate.CompareTo(NullTime) != 0) ? rawDate.ToString(format) : "";
+            }
+            catch (Exception ex)
+            {
+                string errMsg = string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.ToString());
+                Debug.WriteLine(errMsg);
+                NLogger.Error(errMsg);
+                return "";
+            }
+        }
+	    /// <summary>
+        /// Convert to custom (Angie's) money format
+        /// </summary>
+        /// <param name="moneyStr">money string for parsing</param>
+        /// <param name="whiteOutZeroes">zeros become whitespace</param>
+        /// <returns>"0.00" if 0 by default, or "" if whiteoutzeroes set to TRUE</returns>
+        public static string ToMoneyFormat(this string moneyStr, string format = "F", bool whiteOutZeroes = false)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(moneyStr)) return "";
+                decimal rawDouble = decimal.Parse(moneyStr);
+                if (whiteOutZeroes)
+                    return (rawDouble != 0) ? rawDouble.ToString(format) : "0.00"; //return non-zero values as formatted, else as an empty string.
+                else
+                    return decimal.Parse(moneyStr).ToString(format);
+            }
+            catch (Exception ex)
+            {
+                string errMsg = string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.ToString());
+                Debug.WriteLine(errMsg);
+                NLogger.Error(errMsg);
+
+                Debug.WriteLine($"Original string: {moneyStr}");
+                return "";
+            }
+        }
+
+        public static decimal ToDecimal(this string moneyStr)
+        {
+            try
+            {
+                return !string.IsNullOrWhiteSpace(moneyStr) ? decimal.Parse(moneyStr) : 0;
+            }
+            catch (Exception ex)
+            {
+                string errMsg = string.Format($"{MethodBase.GetCurrentMethod().Name}: {ex.ToString()}");
+                Debug.WriteLine(errMsg);
+                NLogger.Error(errMsg);
+                return 0;
+            }
+        }
+	}
+	  ]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

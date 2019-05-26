@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MySqlDataAdapter</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MySqlDataAdapter
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MySqlDataAdapter</ID>
+          <ToolTip>Run a SQL SELECT statement and store in a Datatable</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+		<Literal>
+			<ID>MyConnectionString</ID>
+			<ToolTip>Enter the Connection String</ToolTip>
+			<Default>MyConnectionString</Default>
+		</Literal> 
+		<Literal>
+			<ID>MyTableName</ID>
+			<ToolTip>Enter the Table Name</ToolTip>
+			<Default>MyTableName</Default>
+		</Literal>				
+		<Literal>
+			<ID>MySQLQuery</ID>
+			<ToolTip>Enter the SQL Query Name</ToolTip>
+			<Default>MySQLQuery</Default>
+		</Literal>
+		</Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+			string $MyConnectionString$ = "";
+			StringBuilder $MySQLQuery$ = new StringBuilder("SELECT * FROM $MyTableName$");
+            DataTable dt$MyTableName$ = new DataTable("$MyTableName$");			
+			using (SqlDataAdapter da = new SqlDataAdapter($MySQLQuery$.ToString(), $MyConnectionString$))
+			{
+				try
+				{
+					da.Fill(dt$MyTableName$);$end$
+				}
+				catch (Exception ex)
+				{
+					Debug.WriteLine(string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.Message));
+					NLogger.Error(ex);
+					//MessageBox.Show(string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.Message));					
+				}				
+			}
+			]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

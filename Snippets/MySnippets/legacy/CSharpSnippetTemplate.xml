@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--NOTE: be sure to make this file's extension a .snippet, otherwise VS won't recognize it as a snippet!-->
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>title</Title>
+      <Shortcut>YourShortcutHere</Shortcut>
+      <Description></Description>
+      <HelpUrl></HelpUrl>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <!--Example Literals-->
+        <Literal>
+          <ID>MyPropertyName</ID>
+          <ToolTip>Replace with property name.</ToolTip>
+          <Default>MyPropertyName</Default>
+        </Literal>
+        <Literal>
+          <ID>MyType</ID>
+          <ToolTip>Replace with property type.</ToolTip>
+          <Default>MyType</Default>
+        </Literal>
+      </Declarations>
+      <Imports>
+        <Import>
+          <Namespace></Namespace>
+        </Import>
+      </Imports>
+
+      <!-- /* Sample code with literals (goes in CDATA[])*/ -->
+      <!-- private $MyType$ _$MyPropertyName$; -->
+      <!-- public $MyType$ $MyPropertyName$ -->
+      <!-- {get{return _$MyPropertyName$;} set{SetValue(ref _$MyPropertyName$, value);}} -->
+
+      <!-- Sepecify the code language and the actual snippet content. -->
+      <Code Language="CSharp">
+        <![CDATA[
+
+				//Your code here
+
+				$selected$ //If you selected code in VS, it will go here.
+
+				$end$ //designates the 'return' point after a snippet is entered.
+				]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

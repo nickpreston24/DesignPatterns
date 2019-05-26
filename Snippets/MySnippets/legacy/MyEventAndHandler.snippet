@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippet Format="1.0.0"
+    xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <Header>
+        <Title>Create Event</Title>
+        <Author>BlackWasp</Author>
+        <Shortcut>MyEventAndHandler</Shortcut>
+        <Description>Code for an event based upon
+        the EventHandler delegate.</Description>
+        <SnippetTypes>
+            <SnippetType>Expansion</SnippetType>
+        </SnippetTypes>
+    </Header>
+    <Snippet>
+	<Declarations>
+    <Literal>
+        <ID>EventName</ID>
+        <ToolTip>Enter the event name</ToolTip>
+        <Default>MyEvent</Default>
+    </Literal>
+</Declarations>
+        <Code Language="CSharp">
+        <![CDATA[public event EventHandler $EventName$;
+             
+        public virtual void On$EventName$()
+        {
+            if ($EventName$ != null)
+                $EventName$(this, EventArgs.Empty);
+        }]]></Code>
+    </Snippet>
+</CodeSnippet>

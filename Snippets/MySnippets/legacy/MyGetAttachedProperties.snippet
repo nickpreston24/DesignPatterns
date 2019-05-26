@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>SnippetFile1</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyGetAttachedProperties
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyGetAttachedProperties</ID>
+          <ToolTip>Get attached properties from a given dependency object or control</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[ public static IList<DependencyProperty> GetAttachedProperties(this DependencyObject obj)
+        {
+            List<DependencyProperty> result = new List<DependencyProperty>();
+
+            foreach (PropertyDescriptor pd in TypeDescriptor.GetProperties(obj,
+                new Attribute[] { new PropertyFilterAttribute(PropertyFilterOptions.All) }))
+            {
+                DependencyPropertyDescriptor dpd =
+                    DependencyPropertyDescriptor.FromProperty(pd);
+
+                if (dpd != null)
+                {
+                    result.Add(dpd.DependencyProperty);
+                }
+            }
+
+            return result;
+        }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

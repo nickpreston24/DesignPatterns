@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyFindAncestor</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyFindAncestor
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyFindAncestor</ID>
+          <ToolTip>Find the ancestors for a given control object in WPF</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[        
+		/// <summary>
+        /// Find the ancestor of a WPF depenency object (any control)
+        /// using System.Windows;
+        /// using System.Windows.Media;
+        /// Add these References:
+        ///     WindowsBase
+        ///     PresentationCore
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="dependencyObject"></param>
+        /// <returns></returns>
+        public static T FindAncestor<T>(this DependencyObject dependencyObject)
+            where T : class
+        {
+            DependencyObject target = dependencyObject;
+            do
+            {
+                target = VisualTreeHelper.GetParent(target);
+            }
+            while (target != null && !(target is T));
+            return target as T;
+        }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyGetVarName</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyGetVarName
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyGetVarName</ID>
+          <ToolTip>Get a variable's name</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[ 
+		/// <summary>
+        /// Get Variable Name
+        /// </summary>
+		/// Usage:
+		/// GetVariableName(()=>myvar);
+        /// <typeparam name="T"></typeparam>
+        /// <param name="expr"></param>
+        /// <returns></returns>
+        public static string GetVariableName<T>(Expression<Func<T>> expr)
+        {
+            var body = (MemberExpression)expr.Body;
+            return body.Member.Name;
+        }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

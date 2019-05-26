@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyExcludeChars</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyExcludeChars
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyExcludeChars</ID>
+          <ToolTip>Exclude a set of chars from any string</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[/// <summary>
+        /// Exclude Chars
+        /// Exclude chars from strings
+        /// Note: for best results, have 'toExclude' be a HashSet:
+        /// i.e. new HashSet<char>(new[] { ',', '\t', '\n', '\r' })
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="toExclude"></param>
+        /// <returns></returns>
+        public static string ExcludeChars(this string str, IEnumerable<char> toExclude)
+        {
+            StringBuilder sb = new StringBuilder(str.Length);
+            for (int i = 0; i < str.Length; i++)
+            {
+                char c = str[i];
+                if (!toExclude.Contains(c))
+                    sb.Append(c);
+            }
+            return sb.ToString();
+
+        }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

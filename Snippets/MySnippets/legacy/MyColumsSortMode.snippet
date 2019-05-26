@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyColumsSortMode</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>MyColumsSortMode
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyColumsSortMode</ID>
+          <ToolTip>Set all column sort mode to given or default</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[/// <summary>
+        /// Set the columns to not sortable.
+        /// We want to keep the rows unsorted and properly indexed.
+        /// </summary>
+        /// <param name="dataGridView"></param>
+        /// <param name="sortMode"></param>
+        public static void SetColumnSortMode(this DataGridView dataGridView)
+        {
+            foreach (DataGridViewTextBoxColumn column in dataGridView.Columns)
+            {
+                dataGridView.Columns[column.Name].SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+        }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

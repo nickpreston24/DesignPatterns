@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyToInt</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>MyToInt
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="false">
+          <ID>MyToInt</ID>
+          <ToolTip>convert to an integer</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[/// <summary>
+        /// To Integer
+        /// </summary>
+        /// <param name="v">String that may contain integer</param>
+        /// <param name="a">Parse integer result</param>
+        /// <returns></returns>
+        public static bool ToInt(this string v, out int a)
+        {
+            return int.TryParse(v, out a);
+        }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

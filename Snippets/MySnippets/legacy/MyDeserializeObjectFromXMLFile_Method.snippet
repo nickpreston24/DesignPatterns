@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyDeserializeObjectFromXMLFile_Method</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyDeserializeObjectFromXMLFile_Method
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyDeserializeObjectFromXMLFile</ID>
+          <ToolTip>Deserializes an Object from an XML file into a valid instance of that object.</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>	  
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+		/// <summary>
+        /// Deserializes an Object from an XML file into a valid instance of that object.
+		/// Assumes coder assigns 'filePath' to an actual file containing XML, not necessarily a file with the XML extension.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="objRef"></param>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+		public static T DeserializeObjectFromXMLFile<T>(this T objRef, string filePath)
+        {
+            if (!File.Exists(filePath))
+                return objRef;
+            XmlSerializer xs = new XmlSerializer(typeof(T));
+            using (StreamReader rd = new StreamReader(filePath))
+            {
+                objRef = (T)xs.Deserialize(rd);
+            }
+            return objRef;
+        }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

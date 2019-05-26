@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>SnippetFile1</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyRemoveDuplicateRows
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyRemoveDuplicateRows</ID>
+          <ToolTip>Remove all records that are not unique!</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[                /// <summary>
+        /// Remove duplicate Rows/records
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public static DataTable RemoveDuplicateRows(this DataTable dt)
+        {
+            var UniqueRows = dt.AsEnumerable().Distinct(DataRowComparer.Default);
+            DataTable dt2 = UniqueRows.CopyToDataTable();
+            dt2.TableName = dt.TableName;
+            return dt2;
+        }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

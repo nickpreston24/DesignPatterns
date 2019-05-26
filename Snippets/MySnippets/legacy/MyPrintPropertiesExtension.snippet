@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyPrintPropertiesExtension</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyPrintPropertiesExtension
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyPrintPropertiesExtension</ID>
+          <ToolTip></ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+		/// <summary>
+        /// Print Properties of an object
+        /// </summary>
+        /// <param name="obj"></param>
+        public static object PrintProperties(this object obj, string name = "")
+        {
+            name = (!string.IsNullOrWhiteSpace(name)) ? name : obj.GetType().FullName;
+            Console.WriteLine(string.Format("{0}\n[", name));
+            Debug.WriteLine(string.Format("{0}\n[", name));
+            PrintProperties(obj, 1);
+            Console.WriteLine("]");
+            Debug.WriteLine("]");
+			return obj;
+        }
+        /// <summary>
+        /// Print Properties of an object (recursive, hidden)
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="indent"></param>
+        private static void PrintProperties(object obj, int indent)
+        {
+            if (obj == null) return;
+            string indentString = new string(' ', indent);
+            Type objType = obj.GetType();
+            PropertyInfo[] properties = objType.GetProperties();
+            foreach (PropertyInfo property in properties)
+            {
+                try
+                {
+                    object propValue = property.GetValue(obj, null);
+                    if (property.PropertyType.Assembly == objType.Assembly && !property.PropertyType.IsEnum)
+                    {
+                        Console.WriteLine($$"{indentString}{property.Name}:");
+                        Debug.WriteLine($$"{indentString}{property.Name}:");
+                        PrintProperties(propValue, indent + 2);
+                    }
+                    else
+                    {
+                        Console.WriteLine($$"{indentString}{property.Name}: {propValue}", indentString, property.Name, propValue);
+                        Debug.WriteLine("{0}{1}: {2}", indentString, property.Name, propValue);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($$"{MethodBase.GetCurrentMethod().Name}: {ex.ToString()}");
+                    continue;
+                }
+            }			
+        }
+	  ]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+         <SnippetType>Expansion</SnippetType>
+		<SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+      <Title>MyDialogResultWPF</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyDialogResultWPF
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyDialogResultWPF</ID>
+          <ToolTip>Create a dialogresult check for a custom WPF form.ShowDialog() useage.</ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+		<Literal>
+			<ID>DialogName</ID>
+			<ToolTip>Enter your Dialog Name</ToolTip>
+			<Default>MyDialogName</Default>		
+		</Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+		if ($DialogName$.DialogResult.HasValue && $DialogName$.DialogResult.Value)
+		{
+			//If OK'd:
+			$selected$
+			$end$
+		}
+		else
+		{
+			//If Canceled:
+		}
+		]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

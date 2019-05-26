@@ -47,17 +47,32 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="FavWebSnippets\kez-cssnippets.snippet" />
+    <None Include="MySnippets\.editorconfig" />
+    <None Include="MySnippets\MyCSharpVersionPrecompilerCommands.snippet" />
+    <None Include="MySnippets\MyDebugWriteLines.snippet" />
+    <None Include="MySnippets\MyDispose.snippet" />
+    <None Include="MySnippets\MyDumpMethod.snippet" />
+    <None Include="MySnippets\MyExceptions.snippet" />
+    <None Include="MySnippets\MyGetAssembly.snippet" />
+    <None Include="MySnippets\MyIDisposableTemplate.snippet" />
+    <None Include="MySnippets\MyIEnumerableSnips.snippet" />
+    <None Include="MySnippets\MyInsertUsingT-Sql.snippet" />
+    <None Include="MySnippets\MyLog4NetSnippets.snippet" />
+    <None Include="MySnippets\MySetterGetterProperties.snippet" />
+    <None Include="MySnippets\MyStopwatch.snippet" />
+    <None Include="MySnippets\MyTryCatch.snippet" />
+    <None Include="MySnippets\MyViewModelProperties.snippet" />
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="index.html" />
+    <Content Include="MySnippets\CSharpSnippetTemplate.xml" />
     <Content Include="stylesheet.css" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="snippets\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

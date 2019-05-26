@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>MyRulesEngineClass (alpha)</Title>
+      <Author>pcadmin</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  MyRulesEngineClass_alpha
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>MyRulesEngineClass (alpha)</ID>
+          <ToolTip></ToolTip>
+          <Default>
+          </Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[
+	public static class RulesEngine
+	{
+        #region Extensions	
+        /// <summary>
+        /// ExecuteActionDictionary
+        /// Runs all Actions and their param lists
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="dictionary"></param>
+        public static void ExecuteActionDictionary<T>(this Dictionary<Action<List<T>>, List<T>> dictionary)
+        {
+            foreach (var entry in dictionary)
+            {
+                try
+                {
+                    Action<List<T>> action = entry.Key;
+                    action(entry.Value);
+                }
+                catch (Exception ex)
+                {
+                    string errMsg = string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.ToString());
+                    Debug.WriteLine(errMsg);
+                }
+            }
+        }
+        /// <summary>
+        /// Gets the next enum from the set defined
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="src"></param>
+        /// <returns></returns>
+        public static T Next<T>(this T src) where T : struct
+        {
+            if (!typeof(T).IsEnum) throw new ArgumentException(String.Format("Argumnent {0} is not an Enum", typeof(T).FullName));
+            T[] Arr = (T[])Enum.GetValues(src.GetType());
+            int j = Array.IndexOf<T>(Arr, src) + 1;
+            return (Arr.Length == j) ? Arr[0] : Arr[j];
+        }
+        /// <summary>
+        /// Gets the previous enum from the set defined
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="src"></param>
+        /// <returns></returns>
+        public static T Previous<T>(this T src) where T : struct
+        {
+            if (!typeof(T).IsEnum) throw new ArgumentException(String.Format("Argumnent {0} is not an Enum", typeof(T).FullName));
+            T[] Arr = (T[])Enum.GetValues(src.GetType());
+            int j = Array.IndexOf<T>(Arr, src) - 1;
+            return (Arr.Length == j) ? Arr[0] : Arr[j];
+        }
+        /// <summary>
+        /// Invoke Method from an Instance (non-null)
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="instance"></param>
+        /// <param name="instanceMethodName"></param>
+        public static void InvokeMethod<T>(this T instance, string instanceMethodName, object[] parameters)
+        {
+            try
+            {
+                Type type = typeof(T);
+                MethodInfo toInvoke = type.GetMethod(instanceMethodName);
+                Debug.WriteLine(toInvoke.Invoke(instance, parameters));
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+            }
+        }
+        /// <summary>
+        /// Invoke Static Method from a given Type
+        /// </summary>
+        /// <param name="classType"></param>
+        /// <param name="staticMethodName"></param>
+        /// <param name="parameters"></param>
+        public static void InvokeMethod(this Type classType, string staticMethodName, object[] parameters)
+        {
+            try
+            {
+                MethodInfo toInvoke = classType.GetMethod(staticMethodName, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+                if (toInvoke != null)
+                    toInvoke.Invoke(null, parameters);
+                else
+                    Debug.WriteLine($$"Method '{staticMethodName}' not found in class '{classType.FullName}'!");//Make sure you are calling a static method!
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+            }
+        }
+        /// <summary>
+        /// Invoke Generic Method from a given class Type on a new type 'genericMethodType'
+        /// </summary>
+        /// <param name="classType"></param>
+        /// <param name="genericMethodName"></param>
+        /// <param name="genericMethodType"></param>
+        public static void InvokeMethod(this Type classType, string genericMethodName, object[] parameters, Type genericMethodType)
+        {
+            try
+            {
+                object instance = Activator.CreateInstance(classType);
+                MethodInfo openMethod = classType.GetMethod(genericMethodName);
+                MethodInfo toInvoke = openMethod.MakeGenericMethod(genericMethodType);
+                toInvoke.Invoke(instance, parameters);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+            }
+        }
+        /// <summary>
+        /// Returns the Description Custom Attribute of an Enum
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Description Attribute value as String</returns>
+        /// <remarks></remarks>
+        public static string GetDescription(this Enum value)
+        {
+            try
+            {
+                FieldInfo fi = value.GetType().GetField(value.ToString());
+                DescriptionAttribute[] attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+                return Convert.ToString(((attributes.Length > 0) ? attributes[0].Description : value.ToString()));
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.ToString()));
+                return "";
+            }
+        }
+        /// <summary>
+        /// Get Elements Where
+        /// - Gets elements from an IEnumerable those that match the (compiled) lambda expression
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="collection"></param>
+        /// <param name="lambda"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> GetElementsWhere<T>(this IEnumerable<T> collection, LambdaExpression lambda)
+        {
+            try
+            {
+                var compiledLambda = lambda.Compile();
+                return collection.Where(x => (bool)compiledLambda.DynamicInvoke(x));
+            }
+            catch (Exception ex)
+            {
+                string errMsg = string.Format("{0}: {1}", MethodBase.GetCurrentMethod().Name, ex.ToString());
+                Debug.WriteLine(errMsg);
+                return collection;
+            }
+        }
+        /// <summary>
+        /// Get Where
+        /// Gets N elements from an IEnumerable those that match the 'where' expression
+        /// </summary>
+        /// <param name="collection"></param>
+        /// <param name="where"></param>
+        /// <param name="numDesired"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> GetElementsWhere<T>(this IEnumerable<T> collection, Expression<Func<T, bool>> where, int numDesired = 1)
+        {
+            Func<T, bool> funcWhere = where.Compile();
+            return collection.Where(funcWhere).Take(numDesired);
+        }
+        /// <summary>
+        /// Get Where
+        /// Gets elements from an IEnumerable those that match the 'where' expression
+        /// </summary>
+        /// <param name="collection"></param>
+        /// <param name="where"></param>
+        /// <param name="numDesired"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> GetElementsWhere<T>(this IEnumerable<T> collection, Expression<Func<T, bool>> where)
+        {
+            Func<T, bool> funcWhere = where.Compile();
+            return collection.Where(funcWhere);
+        }
+        /// <summary>
+        /// Take random elements from a IEnumerable collection
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="collection"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> GetRandomElementsWhere<T>(this IEnumerable<T> collection, Expression<Func<T, bool>> whereclause, int count)
+        {
+            Func<T, bool> funcWhere = whereclause.Compile();
+            return collection.Where(funcWhere).OrderBy(c => Guid.NewGuid()).Take(count);
+        }
+        /// <summary>
+        /// Take random elements from a IEnumerable collection
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="collection"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> GetRandomElements<T>(this IEnumerable<T> collection, int count)
+        {
+            return collection.OrderBy(c => Guid.NewGuid()).Take(count);
+        }
+        /// <summary>
+        /// Randomize
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> Randomize<T>(this IEnumerable<T> source)
+        {
+            return source.OrderBy(s => Guid.NewGuid());
+        }
+        /// <summary>
+        /// ??? TODO: Find out how this works and what it does!
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="func"></param>
+        /// <param name="cacheInterval"></param>
+        /// <returns></returns>
+        public static Func<T> Cache<T>(this Func<T> func, int cacheInterval)
+        {
+            var cachedValue = func();
+            var timeCached = DateTime.Now;
+            Func<T> cachedFunc = () =>
+            {
+                if ((DateTime.Now - timeCached).Seconds >= cacheInterval)
+                {
+                    timeCached = DateTime.Now;
+                    cachedValue = func();
+                }
+                return cachedValue;
+            };
+            return cachedFunc;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public static List<T> Append<T>(this List<T> list, T item)
+        {
+            list.Add(item);
+            return list;
+        }
+        #endregion Extensions
+        #region Expressions
+        //
+        /// The Following is a series of Expressions for the purpose of handling functional programming in C#
+        /// and for creating Expression Trees, which are used in this case to evaluate logical constructs (like predicates)
+        /// I will add more as I learn more.
+        ////
+        //TODO: Implement XOR!
+        public static Expression<Func<T, bool>> Not<T>(this Expression<Func<T, bool>> predicate)
+            => Expression.Lambda<Func<T, bool>>(Expression.Not(predicate.Body), predicate.Parameters);
+        public static Expression<Func<T, bool>> And<T>(this Expression<Func<T, bool>> left, Expression<Func<T, bool>> right)
+            => Expression.Lambda<Func<T, bool>>(Expression.AndAlso(left.Body, right.WithParametersOf(left).Body), left.Parameters);
+        public static Expression<Func<T, bool>> Or<T>(this Expression<Func<T, bool>> left, Expression<Func<T, bool>> right)
+            => Expression.Lambda<Func<T, bool>>(Expression.OrElse(left.Body, right.WithParametersOf(left).Body), left.Parameters);
+        private static Expression<Func<TResult>> WithParametersOf<T, TResult>(this Expression<Func<T, TResult>> left, Expression<Func<T, TResult>> right)
+            => new ReplaceParameterVisitor<Func<TResult>>(left.Parameters[0], right.Parameters[0]).Visit(left);
+        #endregion Expressions
+        #region Functions
+        //
+        /// The Following is a series of Funcs for the purpose of handling functional programming in C#
+        /// I may add more as I learn more.
+        ////
+        /// <summary>
+        /// Not
+        /// </summary>
+        public static Func<T, bool> Not<T>(this Func<T, bool> predicate) { return a => !predicate(a); }
+        /// <summary>
+        /// And
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+       /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static Func<T, bool> And<T>(this Func<T, bool> left, Func<T, bool> right) { return a => left(a) && right(a); }
+        /// <summary>
+        /// Or
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static Func<T, bool> Or<T>(this Func<T, bool> left, Func<T, bool> right) { return a => left(a) || right(a); }
+        /// <summary>
+        /// Y - Combinator
+        /// </summary>
+        /// <typeparam name="A"></typeparam>
+        /// <typeparam name="R"></typeparam>
+        /// <param name="r"></param>
+        /// <returns></returns>
+        private delegate Func<A, R> Recursive<A, R>(Recursive<A, R> r);
+        public static Func<A, R> Y<A, R>(Func<Func<A, R>, Func<A, R>> f)
+        {
+           Recursive<A, R> rec = r => a => f(r(r))(a);
+            return rec(rec);
+        }
+        //
+        /// Currying Funcs
+        ////
+        public static Func<T1, T2, TResult> UnCurry<T1, T2, TResult>(this Func<T1, Func<T2, TResult>> func)
+            => (x1, x2) => func(x1)(x2);
+        public static Func<T1, T2, T4> Compose<T1, T2, T3, T4>(this Func<T1, T2, T3> f, Func<T3, T4> g)
+            => (x, y) => g(f(x, y));
+        public static Func<T1, Func<T2, TResult>> Curry<T1, T2, TResult>(this Func<T1, T2, TResult> func)
+            => x1 => x2 => func(x1, x2);
+        public static Func<T1, Func<T2, Func<T3, TResult>>> Curry<T1, T2, T3, TResult>(this Func<T1, T2, T3, TResult> func)
+            => x1 => x2 => x3 => func(x1, x2, x3);
+        public static Func<T1, Func<T2, Func<T3, Func<T4, TResult>>>> Curry<T1, T2, T3, T4, TResult>(this Func<T1, T2, T3, T4, TResult> func)
+            => x1 => x2 => x3 => x4 => func(x1, x2, x3, x4);
+        public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, TResult>>>>> Curry<T1, T2, T3, T4, T5, TResult>(this Func<T1, T2, T3, T4, T5, TResult> func)
+            => x1 => x2 => x3 => x4 => x5 => func(x1, x2, x3, x4, x5);
+        public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, TResult>>>>>> Curry<T1, T2, T3, T4, T5, T6, TResult>(this Func<T1, T2, T3, T4, T5, T6, TResult> func)
+            => x1 => x2 => x3 => x4 => x5 => x6 => func(x1, x2, x3, x4, x5, x6);
+        public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, TResult>>>>>>> Curry<T1, T2, T3, T4, T5, T6, T7, TResult>(this Func<T1, T2, T3, T4, T5, T6, T7, TResult> func)
+            => x1 => x2 => x3 => x4 => x5 => x6 => x7 => func(x1, x2, x3, x4, x5, x6, x7);
+        public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, TResult>>>>>>>> Curry<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> func)
+            => x1 => x2 => x3 => x4 => x5 => x6 => x7 => x8 => func(x1, x2, x3, x4, x5, x6, x7, x8);
+        public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, TResult>>>>>>>>> Curry<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> func)
+            => x1 => x2 => x3 => x4 => x5 => x6 => x7 => x8 => x9 => func(x1, x2, x3, x4, x5, x6, x7, x8, x9);
+        public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, TResult>>>>>>>>>> Curry<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(this Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> func)
+            => x1 => x2 => x3 => x4 => x5 => x6 => x7 => x8 => x9 => x10 => func(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10);
+        public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, TResult>>>>>>>>>>> Curry<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(this Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> func)
+            => x1 => x2 => x3 => x4 => x5 => x6 => x7 => x8 => x9 => x10 => x11 => func(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11);
+        public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, TResult>>>>>>>>>>>> Curry<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(this Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> func)
+            => x1 => x2 => x3 => x4 => x5 => x6 => x7 => x8 => x9 => x10 => x11 => x12 => func(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12);
+        public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, TResult>>>>>>>>>>>>> Curry<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(this Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> func)
+            => x1 => x2 => x3 => x4 => x5 => x6 => x7 => x8 => x9 => x10 => x11 => x12 => x13 => func(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13);
+        public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, Func<T14, TResult>>>>>>>>>>>>>> Curry<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(this Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> func)
+            => x1 => x2 => x3 => x4 => x5 => x6 => x7 => x8 => x9 => x10 => x11 => x12 => x13 => x14 => func(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14);
+        public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, Func<T14, Func<T15, TResult>>>>>>>>>>>>>>> Curry<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(this Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> func)
+            => x1 => x2 => x3 => x4 => x5 => x6 => x7 => x8 => x9 => x10 => x11 => x12 => x13 => x14 => x15 => func(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15);
+        public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, Func<T14, Func<T15, Func<T16, TResult>>>>>>>>>>>>>>>> Curry<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(this Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> func)
+            => x1 => x2 => x3 => x4 => x5 => x6 => x7 => x8 => x9 => x10 => x11 => x12 => x13 => x14 => x15 => x16 => func(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16);       
+		#endregion Functions
+	}
+	  ]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
