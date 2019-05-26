@@ -285,7 +285,6 @@ namespace System
         {
             switch (logTo)
             {
-                default:
                 case LogTo.BOTH:
                     Debug.WriteLine(message);
                     Console.WriteLine(message);
@@ -293,6 +292,7 @@ namespace System
                 case LogTo.CONSOLE:
                     Console.WriteLine(message);
                     break;
+                default:
                 case LogTo.DEBUG:
                     Debug.WriteLine(message);
                     break;
@@ -308,7 +308,7 @@ namespace System
         /// <param name="name">Custom Name of passed object</param>        
         /// <param name="showNulls">if true, show null properties</param>
         /// <returns>T</returns>
-        public static T Dump<T>(this T item, string name = "", bool showNulls = true, LogTo log = LogTo.BOTH)
+        public static T Dump<T>(this T item, string name = "", bool showNulls = true, LogTo log = LogTo.DEBUG)
         {
             if (item == null)
             {
