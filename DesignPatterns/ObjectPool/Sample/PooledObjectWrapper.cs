@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DesignPatterns
+namespace DesignPatterns.WebSamples
 {
     public class PooledObjectWrapper<T> : PooledObject
     {
