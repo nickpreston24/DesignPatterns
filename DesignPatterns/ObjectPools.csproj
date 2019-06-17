@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DesignPatterns</RootNamespace>
-    <AssemblyName>DesignPatterns</AssemblyName>
+    <AssemblyName>ObjectPool</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,22 +41,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Dummy.cs" />
-    <Compile Include="Minion\Minion.cs" />
     <Compile Include="Benefactor\Parent.cs" />
     <Compile Include="ObjectPool\ObjectPool.cs" />
     <Compile Include="ObjectPool\Sample\ObjectPool.cs" />
     <Compile Include="ObjectPool\Sample\PooledObject.cs" />
     <Compile Include="ObjectPool\Sample\PooledObjectWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\IRepository.cs" />
-    <Compile Include="Repository\IUnitOfWork.cs" />
-    <Compile Include="Repository\Repository.cs" />
-    <Compile Include="Repository\UnitOfWork.cs" />
-    <Compile Include="Singleton\ISelector.cs" />
-    <Compile Include="Singleton\ISingleton.cs" />
-    <Compile Include="Singleton\Singleton.cs" />
-    <Compile Include="Singleton\SingletonException.cs" />
-    <Compile Include="Singleton\Multiton.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Shared.csproj">
@@ -65,7 +55,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Singleton\singleton_impl.PNG" />
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,6 +1,4 @@
-﻿using System.Data.SqlClient;
-
-namespace DesignPatterns
+﻿namespace DesignPatterns
 {
     /// <summary>
     /// SQL Server UnitOfWork
@@ -8,9 +6,9 @@ namespace DesignPatterns
     /// </summary>
     public abstract class UnitOfWork : IUnitOfWork
     {
-        protected SqlConnection connection;
+        protected IDbConnection connection;
 
-        protected UnitOfWork(string connectionString) => connection = new SqlConnection(connectionString);
+        protected UnitOfWork(IDbConnection connection) => this.connection = connection;
 
         public abstract void Complete();
 

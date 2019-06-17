@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28917.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignPatterns", "DesignPatterns\DesignPatterns.csproj", "{C5A82F7C-7A62-4EF0-8856-035F1C35DE17}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectPools", "DesignPatterns\ObjectPools.csproj", "{C5A82F7C-7A62-4EF0-8856-035F1C35DE17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignPatternsTests", "DesignPatternsTests\DesignPatternsTests.csproj", "{27F7106D-347C-4BEC-A04B-EC4B6B3CB6E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingletonTests", "DesignPatternsTests\SingletonTests.csproj", "{27F7106D-347C-4BEC-A04B-EC4B6B3CB6E5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Common\Shared.csproj", "{5E4D9F12-A069-4979-9EE1-944FF27C1BF0}"
 EndProject
@@ -17,7 +17,39 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VSSettings", "VSSettings", 
 		Snippets\MySnippets\README.MD = Snippets\MySnippets\README.MD
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectPooling", "ObjectPooling\ObjectPooling.csproj", "{981C3560-B808-4782-95B6-FE67AE92EA4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ObjectPoolingTests", "ObjectPooling\ObjectPoolingTests.csproj", "{981C3560-B808-4782-95B6-FE67AE92EA4C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DesignPatterns", "DesignPatterns", "{D8BFBF70-D61D-4D97-BBAD-AC65D20D495A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ObjectPool", "ObjectPool", "{9B5D7FEE-4055-4D9A-A9A8-D5C05108FCE7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Singleton", "Singleton", "{A6F2A58B-0ABD-4B98-BA7F-8831125BD8BA}"
+	ProjectSection(SolutionItems) = preProject
+		DesignPatterns\Singleton\ISelector.cs = DesignPatterns\Singleton\ISelector.cs
+		DesignPatterns\Singleton\ISingleton.cs = DesignPatterns\Singleton\ISingleton.cs
+		DesignPatterns\Singleton\Multiton.cs = DesignPatterns\Singleton\Multiton.cs
+		DesignPatterns\Singleton\Singleton.cs = DesignPatterns\Singleton\Singleton.cs
+		DesignPatterns\Singleton\singleton_impl.PNG = DesignPatterns\Singleton\singleton_impl.PNG
+		DesignPatterns\Singleton\SingletonException.cs = DesignPatterns\Singleton\SingletonException.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Flyweight", "Flyweight", "{5C8EB0DE-2F40-4050-8E36-9839AC8934F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flyweights", "Flyweights\Flyweights.csproj", "{5CBFC444-6D17-48B1-BDC0-7661D5E0417B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Benefactor", "Benefactor", "{4B64BF8C-53C6-4285-AF90-F53C4CC93A98}"
+	ProjectSection(SolutionItems) = preProject
+		DesignPatterns\Benefactor\Parent.cs = DesignPatterns\Benefactor\Parent.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Minion", "Minion", "{034546F7-9F00-4AD6-8AA6-880CC2E02CE5}"
+	ProjectSection(SolutionItems) = preProject
+		DesignPatterns\Minion\Minion.cs = DesignPatterns\Minion\Minion.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository", "Repository", "{E1A56079-FDE4-4D4C-84AB-F7ECE5F4814D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryPattern", "RepositoryPattern\RepositoryPattern.csproj", "{7A2207CF-9FB3-4E8D-804B-F89D9A8214F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,9 +77,30 @@ Global
 		{981C3560-B808-4782-95B6-FE67AE92EA4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{981C3560-B808-4782-95B6-FE67AE92EA4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{981C3560-B808-4782-95B6-FE67AE92EA4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CBFC444-6D17-48B1-BDC0-7661D5E0417B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CBFC444-6D17-48B1-BDC0-7661D5E0417B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CBFC444-6D17-48B1-BDC0-7661D5E0417B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CBFC444-6D17-48B1-BDC0-7661D5E0417B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A2207CF-9FB3-4E8D-804B-F89D9A8214F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A2207CF-9FB3-4E8D-804B-F89D9A8214F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A2207CF-9FB3-4E8D-804B-F89D9A8214F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A2207CF-9FB3-4E8D-804B-F89D9A8214F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C5A82F7C-7A62-4EF0-8856-035F1C35DE17} = {9B5D7FEE-4055-4D9A-A9A8-D5C05108FCE7}
+		{27F7106D-347C-4BEC-A04B-EC4B6B3CB6E5} = {A6F2A58B-0ABD-4B98-BA7F-8831125BD8BA}
+		{981C3560-B808-4782-95B6-FE67AE92EA4C} = {9B5D7FEE-4055-4D9A-A9A8-D5C05108FCE7}
+		{9B5D7FEE-4055-4D9A-A9A8-D5C05108FCE7} = {D8BFBF70-D61D-4D97-BBAD-AC65D20D495A}
+		{A6F2A58B-0ABD-4B98-BA7F-8831125BD8BA} = {D8BFBF70-D61D-4D97-BBAD-AC65D20D495A}
+		{5C8EB0DE-2F40-4050-8E36-9839AC8934F8} = {D8BFBF70-D61D-4D97-BBAD-AC65D20D495A}
+		{5CBFC444-6D17-48B1-BDC0-7661D5E0417B} = {5C8EB0DE-2F40-4050-8E36-9839AC8934F8}
+		{4B64BF8C-53C6-4285-AF90-F53C4CC93A98} = {D8BFBF70-D61D-4D97-BBAD-AC65D20D495A}
+		{034546F7-9F00-4AD6-8AA6-880CC2E02CE5} = {D8BFBF70-D61D-4D97-BBAD-AC65D20D495A}
+		{E1A56079-FDE4-4D4C-84AB-F7ECE5F4814D} = {D8BFBF70-D61D-4D97-BBAD-AC65D20D495A}
+		{7A2207CF-9FB3-4E8D-804B-F89D9A8214F4} = {E1A56079-FDE4-4D4C-84AB-F7ECE5F4814D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CEEC82EA-C5BB-4E64-A8E3-567DA4DC2291}

@@ -69,18 +69,16 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="Extensions\MaybeExtensionsTests.cs" />
-    <Compile Include="ObjectPool\PoolingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Singleton\TestClasses\EmailService.cs" />
-    <Compile Include="Singleton\TestClasses\IEmailService.cs" />
-    <Compile Include="Singleton\TestClasses\ILogger.cs" />
-    <Compile Include="Singleton\TestClasses\Logger.cs" />
-    <Compile Include="Singleton\TestClasses\IApplication.cs" />
-    <Compile Include="Singleton\TestClasses\Application.cs" />
-    <Compile Include="Singleton\SingletonTests.cs" />
-    <Compile Include="Singleton\TestClasses\LunchBox.cs" />
-    <Compile Include="Singleton\TestClasses\QueryTypeEventArgs.cs" />
+    <Compile Include="Classes\EmailService.cs" />
+    <Compile Include="Classes\IEmailService.cs" />
+    <Compile Include="Classes\ILogger.cs" />
+    <Compile Include="Classes\Logger.cs" />
+    <Compile Include="Classes\IApplication.cs" />
+    <Compile Include="Classes\Application.cs" />
+    <Compile Include="SingletonTests.cs" />
+    <Compile Include="Classes\LunchBox.cs" />
+    <Compile Include="Classes\QueryTypeEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -91,9 +89,9 @@
       <Project>{5E4D9F12-A069-4979-9EE1-944FF27C1BF0}</Project>
       <Name>Shared</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DesignPatterns\DesignPatterns.csproj">
+    <ProjectReference Include="..\DesignPatterns\ObjectPools.csproj">
       <Project>{C5A82F7C-7A62-4EF0-8856-035F1C35DE17}</Project>
-      <Name>DesignPatterns</Name>
+      <Name>ObjectPools</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
