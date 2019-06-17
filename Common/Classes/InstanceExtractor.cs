@@ -3,17 +3,17 @@
  * Last Update: 8/30/2018
  */
 
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
+using System.Text;
+using System.Text.RegularExpressions;
+
 namespace Shared
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Linq;
-    using System.Linq.Expressions;
-    using System.Reflection;
-    using System.Text;
-    using System.Text.RegularExpressions;
-
     /// <summary>
     /// The following is a DSL for extracting class object from regular expressions and strings.
     /// </summary>

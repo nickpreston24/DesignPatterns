@@ -4,7 +4,8 @@ using System.Linq.Expressions;
 
 namespace DesignPatterns
 {
-    public interface IRepository<TEntity> : IDisposable where TEntity : Entity
+    public interface IRepository<TEntity> : IDisposable
+        where TEntity : Entity
     {
         TEntity Get(int id);
         IEnumerable<TEntity> GetAll();

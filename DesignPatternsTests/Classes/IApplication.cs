@@ -1,6 +1,6 @@
-﻿namespace DesignPatterns.Tests
+﻿namespace DesignPatterns
 {
-    interface IApplication : ISingleton
+    public interface IApplication : ISingleton
     {
         string Name { get; }
         string Version { get; }

@@ -73,6 +73,10 @@
     <Compile Include="Classes\DictionaryExtensions.cs" />
     <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="MaybeExtensionsTests.cs" />
+    <Compile Include="SqlParameters\DatabaseAliasAttribute.cs" />
+    <Compile Include="SqlParameters\ParameterCreationOption.cs" />
+    <Compile Include="SqlParameters\SqlParametersBuilder.cs" />
+    <Compile Include="SqlParameters\SqlQueryOperator.cs" />
     <Compile Include="ViewModel\ViewableCollectionBase.cs" />
     <Compile Include="Classes\ConsoleColor.cs" />
     <Compile Include="Classes\InstanceExtractor.cs" />

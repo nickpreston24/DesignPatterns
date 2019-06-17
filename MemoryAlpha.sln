@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.28917.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectPools", "DesignPatterns\ObjectPools.csproj", "{C5A82F7C-7A62-4EF0-8856-035F1C35DE17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingletonTests", "DesignPatternsTests\SingletonTests.csproj", "{27F7106D-347C-4BEC-A04B-EC4B6B3CB6E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Singleton", "DesignPatternsTests\Singleton.csproj", "{27F7106D-347C-4BEC-A04B-EC4B6B3CB6E5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Common\Shared.csproj", "{5E4D9F12-A069-4979-9EE1-944FF27C1BF0}"
 EndProject
