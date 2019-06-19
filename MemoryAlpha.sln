@@ -24,18 +24,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ObjectPool", "ObjectPool", "{9B5D7FEE-4055-4D9A-A9A8-D5C05108FCE7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Singleton", "Singleton", "{A6F2A58B-0ABD-4B98-BA7F-8831125BD8BA}"
-	ProjectSection(SolutionItems) = preProject
-		DesignPatterns\Singleton\ISelector.cs = DesignPatterns\Singleton\ISelector.cs
-		DesignPatterns\Singleton\ISingleton.cs = DesignPatterns\Singleton\ISingleton.cs
-		DesignPatterns\Singleton\Multiton.cs = DesignPatterns\Singleton\Multiton.cs
-		DesignPatterns\Singleton\Singleton.cs = DesignPatterns\Singleton\Singleton.cs
-		DesignPatterns\Singleton\singleton_impl.PNG = DesignPatterns\Singleton\singleton_impl.PNG
-		DesignPatterns\Singleton\SingletonException.cs = DesignPatterns\Singleton\SingletonException.cs
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Flyweight", "Flyweight", "{5C8EB0DE-2F40-4050-8E36-9839AC8934F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flyweights", "Flyweights\Flyweights.csproj", "{5CBFC444-6D17-48B1-BDC0-7661D5E0417B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flyweights", "Flyweights\Flyweights.csproj", "{5CBFC444-6D17-48B1-BDC0-7661D5E0417B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Benefactor", "Benefactor", "{4B64BF8C-53C6-4285-AF90-F53C4CC93A98}"
 	ProjectSection(SolutionItems) = preProject
@@ -49,7 +41,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Minion", "Minion", "{034546
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository", "Repository", "{E1A56079-FDE4-4D4C-84AB-F7ECE5F4814D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryPattern", "RepositoryPattern\RepositoryPattern.csproj", "{7A2207CF-9FB3-4E8D-804B-F89D9A8214F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryPattern", "RepositoryPattern\RepositoryPattern.csproj", "{7A2207CF-9FB3-4E8D-804B-F89D9A8214F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
