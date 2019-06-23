@@ -18,6 +18,16 @@ namespace System
             return Enum.GetValues(type).Cast<int>().ToDictionary(value => value, value => Enum.GetName(type, value));
         }
 
+        //public static string GetDescription<TEnum>(this TEnum value)
+        //    where TEnum : struct, IConvertible, IFormattable, IComparable
+        //{
+        //    var fieldInfo = typeof(TEnum).GetField(value.ToString());
+
+        //    var attributes = (DescriptionAttribute[])fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+        //    return Convert.ToString(((attributes.Length > 0) ? attributes[0].Description : value.ToString()));
+        //}
+
         public static string GetDescription(this Enum value)
         {
             try
