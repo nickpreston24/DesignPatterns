@@ -23,6 +23,7 @@ namespace System
 
         /// <summary>
         /// From: https://mikhail.io/2016/01/monads-explained-in-csharp/
+        /// https://mikhail.io/2018/07/monads-explained-in-csharp-again/
         /// </summary>
         /// <param name="value"></param>
         public Maybe(T value) => values = new[] { value };

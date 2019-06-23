@@ -24,14 +24,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ObjectPool", "ObjectPool", "{9B5D7FEE-4055-4D9A-A9A8-D5C05108FCE7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Singleton", "Singleton", "{A6F2A58B-0ABD-4B98-BA7F-8831125BD8BA}"
-	ProjectSection(SolutionItems) = preProject
-		DesignPatterns\Singleton\ISelector.cs = DesignPatterns\Singleton\ISelector.cs
-		DesignPatterns\Singleton\ISingleton.cs = DesignPatterns\Singleton\ISingleton.cs
-		DesignPatterns\Singleton\Multiton.cs = DesignPatterns\Singleton\Multiton.cs
-		DesignPatterns\Singleton\Singleton.cs = DesignPatterns\Singleton\Singleton.cs
-		DesignPatterns\Singleton\singleton_impl.PNG = DesignPatterns\Singleton\singleton_impl.PNG
-		DesignPatterns\Singleton\SingletonException.cs = DesignPatterns\Singleton\SingletonException.cs
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Flyweight", "Flyweight", "{5C8EB0DE-2F40-4050-8E36-9839AC8934F8}"
 EndProject
@@ -50,6 +42,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository", "Repository", "{E1A56079-FDE4-4D4C-84AB-F7ECE5F4814D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryPattern", "RepositoryPattern\RepositoryPattern.csproj", "{7A2207CF-9FB3-4E8D-804B-F89D9A8214F4}"
+<<<<<<< HEAD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Strategy", "Strategy", "{CAD2E5B0-CA76-41E4-92ED-34647500B6E7}"
 EndProject
@@ -58,6 +51,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MappingTests", "MappingTests\MappingTests.csproj", "{ECAE3533-4FF8-4F79-A516-24F97D5E8A9B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FasterThanReflection", "FasterThanReflection\FasterThanReflection.csproj", "{419BE07A-1FC9-4079-BD44-7F7EE87F7F1D}"
+=======
+>>>>>>> 2a0721a25b8f8c59117cb6c5e19ef75d2829a73b
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
