@@ -42,7 +42,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository", "Repository", "{E1A56079-FDE4-4D4C-84AB-F7ECE5F4814D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryPattern", "RepositoryPattern\RepositoryPattern.csproj", "{7A2207CF-9FB3-4E8D-804B-F89D9A8214F4}"
-<<<<<<< HEAD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Strategy", "Strategy", "{CAD2E5B0-CA76-41E4-92ED-34647500B6E7}"
 EndProject
@@ -50,9 +49,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mappers", "Mappers", "{C79B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MappingTests", "MappingTests\MappingTests.csproj", "{ECAE3533-4FF8-4F79-A516-24F97D5E8A9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FasterThanReflection", "FasterThanReflection\FasterThanReflection.csproj", "{419BE07A-1FC9-4079-BD44-7F7EE87F7F1D}"
-=======
->>>>>>> 2a0721a25b8f8c59117cb6c5e19ef75d2829a73b
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FasterThanReflection", "FasterThanReflection\FasterThanReflection.csproj", "{419BE07A-1FC9-4079-BD44-7F7EE87F7F1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graphs.Client", "Graphs.Console\Graphs.Client.csproj", "{80A58D02-87CE-48B5-872D-2402DDEBDCD2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -96,6 +95,10 @@ Global
 		{419BE07A-1FC9-4079-BD44-7F7EE87F7F1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{419BE07A-1FC9-4079-BD44-7F7EE87F7F1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{419BE07A-1FC9-4079-BD44-7F7EE87F7F1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80A58D02-87CE-48B5-872D-2402DDEBDCD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80A58D02-87CE-48B5-872D-2402DDEBDCD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80A58D02-87CE-48B5-872D-2402DDEBDCD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80A58D02-87CE-48B5-872D-2402DDEBDCD2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
