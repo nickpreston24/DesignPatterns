@@ -188,15 +188,11 @@ namespace Shared
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        protected virtual void RaisePropertiesChangedBy<T>(params Expression<Func<T>>[] expressions)
-        {
-            expressions.Select(expr => GetPropertyName(expr)).ToList().ForEach(propertyName =>
-            {
-                RaisePropertyChanged(propertyName);
-                RaisePropertiesChangedBy(propertyName, new List<string>() { propertyName });
-            });
-
-        }
+        protected virtual void RaisePropertiesChangedBy<T>(params Expression<Func<T>>[] expressions) => expressions.Select(expr => GetPropertyName(expr)).ToList().ForEach(propertyName =>
+                                                                                                      {
+                                                                                                          RaisePropertyChanged(propertyName);
+                                                                                                          RaisePropertiesChangedBy(propertyName, new List<string>() { propertyName });
+                                                                                                      });
 
         protected virtual void RaisePropertiesChangedBy(string propertyName, List<string> calledProperties = null)
         {
@@ -247,16 +243,13 @@ namespace Shared
         }
 
         protected void RaisePropertiesDependentOn(params Expression<Func<object>>[] expressions)//rename as work name
-        {
-            expressions.Select(expression => GetPropertyName(expression))
+=> expressions.Select(expression => GetPropertyName(expression))
                 .ToList()
                 .ForEach(propertyName =>
             {
                 RaisePropertyChanged(propertyName);
                 RaiseDependentProperties(propertyName, new List<string>() { propertyName });
             });
-
-        }
 
         private void RaiseDependentProperties(string propertyName, List<string> calledProperties = null)
         {
@@ -286,10 +279,7 @@ namespace Shared
 
     public class DependentPropertiesAttribute : Attribute
     {
-        public DependentPropertiesAttribute(params string[] properties)
-        {
-            DependentProperties = properties;
-        }
+        public DependentPropertiesAttribute(params string[] properties) => DependentProperties = properties;
 
         public string[] DependentProperties { get; }
     }

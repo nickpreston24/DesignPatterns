@@ -2,36 +2,33 @@
 using System;
 using System.Linq;
 
-namespace Graphs.Client
+namespace Movies.Client
 {
     class HelloWorldExample : IDisposable
     {
-        private readonly IDriver _driver;
+        private readonly IDriver driver;
 
-        public HelloWorldExample(string uri, string user, string password)
-        {
-            _driver = GraphDatabase.Driver(uri, AuthTokens.Basic(user, password));
-        }
+        public HelloWorldExample(string uri, string user, string password) => driver = GraphDatabase.Driver(uri, AuthTokens.Basic(user, password));
 
         public void PrintGreeting(string message)
         {
-            using (var session = _driver.Session())
+            using (var session = driver.Session())
             {
-                var greeting = session.WriteTransaction(tx =>
+                var greeting = session.WriteTransaction(transaction =>
                 {
-                    var result = tx.Run("CREATE (a:Greeting) " +
+                    var result = transaction.Run("CREATE (a:Greeting) " +
                                         "SET a.message = $message " +
                                         "RETURN a.message + ', from node ' + id(a)",
                         new { message });
                     return result.Single()[0].As<IRecord>();
                 });
-                Console.WriteLine(greeting);
+                System.Console.WriteLine(greeting);
             }
         }
 
         public void Dispose()
         {
-            _driver?.Dispose();
+            driver?.Dispose();
         }
 
         public static void Main()

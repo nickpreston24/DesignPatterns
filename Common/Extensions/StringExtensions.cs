@@ -206,12 +206,9 @@ namespace System
             }
         }
 
-        public static T ToEnum<T>(this string value)
-        {
-            return !typeof(T).IsEnum ?
+        public static T ToEnum<T>(this string value) => !typeof(T).IsEnum ?
                 throw new NotSupportedException($"{MethodBase.GetCurrentMethod().Name}> Could not convert string '{value}' to type {typeof(T).Name}")
                 : (T)Enum.Parse(typeof(T), value);
-        }
 
         public static bool IsNullOrWhiteSpace(this string str) => string.IsNullOrWhiteSpace(str);
 
@@ -230,10 +227,7 @@ namespace System
         /// <param name="value">String value</param>
         /// <param name="length">Max number of charaters to return</param>
         /// <returns>Returns string from right</returns>
-        public static string Right(this string value, int length)
-        {
-            return value != null && value.Length > length ? value.Substring(value.Length - length) : value;
-        }
+        public static string Right(this string value, int length) => value != null && value.Length > length ? value.Substring(value.Length - length) : value;
 
         /// <summary>
         /// Returns characters from left of specified length
@@ -241,9 +235,6 @@ namespace System
         /// <param name="value">String value</param>
         /// <param name="length">Max number of charaters to return</param>
         /// <returns>Returns string from left</returns>
-        public static string Left(this string value, int length)
-        {
-            return value != null && value.Length > length ? value.Substring(0, length) : value;
-        }
+        public static string Left(this string value, int length) => value != null && value.Length > length ? value.Substring(0, length) : value;
     }
 }

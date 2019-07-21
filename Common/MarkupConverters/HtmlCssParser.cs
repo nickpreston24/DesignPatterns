@@ -460,20 +460,11 @@ namespace MarkupConverter
             ParseCssFontFamily(styleValue, ref nextIndex, localProperties);
         }
 
-        private static void ParseCssFontStyle(string styleValue, ref int nextIndex, Hashtable localProperties)
-        {
-            ParseWordEnumeration(_fontStyles, styleValue, ref nextIndex, localProperties, "font-style");
-        }
+        private static void ParseCssFontStyle(string styleValue, ref int nextIndex, Hashtable localProperties) => ParseWordEnumeration(_fontStyles, styleValue, ref nextIndex, localProperties, "font-style");
 
-        private static void ParseCssFontVariant(string styleValue, ref int nextIndex, Hashtable localProperties)
-        {
-            ParseWordEnumeration(_fontVariants, styleValue, ref nextIndex, localProperties, "font-variant");
-        }
+        private static void ParseCssFontVariant(string styleValue, ref int nextIndex, Hashtable localProperties) => ParseWordEnumeration(_fontVariants, styleValue, ref nextIndex, localProperties, "font-variant");
 
-        private static void ParseCssFontWeight(string styleValue, ref int nextIndex, Hashtable localProperties)
-        {
-            ParseWordEnumeration(_fontWeights, styleValue, ref nextIndex, localProperties, "font-weight");
-        }
+        private static void ParseCssFontWeight(string styleValue, ref int nextIndex, Hashtable localProperties) => ParseWordEnumeration(_fontWeights, styleValue, ref nextIndex, localProperties, "font-weight");
 
         private static void ParseCssFontFamily(string styleValue, ref int nextIndex, Hashtable localProperties)
         {
@@ -605,21 +596,13 @@ namespace MarkupConverter
             }
         }
 
-        private static string ParseCssListStyleType(string styleValue, ref int nextIndex)
-        {
-            return ParseWordEnumeration(_listStyleTypes, styleValue, ref nextIndex);
-        }
+        private static string ParseCssListStyleType(string styleValue, ref int nextIndex) => ParseWordEnumeration(_listStyleTypes, styleValue, ref nextIndex);
 
-        private static string ParseCssListStylePosition(string styleValue, ref int nextIndex)
-        {
-            return ParseWordEnumeration(_listStylePositions, styleValue, ref nextIndex);
-        }
+        private static string ParseCssListStylePosition(string styleValue, ref int nextIndex) => ParseWordEnumeration(_listStylePositions, styleValue, ref nextIndex);
 
-        private static string ParseCssListStyleImage(string styleValue, ref int nextIndex)
-        {
+        private static string ParseCssListStyleImage(string styleValue, ref int nextIndex) =>
             // TODO: Implement URL parsing for images
-            return null;
-        }
+            null;
 
         // .................................................................
         //
@@ -657,10 +640,7 @@ namespace MarkupConverter
 
         private static readonly string[] _textTransforms = new string[] { "none", "capitalize", "uppercase", "lowercase" };
 
-        private static void ParseCssTextTransform(string styleValue, ref int nextIndex, Hashtable localProperties)
-        {
-            ParseWordEnumeration(_textTransforms, styleValue, ref nextIndex, localProperties, "text-transform");
-        }
+        private static void ParseCssTextTransform(string styleValue, ref int nextIndex, Hashtable localProperties) => ParseWordEnumeration(_textTransforms, styleValue, ref nextIndex, localProperties, "text-transform");
 
         // .................................................................
         //
@@ -670,10 +650,7 @@ namespace MarkupConverter
 
         private static readonly string[] _textAligns = new string[] { "left", "right", "center", "justify" };
 
-        private static void ParseCssTextAlign(string styleValue, ref int nextIndex, Hashtable localProperties)
-        {
-            ParseWordEnumeration(_textAligns, styleValue, ref nextIndex, localProperties, "text-align");
-        }
+        private static void ParseCssTextAlign(string styleValue, ref int nextIndex, Hashtable localProperties) => ParseWordEnumeration(_textAligns, styleValue, ref nextIndex, localProperties, "text-align");
 
         // .................................................................
         //
@@ -683,11 +660,9 @@ namespace MarkupConverter
 
         private static readonly string[] _verticalAligns = new string[] { "baseline", "sub", "super", "top", "text-top", "middle", "bottom", "text-bottom" };
 
-        private static void ParseCssVerticalAlign(string styleValue, ref int nextIndex, Hashtable localProperties)
-        {
+        private static void ParseCssVerticalAlign(string styleValue, ref int nextIndex, Hashtable localProperties) =>
             //  Parse percentage value for vertical-align style
             ParseWordEnumeration(_verticalAligns, styleValue, ref nextIndex, localProperties, "vertical-align");
-        }
 
         // .................................................................
         //
@@ -697,10 +672,7 @@ namespace MarkupConverter
 
         private static readonly string[] _floats = new string[] { "left", "right", "none" };
 
-        private static void ParseCssFloat(string styleValue, ref int nextIndex, Hashtable localProperties)
-        {
-            ParseWordEnumeration(_floats, styleValue, ref nextIndex, localProperties, "float");
-        }
+        private static void ParseCssFloat(string styleValue, ref int nextIndex, Hashtable localProperties) => ParseWordEnumeration(_floats, styleValue, ref nextIndex, localProperties, "float");
 
         // .................................................................
         //
@@ -710,10 +682,7 @@ namespace MarkupConverter
 
         private static readonly string[] _clears = new string[] { "none", "left", "right", "both" };
 
-        private static void ParseCssClear(string styleValue, ref int nextIndex, Hashtable localProperties)
-        {
-            ParseWordEnumeration(_clears, styleValue, ref nextIndex, localProperties, "clear");
-        }
+        private static void ParseCssClear(string styleValue, ref int nextIndex, Hashtable localProperties) => ParseWordEnumeration(_clears, styleValue, ref nextIndex, localProperties, "clear");
 
         // .................................................................
         //
@@ -787,10 +756,7 @@ namespace MarkupConverter
 
         private static readonly string[] _borderStyles = new string[] { "none", "dotted", "dashed", "solid", "double", "groove", "ridge", "inset", "outset" };
 
-        private static string ParseCssBorderStyle(string styleValue, ref int nextIndex)
-        {
-            return ParseWordEnumeration(_borderStyles, styleValue, ref nextIndex);
-        }
+        private static string ParseCssBorderStyle(string styleValue, ref int nextIndex) => ParseWordEnumeration(_borderStyles, styleValue, ref nextIndex);
 
         // .................................................................
         //

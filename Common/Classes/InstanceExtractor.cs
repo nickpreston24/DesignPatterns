@@ -34,10 +34,7 @@ namespace Shared
         public bool HasValue => result != null;
         public RegexOptions? ExtractionOptions { get; set; }
 
-        private Extractor()
-        {
-            patternsMap = InitializeMap();
-        }
+        private Extractor() => patternsMap = InitializeMap();
 
         public static Extractor<T> Create() => new Extractor<T>();
 
@@ -47,11 +44,7 @@ namespace Shared
             return this;
         }
 
-        public Extractor<T> SetPropertyPattern(string pattern)
-        {
-
-            return this;
-        }
+        public Extractor<T> SetPropertyPattern(string pattern) => this;
 
         public Extractor<T> Extract(string text) => Extract(text.Split('\n', '\r'));
 
@@ -117,7 +110,7 @@ namespace Shared
         {
             properties = GetProperties();
             ExtractionOptions = ExtractionOptions.HasValue ? ExtractionOptions : RegexOptions.Singleline;
-            T instance = (T)Activator.CreateInstance(typeof(T));
+            var instance = (T)Activator.CreateInstance(typeof(T));
             Match match;
             PropertyInfo property;
             string line;
@@ -166,29 +159,23 @@ namespace Shared
             return this;
         }
 
-        private PropertyInfo[] GetProperties()
-        {
-            return typeof(T)
+        private PropertyInfo[] GetProperties() => typeof(T)
                 .GetProperties(defaultBindingFlags);
-        }
 
-        private Dictionary<string, Regex> InitializeMap()
-        {
-            return (properties ?? GetProperties()).Aggregate(new Dictionary<string, Regex>(), (dictionary, property) =>
-            {
-                var attributes = property.GetCustomAttributes(true);
-                if (attributes.Length != 0)
-                {
-                    var value = attributes
-                         .Select(a => a as PatternAttribute)
-                         .Single()
-                         .Value;
+        private Dictionary<string, Regex> InitializeMap() => (properties ?? GetProperties()).Aggregate(new Dictionary<string, Regex>(), (dictionary, property) =>
+                                                                       {
+                                                                           var attributes = property.GetCustomAttributes(true);
+                                                                           if (attributes.Length != 0)
+                                                                           {
+                                                                               var value = attributes
+                                                                                    .Select(a => a as PatternAttribute)
+                                                                                    .Single()
+                                                                                    .Value;
 
-                    dictionary.Add(property.Name, new Regex(value));
-                }
-                return dictionary;
-            });
-        }
+                                                                               dictionary.Add(property.Name, new Regex(value));
+                                                                           }
+                                                                           return dictionary;
+                                                                       });
 
         /// Set value on instance
         public Extractor<T> SetValue<TProperty>(Expression<Func<TProperty>> propertyExpression, TProperty value)

@@ -14,10 +14,7 @@ namespace System.Collections.Generic
             return result;
         }
 
-        public static T Pop<T>(this IList<T> list, T item)
-        {
-            return list.Remove(item) ? item : throw new Exception($"{MethodBase.GetCurrentMethod().Name}: could not remove item");
-        }
+        public static T Pop<T>(this IList<T> list, T item) => list.Remove(item) ? item : throw new Exception($"{MethodBase.GetCurrentMethod().Name}: could not remove item");
 
         public static IList<T> Pop<T>(this IList<T> list, int count)
         {
@@ -29,10 +26,7 @@ namespace System.Collections.Generic
             return last;
         }
 
-        public static void AddMany<T>(this List<T> list, IEnumerable<T> elements)
-        {
-            list?.AddRange(elements ?? Enumerable.Empty<T>());
-        }
+        public static void AddMany<T>(this List<T> list, IEnumerable<T> elements) => list?.AddRange(elements ?? Enumerable.Empty<T>());
 
         public static void BubbleSort<T>(this IList<T> list)
         {
@@ -53,11 +47,8 @@ namespace System.Collections.Generic
         }
 
         // Shuffles an IList in place.        
-        public static IList<T> Shuffle<T>(this IList<T> list)
-        {
-            return list == null || list.Count == 0 ?
+        public static IList<T> Shuffle<T>(this IList<T> list) => list == null || list.Count == 0 ?
                 list.Shuffle(new Random(Guid.NewGuid().GetHashCode())) : new List<T>();
-        }
 
         // Shuffles an IList in place.
         public static IList<T> Shuffle<T>(this IList<T> list, Random random)
@@ -121,9 +112,6 @@ namespace System.Collections.Generic
             return table;
         }
 
-        public static IList<T> RemoveDuplicates<T>(this IList<T> items)
-        {
-            return items.Distinct().ToList();
-        }
+        public static IList<T> RemoveDuplicates<T>(this IList<T> items) => items.Distinct().ToList();
     }
 }

@@ -184,37 +184,25 @@ namespace DesignPatterns.WebSamples
         /// <summary>
         /// Initializes a new pool with default settings.
         /// </summary>
-        public ObjectPool()
-        {
-            InitializePool(DefaultPoolMinimumSize, DefaultPoolMaximumSize, null);
-        }
+        public ObjectPool() => InitializePool(DefaultPoolMinimumSize, DefaultPoolMaximumSize, null);
         /// <summary>
         /// Initializes a new pool with specified minimum pool size and maximum pool size
         /// </summary>
         /// <param name="minimumPoolSize">The minimum pool size limit.</param>
         /// <param name="maximumPoolSize">The maximum pool size limit</param>
-        public ObjectPool(int minimumPoolSize, int maximumPoolSize)
-        {
-            InitializePool(minimumPoolSize, maximumPoolSize, null);
-        }
+        public ObjectPool(int minimumPoolSize, int maximumPoolSize) => InitializePool(minimumPoolSize, maximumPoolSize, null);
         /// <summary>
         /// Initializes a new pool with specified factory method.
         /// </summary>
         /// <param name="factoryMethod">The factory method that will be used to create new objects.</param>
-        public ObjectPool(Func<T> factoryMethod)
-        {
-            InitializePool(DefaultPoolMinimumSize, DefaultPoolMaximumSize, factoryMethod);
-        }
+        public ObjectPool(Func<T> factoryMethod) => InitializePool(DefaultPoolMinimumSize, DefaultPoolMaximumSize, factoryMethod);
         /// <summary>
         /// Initializes a new pool with specified factory method and minimum and maximum size.
         /// </summary>
         /// <param name="minimumPoolSize">The minimum pool size limit.</param>
         /// <param name="maximumPoolSize">The maximum pool size limit</param>
         /// <param name="factoryMethod">The factory method that will be used to create new objects.</param>
-        public ObjectPool(int minimumPoolSize, int maximumPoolSize, Func<T> factoryMethod)
-        {
-            InitializePool(minimumPoolSize, maximumPoolSize, factoryMethod);
-        }
+        public ObjectPool(int minimumPoolSize, int maximumPoolSize, Func<T> factoryMethod) => InitializePool(minimumPoolSize, maximumPoolSize, factoryMethod);
         private void InitializePool(int minimumPoolSize, int maximumPoolSize, Func<T> factoryMethod)
         {
             // Validating pool limits, exception is thrown if invalid

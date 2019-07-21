@@ -7,12 +7,9 @@ namespace System.IO
 {
     public static partial class Extensions
     {
-        public static bool Equals(this FileInfo first, FileInfo second, bool useHash = false)
-        {
-            return useHash
+        public static bool Equals(this FileInfo first, FileInfo second, bool useHash = false) => useHash
                 ? FilesAreEqual_Hash(first, second)
                 : FilesAreEqual_OneByte(first, second);
-        }
 
         private static bool FilesAreEqual_OneByte(this FileInfo first, FileInfo second)
         {
@@ -22,8 +19,8 @@ namespace System.IO
             if (string.Equals(first.FullName, second.FullName, StringComparison.OrdinalIgnoreCase))
                 return true;
 
-            using (FileStream fs1 = first.OpenRead())
-            using (FileStream fs2 = second.OpenRead())
+            using (var fs1 = first.OpenRead())
+            using (var fs2 = second.OpenRead())
             {
                 for (int i = 0; i < first.Length; i++)
                 {
@@ -50,10 +47,7 @@ namespace System.IO
             return true;
         }
 
-        public static string ResolveRelativePath(string referencePath, string relativePath)
-        {
-            return Path.GetFullPath(Path.Combine(referencePath, relativePath));
-        }
+        public static string ResolveRelativePath(string referencePath, string relativePath) => Path.GetFullPath(Path.Combine(referencePath, relativePath));
 
         public static void CreateStartupFolderShortcut()
         {

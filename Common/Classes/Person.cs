@@ -1,4 +1,4 @@
-﻿namespace Shared
+﻿namespace Shared.Classes
 {
     //Common test class
     public class Person

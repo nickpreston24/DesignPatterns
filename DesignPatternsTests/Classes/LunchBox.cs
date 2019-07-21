@@ -12,10 +12,7 @@ namespace DesignPatterns.Tests
             get { return Singleton<LunchBox>.Instance; }
         }
 
-        private LunchBox()
-        {
-            apple = new Apple();
-        }
+        private LunchBox() => apple = new Apple();
 
         internal void Open()
         {

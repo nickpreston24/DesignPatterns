@@ -133,10 +133,7 @@ namespace System
 
         public EnumBindingSourceExtension() { }
 
-        public EnumBindingSourceExtension(Type enumType)
-        {
-            EnumType = enumType;
-        }
+        public EnumBindingSourceExtension(Type enumType) => EnumType = enumType;
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {

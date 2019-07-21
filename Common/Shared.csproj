@@ -77,6 +77,8 @@
     <Compile Include="Classes\ApiMethodController.cs" />
     <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="MaybeExtensionsTests.cs" />
+    <Compile Include="Specifications\ISpecification.cs" />
+    <Compile Include="Specifications\Specification.cs" />
     <Compile Include="SqlParameters\DatabaseAliasAttribute.cs" />
     <Compile Include="SqlParameters\ParameterCreationOption.cs" />
     <Compile Include="SqlParameters\SqlParametersBuilder.cs" />
@@ -170,6 +172,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

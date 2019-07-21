@@ -1,5 +1,5 @@
 ﻿using DesignPatterns;
-using Shared;
+using Shared.Classes;
 using System;
 using System.Threading;
 using System.Threading.Tasks;

@@ -6,9 +6,6 @@ namespace Shared
     public class DatabaseAliasAttribute : Attribute
     {
         public string Alias { get; set; }
-        public DatabaseAliasAttribute(string alias)
-        {
-            Alias = alias;
-        }
+        public DatabaseAliasAttribute(string alias) => Alias = alias;
     }
 }

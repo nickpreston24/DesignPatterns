@@ -241,15 +241,12 @@ namespace System.Data
         /// </summary>
         /// <param name="table"></param>
         /// <returns></returns>
-        public static IEnumerable<dynamic> AsDynamicEnumerable(this DataTable table)
-        {
-            return table == null ? table.AsEnumerable().Select(row => new DynamicRow(row)) : Enumerable.Empty<dynamic>();
-        }
+        public static IEnumerable<dynamic> AsDynamicEnumerable(this DataTable table) => table == null ? table.AsEnumerable().Select(row => new DynamicRow(row)) : Enumerable.Empty<dynamic>();
 
         private sealed class DynamicRow : DynamicObject
         {
             private readonly DataRow _row;
-            internal DynamicRow(DataRow row) { _row = row; }
+            internal DynamicRow(DataRow row) => _row = row;
             // Interprets a member-access as an indexer-access on the 
             // contained DataRow.
             public override bool TryGetMember(GetMemberBinder binder, out object result)

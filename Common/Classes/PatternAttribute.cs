@@ -4,9 +4,6 @@
     {
         private string pattern;
         public string Value => pattern;
-        public PatternAttribute(string propertyRegex)
-        {
-            pattern = propertyRegex;
-        }
+        public PatternAttribute(string propertyRegex) => pattern = propertyRegex;
     }
 }

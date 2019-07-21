@@ -26,15 +26,11 @@ namespace System
         }
 
         public static Dictionary<Type, UInterface> GetRepositories<TDerived, UInterface>()
-            where UInterface : class, TDerived
-        {
-            return Assembly.GetAssembly(typeof(TDerived)).GetTypes()
+            where UInterface : class, TDerived => Assembly.GetAssembly(typeof(TDerived)).GetTypes()
                .Where(type => type.BaseType != null &&
                            type.BaseType.GetGenericArguments().FirstOrDefault() != null)
                .ToDictionary(type => type.BaseType.GetGenericArguments().FirstOrDefault(),
                             type => Activator.CreateInstance(type) as UInterface);
-
-        }
 
         // Invoke Method from an Instance (non-null)
         public static void InvokeMethod<T>(this T instance, string instanceMethodName, object[] parameters)

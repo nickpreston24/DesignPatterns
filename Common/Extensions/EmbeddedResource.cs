@@ -57,9 +57,6 @@ namespace Shared.Extensions
             return string.Empty;
         }
 
-        public static string GetAsEmbeddedResource(this string resourceName)
-        {
-            return GetEmbeddedResourceContent(typeof(EmbeddedResources).Assembly, resourceName);
-        }
+        public static string GetAsEmbeddedResource(this string resourceName) => GetEmbeddedResourceContent(typeof(EmbeddedResources).Assembly, resourceName);
     }
 }

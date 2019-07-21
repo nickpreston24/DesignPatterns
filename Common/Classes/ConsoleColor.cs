@@ -10,9 +10,6 @@ namespace Shared.Classes
             previousColor = Console.ForegroundColor;
             Console.ForegroundColor = color;
         }
-        public void Dispose()
-        {
-            Console.ForegroundColor = previousColor;
-        }
+        public void Dispose() => Console.ForegroundColor = previousColor;
     }
 }

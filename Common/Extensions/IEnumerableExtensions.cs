@@ -76,10 +76,7 @@ namespace System
 
         //From: https://github.com/morelinq/MoreLINQ/blob/master/MoreLinq/MaxBy.cs#L43
         public static TSource MaxBy<TSource, TKey>(this IEnumerable<TSource> source,
-           Func<TSource, TKey> selector)
-        {
-            return source.MaxBy(selector, null);
-        }
+           Func<TSource, TKey> selector) => source.MaxBy(selector, null);
 
         public static TSource MaxBy<TSource, TKey>(this IEnumerable<TSource> source,
            Func<TSource, TKey> selector, IComparer<TKey> comparer)
@@ -126,10 +123,7 @@ namespace System
         }
 
         public static TSource MinBy<TSource, TKey>(this IEnumerable<TSource> source,
-           Func<TSource, TKey> selector)
-        {
-            return source.MinBy(selector, null);
-        }
+           Func<TSource, TKey> selector) => source.MinBy(selector, null);
 
         public static TSource MinBy<TSource, TKey>(this IEnumerable<TSource> source,
            Func<TSource, TKey> selector, IComparer<TKey> comparer)

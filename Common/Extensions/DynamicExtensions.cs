@@ -351,18 +351,12 @@ namespace Shared
             return result;
         }
 
-        public static Type FindType(this Assembly assembly, string typeName)
-        {
-            return assembly.GetTypes().Where(type => type.Name.Equals(typeName)).SingleOrDefault();
-        }
+        public static Type FindType(this Assembly assembly, string typeName) => assembly.GetTypes().Where(type => type.Name.Equals(typeName)).SingleOrDefault();
     }
 
     public class DynamicAliasAttribute : Attribute
     {
         public string Alias { get; set; }
-        public DynamicAliasAttribute(string alias)
-        {
-            Alias = alias;
-        }
+        public DynamicAliasAttribute(string alias) => Alias = alias;
     }
 }

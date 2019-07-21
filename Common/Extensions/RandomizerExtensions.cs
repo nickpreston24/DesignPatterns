@@ -4,10 +4,7 @@ namespace System.Collections.Generic
 {
     public static partial class Extensions
     {
-        public static IEnumerable<int> Random()
-        {
-            return Random(GlobalRandom.Instance);
-        }
+        public static IEnumerable<int> Random() => Random(GlobalRandom.Instance);
 
         /// <summary>
         /// Returns an infinite sequence of random integers using the supplied
@@ -106,10 +103,7 @@ namespace System.Collections.Generic
         /// resulting sequences.
         /// </remarks>
 
-        public static IEnumerable<int> Random(int minValue, int maxValue)
-        {
-            return Random(GlobalRandom.Instance, minValue, maxValue);
-        }
+        public static IEnumerable<int> Random(int minValue, int maxValue) => Random(GlobalRandom.Instance, minValue, maxValue);
 
         /// <summary>
         /// Returns an infinite sequence of random integers between a given
@@ -157,10 +151,7 @@ namespace System.Collections.Generic
         /// resulting sequences.
         /// </remarks>
 
-        public static IEnumerable<double> RandomDouble()
-        {
-            return RandomDouble(GlobalRandom.Instance);
-        }
+        public static IEnumerable<double> RandomDouble() => RandomDouble(GlobalRandom.Instance);
 
         /// <summary>
         /// Returns an infinite sequence of random double values between 0.0 and 1.0
@@ -221,8 +212,7 @@ namespace System.Collections.Generic
             public override double NextDouble() => ThreadRandom.NextDouble();
             public override void NextBytes(byte[] buffer) => ThreadRandom.NextBytes(buffer);
 
-            protected override double Sample()
-            {
+            protected override double Sample() =>
                 // All the NextXXX calls are hijacked above to use the Random
                 // instance allocated for the thread so no call from the base
                 // class should ever end up here. If Random introduces new
@@ -232,7 +222,6 @@ namespace System.Collections.Generic
                 // need to be overriden.
 
                 throw new NotImplementedException();
-            }
         }
     }
 }

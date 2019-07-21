@@ -372,10 +372,7 @@ namespace MarkupConverter
             htmlParent.AppendChild(htmlEmptyElement);
         }
 
-        private void OpenInlineElement(XmlElement htmlInlineElement)
-        {
-            _pendingInlineElements.Push(htmlInlineElement);
-        }
+        private void OpenInlineElement(XmlElement htmlInlineElement) => _pendingInlineElements.Push(htmlInlineElement);
 
         // Opens structurig element such as Div or Table etc.
         private void OpenStructuringElement(XmlElement htmlElement)

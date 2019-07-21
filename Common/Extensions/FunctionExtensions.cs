@@ -24,11 +24,11 @@
             return cachedFunc;
         }
 
-        public static Func<T, bool> Not<T>(this Func<T, bool> predicate) { return a => !predicate(a); }
+        public static Func<T, bool> Not<T>(this Func<T, bool> predicate) => a => !predicate(a);
 
-        public static Func<T, bool> And<T>(this Func<T, bool> left, Func<T, bool> right) { return a => left(a) && right(a); }
+        public static Func<T, bool> And<T>(this Func<T, bool> left, Func<T, bool> right) => a => left(a) && right(a);
 
-        public static Func<T, bool> Or<T>(this Func<T, bool> left, Func<T, bool> right) { return a => left(a) || right(a); }
+        public static Func<T, bool> Or<T>(this Func<T, bool> left, Func<T, bool> right) => a => left(a) || right(a);
 
         // Y - Combinator        
         private delegate Func<A, R> Recursive<A, R>(Recursive<A, R> r);

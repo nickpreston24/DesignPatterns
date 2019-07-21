@@ -24,9 +24,7 @@ namespace Shared
 
     public class SqlParamsBuilder
     {
-        public SqlParameter[] GetSqlParams<T>()
-        {
-            return typeof(T)
+        public SqlParameter[] GetSqlParams<T>() => typeof(T)
                 .GetProperties()
                 .Select(property =>
                     GetSqlParam(property.PropertyType, (Attribute.IsDefined(property, typeof(DatabaseAliasAttribute)))
@@ -34,7 +32,6 @@ namespace Shared
                         .OfType<DatabaseAliasAttribute>()
                         .Single().Alias
                     : property.Name)).ToArray();
-        }
 
         public SqlParameter GetSqlParam<T>(T propertyValue, string propertyName)
         {
@@ -43,10 +40,7 @@ namespace Shared
             return parameter;
         }
 
-        private static SqlParameter GetSqlParam(Type type, string propertyName)
-        {
-            return SqlUtilities.Parameters?[type](propertyName);
-        }
+        private static SqlParameter GetSqlParam(Type type, string propertyName) => SqlUtilities.Parameters?[type](propertyName);
 
         private static ICollection<SqlParameter> GetSqlParamsFromTable(string connectionString, string tableName)
         {
@@ -61,7 +55,7 @@ namespace Shared
             {
                 connection.Open();
                 cmd.CommandText = $"SET FMTONLY ON; select * from dbo.{tableName}; SET FMTONLY OFF";
-                SqlDataReader reader = cmd.ExecuteReader();
+                var reader = cmd.ExecuteReader();
                 table = reader.GetSchemaTable();
             }
 
@@ -122,7 +116,7 @@ namespace Shared
             if (string.IsNullOrWhiteSpace(tableName))
                 throw new NullReferenceException(nameof(tableName) + " cannot be empty!");
 
-            StringBuilder query = new StringBuilder($"DELETE FROM dbo.{tableName}\n");
+            var query = new StringBuilder($"DELETE FROM dbo.{tableName}\n");
 
             query.Append("\nWHERE\n");
 
