@@ -6,5 +6,6 @@ namespace Movies.Shared
     {
         public string Name { get; set; }
         public MpaaRating MpaaRating { get; set; }
+        public double Rating { get; set; }
     }
 }

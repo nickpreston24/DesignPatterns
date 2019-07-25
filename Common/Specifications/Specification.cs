@@ -13,26 +13,28 @@ namespace Shared
             return predicate(candidate);
         }
 
-        public Specification<T> And(Specification<T> specification) => new AndSpecification<T>(this, specification);
+        public Specification<T> And(Specification<T> specification)
+            => new AndSpecification<T>(this, specification);
 
-        public Specification<T> Or(Specification<T> specification) => new OrSpecification<T>(this, specification);
+        public Specification<T> Or(Specification<T> specification)
+            => new OrSpecification<T>(this, specification);
     }
 
     internal class AndSpecification<T> : Specification<T>
     {
-        private readonly Specification<T> _left;
-        private readonly Specification<T> _right;
+        private readonly Specification<T> left;
+        private readonly Specification<T> right;
 
         public AndSpecification(Specification<T> left, Specification<T> right)
         {
-            _right = right;
-            _left = left;
+            this.right = right;
+            this.left = left;
         }
 
         public override Expression<Func<T, bool>> ToExpression()
         {
-            var leftExpression = _left.ToExpression();
-            var rightExpression = _right.ToExpression();
+            var leftExpression = left.ToExpression();
+            var rightExpression = right.ToExpression();
 
             var paramExpr = Expression.Parameter(typeof(T));
             var exprBody = Expression.AndAlso(leftExpression.Body, rightExpression.Body);
@@ -45,19 +47,19 @@ namespace Shared
 
     internal class OrSpecification<T> : Specification<T>
     {
-        private readonly Specification<T> _left;
-        private readonly Specification<T> _right;
+        private readonly Specification<T> left;
+        private readonly Specification<T> right;
 
         public OrSpecification(Specification<T> left, Specification<T> right)
         {
-            _right = right;
-            _left = left;
+            this.right = right;
+            this.left = left;
         }
 
         public override Expression<Func<T, bool>> ToExpression()
         {
-            var leftExpression = _left.ToExpression();
-            var rightExpression = _right.ToExpression();
+            var leftExpression = left.ToExpression();
+            var rightExpression = right.ToExpression();
             var paramExpr = Expression.Parameter(typeof(T));
             var exprBody = Expression.OrElse(leftExpression.Body, rightExpression.Body);
             exprBody = (BinaryExpression)new ParameterReplacer(paramExpr).Visit(exprBody);
@@ -69,11 +71,12 @@ namespace Shared
 
     internal class ParameterReplacer : ExpressionVisitor
     {
-        private readonly ParameterExpression _parameter;
+        private readonly ParameterExpression parameter;
 
         protected override Expression VisitParameter(ParameterExpression node)
-            => base.VisitParameter(_parameter);
+            => base.VisitParameter(parameter);
 
-        internal ParameterReplacer(ParameterExpression parameter) => _parameter = parameter;
+        internal ParameterReplacer(ParameterExpression parameter)
+            => this.parameter = parameter;
     }
 }
