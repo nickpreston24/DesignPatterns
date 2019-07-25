@@ -30,12 +30,13 @@ namespace Movies.Api
         public
            /*async Task<ActionResult<IEnumerable<Movie>>>*/
            //ActionResult<IEnumerable<Movie>>
-           IEnumerable<Movie> Get(string mpaaRating)
+           IReadOnlyList<Movie> GetByRating(params string[] mpaaRatings)
         {
-            Enum.TryParse("red", ignoreCase: true, out MpaaRating ratingSelected);
-            var withRating = new MpaaRatingSpecification(ratingSelected);
+            var withSpecification = new Data.MpaaRatingSpecification(mpaaRatings)
+                .And(new Data.GoodMovie(threshold: Data.Movie.MAX_RATING - 2))
+                ;
             //bool isOk = rating.IsSatisfiedBy(movie);  //Exercising a single movie
-            IReadOnlyList<Movie> movies = service.Find(withRating);
+            IReadOnlyList<Movie> movies = service.Find(withSpecification);
             return movies;
         }
 

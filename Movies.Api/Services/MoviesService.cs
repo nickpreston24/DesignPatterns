@@ -1,5 +1,5 @@
 ﻿using Movies.Data;
-using Movies.Shared;
+using Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +16,9 @@ namespace Movies.Api
             this.assembler = assembler;
         }
 
-        internal IReadOnlyList<Api.Movie> Find(MpaaRatingSpecification withRating)
+        internal IReadOnlyList<Api.Movie> Find(Specification<Data.Movie> specification)
         {
-            IList<Shared.Movie> movies = this.movies.Find(withRating).Map();
+            IList<Shared.Movie> movies = this.movies.Find(specification).Map();
             return movies.Select(movie => assembler.Build(movie)).ToList();
         }
     }

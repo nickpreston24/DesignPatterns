@@ -9,9 +9,11 @@ namespace Movies.Api
         {
             Name = movie.Name,
             MpaaRating = movie.MpaaRating,
+            Rating = movie.Rating
         };
 
-        public static IReadOnlyList<Movie> ToDto(this IEnumerable<Shared.Movie> collection) => collection
+        public static IReadOnlyList<Movie> ToDto(this IEnumerable<Shared.Movie> collection)
+            => collection
                 .Select(entity => entity.ToDto())
                 .ToList();
     }

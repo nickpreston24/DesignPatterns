@@ -21,6 +21,7 @@ namespace Movies.Data
         {
             Name = entity.Name,
             MpaaRating = entity.MpaaRating,
+            Rating = entity.Rating
         };
     }
 }

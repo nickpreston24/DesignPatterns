@@ -5,14 +5,23 @@ namespace Movies.Data
 {
     public class Movie
     {
-        public string Name { get; }
+        public string Name { get; internal set; }
 
-        public DateTime ReleaseDate { get; }
+        public DateTime ReleaseDate { get; internal set; }
 
-        public MpaaRating MpaaRating { get; }
+        public MpaaRating MpaaRating { get; internal set; }
 
-        public string Genre { get; }
+        public string Genre { get; internal set; }
 
-        public double Rating { get; }
+        public static int MAX_RATING = 5;
+        private double rating;
+
+        public double Rating
+        {
+            get => rating;
+            internal set => rating = value < MAX_RATING
+                ? value
+                : throw new ArgumentOutOfRangeException(nameof(Rating));
+        }
     }
 }

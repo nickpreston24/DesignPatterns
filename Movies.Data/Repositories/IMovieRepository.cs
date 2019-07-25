@@ -5,6 +5,6 @@ namespace Movies.Data
 {
     public interface IMovieRepository
     {
-        IReadOnlyList<Movie> Find(Specification<Shared.Movie> specification);
+        IReadOnlyList<Movie> Find(Specification<Movie> specification);
     }
 }
