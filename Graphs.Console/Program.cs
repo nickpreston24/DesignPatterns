@@ -8,7 +8,8 @@ namespace Movies.Client
     {
         private readonly IDriver driver;
 
-        public HelloWorldExample(string uri, string user, string password) => driver = GraphDatabase.Driver(uri, AuthTokens.Basic(user, password));
+        public HelloWorldExample(string uri, string user, string password)
+            => driver = GraphDatabase.Driver(uri, AuthTokens.Basic(user, password));
 
         public void PrintGreeting(string message)
         {
@@ -22,18 +23,16 @@ namespace Movies.Client
                         new { message });
                     return result.Single()[0].As<IRecord>();
                 });
-                System.Console.WriteLine(greeting);
+                Console.WriteLine(greeting);
             }
         }
 
-        public void Dispose()
-        {
-            driver?.Dispose();
-        }
+        public void Dispose() => driver?.Dispose();
 
         public static void Main()
         {
-            using (var greeter = new HelloWorldExample("bolt://localhost:7687", "neo4j", "password"))
+            int port = 7687;
+            using (var greeter = new HelloWorldExample($"bolt://localhost:{port}", "neo4j", "password"))
             {
                 greeter.PrintGreeting("hello, world");
             }

@@ -14,11 +14,18 @@ namespace System
     public static partial class Extensions
     {
         public static string Append(this string input, string text) => new StringBuilder(input).Append(text).ToString();
-        public static string Reverse(this string str) => new string(str.ToCharArray().Reverse().ToArray());
 
-        public static string SplitCamelCase(this string str) => Regex.Replace(Regex.Replace(str,
+        public static string Reverse(this string text) => new string(text.ToCharArray().Reverse().ToArray());
+
+        public static string Clean(this string text) => Regex.Replace(text, @"[-$_!@#?]", "").Trim();
+
+        public static string SplitCamelCase(this string text) =>
+            Regex.Replace(
+            Regex.Replace(
+            Regex.Replace(text.Clean(),
                     @"(\P{Ll})(\P{Ll}\p{Ll})", "$1 $2"),
-                    @"(\p{Ll})(\P{Ll})", "$1 $2");
+                    @"(\p{Ll})(\P{Ll})", "$1 $2"),
+                @"\s+", " ");
 
         public static T DeserializeFromXML<T>(this string xml)
             where T : class
@@ -165,7 +172,7 @@ namespace System
         /// <summary>
         /// ExtractPrimitives
         ///
-        /// Extracts all fields from a string that match a certain regex. 
+        /// Extracts all fields from a string that match a certain regex.
         /// Will convert to desired type through a standard TypeConverter.
         /// Supports basic primative types ONLY
         /// Tip: Extract the 'T' type you expect (like int) to retrieve;
@@ -179,8 +186,8 @@ namespace System
         {
             try
             {
-                var tc = TypeDescriptor.GetConverter(typeof(T));
-                if (!tc.CanConvertFrom(typeof(string)))
+                var converter = TypeDescriptor.GetConverter(typeof(T));
+                if (!converter.CanConvertFrom(typeof(string)))
                 {
                     throw new ArgumentException("Type does not have a TypeConverter from string", "T");
                 }
@@ -189,8 +196,8 @@ namespace System
                     return
                         Regex.Matches(text, regexPattern)
                         .Cast<Match>()
-                        .Select(f => f.ToString())
-                        .Select(f => (T)tc.ConvertFrom(f))
+                        .Select(match => match.ToString())
+                        .Select(txt => (T)converter.ConvertFrom(txt))
                         .ToArray();
                 }
                 else

@@ -1,23 +1,23 @@
 //---------------------------------------------------------------------------
-// 
+//
 // File: HtmlXamlConverter.cs
 //
 // Copyright (C) Microsoft Corporation.  All rights reserved.
 //
-// Description: Prototype for Html - Xaml conversion 
+// Description: Prototype for Html - Xaml conversion
 //
 //---------------------------------------------------------------------------
 
-namespace MarkupConverter
-{
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Windows; // DependencyProperty
-    using System.Windows.Documents; // TextElement
-    using System.Xml;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Windows; // DependencyProperty
+using System.Windows.Documents; // TextElement
+using System.Xml;
 
+namespace Shared.MarkupConverters
+{
     /// <summary>
     /// HtmlToXamlConverter is a static class that takes an HTML string
     /// and converts it into XAML
@@ -137,11 +137,11 @@ namespace MarkupConverter
         /// Analyzes the given htmlElement expecting it to be converted
         /// into some of xaml Block elements and adds the converted block
         /// to the children collection of xamlParentElement.
-        /// 
+        ///
         /// Analyzes the given XmlElement htmlElement, recognizes it as some HTML element
         /// and adds it as a child to a xamlParentElement.
         /// In some cases several following siblings of the given htmlElement
-        /// will be consumed too (e.g. LIs encountered without wrapping UL/OL, 
+        /// will be consumed too (e.g. LIs encountered without wrapping UL/OL,
         /// which must be collected together and wrapped into one implicit List element).
         /// </summary>
         /// <param name="xamlParentElement">
@@ -231,6 +231,7 @@ namespace MarkupConverter
                         // List element conversion
                         AddList(xamlParentElement, htmlElement, inheritedProperties, stylesheet, sourceContext);
                         break;
+
                     case "li":
                         // LI outside of OL/UL
                         // Collect all sibling LIs, wrap them into a List and then proceed with the element following the last of LIs
@@ -505,7 +506,6 @@ namespace MarkupConverter
             }
             else if (htmlNode is XmlElement htmlElement)
             {
-
                 // Check whether this is an html element
                 if (htmlElement.NamespaceURI != HtmlParser.XhtmlNamespace)
                 {
@@ -523,13 +523,16 @@ namespace MarkupConverter
                     case "a":
                         AddHyperlink(xamlParentElement, htmlElement, inheritedProperties, stylesheet, sourceContext);
                         break;
+
                     case "img":
                         AddImage(xamlParentElement, htmlElement, inheritedProperties, stylesheet, sourceContext);
                         break;
+
                     case "br":
                     case "hr":
                         AddBreak(xamlParentElement, htmlElementName);
                         break;
+
                     default:
                         if (HtmlSchema.IsInlineElement(htmlElementName) || HtmlSchema.IsBlockElement(htmlElementName))
                         {
@@ -719,7 +722,7 @@ namespace MarkupConverter
         // .............................................................
 
         /// <summary>
-        /// Converts Html ul or ol element into Xaml list element. During conversion if the ul/ol element has any children 
+        /// Converts Html ul or ol element into Xaml list element. During conversion if the ul/ol element has any children
         /// that are not li elements, they are ignored and not added to the list element
         /// </summary>
         /// <param name="xamlParentElement">
@@ -830,7 +833,7 @@ namespace MarkupConverter
             //currentProperties = GetElementProperties(htmlLIElement, inheritedProperties, out localProperties, stylesheet);
 
             // Add li elements to the parent xamlListElement we created as long as they appear sequentially
-            // Use properties inherited from xamlParentElement for context 
+            // Use properties inherited from xamlParentElement for context
             while (htmlChildNode != null && htmlChildNodeName == "li")
             {
                 AddListItem(xamlListElement, (XmlElement)htmlChildNode, inheritedProperties, stylesheet, sourceContext);
@@ -897,7 +900,7 @@ namespace MarkupConverter
         /// XmlElement reprsenting the Html table element to be converted
         /// </param>
         /// <param name="inheritedProperties">
-        /// Hashtable representing properties inherited from parent context. 
+        /// Hashtable representing properties inherited from parent context.
         /// </param>
         private static void AddTable(XmlElement xamlParentElement, XmlElement htmlTableElement, Hashtable inheritedProperties, CssStylesheet stylesheet, List<XmlElement> sourceContext)
         {
@@ -979,7 +982,7 @@ namespace MarkupConverter
                         // Tbody is not present, but tr element is present. Tr is wrapped in tbody
                         var xamlTableBodyElement = xamlTableElement.OwnerDocument.CreateElement(null, Xaml_TableRowGroup, _xamlNamespace);
 
-                        // We use currentProperties of xamlTableElement when adding rows since the tbody element is artificially created and has 
+                        // We use currentProperties of xamlTableElement when adding rows since the tbody element is artificially created and has
                         // no properties of its own
 
                         htmlChildNode = AddTableRowsToTableBody(xamlTableBodyElement, htmlChildNode, currentProperties, columnStarts, stylesheet, sourceContext);
@@ -1100,7 +1103,7 @@ namespace MarkupConverter
             else
             {
                 // We do not have consistent information from table cells;
-                // Translate blindly colgroups from html.                
+                // Translate blindly colgroups from html.
                 for (var htmlChildNode = htmlTableElement.FirstChild; htmlChildNode != null; htmlChildNode = htmlChildNode.NextSibling)
                 {
                     if (htmlChildNode.LocalName.ToLower() == "colgroup")
@@ -1172,7 +1175,7 @@ namespace MarkupConverter
 
             // TODO: process local properties for TableColumn element
 
-            // Col is an empty element, with no subtree 
+            // Col is an empty element, with no subtree
             xamlTableElement.AppendChild(xamlTableColumnElement);
         }
 
@@ -1235,7 +1238,6 @@ namespace MarkupConverter
 
                     // Advance
                     htmlChildNode = htmlChildNode.NextSibling;
-
                 }
                 else if (htmlChildNode.LocalName.ToLower() == "td")
                 {
@@ -1387,7 +1389,7 @@ namespace MarkupConverter
 
         /// <summary>
         /// Performs a parsing pass over a table to read information about column width and rowspan attributes. This information
-        /// is used to determine the starting point of each column. 
+        /// is used to determine the starting point of each column.
         /// </summary>
         /// <param name="htmlTableElement">
         /// XmlElement representing Html table whose structure is to be analyzed
@@ -1432,11 +1434,12 @@ namespace MarkupConverter
                         }
                         else if (tbodyWidth == 0)
                         {
-                            // Tbody analysis may return 0, probably due to unprocessable format. 
+                            // Tbody analysis may return 0, probably due to unprocessable format.
                             // We should also fail.
                             columnWidthsAvailable = false; // interrupt the analisys
                         }
                         break;
+
                     case "tr":
                         // Table row. Analyze column structure within row directly
                         double trWidth = AnalyzeTRStructure((XmlElement)htmlChildNode, columnStarts, activeRowSpans, tableWidth, stylesheet);
@@ -1449,11 +1452,13 @@ namespace MarkupConverter
                             columnWidthsAvailable = false; // interrupt the analisys
                         }
                         break;
+
                     case "td":
                         // Incorrect formatting, too deep to analyze at this level. Return null.
                         // TODO: implement analysis at this level, possibly by creating a new tr
                         columnWidthsAvailable = false; // interrupt the analisys
                         break;
+
                     default:
                         // Element should not occur directly in table. Ignore it.
                         break;
@@ -1479,7 +1484,7 @@ namespace MarkupConverter
         /// <summary>
         /// Performs a parsing pass over a tbody to read information about column width and rowspan attributes. Information read about width
         /// attributes is stored in the reference ArrayList parameter columnStarts, which contains a list of all starting
-        /// positions of all columns in the table, ordered from left to right. Row spans are taken into consideration when 
+        /// positions of all columns in the table, ordered from left to right. Row spans are taken into consideration when
         /// computing column starts
         /// </summary>
         /// <param name="htmlTbodyElement">
@@ -1528,9 +1533,11 @@ namespace MarkupConverter
                             tbodyWidth = trWidth;
                         }
                         break;
+
                     case "td":
                         columnWidthsAvailable = false; // interrupt the analisys
                         break;
+
                     default:
                         break;
                 }
@@ -1544,7 +1551,7 @@ namespace MarkupConverter
         }
 
         /// <summary>
-        /// Performs a parsing pass over a tr element to read information about column width and rowspan attributes.  
+        /// Performs a parsing pass over a tr element to read information about column width and rowspan attributes.
         /// </summary>
         /// <param name="htmlTRElement">
         /// XmlElement representing Html tr element whose structure is to be analyzed
@@ -1691,6 +1698,7 @@ namespace MarkupConverter
                             columnWidthsAvailable = false;
                         }
                         break;
+
                     default:
                         break;
                 }
@@ -1878,7 +1886,7 @@ namespace MarkupConverter
         }
 
         /// <summary>
-        /// Calculates column span based the column width and the widths of all other columns. Returns an integer representing 
+        /// Calculates column span based the column width and the widths of all other columns. Returns an integer representing
         /// the column span
         /// </summary>
         /// <param name="columnIndex">
@@ -1992,25 +2000,32 @@ namespace MarkupConverter
                         //  Convert from font-family value list into xaml FontFamily value
                         xamlElement.SetAttribute(Xaml_FontFamily, (string)propertyEnumerator.Value);
                         break;
+
                     case "font-style":
                         xamlElement.SetAttribute(Xaml_FontStyle, (string)propertyEnumerator.Value);
                         break;
+
                     case "font-variant":
                         //  Convert from font-variant into xaml property
                         break;
+
                     case "font-weight":
                         xamlElement.SetAttribute(Xaml_FontWeight, (string)propertyEnumerator.Value);
                         break;
+
                     case "font-size":
                         //  Convert from css size into FontSize
                         xamlElement.SetAttribute(Xaml_FontSize, (string)propertyEnumerator.Value);
                         break;
+
                     case "color":
                         SetPropertyValue(xamlElement, TextElement.ForegroundProperty, (string)propertyEnumerator.Value);
                         break;
+
                     case "background-color":
                         SetPropertyValue(xamlElement, TextElement.BackgroundProperty, (string)propertyEnumerator.Value);
                         break;
+
                     case "text-decoration-underline":
                         if (!isBlock)
                         {
@@ -2020,6 +2035,7 @@ namespace MarkupConverter
                             }
                         }
                         break;
+
                     case "text-decoration-none":
                     case "text-decoration-overline":
                     case "text-decoration-line-through":
@@ -2029,6 +2045,7 @@ namespace MarkupConverter
                         {
                         }
                         break;
+
                     case "text-transform":
                         //  Convert from text-transform into xaml property
                         break;
@@ -2056,14 +2073,17 @@ namespace MarkupConverter
                         marginSet = true;
                         marginTop = (string)propertyEnumerator.Value;
                         break;
+
                     case "margin-right":
                         marginSet = true;
                         marginRight = (string)propertyEnumerator.Value;
                         break;
+
                     case "margin-bottom":
                         marginSet = true;
                         marginBottom = (string)propertyEnumerator.Value;
                         break;
+
                     case "margin-left":
                         marginSet = true;
                         marginLeft = (string)propertyEnumerator.Value;
@@ -2073,14 +2093,17 @@ namespace MarkupConverter
                         paddingSet = true;
                         paddingTop = (string)propertyEnumerator.Value;
                         break;
+
                     case "padding-right":
                         paddingSet = true;
                         paddingRight = (string)propertyEnumerator.Value;
                         break;
+
                     case "padding-bottom":
                         paddingSet = true;
                         paddingBottom = (string)propertyEnumerator.Value;
                         break;
+
                     case "padding-left":
                         paddingSet = true;
                         paddingLeft = (string)propertyEnumerator.Value;
@@ -2091,33 +2114,41 @@ namespace MarkupConverter
                     case "border-color-top":
                         borderColor = (string)propertyEnumerator.Value;
                         break;
+
                     case "border-color-right":
                         borderColor = (string)propertyEnumerator.Value;
                         break;
+
                     case "border-color-bottom":
                         borderColor = (string)propertyEnumerator.Value;
                         break;
+
                     case "border-color-left":
                         borderColor = (string)propertyEnumerator.Value;
                         break;
+
                     case "border-style-top":
                     case "border-style-right":
                     case "border-style-bottom":
                     case "border-style-left":
                         //  Implement conversion from border style
                         break;
+
                     case "border-width-top":
                         borderThicknessSet = true;
                         borderThicknessTop = (string)propertyEnumerator.Value;
                         break;
+
                     case "border-width-right":
                         borderThicknessSet = true;
                         borderThicknessRight = (string)propertyEnumerator.Value;
                         break;
+
                     case "border-width-bottom":
                         borderThicknessSet = true;
                         borderThicknessBottom = (string)propertyEnumerator.Value;
                         break;
+
                     case "border-width-left":
                         borderThicknessSet = true;
                         borderThicknessLeft = (string)propertyEnumerator.Value;
@@ -2132,33 +2163,43 @@ namespace MarkupConverter
                                 case "disc":
                                     markerStyle = HtmlToXamlConverter.Xaml_List_MarkerStyle_Disc;
                                     break;
+
                                 case "circle":
                                     markerStyle = HtmlToXamlConverter.Xaml_List_MarkerStyle_Circle;
                                     break;
+
                                 case "none":
                                     markerStyle = HtmlToXamlConverter.Xaml_List_MarkerStyle_None;
                                     break;
+
                                 case "square":
                                     markerStyle = HtmlToXamlConverter.Xaml_List_MarkerStyle_Square;
                                     break;
+
                                 case "box":
                                     markerStyle = HtmlToXamlConverter.Xaml_List_MarkerStyle_Box;
                                     break;
+
                                 case "lower-latin":
                                     markerStyle = HtmlToXamlConverter.Xaml_List_MarkerStyle_LowerLatin;
                                     break;
+
                                 case "upper-latin":
                                     markerStyle = HtmlToXamlConverter.Xaml_List_MarkerStyle_UpperLatin;
                                     break;
+
                                 case "lower-roman":
                                     markerStyle = HtmlToXamlConverter.Xaml_List_MarkerStyle_LowerRoman;
                                     break;
+
                                 case "upper-roman":
                                     markerStyle = HtmlToXamlConverter.Xaml_List_MarkerStyle_UpperRoman;
                                     break;
+
                                 case "decimal":
                                     markerStyle = HtmlToXamlConverter.Xaml_List_MarkerStyle_Decimal;
                                     break;
+
                                 default:
                                     markerStyle = HtmlToXamlConverter.Xaml_List_MarkerStyle_Disc;
                                     break;
@@ -2319,16 +2360,19 @@ namespace MarkupConverter
                 case "em":
                     localProperties["font-style"] = "italic";
                     break;
+
                 case "b":
                 case "bold":
                 case "strong":
                 case "dfn":
                     localProperties["font-weight"] = "bold";
                     break;
+
                 case "u":
                 case "underline":
                     localProperties["text-decoration-underline"] = "true";
                     break;
+
                 case "font":
                     string attributeValue = GetAttribute(htmlElement, "face");
                     if (attributeValue != null)
@@ -2355,13 +2399,16 @@ namespace MarkupConverter
                         localProperties["color"] = attributeValue;
                     }
                     break;
+
                 case "samp":
                     localProperties["font-family"] = "Courier New"; // code sample
                     localProperties["font-size"] = Xaml_FontSize_XXSmall;
                     localProperties["text-align"] = "Left";
                     break;
+
                 case "sub":
                     break;
+
                 case "sup":
                     break;
 
@@ -2369,6 +2416,7 @@ namespace MarkupConverter
                 case "a": // href, hreflang, urn, methods, rel, rev, title
                     //  Set default hyperlink properties
                     break;
+
                 case "acronym":
                     break;
 
@@ -2376,14 +2424,17 @@ namespace MarkupConverter
                 case "p":
                     //  Set default paragraph properties
                     break;
+
                 case "div":
                     //  Set default div properties
                     break;
+
                 case "pre":
                     localProperties["font-family"] = "Courier New"; // renders text in a fixed-width font
                     localProperties["font-size"] = Xaml_FontSize_XXSmall;
                     localProperties["text-align"] = "Left";
                     break;
+
                 case "blockquote":
                     localProperties["margin-left"] = "16";
                     break;
@@ -2391,18 +2442,23 @@ namespace MarkupConverter
                 case "h1":
                     localProperties["font-size"] = Xaml_FontSize_XXLarge;
                     break;
+
                 case "h2":
                     localProperties["font-size"] = Xaml_FontSize_XLarge;
                     break;
+
                 case "h3":
                     localProperties["font-size"] = Xaml_FontSize_Large;
                     break;
+
                 case "h4":
                     localProperties["font-size"] = Xaml_FontSize_Medium;
                     break;
+
                 case "h5":
                     localProperties["font-size"] = Xaml_FontSize_Small;
                     break;
+
                 case "h6":
                     localProperties["font-size"] = Xaml_FontSize_XSmall;
                     break;
@@ -2410,6 +2466,7 @@ namespace MarkupConverter
                 case "ul":
                     localProperties["list-style-type"] = "disc";
                     break;
+
                 case "ol":
                     localProperties["list-style-type"] = "decimal";
                     break;
@@ -2545,7 +2602,7 @@ namespace MarkupConverter
         /// XmlElement representing Xaml element for which properties are to be processed
         /// </param>
         /// <remarks>
-        /// TODO: Use the processed properties for htmlChildNode instead of using the node itself 
+        /// TODO: Use the processed properties for htmlChildNode instead of using the node itself
         /// </remarks>
         private static void ApplyPropertiesToTableCellElement(XmlElement htmlChildNode, XmlElement xamlTableCellElement)
         {
@@ -2654,7 +2711,7 @@ namespace MarkupConverter
 
         #region Private Fields
 
-        static readonly string _xamlNamespace = "http://schemas.microsoft.com/winfx/2006/xaml/presentation";
+        private static readonly string _xamlNamespace = "http://schemas.microsoft.com/winfx/2006/xaml/presentation";
 
         #endregion Private Fields
     }

@@ -1,4 +1,4 @@
-﻿namespace Shared
+﻿namespace Shared.Sql
 {
     public enum ParameterCreationOption
     {

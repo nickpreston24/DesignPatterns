@@ -7,12 +7,13 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-namespace Shared
+namespace Shared.MVVM
 {
     public abstract class ViewModelBase : INotifyPropertyChanged
     {
         //public event PropertyChangedEventHandler PropertyChanged = delegate { };
         public event PropertyChangedEventHandler PropertyChanged;
+
         private readonly Dictionary<string, List<string>> _dependencies = new Dictionary<string, List<string>>();
         private readonly Dictionary<string, object> _propertyValueStorage;
 
@@ -99,7 +100,6 @@ namespace Shared
             }
 
             return default(T);
-
         }
 
         [Conditional("DEBUG")]
@@ -274,7 +274,6 @@ namespace Shared
                 }
             }
         }
-
     }
 
     public class DependentPropertiesAttribute : Attribute
@@ -283,5 +282,4 @@ namespace Shared
 
         public string[] DependentProperties { get; }
     }
-
 }

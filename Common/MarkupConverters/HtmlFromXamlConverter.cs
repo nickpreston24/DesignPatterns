@@ -1,21 +1,21 @@
 //---------------------------------------------------------------------------
-// 
+//
 // File: HtmlFromXamlConverter.cs
 //
 // Copyright (C) Microsoft Corporation.  All rights reserved.
 //
-// Description: Prototype for Xaml - Html conversion 
+// Description: Prototype for Xaml - Html conversion
 //
 //---------------------------------------------------------------------------
 
-namespace MarkupConverter
-{
-    using System;
-    using System.Diagnostics;
-    using System.IO;
-    using System.Text;
-    using System.Xml;
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Text;
+using System.Xml;
 
+namespace Shared.MarkupConverters
+{
     /// <summary>
     /// HtmlToXamlConverter is a static class that takes an HTML string
     /// and converts it into XAML
@@ -70,6 +70,7 @@ namespace MarkupConverter
         // ---------------------------------------------------------------------
 
         #region Private Methods
+
         /// <summary>
         /// Processes a root level element of XAML (normally it's FlowDocument element).
         /// </summary>
@@ -155,23 +156,30 @@ namespace MarkupConverter
                     case "Background":
                         css = "background-color:" + ParseXamlColor(xamlReader.Value) + ";";
                         break;
+
                     case "FontFamily":
                         css = "font-family:" + xamlReader.Value + ";";
                         break;
+
                     case "FontStyle":
                         css = "font-style:" + xamlReader.Value.ToLower() + ";";
                         break;
+
                     case "FontWeight":
                         css = "font-weight:" + xamlReader.Value.ToLower() + ";";
                         break;
+
                     case "FontStretch":
                         break;
+
                     case "FontSize":
                         css = "font-size:" + xamlReader.Value + ";";
                         break;
+
                     case "Foreground":
                         css = "color:" + ParseXamlColor(xamlReader.Value) + ";";
                         break;
+
                     case "TextDecorations":
                         if (xamlReader.Value.ToLower() == "strikethrough")
                         {
@@ -183,16 +191,22 @@ namespace MarkupConverter
                         }
 
                         break;
+
                     case "TextEffects":
                         break;
+
                     case "Emphasis":
                         break;
+
                     case "StandardLigatures":
                         break;
+
                     case "Variants":
                         break;
+
                     case "Capitals":
                         break;
+
                     case "Fraction":
                         break;
 
@@ -201,33 +215,44 @@ namespace MarkupConverter
                     case "Padding":
                         css = "padding:" + ParseXamlThickness(xamlReader.Value) + ";";
                         break;
+
                     case "Margin":
                         css = "margin:" + ParseXamlThickness(xamlReader.Value) + ";";
                         break;
+
                     case "BorderThickness":
                         css = "border-width:" + ParseXamlThickness(xamlReader.Value) + ";";
                         borderSet = true;
                         break;
+
                     case "BorderBrush":
                         css = "border-color:" + ParseXamlColor(xamlReader.Value) + ";";
                         borderSet = true;
                         break;
+
                     case "LineHeight":
                         break;
+
                     case "TextIndent":
                         css = "text-indent:" + xamlReader.Value + ";";
                         break;
+
                     case "TextAlignment":
                         css = "text-align:" + xamlReader.Value + ";";
                         break;
+
                     case "IsKeptTogether":
                         break;
+
                     case "IsKeptWithNext":
                         break;
+
                     case "ColumnBreakBefore":
                         break;
+
                     case "PageBreakBefore":
                         break;
+
                     case "FlowDirection":
                         break;
 
@@ -236,9 +261,11 @@ namespace MarkupConverter
                     case "Width":
                         css = "width:" + xamlReader.Value + ";";
                         break;
+
                     case "ColumnSpan":
                         htmlWriter.WriteAttributeString("COLSPAN", xamlReader.Value);
                         break;
+
                     case "RowSpan":
                         htmlWriter.WriteAttributeString("ROWSPAN", xamlReader.Value);
                         break;
@@ -302,12 +329,15 @@ namespace MarkupConverter
                 case 1:
                     cssThickness = thickness;
                     break;
+
                 case 2:
                     cssThickness = values[1] + " " + values[0];
                     break;
+
                 case 4:
                     cssThickness = values[1] + " " + values[2] + " " + values[3] + " " + values[0];
                     break;
+
                 default:
                     cssThickness = values[0];
                     break;
@@ -370,6 +400,7 @@ namespace MarkupConverter
                             }
                             Debug.Assert(xamlReader.NodeType == XmlNodeType.EndElement || xamlReader.NodeType == XmlNodeType.Element && xamlReader.IsEmptyElement);
                             break;
+
                         case XmlNodeType.Comment:
                             if (htmlWriter != null)
                             {
@@ -381,6 +412,7 @@ namespace MarkupConverter
                             }
                             elementContentStarted = true;
                             break;
+
                         case XmlNodeType.CDATA:
                         case XmlNodeType.Text:
                         case XmlNodeType.SignificantWhitespace:
@@ -457,39 +489,51 @@ namespace MarkupConverter
                     case "Span":
                         htmlElementName = "SPAN";
                         break;
+
                     case "InlineUIContainer":
                         htmlElementName = "SPAN";
                         break;
+
                     case "Bold":
                         htmlElementName = "B";
                         break;
+
                     case "Italic":
                         htmlElementName = "I";
                         break;
+
                     case "Paragraph":
                         htmlElementName = "P";
                         break;
+
                     case "BlockUIContainer":
                         htmlElementName = "DIV";
                         break;
+
                     case "Section":
                         htmlElementName = "DIV";
                         break;
+
                     case "Table":
                         htmlElementName = "TABLE";
                         break;
+
                     case "TableColumn":
                         htmlElementName = "COL";
                         break;
+
                     case "TableRowGroup":
                         htmlElementName = "TBODY";
                         break;
+
                     case "TableRow":
                         htmlElementName = "TR";
                         break;
+
                     case "TableCell":
                         htmlElementName = "TD";
                         break;
+
                     case "List":
                         string marker = xamlReader.GetAttribute("MarkerStyle");
                         if (marker == null || marker == "None" || marker == "Disc" || marker == "Circle" || marker == "Square" || marker == "Box")
@@ -501,12 +545,15 @@ namespace MarkupConverter
                             htmlElementName = "OL";
                         }
                         break;
+
                     case "ListItem":
                         htmlElementName = "LI";
                         break;
+
                     case "Hyperlink":
                         htmlElementName = "A";
                         break;
+
                     default:
                         htmlElementName = null; // Ignore the element
                         break;
@@ -575,6 +622,7 @@ namespace MarkupConverter
 
                     case XmlNodeType.Comment:
                         return true;
+
                     case XmlNodeType.ProcessingInstruction:
                     case XmlNodeType.DocumentType:
                     case XmlNodeType.XmlDeclaration:
@@ -593,9 +641,5 @@ namespace MarkupConverter
         // Private Fields
         //
         // ---------------------------------------------------------------------
-
-        #region Private Fields
-
-        #endregion Private Fields
     }
 }

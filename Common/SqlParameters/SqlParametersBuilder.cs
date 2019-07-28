@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 
-namespace Shared
+namespace Shared.Sql
 {
     public class SqlUtilities
     {
@@ -175,7 +175,7 @@ namespace Shared
 
             //
             /// RETRIEVE DUPLICATES
-            //// 
+            ////
 
             var duplicates = new DataTable($"{tablename} Duplicates");
             var sql = new StringBuilder();
@@ -218,7 +218,7 @@ namespace Shared
                 //if (duplicates.Rows.Count > limit)
                 //{
                 //Debug.WriteLine(message);
-                //Debug.WriteLine(sql.ToString());                    
+                //Debug.WriteLine(sql.ToString());
                 //}
             }
 
@@ -232,72 +232,102 @@ namespace Shared
             {
                 case SqlDbType.BigInt:
                     break;
+
                 case SqlDbType.Binary:
                     break;
+
                 case SqlDbType.Bit:
                     break;
+
                 case SqlDbType.Char:
                     break;
+
                 case SqlDbType.DateTime:
                     break;
+
                 case SqlDbType.Decimal:
                     break;
+
                 case SqlDbType.Float:
                     break;
+
                 case SqlDbType.Image:
                     break;
+
                 case SqlDbType.Int:
                     query.Append($"{parameter.ParameterName} = {(int)parameter.Value} {sqlOperator.ToString()} ");
                     break;
+
                 case SqlDbType.Money:
                     break;
+
                 case SqlDbType.NChar:
                     break;
+
                 case SqlDbType.NText:
                     break;
+
                 case SqlDbType.NVarChar:
                     break;
+
                 case SqlDbType.Real:
                     break;
+
                 case SqlDbType.UniqueIdentifier:
                     break;
+
                 case SqlDbType.SmallDateTime:
                     break;
+
                 case SqlDbType.SmallInt:
                     break;
+
                 case SqlDbType.SmallMoney:
                     break;
+
                 case SqlDbType.Text:
                     break;
+
                 case SqlDbType.Timestamp:
                     break;
+
                 case SqlDbType.TinyInt:
                     break;
+
                 case SqlDbType.VarBinary:
                     break;
+
                 case SqlDbType.VarChar:
                     query.Append($"{parameter.ParameterName} = '{parameter.Value.ToString()}' {sqlOperator.ToString()} ");
                     break;
+
                 case SqlDbType.Variant:
                     break;
+
                 case SqlDbType.Xml:
                     break;
+
                 case SqlDbType.Udt:
                     break;
+
                 case SqlDbType.Structured:
                     break;
+
                 case SqlDbType.Date:
                     break;
+
                 case SqlDbType.Time:
                     break;
+
                 case SqlDbType.DateTime2:
                     break;
+
                 case SqlDbType.DateTimeOffset:
                     break;
+
                 default:
                     break;
             }
         }
-
     }
 }

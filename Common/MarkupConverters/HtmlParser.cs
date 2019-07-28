@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-// 
+//
 // File: HtmlParser.cs
 //
 // Copyright (C) Microsoft Corporation.  All rights reserved.
@@ -13,21 +13,21 @@ using System.Collections.Generic;
 using System.Text; // StringBuilder
 using System.Xml;
 
-// important TODOS: 
-// TODO 1. Start tags: The ParseXmlElement function has been modified to be called after both the 
-// angle bracket < and element name have been read, instead of just the < bracket and some valid name character, 
+// important TODOS:
+// TODO 1. Start tags: The ParseXmlElement function has been modified to be called after both the
+// angle bracket < and element name have been read, instead of just the < bracket and some valid name character,
 // previously the case. This change was made so that elements with optional closing tags could read a new
 // element's start tag and decide whether they were required to close. However, there is a question of whether to
 // handle this in the parser or lexical analyzer. It is currently handled in the parser - the lexical analyzer still
-// recognizes a start tag opener as a '<' + valid name start char; it is the parser that reads the actual name. 
+// recognizes a start tag opener as a '<' + valid name start char; it is the parser that reads the actual name.
 // this is correct behavior assuming that the name is a valid html name, because the lexical analyzer should not know anything
-// about optional closing tags, etc. UPDATED: 10/13/2004: I am updating this to read the whole start tag of something 
+// about optional closing tags, etc. UPDATED: 10/13/2004: I am updating this to read the whole start tag of something
 // that is not an HTML, treat it as empty, and add it to the tree. That way the converter will know it's there, but
 // it will hvae no content. We could also partially recover by trying to look up and match names if they are similar
 // TODO 2. Invalid element names: However, it might make sense to give the lexical analyzer the ability to identify
 // a valid html element name and not return something as a start tag otherwise. For example, if we type <good>, should
 // the lexical analyzer return that it has found the start of an element when this is not the case in HTML? But this will
-// require implementing a lookahead token in the lexical analyzer so that it can treat an invalid element name as text. One 
+// require implementing a lookahead token in the lexical analyzer so that it can treat an invalid element name as text. One
 // character of lookahead will not be enough.
 // TODO 3. Attributes: The attribute recovery is poor when reading attribute values in quotes - if no closing quotes are found,
 // the lexical analyzer just keeps reading and if it eventually reaches the end of file, it would have just skipped everything.
@@ -47,7 +47,7 @@ using System.Xml;
 // can be applied. Is there a better way to do this? Should we do it at all?
 // TODO 6. Elements with optional starting tags: there are 4 such elements in the HTML 4 specification - html, tbody, body and head.
 // The current recovery doesn;t do anything for any of these elements except the html element, because it's not critical - head
-// and body elementscan be contained within html element, and tbody is contained within table. To extend this for XHTML 
+// and body elementscan be contained within html element, and tbody is contained within table. To extend this for XHTML
 // extensions, and to recover in case other elements are missing start tags, we would need to insert an extra recursive call
 // to ParseXmlElement for the missing start tag. It is suggested to do this by giving ParseXmlElement an argument that specifies
 // a name to use. If this argument is null, it  assumes its name is the next token from the lexical analyzer and continues
@@ -64,7 +64,7 @@ using System.Xml;
 // reading a table and ignore them otherwise? This may be too much of a load on the parser, I think it's better if the converter
 // deals with it
 
-namespace MarkupConverter
+namespace Shared.MarkupConverters
 {
     /// <summary>
     /// HtmlParser class accepts a string of possibly badly formed Html, parses it and returns a string
@@ -147,6 +147,7 @@ namespace MarkupConverter
         //      StartSelection:000000000
         //      EndSelection:000000000
         internal const string HtmlHeader = "Version:1.0\r\nStartHTML:{0:D10}\r\nEndHTML:{1:D10}\r\nStartFragment:{2:D10}\r\nEndFragment:{3:D10}\r\nStartSelection:{4:D10}\r\nEndSelection:{5:D10}\r\n";
+
         internal const string HtmlStartFragmentComment = "<!--StartFragment-->";
         internal const string HtmlEndFragmentComment = "<!--EndFragment-->";
 
@@ -549,8 +550,9 @@ namespace MarkupConverter
         private XmlDocument _document;
 
         // stack for open elements
-        Stack<XmlElement> _openedElements;
-        Stack<XmlElement> _pendingInlineElements;
+        private Stack<XmlElement> _openedElements;
+
+        private Stack<XmlElement> _pendingInlineElements;
 
         #endregion Private Fields
     }

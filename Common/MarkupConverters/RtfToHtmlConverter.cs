@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 
-namespace MarkupConverter
+namespace Shared.MarkupConverters
 {
     public static class RtfToHtmlConverter
     {
@@ -43,7 +43,6 @@ namespace MarkupConverter
 
             using (var rtfMemoryStream = new MemoryStream())
             {
-
                 textRange = new TextRange(richTextBox.Document.ContentStart, richTextBox.Document.ContentEnd);
                 textRange.Save(rtfMemoryStream, DataFormats.Xaml);
                 rtfMemoryStream.Seek(0, SeekOrigin.Begin);
@@ -52,8 +51,6 @@ namespace MarkupConverter
                     return rtfStreamReader.ReadToEnd();
                 }
             }
-
         }
-
     }
 }

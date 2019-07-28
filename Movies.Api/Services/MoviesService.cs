@@ -1,5 +1,5 @@
-﻿using Movies.Data;
-using Shared;
+﻿using DesignPatterns;
+using Movies.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +10,7 @@ namespace Movies.Api
     {
         private readonly IMovieRepository movies;
         private readonly MovieAssembler assembler;
+
         public MoviesService(IMovieRepository movieRepository, MovieAssembler assembler)
         {
             movies = movieRepository;

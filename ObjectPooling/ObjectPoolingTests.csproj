@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DesignPatterns\ObjectPools.csproj" />
+    <ProjectReference Include="..\DesignPatterns\ObjectPool\ObjectPools.csproj" />
   </ItemGroup>
 
 </Project>

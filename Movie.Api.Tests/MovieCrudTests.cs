@@ -4,7 +4,6 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 
 namespace Tests
 {
@@ -35,7 +34,10 @@ namespace Tests
 
         private void Print(IEnumerable<object> collection)
         {
-            collection.ToList().ForEach(Print);
+            foreach (var item in collection)
+            {
+                Print(item);
+            }
         }
 
         private void Print(object value)

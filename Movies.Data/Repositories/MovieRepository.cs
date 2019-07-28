@@ -1,9 +1,6 @@
-﻿using Movies.Shared;
-using Shared;
-using System;
+﻿using DesignPatterns;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Movies.Data
 {
@@ -22,37 +19,6 @@ namespace Movies.Data
                     .Where(specification.ToExpression())
                     .ToList();
             }
-        }
-
-        private class MockDb
-        {
-            private static readonly char[] alphabet = Enumerable.Range('A', 26)
-                .Select(n => (char)n).ToArray();
-
-            internal static IQueryable<Movie> GetMovies() =>
-                Enumerable.Range(1, 100)
-                .Aggregate(new List<Movie>(), (result, next) =>
-                {
-                    result.Add(new Movie
-                    {
-                        MpaaRating = GetMpaaRating(),
-                        Name = GetTitle(),
-                        Rating = GetRating(),
-                    });
-                    return result;
-                })
-                .AsQueryable();
-
-            private static int GetRating() => Enumerable.Range(1, Movie.MAX_RATING - 1).FirstRandom();
-
-            private static MpaaRating GetMpaaRating() => EnumExtensions.GetRandom<MpaaRating>();
-
-            private static string GetTitle() => alphabet.TakeRandom(10)
-                .Aggregate(new StringBuilder(), (res, nxt) =>
-                {
-                    res.Append(nxt);
-                    return res;
-                }).ToString();
         }
     }
 }

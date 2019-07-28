@@ -1,22 +1,22 @@
 //---------------------------------------------------------------------------
-// 
+//
 // File: HtmlXamlConverter.cs
 //
 // Copyright (C) Microsoft Corporation.  All rights reserved.
 //
-// Description: Prototype for Html - Xaml conversion 
+// Description: Prototype for Html - Xaml conversion
 //
 //---------------------------------------------------------------------------
 
-namespace MarkupConverter
-{
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Text;
-    using System.Xml;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Text;
+using System.Xml;
 
+namespace Shared.MarkupConverters
+{
     internal static class HtmlCssParser
     {
         // .................................................................
@@ -59,30 +59,39 @@ namespace MarkupConverter
                             case "font":
                                 ParseCssFont(styleValue, localProperties);
                                 break;
+
                             case "font-family":
                                 ParseCssFontFamily(styleValue, ref nextIndex, localProperties);
                                 break;
+
                             case "font-size":
                                 ParseCssSize(styleValue, ref nextIndex, localProperties, "font-size", /*mustBeNonNegative:*/true);
                                 break;
+
                             case "font-style":
                                 ParseCssFontStyle(styleValue, ref nextIndex, localProperties);
                                 break;
+
                             case "font-weight":
                                 ParseCssFontWeight(styleValue, ref nextIndex, localProperties);
                                 break;
+
                             case "font-variant":
                                 ParseCssFontVariant(styleValue, ref nextIndex, localProperties);
                                 break;
+
                             case "line-height":
                                 ParseCssSize(styleValue, ref nextIndex, localProperties, "line-height", /*mustBeNonNegative:*/true);
                                 break;
+
                             case "word-spacing":
                                 //  Implement word-spacing conversion
                                 break;
+
                             case "letter-spacing":
                                 //  Implement letter-spacing conversion
                                 break;
+
                             case "color":
                                 ParseCssColor(styleValue, ref nextIndex, localProperties, "color");
                                 break;
@@ -98,6 +107,7 @@ namespace MarkupConverter
                             case "background-color":
                                 ParseCssColor(styleValue, ref nextIndex, localProperties, "background-color");
                                 break;
+
                             case "background":
                                 // TODO: need to parse composite background property
                                 ParseCssBackground(styleValue, ref nextIndex, localProperties);
@@ -106,9 +116,11 @@ namespace MarkupConverter
                             case "text-align":
                                 ParseCssTextAlign(styleValue, ref nextIndex, localProperties);
                                 break;
+
                             case "vertical-align":
                                 ParseCssVerticalAlign(styleValue, ref nextIndex, localProperties);
                                 break;
+
                             case "text-indent":
                                 ParseCssSize(styleValue, ref nextIndex, localProperties, "text-indent", /*mustBeNonNegative:*/false);
                                 break;
@@ -121,6 +133,7 @@ namespace MarkupConverter
                             case "margin": // top/right/bottom/left
                                 ParseCssRectangleProperty(styleValue, ref nextIndex, localProperties, styleName);
                                 break;
+
                             case "margin-top":
                             case "margin-right":
                             case "margin-bottom":
@@ -131,6 +144,7 @@ namespace MarkupConverter
                             case "padding":
                                 ParseCssRectangleProperty(styleValue, ref nextIndex, localProperties, styleName);
                                 break;
+
                             case "padding-top":
                             case "padding-right":
                             case "padding-bottom":
@@ -141,11 +155,13 @@ namespace MarkupConverter
                             case "border":
                                 ParseCssBorder(styleValue, ref nextIndex, localProperties);
                                 break;
+
                             case "border-style":
                             case "border-width":
                             case "border-color":
                                 ParseCssRectangleProperty(styleValue, ref nextIndex, localProperties, styleName);
                                 break;
+
                             case "border-top":
                             case "border-right":
                             case "border-left":
@@ -177,6 +193,7 @@ namespace MarkupConverter
                             case "float":
                                 ParseCssFloat(styleValue, ref nextIndex, localProperties);
                                 break;
+
                             case "clear":
                                 ParseCssClear(styleValue, ref nextIndex, localProperties);
                                 break;
@@ -415,7 +432,7 @@ namespace MarkupConverter
         // CSS has five font properties: font-family, font-style, font-variant, font-weight, font-size.
         // An aggregated "font" property lets you specify in one action all the five in combination
         // with additional line-height property.
-        // 
+        //
         // font-family: [<family-name>,]* [<family-name> | <generic-family>]
         //    generic-family: serif | sans-serif | monospace | cursive | fantasy
         //       The list of families sets priorities to choose fonts;
@@ -693,7 +710,7 @@ namespace MarkupConverter
         // Generic method for parsing any of four-values properties, such as margin, padding, border-width, border-style, border-color
         private static bool ParseCssRectangleProperty(string styleValue, ref int nextIndex, Hashtable localProperties, string propertyName)
         {
-            // CSS Spec: 
+            // CSS Spec:
             // If only one value is set, then the value applies to all four sides;
             // If two or three values are set, then missinng value(s) are taken fromm the opposite side(s).
             // The order they are applied is: top/right/bottom/left

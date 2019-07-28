@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-// 
+//
 // File: HtmlLexicalAnalyzer.cs
 //
 // Copyright (C) Microsoft Corporation.  All rights reserved.
@@ -13,7 +13,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 
-namespace MarkupConverter
+namespace Shared.MarkupConverters
 {
     /// <summary>
     /// lexical analyzer class
@@ -63,7 +63,7 @@ namespace MarkupConverter
         #region Internal Methods
 
         /// <summary>
-        /// retrieves next recognizable token from input string 
+        /// retrieves next recognizable token from input string
         /// and identifies its type
         /// if no valid token is found, the output parameters are set to null
         /// if end of stream is reached without matching any token, token type
@@ -436,7 +436,7 @@ namespace MarkupConverter
         /// <summary>
         /// skips whitespace in the input string
         /// leaves the first non-whitespace character available in the NextCharacter property
-        /// this may be the end-of-file character, it performs no checking 
+        /// this may be the end-of-file character, it performs no checking
         /// </summary>
         private void SkipWhiteSpace()
         {
@@ -549,7 +549,7 @@ namespace MarkupConverter
             false;
 
         /// <summary>
-        /// skips dynamic content starting with '<![' and ending with ']>' 
+        /// skips dynamic content starting with '<![' and ending with ']>'
         /// </summary>
         private void ReadDynamicContent()
         {
@@ -587,7 +587,7 @@ namespace MarkupConverter
         }
 
         /// <summary>
-        /// skips comments starting with '<!-' and ending with '-->' 
+        /// skips comments starting with '<!-' and ending with '-->'
         /// NOTE: 10/06/2004: processing changed, will now skip anything starting with
         /// the "<!-"  sequence and ending in "!>" or "->", because in practice many html pages do not
         /// use the full comment specifying conventions
@@ -675,7 +675,7 @@ namespace MarkupConverter
         }
 
         /// <summary>
-        /// skips processing directives starting with the characters '<?' and ending with '?>' 
+        /// skips processing directives starting with the characters '<?' and ending with '?>'
         /// NOTE: 10/14/2004: IE also ends processing directives with a />, so this function is
         /// being modified to recognize that condition as well
         /// </summary>
@@ -751,7 +751,8 @@ namespace MarkupConverter
             }
         }
 
-        private bool IsNextCharacterEntity {
+        private bool IsNextCharacterEntity
+        {
             // check if next character is an entity
             get; set;
         }
@@ -768,16 +769,18 @@ namespace MarkupConverter
 
         // string reader which will move over input text
         private StringReader _inputStringReader;
+
         // next character code read from input that is not yet part of any token
         // and the character it represents
         private int _nextCharacterCode;
+
         private int _lookAheadCharacterCode;
         private char _lookAheadCharacter;
         private char _previousCharacter;
         private bool _ignoreNextWhitespace;
 
         // store token and type in local variables before copying them to output parameters
-        StringBuilder _nextToken;
+        private StringBuilder _nextToken;
 
         #endregion Private Fields
     }

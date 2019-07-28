@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-// 
+//
 // File: HtmlSchema.cs
 //
 // Copyright (C) Microsoft Corporation.  All rights reserved.
@@ -8,11 +8,11 @@
 //
 //---------------------------------------------------------------------------
 
-namespace MarkupConverter
-{
-    using System.Collections;
-    using System.Diagnostics;
+using System.Collections;
+using System.Diagnostics;
 
+namespace Shared.MarkupConverters
+{
     /// <summary>
     /// HtmlSchema class
     /// maintains static information about HTML structure
@@ -55,7 +55,7 @@ namespace MarkupConverter
             InitializeHtmlCharacterEntities();
         }
 
-        #endregion Constructors;
+        #endregion Constructors
 
         // ---------------------------------------------------------------------
         //
@@ -66,7 +66,7 @@ namespace MarkupConverter
         #region Internal Methods
 
         /// <summary>
-        /// returns true when xmlElementName corresponds to empty element 
+        /// returns true when xmlElementName corresponds to empty element
         /// </summary>
         /// <param name="xmlElementName">
         /// string representing name to test
@@ -128,24 +128,34 @@ namespace MarkupConverter
             {
                 case "colgroup":
                     return _htmlElementsClosingColgroup.Contains(nextElementName) && HtmlSchema.IsBlockElement(nextElementName);
+
                 case "dd":
                     return _htmlElementsClosingDD.Contains(nextElementName) && HtmlSchema.IsBlockElement(nextElementName);
+
                 case "dt":
                     return _htmlElementsClosingDT.Contains(nextElementName) && HtmlSchema.IsBlockElement(nextElementName);
+
                 case "li":
                     return _htmlElementsClosingLI.Contains(nextElementName);
+
                 case "p":
                     return HtmlSchema.IsBlockElement(nextElementName);
+
                 case "tbody":
                     return _htmlElementsClosingTbody.Contains(nextElementName);
+
                 case "tfoot":
                     return _htmlElementsClosingTfoot.Contains(nextElementName);
+
                 case "thead":
                     return _htmlElementsClosingThead.Contains(nextElementName);
+
                 case "tr":
                     return _htmlElementsClosingTR.Contains(nextElementName);
+
                 case "td":
                     return _htmlElementsClosingTD.Contains(nextElementName);
+
                 case "th":
                     return _htmlElementsClosingTH.Contains(nextElementName);
             }
@@ -156,7 +166,7 @@ namespace MarkupConverter
         /// returns true if the string passed as argument is an Html entity name
         /// </summary>
         /// <param name="entityName">
-        /// string to be tested for Html entity name 
+        /// string to be tested for Html entity name
         /// </param>
         internal static bool IsEntity(string entityName)
         {
@@ -173,7 +183,7 @@ namespace MarkupConverter
 
         /// <summary>
         /// returns the character represented by the entity name string which is passed as an argument, if the string is an entity name
-        /// as specified in _htmlCharacterEntities, returns the character value of 0 otherwise 
+        /// as specified in _htmlCharacterEntities, returns the character value of 0 otherwise
         /// </summary>
         /// <param name="entityName">
         /// string representing entity name whose character value is desired
@@ -197,10 +207,6 @@ namespace MarkupConverter
         //  Internal Properties
         //
         // ---------------------------------------------------------------------
-
-        #region Internal Properties
-
-        #endregion Internal Indexers
 
         // ---------------------------------------------------------------------
         //
@@ -285,7 +291,7 @@ namespace MarkupConverter
         /// http://www.w3.org/TR/REC-html40/index/elements.html
         /// </summary>
         private static void InitializeEmptyElements() =>
-            // Build a list of empty (no-scope) elements 
+            // Build a list of empty (no-scope) elements
             // (element not requiring closing tags, and not accepting any content)
             _htmlEmptyElements = new ArrayList
             {
@@ -766,4 +772,3 @@ namespace MarkupConverter
         #endregion Private Fields
     }
 }
-

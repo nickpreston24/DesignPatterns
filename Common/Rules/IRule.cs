@@ -1,4 +1,4 @@
-﻿namespace Shared
+﻿namespace Shared.RulesEngines
 {
     public interface IRule
     {

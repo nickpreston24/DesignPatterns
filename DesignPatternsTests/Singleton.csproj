@@ -97,10 +97,6 @@
       <Project>{5E4D9F12-A069-4979-9EE1-944FF27C1BF0}</Project>
       <Name>Shared</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DesignPatterns\ObjectPools.csproj">
-      <Project>{C5A82F7C-7A62-4EF0-8856-035F1C35DE17}</Project>
-      <Name>ObjectPools</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="singleton_impl.PNG" />

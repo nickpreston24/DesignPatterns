@@ -19,7 +19,7 @@ namespace Movies.Data
 
         public static Shared.Movie Map(this Movie entity) => new Shared.Movie
         {
-            Name = entity.Name,
+            Title = entity.Title,
             MpaaRating = entity.MpaaRating,
             Rating = entity.Rating
         };

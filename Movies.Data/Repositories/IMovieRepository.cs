@@ -1,4 +1,4 @@
-﻿using Shared;
+﻿using DesignPatterns;
 using System.Collections.Generic;
 
 namespace Movies.Data

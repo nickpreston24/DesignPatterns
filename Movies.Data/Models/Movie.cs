@@ -5,7 +5,7 @@ namespace Movies.Data
 {
     public class Movie
     {
-        public string Name { get; internal set; }
+        public string Title { get; internal set; }
 
         public DateTime ReleaseDate { get; internal set; }
 
@@ -23,5 +23,7 @@ namespace Movies.Data
                 ? value
                 : throw new ArgumentOutOfRangeException(nameof(Rating));
         }
+
+        public override string ToString() => $"Title: {Title}\nMpaa: {MpaaRating}\nRating: {Rating}/{MAX_RATING} Release Date: {ReleaseDate}\n";
     }
 }

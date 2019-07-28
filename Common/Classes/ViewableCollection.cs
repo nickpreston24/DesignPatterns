@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Shared.MVVM;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 
@@ -6,11 +7,17 @@ namespace Shared.Classes
 {
     public class ViewableCollection<T> : ViewableCollectionBase<T> where T : INotifyPropertyChanged
     {
-        public ViewableCollection() : base() { }
+        public ViewableCollection() : base()
+        {
+        }
 
-        public ViewableCollection(IEnumerable<T> items) : base(items) { }
+        public ViewableCollection(IEnumerable<T> items) : base(items)
+        {
+        }
 
-        public ViewableCollection(List<T> items) : base(items) { }
+        public ViewableCollection(List<T> items) : base(items)
+        {
+        }
 
         private void ItemPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -41,6 +48,5 @@ namespace Shared.Classes
             if (item != null) { item.PropertyChanged += ItemPropertyChanged; }
             base.SetItem(index, item);
         }
-
     }
 }

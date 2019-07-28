@@ -77,8 +77,6 @@
     <Compile Include="Classes\ApiMethodController.cs" />
     <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="MaybeExtensionsTests.cs" />
-    <Compile Include="Specifications\ISpecification.cs" />
-    <Compile Include="Specifications\Specification.cs" />
     <Compile Include="SqlParameters\DatabaseAliasAttribute.cs" />
     <Compile Include="SqlParameters\ParameterCreationOption.cs" />
     <Compile Include="SqlParameters\SqlParametersBuilder.cs" />
@@ -119,9 +117,7 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\ThreadExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
-    <Compile Include="Interfaces\IExpressionBuilder.cs" />
-    <Compile Include="Interfaces\ILogger.cs" />
-    <Compile Include="Interfaces\IRule.cs" />
+    <Compile Include="Rules\IRule.cs" />
     <Compile Include="MarkupConverters\HtmlCssParser.cs" />
     <Compile Include="MarkupConverters\HtmlFromXamlConverter.cs" />
     <Compile Include="MarkupConverters\HtmlLexicalAnalyzer.cs" />

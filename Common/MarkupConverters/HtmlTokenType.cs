@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-// 
+//
 // File: HtmlTokenType.cs
 //
 // Copyright (C) Microsoft Corporation.  All rights reserved.
@@ -8,7 +8,7 @@
 //
 //---------------------------------------------------------------------------
 
-namespace MarkupConverter
+namespace Shared.MarkupConverters
 {
     /// <summary>
     /// types of lexical tokens for html-to-xaml converter

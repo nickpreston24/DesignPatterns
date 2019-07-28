@@ -3,11 +3,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 
-namespace MarkupConverter
+namespace Shared.MarkupConverters
 {
     public static class HtmlToRtfConverter
     {
-
         public static string ConvertHtmlToRtf(string htmlText)
         {
             string xamlText = HtmlToXamlConverter.ConvertHtmlToXaml(htmlText, false);
@@ -42,7 +41,6 @@ namespace MarkupConverter
 
             using (var rtfMemoryStream = new MemoryStream())
             {
-
                 textRange = new TextRange(richTextBox.Document.ContentStart, richTextBox.Document.ContentEnd);
                 textRange.Save(rtfMemoryStream, DataFormats.Rtf);
                 rtfMemoryStream.Seek(0, SeekOrigin.Begin);
@@ -51,8 +49,6 @@ namespace MarkupConverter
                     return rtfStreamReader.ReadToEnd();
                 }
             }
-
         }
-
     }
 }

@@ -2,17 +2,29 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Movies.Api.Graphs
+namespace DesignPatterns
 {
+    /// <summary>
+    /// John Skeet's Iterable Implementation
+    /// Source:
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IIterable<T>
     {
         IIterator<T> Iterator();
     }
 
+    /// <summary>
+    /// John Skeet's Iterator Implementation
+    /// Source:
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IIterator<T> : IDisposable
     {
         bool HasNext { get; }
-        T Next();
+
+        T GetNext();
+
         void Remove();
     }
 
@@ -34,11 +46,18 @@ namespace Movies.Api.Graphs
 
         public EnumeratorAdapter(IEnumerator<T> enumerator) => this.enumerator = enumerator;
 
-        public bool HasNext { get; }
+        public bool HasNext
+        {
+            get
+            {
+                CheckNext();
+                return nextAvailable;
+            }
+        }
 
-        public void Dispose() => enumerator.Dispose();
+        public void Dispose() => enumerator?.Dispose();
 
-        public T Next()
+        public T GetNext()
         {
             CheckNext();
 
@@ -51,7 +70,7 @@ namespace Movies.Api.Graphs
 
         public void Remove() => throw new NotSupportedException("Remove() operation is not supported.");
 
-        void CheckNext()
+        private void CheckNext()
         {
             if (fetchedNext)
                 return;
@@ -72,6 +91,7 @@ namespace Movies.Api.Graphs
         public IterableAdapter(IIterable<T> iterable) => this.iterable = iterable;
 
         public IEnumerator<T> GetEnumerator() => new IteratorAdapter<T>(iterable.Iterator());
+
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 
@@ -97,18 +117,17 @@ namespace Movies.Api.Graphs
         object IEnumerator.Current => Current;
 
         public void Dispose() => iterator.Dispose();
+
         public bool MoveNext()
         {
             gotCurrent = iterator.HasNext;
 
             if (gotCurrent)
-                current = iterator.Next();
+                current = iterator.GetNext();
 
             return gotCurrent;
         }
 
         public void Reset() => throw new NotSupportedException("Reset() operation is not supported.");
     }
-
-    // A C# joke: I treat coworkers like I treat IDisposable: I'm contractually obligated to deal with unmanaged resources.
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Shared
+namespace DesignPatterns
 {
     public abstract class Specification<T> : ISpecification<T>
     {
@@ -67,16 +67,5 @@ namespace Shared
 
             return finalExpr;
         }
-    }
-
-    internal class ParameterReplacer : ExpressionVisitor
-    {
-        private readonly ParameterExpression parameter;
-
-        protected override Expression VisitParameter(ParameterExpression node)
-            => base.VisitParameter(parameter);
-
-        internal ParameterReplacer(ParameterExpression parameter)
-            => this.parameter = parameter;
     }
 }
