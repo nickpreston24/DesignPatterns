@@ -10,6 +10,7 @@ namespace System
     public static partial class Extensions
     {
         private static JsonConverter _jsonConverter = new Newtonsoft.Json.Converters.StringEnumConverter();
+
         private static JsonSerializerSettings _jsonSerializerSettings = new JsonSerializerSettings
         {
             Converters = new List<JsonConverter> { _jsonConverter },
@@ -54,15 +55,14 @@ namespace System
             {
                 properties.mappedDestination.SetValue(destination, properties.mappedSource.GetValue(source, null), null);
             }
-
         }
 
         //Map properties from one instance of T to another by shape and types (not property names).
-        public static T Map<T>(this T target, T source) => throw new NotImplementedException();
+        //public static T Map<T>(this T target, T source) => throw new NotImplementedException();
 
         //Map properties from one instance of T to another instance of U by shape and types(not property names).
-        public static T Map<T, U>(this T target, U source)
-            where T : class where U : class => throw new NotImplementedException();
+        //public static T Map<T, U>(this T target, U source)
+        //    where T : class where U : class => throw new NotImplementedException();
 
         public static object Slurp(this object destination, object source)
         {
@@ -88,7 +88,7 @@ namespace System
             return destination;
         }
 
-        //Alias for Consume method because I like(d) the name        
+        //Alias for Consume method because I like(d) the name
         public static TParent Slurp<TParent, TDerived>(this TParent destination, TDerived source)
             where TParent : new()
             where TDerived : TParent, new()
@@ -216,7 +216,6 @@ namespace System
             }
 
             return result;
-
         }
 
         public static bool JsonCompare(this object obj, object another)
@@ -289,9 +288,11 @@ namespace System
                     Debug.WriteLine(message);
                     Console.WriteLine(message);
                     break;
+
                 case LogTo.CONSOLE:
                     Console.WriteLine(message);
                     break;
+
                 default:
                 case LogTo.DEBUG:
                     Debug.WriteLine(message);
@@ -300,12 +301,12 @@ namespace System
         }
 
         /// <summary>
-        /// Dump an object's properties to Debug in JSON format        
+        /// Dump an object's properties to Debug in JSON format
         /// Null values will be ignored by default
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="item">Instance of any passed object</param>
-        /// <param name="name">Custom Name of passed object</param>        
+        /// <param name="name">Custom Name of passed object</param>
         /// <param name="showNulls">if true, show null properties</param>
         /// <returns>T</returns>
         public static T Dump<T>(this T item, string name = "", bool showNulls = true, LogTo log = LogTo.DEBUG)

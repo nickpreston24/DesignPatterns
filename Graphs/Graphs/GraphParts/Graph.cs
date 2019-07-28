@@ -30,7 +30,7 @@ namespace Graphs
         protected virtual ICollection<IEdge> GetEdges()
         {
             return (Nodes == null
-                ? Enumerable.Empty<Edge>()
+                ? Enumerable.Empty<IEdge>()
                 : Nodes.Where(n => n.Edges != null)
                     .SelectMany(n => n.Edges)
                 )

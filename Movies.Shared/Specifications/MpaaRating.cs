@@ -28,7 +28,7 @@ namespace Movies.Data
         {
         }
 
-        public override Expression<Func<Movie, bool>> ToExpression()
+        public override Expression<Func<Movie, bool>> Condition()
             => movie
                 => Ratings.Any(rating => movie.MpaaRating.Equals(rating))
                    && nonAdult(movie);

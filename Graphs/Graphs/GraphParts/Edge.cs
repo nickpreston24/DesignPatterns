@@ -9,19 +9,19 @@ namespace Graphs
     {
         private bool disposedValue = false; // To detect redundant calls
 
-        private List<IRelationship<INode>> relationships = new List<IRelationship<INode>>(0);
+        //private List<IRelationship<INode>> relationships = new List<IRelationship<INode>>(0);
 
-        public ICollection<IRelationship<INode>> Relationships
-        {
-            get => relationships;
-            set => relationships.AddRange(value);
-        }
+        //public ICollection<IRelationship<INode>> Relationships
+        //{
+        //    get => relationships;
+        //    set => relationships.AddRange(value);
+        //}
 
-        public IRelationship<INode> this[int index]
-        {
-            get => relationships[index];
-            set => relationships[index] = value;
-        }
+        //public IRelationship<INode> this[int index]
+        //{
+        //    get => relationships[index];
+        //    set => relationships[index] = value;
+        //}
 
         private void Dispose(bool disposing)
         {
@@ -31,10 +31,10 @@ namespace Graphs
                 if (disposing)
                 {
                     // TODO: dispose managed state (managed objects).
-                    foreach (var relationship in Relationships)
-                    {
-                        relationship.Dispose();
-                    }
+                    //foreach (var relationship in Relationships)
+                    //{
+                    //    relationship.Dispose();
+                    //}
                 }
 
                 disposedValue = true;
@@ -43,6 +43,6 @@ namespace Graphs
 
         public void Dispose() => Dispose(true);
 
-        public override string ToString() => $"[Edge]{Relationships.Count}";
+        //public override string ToString() => $"[Edge]{Relationships.Count}";
     }
 }

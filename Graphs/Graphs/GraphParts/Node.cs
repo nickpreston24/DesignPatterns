@@ -10,13 +10,13 @@ namespace Graphs
 
         protected IGraphBuilder<INode> graphBuilder = Singleton<GraphBuilder<INode>>.Instance;
 
-        protected List<IEdge> edges = new List<IEdge>(0);
+        protected List<IRelationship> edges = new List<IRelationship>(0);
 
         public int Id { get; set; }
 
         protected Node() => graphBuilder.AddNode(this);
 
-        public ICollection<IEdge> Edges
+        public ICollection<IRelationship> Edges
         {
             get => edges;
             private set => edges.AddRange(value);
@@ -25,7 +25,7 @@ namespace Graphs
         public INode Relate(IRelationship relationship, params INode[] neighbors)
         {
             //Todo: have the builder attach a relationship to this node and its neighbor(s).
-            graphBuilder.AddEdge(new Edge());
+            //graphBuilder.AddEdge(new Edge());
             return this;
         }
 

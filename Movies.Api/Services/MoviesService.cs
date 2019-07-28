@@ -1,8 +1,6 @@
 ﻿using DesignPatterns;
 using Movies.Data;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Movies.Api
 {
@@ -17,10 +15,10 @@ namespace Movies.Api
             this.assembler = assembler;
         }
 
-        internal IReadOnlyList<Api.Movie> Find(Specification<Data.Movie> specification)
+        internal IReadOnlyList<Shared.Movie> Find(ISpecification<Shared.Movie> specification)
         {
-            IList<Shared.Movie> movies = this.movies.Find(specification).Map();
-            return movies.Select(movie => assembler.Build(movie)).ToList();
+            IReadOnlyList<Shared.Movie> movies = this.movies.Find(specification);
+            return movies;
         }
     }
 }

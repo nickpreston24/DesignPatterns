@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using DesignPatterns;
+using System;
 using System.Linq.Expressions;
 
 namespace Graphs
@@ -13,38 +12,11 @@ namespace Graphs
     /// </summary>
     /// <typeparam name="TNode">The type of the node.</typeparam>
     /// <seealso cref="Movies.Api.Graphs.IRelationship" />
-    public abstract class Relationship<TNode> : IRelationship<TNode>
+    ///
+
+    public abstract class Relationship<TNode> : Specification<TNode>, IRelationship
         where TNode : INode
     {
-        public abstract Expression<Func<TNode, TNode, bool>> ToExpression();
-
-        public bool AreRelated(TNode node, TNode neighbor)
-        {
-            var predicate = ToExpression().Compile();
-            return predicate(node, neighbor);
-        }
-
-        // Relate a given node to his neighbor by establishing a relationship between the two
-        // Add this relationship to both nodes' edges (collection of relationships)
-        IRelationship IRelationship<TNode>.Relate(TNode node, TNode neighbor)
-        {
-            //TODO:
-
-            //node.Edges(this);
-            throw new NotImplementedException();
-        }
-
-        //public bool Relate(TNode node, TNode neighbor)
-        //{
-        //    subject = node;
-        //    var predicate = ToExpression().Compile();
-        //    return predicate(node, neighbor);
-        //}
-
-        public Relationship<TNode> And(Relationship<TNode> relationship) => new AndRelationship<TNode>(this, relationship);
-
-        public Relationship<TNode> Or(Relationship<TNode> relationship) => new OrRelationship<TNode>(this, relationship);
-
         #region IDisposable Support
 
         private bool disposedValue = false; // To detect redundant calls
@@ -53,8 +25,6 @@ namespace Graphs
         {
             if (!disposedValue)
             {
-                //Console.WriteLine($"Disposing { GetType().Name }...");
-
                 if (disposing)
                 {
                     // TODO: dispose managed state (managed objects).
@@ -62,6 +32,7 @@ namespace Graphs
 
                 // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
                 // TODO: set large fields to null.
+
                 disposedValue = true;
             }
         }
@@ -85,57 +56,68 @@ namespace Graphs
         #endregion IDisposable Support
     }
 
-    public abstract class Relationship<TNode, Other> : IRelationship<TNode, Other>
-        where Other : INode
-        where TNode : INode
-    {
-        //private INode subject;
+    //public abstract class Relationship<TNode> : IRelationship<TNode>
+    //    where TNode : INode
+    //{
+    //    public abstract Expression<Func<TNode, TNode, bool>> Condition();
 
-        public abstract Expression<Func<TNode, Other, bool>> ToExpression();
+    //    public bool Relate(TNode node, TNode neighbor)
+    //    {
+    //        var predicate = Condition().Compile();
+    //        return predicate(node, neighbor);
+    //    }
 
-        public bool AreRelated(TNode node, Other other)
-        {
-            var predicate = ToExpression().Compile();
-            return predicate(node, other);
-        }
+    //    // Relate a given node to his neighbor by establishing a relationship between the two
+    //    // Add this relationship to both nodes' edges (collection of relationships)
+    //    IRelationship IRelationship<TNode>.Relate(TNode node, TNode neighbor)
+    //    {
+    //        //TODO:
 
-        IRelationship IRelationship<TNode, Other>.Relate(TNode node, Other neighbor) => throw new NotImplementedException();
+    //        //node.Edges(this);
+    //        throw new NotImplementedException();
+    //    }
 
-        //public bool Relate(TNode node, Other other)
-        //{
-        //    //subject = node;
-        //    var predicate = ToExpression().Compile();
-        //    return predicate(node, other);
-        //}
+    //    //public bool Relate(TNode node, TNode neighbor)
+    //    //{
+    //    //    subject = node;
+    //    //    var predicate = ToExpression().Compile();
+    //    //    return predicate(node, neighbor);
+    //    //}
 
-        public Relationship<TNode, Other> And(Relationship<TNode, Other> relationship)
-            => new AndRelationship<TNode, Other>(this, relationship);
+    //    public Relationship<TNode> And(Relationship<TNode> relationship) => new AndRelationship<TNode>(this, relationship);
 
-        public Relationship<TNode, Other> Or(Relationship<TNode, Other> relationship)
-            => new OrRelationship<TNode, Other>(this, relationship);
+    //    public Relationship<TNode> Or(Relationship<TNode> relationship) => new OrRelationship<TNode>(this, relationship);
+    //}
 
-        private bool disposedValue = false; // To detect redundant calls
+    //public abstract class Relationship<TNode, Other> : IRelationship<TNode, Other>
+    //    where Other : INode
+    //    where TNode : INode
+    //{
+    //    //private INode subject;
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
-            {
-                //Console.WriteLine($"Disposing { GetType().Name }...");
+    //    public abstract Expression<Func<TNode, Other, bool>> ToExpression();
 
-                if (disposing)
-                {
-                    //TODO: Dispose of all relationship-edges
-                }
+    //    public bool AreRelated(TNode node, Other other)
+    //    {
+    //        var predicate = ToExpression().Compile();
+    //        return predicate(node, other);
+    //    }
 
-                disposedValue = true;
-            }
-        }
+    //    IRelationship IRelationship<TNode, Other>.Relate(TNode node, Other neighbor) => throw new NotImplementedException();
 
-        public void Dispose()
-        {
-            Dispose(true);
-        }
-    }
+    //    //public bool Relate(TNode node, Other other)
+    //    //{
+    //    //    //subject = node;
+    //    //    var predicate = ToExpression().Compile();
+    //    //    return predicate(node, other);
+    //    //}
+
+    //    public Relationship<TNode, Other> And(Relationship<TNode, Other> relationship)
+    //        => new AndRelationship<TNode, Other>(this, relationship);
+
+    //    public Relationship<TNode, Other> Or(Relationship<TNode, Other> relationship)
+    //        => new OrRelationship<TNode, Other>(this, relationship);
+    //}
 
     //internal sealed class RelationshipAdapter
     //{

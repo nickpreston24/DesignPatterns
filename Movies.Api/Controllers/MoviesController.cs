@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Movies.Data;
 using System.Collections.Generic;
-using Movies.Shared;
 
 namespace Movies.Api
 {
@@ -31,13 +31,11 @@ namespace Movies.Api
            //ActionResult<IEnumerable<Movie>>
            IReadOnlyList<Movie> GetByRating(params string[] mpaaRatings)
         {
-            DesignPatterns.Specification<Shared.Movie> withSpecification = new Data.MpaaRatingSpecification(mpaaRatings)
-                //.And(new Data.GoodMovieSpecification(threshold: Data.Movie.MAX_RATING - 2))
-                ;
-            //bool isOk = rating.IsSatisfiedBy(movie);  //Exercising a single movie
-            //IReadOnlyList<Movie> movies = service.Find(withSpecification);
-            //return movies;
-            return null;
+            MpaaRatingSpecification withSpecification = new MpaaRatingSpecification(mpaaRatings);
+            //.And(new Data.GoodMovieSpecification(threshold: Data.Movie.MAX_RATING - 2))
+            ;
+            IReadOnlyList<Movie> movies = service.Find(withSpecification).ToDto();
+            return movies;
         }
 
         //[HttpPost]

@@ -5,23 +5,27 @@ namespace Graphs
     //Interface for a Neo4j-style relationship
     public interface IRelationship<TSubject> : IRelationship
         where TSubject : INode
-
     {
-        bool AreRelated(TSubject node, TSubject neighbor);
+        TSubject Subject { get; }
 
-        IRelationship Relate(TSubject node, TSubject neighbor);
+        //bool AreRelated(TSubject node, TSubject neighbor);
+
+        //IRelationship Relate(TSubject node, TSubject neighbor);
     }
 
     public interface IRelationship<TSubject, Other> : IRelationship
         where TSubject : INode
         where Other : INode
     {
-        bool AreRelated(TSubject node, Other other);
+        TSubject Subject { get; }
+        Other Neighbor { get; }
 
-        IRelationship Relate(TSubject node, Other neighbor);
+        //bool AreRelated(TSubject node, Other other);
+
+        //IRelationship Relate(TSubject node, Other neighbor);
     }
 
-    public interface IRelationship : IDisposable
+    public interface IRelationship : IEdge
     {
         //bool IsEdgeOf(INode subject);
     }

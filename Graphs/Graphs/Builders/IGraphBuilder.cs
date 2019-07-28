@@ -1,12 +1,11 @@
 ﻿using DesignPatterns;
-using Graphs;
 
 namespace Graphs
 {
     public interface IGraphBuilder<T> : ISingleton
         where T : INode
     {
-        IGraphBuilder<T> AddEdge(IEdge edge);
+        IGraphBuilder<T> AddEdge(IRelationship edge);
 
         T Build();
 

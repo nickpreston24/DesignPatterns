@@ -24,12 +24,15 @@ namespace Tests
         {
             //TODO: There is an issue where compiling multiple expressions, one dealing with a
             // collection produces a strange bug.  Look into it.
-            IReadOnlyList<Movies.Api.Movie> results = controller.GetByRating("G", "PG13", "R");
 
-            Print(results.Count);
-            Print(results);
-            Assert.IsNotNull(results);
-            Assert.Greater(results.Count, 0);
+            for (int i = 0; i < 5; i++)
+            {
+                IReadOnlyList<Movies.Api.Movie> results = controller.GetByRating("G", "PG13", "R");
+                Print(results.Count);
+                //Print(results);
+                Assert.IsNotNull(results);
+                Assert.Greater(results.Count, 0);
+            }
         }
 
         private void Print(IEnumerable<object> collection)

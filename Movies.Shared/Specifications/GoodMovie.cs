@@ -8,8 +8,10 @@ namespace Movies.Shared
     {
         public int Threshold { get; set; }
 
-        public GoodMovieSpecification(int threshold) => Threshold = threshold;
+        public GoodMovieSpecification(int threshold)
+            => Threshold = threshold;
 
-        public override Expression<Func<Movie, bool>> ToExpression() => movie => movie.Rating >= Threshold;
+        public override Expression<Func<Movie, bool>> Condition()
+            => movie => movie.Rating >= Threshold;
     }
 }

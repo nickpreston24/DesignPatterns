@@ -5,11 +5,19 @@ namespace DesignPatterns
 {
     public abstract class Specification<T> : ISpecification<T>
     {
-        public abstract Expression<Func<T, bool>> ToExpression();
+        private Func<T, bool> predicate;
+        private bool hasCompiled;
+
+        protected Specification()
+        {
+            predicate = Condition().Compile();
+            hasCompiled = true;
+        }
+
+        public abstract Expression<Func<T, bool>> Condition();
 
         public bool IsSatisfiedBy(T candidate)
         {
-            var predicate = ToExpression().Compile();
             return predicate(candidate);
         }
 
@@ -31,10 +39,10 @@ namespace DesignPatterns
             this.left = left;
         }
 
-        public override Expression<Func<T, bool>> ToExpression()
+        public override Expression<Func<T, bool>> Condition()
         {
-            var leftExpression = left.ToExpression();
-            var rightExpression = right.ToExpression();
+            var leftExpression = left.Condition();
+            var rightExpression = right.Condition();
 
             var paramExpr = Expression.Parameter(typeof(T));
             var exprBody = Expression.AndAlso(leftExpression.Body, rightExpression.Body);
@@ -56,10 +64,10 @@ namespace DesignPatterns
             this.left = left;
         }
 
-        public override Expression<Func<T, bool>> ToExpression()
+        public override Expression<Func<T, bool>> Condition()
         {
-            var leftExpression = left.ToExpression();
-            var rightExpression = right.ToExpression();
+            var leftExpression = left.Condition();
+            var rightExpression = right.Condition();
             var paramExpr = Expression.Parameter(typeof(T));
             var exprBody = Expression.OrElse(leftExpression.Body, rightExpression.Body);
             exprBody = (BinaryExpression)new ParameterReplacer(paramExpr).Visit(exprBody);

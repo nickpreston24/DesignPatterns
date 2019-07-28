@@ -24,7 +24,6 @@ namespace Movies.Api
                 .Select(entity => entity.ToDto())
                 .ToList();
 
-        // Todo: add a params delegate (see raindrop/history for ParamsFunc delegate that allowed multiple strings in a concat())
         public static IReadOnlyList<Shared.Movie> Map(this IEnumerable<Movie> movies)
             => movies
                 .Select(movie => movie.Map())

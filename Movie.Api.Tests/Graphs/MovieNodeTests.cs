@@ -1,6 +1,7 @@
 using DesignPatterns;
 using Graphs;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Movies.Api;
 using Movies.Api.Graphs;
 using Movies.Data;
 using System;
@@ -14,13 +15,6 @@ namespace Movie.Api.Tests.Graphs
     [TestClass]
     public class MovieNodeTests
     {
-        //MovieGraph movieGraph;
-
-        //public MovieNodeTests()
-        //{
-        //    movieGraph = CreateMovieGraph();
-        //}
-
         [TestMethod]
         public void CanIterateMovieGraph()
         {
@@ -39,17 +33,18 @@ namespace Movie.Api.Tests.Graphs
                 Print("Edges: " + edgeCount, "Nodes: " + nodeCount);
                 Print("------------------------\n");
 
-                Assert.IsTrue(edgeCount > 0);
+                //Assert.IsTrue(edgeCount > 0);
                 Assert.IsTrue(nodeCount > 0);
 
                 // Act
-                //RunIterator(movieGraph, bfsIterator);
+                RunIterator(movieGraph, bfsIterator);
             }
         }
 
         [TestMethod]
         public void TestSpaceCasing()
         {
+            // Todo: add a params delegate (see raindrop/history for ParamsFunc delegate that allowed multiple strings in a concat())
             var inputs = new string[] { "MovieGraph", "Movie Graph", "Movie-?#Graph", "-RAnDom -jUnk$__lol!" }.ToList();
 
             Console.WriteLine("cleaned:---");
@@ -61,6 +56,8 @@ namespace Movie.Api.Tests.Graphs
             Console.WriteLine("npm ---");
             inputs.ForEach(text => Console.WriteLine(
                 Regex.Replace(text.Clean(), "/[W_]+(.|$)/g", "")));
+
+            Print(inputs);
         }
 
         private bool RunIterator(MovieGraph movieGraph, IIterator<MovieNode> iterator)
@@ -90,7 +87,7 @@ namespace Movie.Api.Tests.Graphs
             var randomNodes =
                 movieLibrary.Aggregate(new List<MovieNode>(), (result, movie) =>
                 {
-                    var node = new MovieNode(new Movies.Api.Movie() { } /*movie.ToDto()*/)
+                    var node = new MovieNode(movie.ToDto())
                     {
                         Id = Enumerable.Range(1, movieLibrary.Count()).FirstRandom()
                     };
@@ -110,16 +107,16 @@ namespace Movie.Api.Tests.Graphs
 
             //TODO: node.Relate(...graphbuilder.addEdge(n1,n2)..., IRelationship r)
             // TODO: may have to use Vistor here:
-            //actor.Relate(new WorksWith(actor2), actor, actor2);
-            //actor.WorksWith(actor2); //Delegate to a the WorksWith<T> relationship
+            //actor.Relate(new WorksWith(actor2), actor, actor2);  //I'd like to use a delegate to hold & obfuscate the relationship
+            actor.WorksWith(actor2); //Delegate to a the WorksWith<T> relationship
 
             Print(actor, actor2);
             return movieGraph;
         }
 
-        private void Print(params object[] collection)
+        private void Print(params object[] array)
         {
-            foreach (var item in collection)
+            foreach (var item in array)
             {
                 if (item is IEnumerable<object> list)
                     Print(list);
@@ -131,7 +128,7 @@ namespace Movie.Api.Tests.Graphs
         private void Print(object item)
         {
             if (item is IEnumerable<object> list)
-                Print(new[] { list });
+                Print(list.ToArray());
 
             Console.WriteLine(item?.ToString());
             Debug.WriteLine(item?.ToString());

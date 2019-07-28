@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Common\Shared.csproj" />
     <ProjectReference Include="..\DesignPatternsTests\Singleton.csproj" />
+    <ProjectReference Include="..\DesignPatterns\Specs\Specifications.csproj" />
   </ItemGroup>
 
 </Project>

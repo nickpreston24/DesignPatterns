@@ -1,6 +1,4 @@
-﻿using Shared;
-
-namespace Graphs
+﻿namespace Graphs
 {
     public class GraphBuilder<T> : IGraphBuilder<T>
         where T : INode
@@ -15,7 +13,7 @@ namespace Graphs
 
         public T Build() => root;
 
-        public IGraphBuilder<T> AddEdge(IEdge edge)
+        public IGraphBuilder<T> AddEdge(IRelationship edge)
         {
             root.Edges.Add(edge);
             return this;
