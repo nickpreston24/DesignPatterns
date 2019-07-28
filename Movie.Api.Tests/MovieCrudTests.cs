@@ -15,7 +15,7 @@ namespace Tests
         [SetUp]
         public void Setup()
         {
-            moviesService = new MoviesService(new MovieRepository(), new MovieAssembler());
+            moviesService = new MoviesService(new MovieRepository());
             controller = new MoviesController(moviesService);
         }
 
@@ -27,11 +27,11 @@ namespace Tests
 
             for (int i = 0; i < 5; i++)
             {
-                IReadOnlyList<Movies.Api.Movie> results = controller.GetByRating("G", "PG13", "R");
-                Print(results.Count);
-                //Print(results);
-                Assert.IsNotNull(results);
-                Assert.Greater(results.Count, 0);
+                IReadOnlyList<Movies.Api.Movie> movies = controller.GetByRating("G", "PG13", "R");
+                Print(movies.Count);
+                //Print(movies);
+                Assert.IsNotNull(movies);
+                Assert.Greater(movies.Count, 0);
             }
         }
 

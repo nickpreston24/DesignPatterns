@@ -9,7 +9,7 @@ namespace Graphs
     {
         protected readonly IIterator<INode> iterator;
 
-        private List<INode> nodes = new List<INode>(0);
+        private readonly List<INode> nodes = new List<INode>(0);
 
         public ICollection<INode> Nodes
         {

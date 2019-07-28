@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Movies.Data;
 
 namespace Movies.Api
 {
@@ -11,6 +12,12 @@ namespace Movies.Api
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc()
+                .AddControllersAsServices();
+
+            services.AddScoped<MoviesService>();
+            services.AddTransient(x => new MoviesController(new MoviesService(new MovieRepository())));
+            //services.AddSingleton<MoviesController>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -18,7 +25,8 @@ namespace Movies.Api
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
+                app.UseMvcWithDefaultRoute();
             }
 
             app.Run(async (context) =>

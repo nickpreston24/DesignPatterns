@@ -1,10 +1,9 @@
 ﻿using DesignPatterns;
-using Movies.Shared;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Movies.Data
+namespace Movies.Shared
 {
     public class MpaaRatingSpecification : Specification<Movie>
     {

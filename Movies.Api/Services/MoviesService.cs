@@ -9,10 +9,10 @@ namespace Movies.Api
         private readonly IMovieRepository movies;
         private readonly MovieAssembler assembler;
 
-        public MoviesService(IMovieRepository movieRepository, MovieAssembler assembler)
+        public MoviesService(IMovieRepository movieRepository)
         {
             movies = movieRepository;
-            this.assembler = assembler;
+            assembler = new MovieAssembler();
         }
 
         internal IReadOnlyList<Shared.Movie> Find(ISpecification<Shared.Movie> specification)

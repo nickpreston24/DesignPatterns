@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Movies.Data;
+using Movies.Shared;
 using System.Collections.Generic;
 
 namespace Movies.Api
@@ -12,12 +13,12 @@ namespace Movies.Api
 
         public MoviesController(MoviesService moviesService) => service = moviesService;
 
-        //[HttpGet]
-        //public IEnumerable<Movie> Get()
-        //{
-        //    return new Movie[] { new Movie { Name = "The Matrix" },
-        //        new Movie { Name = "Star Wars: A New Hope" } };
-        //}
+        [HttpGet]
+        public IEnumerable<Movie> Get()
+        {
+            return new Movie[] { new Movie { Title = "The Matrix" },
+                new Movie { Title = "Star Wars: A New Hope" } };
+        }
 
         //[HttpGet("{id}")]
         //public string Get(int id)
@@ -26,15 +27,17 @@ namespace Movies.Api
         //}
 
         [HttpGet("{mpaa-rating}")]
-        public
-           /*async Task<ActionResult<IEnumerable<Movie>>>*/
-           //ActionResult<IEnumerable<Movie>>
-           IReadOnlyList<Movie> GetByRating(params string[] mpaaRatings)
+        public IReadOnlyList<Movie> GetByRating(params string[] mpaaRatings)
         {
-            MpaaRatingSpecification withSpecification = new MpaaRatingSpecification(mpaaRatings);
-            //.And(new Data.GoodMovieSpecification(threshold: Data.Movie.MAX_RATING - 2))
-            ;
-            IReadOnlyList<Movie> movies = service.Find(withSpecification).ToDto();
+            var mpaaSpec = new MpaaRatingSpecification(mpaaRatings);
+            var goodSpec = new GoodMovieSpecification(threshold: Shared.Movie.MAX_RATING - 2);
+
+            var compoundSpecification = new MpaaRatingSpecification(mpaaRatings)
+                .And(new GoodMovieSpecification(threshold: Data.Movie.MAX_RATING - 2));
+
+            //var movies = service.Find(compoundSpecification).ToDto();
+            //var movies = service.Find(mpaaSpec).ToDto();
+            var movies = service.Find(mpaaSpec.And(goodSpec)).ToDto();
             return movies;
         }
 
