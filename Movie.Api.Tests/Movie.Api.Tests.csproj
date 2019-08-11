@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Common\Shared.csproj" />
+    <ProjectReference Include="..\Graphs.Console\Movies.Console.csproj" />
     <ProjectReference Include="..\Graphs\Graphs.csproj" />
     <ProjectReference Include="..\Movies.Api\Movies.Api.csproj" />
   </ItemGroup>

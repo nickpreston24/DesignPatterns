@@ -9,6 +9,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Movies.Client;
+using System.Text;
+using System.Timers;
 
 namespace Movie.Api.Tests.Graphs
 {
@@ -39,6 +42,61 @@ namespace Movie.Api.Tests.Graphs
                 // Act
                 RunIterator(movieGraph, bfsIterator);
             }
+        }
+
+        [TestMethod]
+        public void CanStoreGraphToNeo4j()
+        {
+            // Todo: replace this with that query you found that
+            // does a merge insert for new nodes
+            string deleteAll = "MATCH (n:Movie) detach delete n";
+
+            int port = 7687;
+            using (var timer = TimeIt.GetTimer())
+            using (IGraph graph = CreateMovieGraph(1000))
+            using (var prototype = new HelloWorldExample($"bolt://localhost:{port}", "neo4j", "root"))
+            {
+                prototype.RunQuery(deleteAll);
+
+                string query = MockNeo4JQueryBuilder<MovieNode>.MakeQuery(graph.Nodes.ToArray());
+                Print(query);
+                var results = prototype.RunQuery(query);
+            }
+        }
+
+        private class MockNeo4JQueryBuilder<TNode>
+        where TNode : INode
+        {
+            // Makes the query from ToString() of TNode.
+            public static string MakeQuery(INode node)
+            {
+                return "CREATE (movie: Movie {" + node.ToString() + "})";
+            }
+
+            public static string MakeQuery(INode[] nodes)
+            {
+                int key = 0;
+                var sb = nodes.Aggregate(new StringBuilder("CREATE \n"), (result, next)
+                    => result.AppendLine("(movie" + key++
+                        + ": Movie {" + next.ToString() + "}),"));
+                sb.Length -= 3; //removes extra comma
+                return sb.ToString();
+            }
+
+            //private static string MakeQueryFromProps(TNode node)
+            //{
+            //System.Reflection.PropertyInfo[] props = typeof(TNode).GetProperties();
+            //string query = props.Aggregate(
+            //    new StringBuilder("CREATE (movie:"), (sb, next) =>
+            //    {
+            //        //string value = next.GetValue(node).ToString();
+            //        string value = node.ToString();
+            //        sb.Append($"{value}");
+            //        return sb;
+            //    })
+            //    .Append(")")
+            //    .ToString();
+            //}
         }
 
         [TestMethod]
@@ -78,9 +136,9 @@ namespace Movie.Api.Tests.Graphs
             return true;
         }
 
-        private MovieGraph CreateMovieGraph()
+        private MovieGraph CreateMovieGraph(uint count = 10)
         {
-            var movieLibrary = MockDb.GetMovies()
+            var movieLibrary = MockDb.GetMovies(count: count)
                 .AsEnumerable()
                 .Select(movie => movie.Map());
 

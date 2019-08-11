@@ -3,32 +3,30 @@ using System.Linq;
 
 namespace System
 {
-    //from: https://www.pluralsight.com/tech-blog/maybe
+    //Source from: https://www.pluralsight.com/tech-blog/maybe
     public struct Maybe<T>
     {
-        readonly IEnumerable<T> values;
-
+        private readonly IEnumerable<T> values;
 
         public bool HasValue => values != null && values.Any();
 
+        public static implicit operator Maybe<T>(T value) => Some(value);
+
         public static Maybe<T> Some(T value) => value == null
-                ? throw new InvalidOperationException()
+                ? throw new InvalidOperationException("Cannot add a null value for a reference type")
                 : new Maybe<T>(new[] { value });
 
         public static Maybe<T> None => new Maybe<T>(new T[0]);
 
         public T Value => (HasValue)
                 ? values.Single()
-                : throw new InvalidOperationException($"Maybe<{typeof(T).Name}> does not have a value!");
+                : throw new InvalidOperationException($"Maybe of type {typeof(T).Name} does not have a value");
 
-        /// <summary>
-        /// From: https://mikhail.io/2016/01/monads-explained-in-csharp/
+        /// Source from: https://mikhail.io/2016/01/monads-explained-in-csharp/
         /// https://mikhail.io/2018/07/monads-explained-in-csharp-again/
-        /// </summary>
-        /// <param name="value"></param>
-        public Maybe(T value) => values = new[] { value };
+        public Maybe(T value) => values = Enumerable.Repeat(value, 1);
 
-        Maybe(IEnumerable<T> values) => this.values = values;
+        private Maybe(IEnumerable<T> values) => this.values = values;
 
         public T ValueOrDefault(T @default) => !HasValue
                 ? @default
@@ -77,7 +75,7 @@ namespace System
         }
 
         /// <summary>
-        /// Source: https://mikhail.io/2018/07/monads-explained-in-csharp-again/
+        /// Source from : https://mikhail.io/2018/07/monads-explained-in-csharp-again/
         /// Sample Usage:
         /// Maybe<Shipper> shipperOfLastOrderOnCurrentAddress =
         ///     repo.GetCustomer(customerId)
@@ -87,9 +85,6 @@ namespace System
         ///     .Bind(lo => repo.GetOrder(lo.Id))
         ///     .Bind(o => o.Shipper);
         /// </summary>
-        /// <typeparam name="U"></typeparam>
-        /// <param name="func"></param>
-        /// <returns></returns>
         public Maybe<U> Bind<U>(Func<T, Maybe<U>> func) where U : class
         {
             var value = values.SingleOrDefault();

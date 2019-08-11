@@ -24,12 +24,14 @@ namespace System
                 .ToMaybe();
 
         /// <summary>
-        /// Return function is implemented with a combination of a public constructor which accepts Some value (notice that null is not allowed) and a static None method returning an object of 'no value'. Return extension method combines both of them in one call.
+        /// Return function is implemented with a combination of a
+        /// public constructor which accepts Some value (notice that null is not allowed)
+        /// and a static None method returning an object of 'no value'.
+        ///
+        /// The Return extension method combines both of them in one call.
         /// </summary>
         public static Maybe<T> Return<T>(this T value) where T : class => value != null
                 ? new Maybe<T>(value)
                 : Maybe<T>.None;
     }
 }
-
-

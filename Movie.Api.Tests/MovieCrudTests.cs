@@ -4,6 +4,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Tests
 {
@@ -35,18 +36,24 @@ namespace Tests
             }
         }
 
-        private void Print(IEnumerable<object> collection)
+        private void Print(params object[] array)
         {
-            foreach (var item in collection)
+            foreach (var item in array)
             {
+                if (item is IEnumerable<object> list)
+                    Print(list);
+
                 Print(item);
             }
         }
 
-        private void Print(object value)
+        private void Print(object item)
         {
-            Console.WriteLine(value?.ToString());
-            Debug.WriteLine(value?.ToString());
+            if (item is IEnumerable<object> list)
+                Print(list.ToArray());
+
+            Console.WriteLine(item?.ToString());
+            Debug.WriteLine(item?.ToString());
         }
     }
 }

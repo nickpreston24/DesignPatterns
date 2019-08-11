@@ -162,7 +162,7 @@ namespace System
         //Combine 2 different class instances into an out instance, R.
         public static R Merge<T, U, R>(T first, U second, out R result) => throw new NotImplementedException();
 
-        public static void ToPropertyDictionary(object @object) => @object?.GetType()
+        public static void ToPropertyDictionary(this object @object) => @object?.GetType()
             .GetProperties()?
             .ToDictionary(property => property.Name, property => property
             .GetValue(@object));

@@ -9,7 +9,7 @@ namespace Movies.Api.Graphs
 
         public MovieNode(Movie movie) => Movie = movie;
 
-        public override string ToString() => $"Id: {Id} {Movie?.ToString()}";
+        public override string ToString() => $"{nameof(Id)}: '{Id}', {Movie?.ToString()}";
 
         public new void Dispose(bool disposing)
         {

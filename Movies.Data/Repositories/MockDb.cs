@@ -11,8 +11,8 @@ namespace Movies.Data
         private static readonly char[] alphabet = Enumerable.Range('A', 26)
             .Select(n => (char)n).ToArray();
 
-        public static IQueryable<Movie> GetMovies() =>
-            Enumerable.Range(1, 100)
+        public static IQueryable<Movie> GetMovies(uint count = 10) =>
+            Enumerable.Range(1, (int)count)
             .Aggregate(new List<Movie>(), (result, next) =>
             {
                 result.Add(new Movie

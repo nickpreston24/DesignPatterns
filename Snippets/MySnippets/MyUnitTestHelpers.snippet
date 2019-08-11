@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>  
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">  
+    <CodeSnippet Format="1.0.0">  
+        <Header>			
+            <Title>MyDispose</Title>          
+			<Shortcut>MyUnitTestPrintMethods</Shortcut>			
+			<Description>Print ANYthing with a ToString(), including collections</Description>
+			<HelpUrl></HelpUrl>
+		</Header>  
+        <Snippet> 						
+			<Imports>
+				<Import>
+					<Namespace>System.Collections.Generic</Namespace>
+				</Import>
+			</Imports>			
+			
+			<Code Language="CSharp" > 
+
+   private void Print(params object[] array)
+        {
+            foreach (var item in array)
+            {
+                if (item is IEnumerable<object> list)
+                    Print(list);
+
+                Print(item);
+            }
+        }
+
+        private void Print(object item)
+        {
+            if (item is IEnumerable<object> list)
+                Print(list.ToArray());
+
+            Console.WriteLine(item?.ToString());
+            Debug.WriteLine(item?.ToString());
+        }
+
+			]]>  
+			</Code>  
+        </Snippet>  
+    </CodeSnippet>  
+</CodeSnippets>  

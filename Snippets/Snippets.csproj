@@ -192,6 +192,7 @@
     <None Include="MySnippets\MySetterGetterProperties.snippet" />
     <None Include="MySnippets\MyStopwatch.snippet" />
     <None Include="MySnippets\MyTryCatch.snippet" />
+    <None Include="MySnippets\MyUnitTestHelpers.snippet" />
     <None Include="MySnippets\MyViewModelProperties.snippet" />
     <None Include="MySnippets\README.md" />
     <None Include="source.extension.vsixmanifest">

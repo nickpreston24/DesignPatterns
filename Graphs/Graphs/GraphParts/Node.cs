@@ -8,13 +8,21 @@ namespace Graphs
     {
         protected bool disposed = false; // To detect redundant calls
 
+        private void DisposeEdges()
+        {
+            foreach (var edge in Edges ?? Enumerable.Empty<IEdge>())
+            {
+                edge.Dispose();
+            }
+        }
+
         protected IGraphBuilder<INode> graphBuilder = Singleton<GraphBuilder<INode>>.Instance;
 
         protected List<IRelationship> edges = new List<IRelationship>(0);
 
-        public int Id { get; set; }
-
         protected Node() => graphBuilder.AddNode(this);
+
+        public int Id { get; set; }
 
         public ICollection<IRelationship> Edges
         {
@@ -31,34 +39,17 @@ namespace Graphs
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposed)
+            if (disposed)
+                return;
+
+            if (disposing)
             {
-                if (disposing)
-                {
-                    //Console.WriteLine($"Disposing { GetType().Name }...");
-                    // TODO: dispose managed state (managed objects).
-
-                    DisposeEdges();
-                }
-
-                // TODO: set large fields to null.
-                disposed = true;
+                DisposeEdges();
             }
+
+            disposed = true;
         }
 
-        private void DisposeEdges()
-        {
-            foreach (var edge in Edges ?? Enumerable.Empty<IEdge>())
-            {
-                edge.Dispose();
-            }
-        }
-
-        // This code added to correctly implement the disposable pattern.
-        public void Dispose()
-        {
-            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-            Dispose(true);
-        }
+        public void Dispose() => Dispose(true);
     }
 }
