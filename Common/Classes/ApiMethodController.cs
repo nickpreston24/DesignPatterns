@@ -6,6 +6,7 @@ namespace Shared
 {
     public class ApiMethodController : ApiController
     {
+        //MASTER COMMENT!
 
         /// <summary>
         /// TODO: Put this method in an API.  Treat as a stub until it can be used.
