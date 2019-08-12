@@ -65,7 +65,7 @@ namespace Movie.Api.Tests.Graphs
         }
 
         private class MockNeo4JQueryBuilder<TNode>
-        where TNode : INode
+            where TNode : INode
         {
             // Makes the query from ToString() of TNode.
             public static string MakeQuery(INode node)
@@ -164,7 +164,7 @@ namespace Movie.Api.Tests.Graphs
             Actor actor2 = new Actor { Name = "Mark Ruffalo" };
 
             //TODO: node.Relate(...graphbuilder.addEdge(n1,n2)..., IRelationship r)
-            // TODO: may have to use Vistor here:
+            // TODO: may have to use Visitor here:
             //actor.Relate(new WorksWith(actor2), actor, actor2);  //I'd like to use a delegate to hold & obfuscate the relationship
             actor.WorksWith(actor2); //Delegate to a the WorksWith<T> relationship
 
