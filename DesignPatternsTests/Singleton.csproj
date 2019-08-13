@@ -93,12 +93,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Shared.csproj">
-      <Project>{5E4D9F12-A069-4979-9EE1-944FF27C1BF0}</Project>
-      <Name>Shared</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="singleton_impl.PNG" />
   </ItemGroup>
   <Choose>

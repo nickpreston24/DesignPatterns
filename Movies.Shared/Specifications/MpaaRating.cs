@@ -34,7 +34,7 @@ namespace Movies.Shared
 
         private static MpaaRating DetectRating(string rating)
         {
-            Enum.TryParse(rating, ignoreCase: true, out MpaaRating selectedRating);
+            Enum.TryParse(rating, true, out MpaaRating selectedRating);
             return selectedRating;
         }
     }

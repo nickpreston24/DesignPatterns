@@ -52,17 +52,15 @@ namespace System.IO
         public static void CreateStartupFolderShortcut()
         {
             var wshShell = new WshShellClass();
-            IWshShortcut shortcut;
             string startUpFolderPath =
               Environment.GetFolderPath(Environment.SpecialFolder.Startup);
 
             // Create the shortcut
-            shortcut =
-              (IWshShortcut)wshShell.CreateShortcut(
+            IWshShortcut shortcut = (IWshShortcut)wshShell.CreateShortcut(
                 startUpFolderPath + "\\" +
                 Assembly.GetExecutingAssembly().FullName
                 //Application.ProductName + ".lnk"
-                );
+            );
 
             //shortcut.TargetPath = Application.ExecutablePath;
             //shortcut.WorkingDirectory = Application.StartupPath;
@@ -76,7 +74,7 @@ namespace System.IO
             shortcut.Save();
         }
 
-        public static string GetShortcutTargetFile(string shortcutFilename)
+        private static string GetShortcutTargetFile(string shortcutFilename)
         {
             string pathOnly = Path.GetDirectoryName(shortcutFilename);
             string filenameOnly = Path.GetFileName(shortcutFilename);
@@ -84,33 +82,24 @@ namespace System.IO
             Shell32.Shell shell = new ShellClass();
             var folder = shell.NameSpace(pathOnly);
             var folderItem = folder.ParseName(filenameOnly);
-            if (folderItem != null)
-            {
-                var link =
-                  (ShellLinkObject)folderItem.GetLink;
-                return link.Path;
-            }
-
-            return string.Empty;
+            if (folderItem == null) return string.Empty;
+            var link =(ShellLinkObject)folderItem.GetLink;
+            return link.Path;
         }
 
         public static void DeleteStartupFolderShortcuts(string targetExeName)
         {
-            string startUpFolderPath =
-              Environment.GetFolderPath(Environment.SpecialFolder.Startup);
+            string startUpFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
 
-            var di = new DirectoryInfo(startUpFolderPath);
-            var files = di.GetFiles("*.lnk");
+            var directoryInfo = new DirectoryInfo(startUpFolderPath);
+            var files = directoryInfo.GetFiles("*.lnk");
 
-            foreach (var fi in files)
+            foreach (var fileInfo in files)
             {
-                string shortcutTargetFile = GetShortcutTargetFile(fi.FullName);
+                var shortcutTargetFile = GetShortcutTargetFile(fileInfo.FullName);
 
-                if (shortcutTargetFile.EndsWith(targetExeName,
-                      StringComparison.InvariantCultureIgnoreCase))
-                {
-                    System.IO.File.Delete(fi.FullName);
-                }
+                if (shortcutTargetFile.EndsWith(targetExeName, StringComparison.InvariantCultureIgnoreCase))
+                    File.Delete(fileInfo.FullName);
             }
         }
     }

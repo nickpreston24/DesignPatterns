@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.28917.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Singleton", "DesignPatternsTests\Singleton.csproj", "{27F7106D-347C-4BEC-A04B-EC4B6B3CB6E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Common\Shared.csproj", "{5E4D9F12-A069-4979-9EE1-944FF27C1BF0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snippets", "Snippets\Snippets.csproj", "{C796791F-D7AC-48B6-B1CE-2582CAC57A65}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VSSettings", "VSSettings", "{C7D77295-071B-4205-B444-CB335A913C59}"
@@ -72,6 +70,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Specifications", "DesignPat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectPools", "DesignPatterns\ObjectPool\ObjectPools.csproj", "{C5A82F7C-7A62-4EF0-8856-035F1C35DE17}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{5E4D9F12-A069-4979-9EE1-944FF27C1BF0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -82,10 +82,6 @@ Global
 		{27F7106D-347C-4BEC-A04B-EC4B6B3CB6E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27F7106D-347C-4BEC-A04B-EC4B6B3CB6E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27F7106D-347C-4BEC-A04B-EC4B6B3CB6E5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5E4D9F12-A069-4979-9EE1-944FF27C1BF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5E4D9F12-A069-4979-9EE1-944FF27C1BF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5E4D9F12-A069-4979-9EE1-944FF27C1BF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5E4D9F12-A069-4979-9EE1-944FF27C1BF0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C796791F-D7AC-48B6-B1CE-2582CAC57A65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C796791F-D7AC-48B6-B1CE-2582CAC57A65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C796791F-D7AC-48B6-B1CE-2582CAC57A65}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -142,6 +138,10 @@ Global
 		{C5A82F7C-7A62-4EF0-8856-035F1C35DE17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5A82F7C-7A62-4EF0-8856-035F1C35DE17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5A82F7C-7A62-4EF0-8856-035F1C35DE17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E4D9F12-A069-4979-9EE1-944FF27C1BF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E4D9F12-A069-4979-9EE1-944FF27C1BF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E4D9F12-A069-4979-9EE1-944FF27C1BF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E4D9F12-A069-4979-9EE1-944FF27C1BF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
