@@ -72,6 +72,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectPools", "DesignPatter
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{5E4D9F12-A069-4979-9EE1-944FF27C1BF0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedTests", "SharedTests\SharedTests.csproj", "{533AF993-D5C3-4665-BD14-92DDD04E24C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -142,6 +144,10 @@ Global
 		{5E4D9F12-A069-4979-9EE1-944FF27C1BF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E4D9F12-A069-4979-9EE1-944FF27C1BF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E4D9F12-A069-4979-9EE1-944FF27C1BF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{533AF993-D5C3-4665-BD14-92DDD04E24C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{533AF993-D5C3-4665-BD14-92DDD04E24C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{533AF993-D5C3-4665-BD14-92DDD04E24C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{533AF993-D5C3-4665-BD14-92DDD04E24C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

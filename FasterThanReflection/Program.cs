@@ -1,19 +1,18 @@
 ﻿using Delegates;
 using System;
-using System.Timers;
 using static System.Timers.TimeIt;
 
 namespace FasterThanReflection
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             string[] properties = new string[] { "Number", "Text", "Money" };
             var instance = new MyClass { Number = 25, Text = "lol", Money = 12d };
             var type = typeof(MyClass);
 
-            using (var timer = new TimeIt(TimeSpanUnit.Milliseconds))
+            using (var timer = GetTimer(TimeSpanUnit.Milliseconds))
             {
                 foreach (var property in properties)
                 {

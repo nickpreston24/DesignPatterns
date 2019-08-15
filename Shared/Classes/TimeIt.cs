@@ -11,9 +11,23 @@ namespace System.Timers
         private readonly Stopwatch watch;
         private TimeSpan elapsed;
         public TimeSpan Elapsed => elapsed;
-        public static TimeIt GetTimer([CallerMemberName] string name = ""
-            , TimeSpanUnit timeSpanUnit = TimeSpanUnit.Milliseconds)
-            => new TimeIt(timeSpanUnit, name);
+
+        public static TimeIt GetTimer(
+            TimeSpanUnit timeSpanUnit = TimeSpanUnit.Milliseconds,
+            [CallerMemberName] string name = ""
+        )
+        => new TimeIt(timeSpanUnit, name);
+
+        private TimeIt()
+        {
+        }
+
+        private TimeIt(TimeSpanUnit timeSpanUnit = TimeSpanUnit.Milliseconds, [CallerMemberName] string name = "")
+        {
+            this.name = name;
+            this.timeSpanUnit = timeSpanUnit;
+            watch = Stopwatch.StartNew();
+        }
 
         private static Dictionary<TimeSpanUnit, Func<TimeSpan, int>> spans = new Dictionary<TimeSpanUnit, Func<TimeSpan, int>>()
         {
@@ -25,13 +39,6 @@ namespace System.Timers
             [TimeSpanUnit.Milliseconds] = ts => ts.Milliseconds,
             //[TimeSpanUnit.Ticks] = ts => ts.Ticks, //TODO: add a cast to long in this dictionary somehow
         };
-
-        public TimeIt(TimeSpanUnit timeSpanUnit = TimeSpanUnit.Milliseconds, [CallerMemberName] string name = "")
-        {
-            this.name = name;
-            this.timeSpanUnit = timeSpanUnit;
-            watch = Stopwatch.StartNew();
-        }
 
         public void Dispose()
         {

@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\ApiMethodController.cs" />
+    <Compile Include="Classes\Range.cs" />
     <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="MaybeExtensionsTests.cs" />
     <Compile Include="SqlParameters\DatabaseAliasAttribute.cs" />

@@ -21,6 +21,7 @@
     <ProjectReference Include="..\Graphs\Graphs.csproj" />
     <ProjectReference Include="..\Movies.Data\Movies.Data.csproj" />
     <ProjectReference Include="..\Movies.Shared\Movies.Shared.csproj" />
+    <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
 
 </Project>

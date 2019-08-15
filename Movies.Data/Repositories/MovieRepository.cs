@@ -1,4 +1,5 @@
 ﻿using DesignPatterns;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Timers;
@@ -10,8 +11,12 @@ namespace Movies.Data
     /// </summary>
     public class MovieRepository : IMovieRepository
     {
+        private Func<Shared.Movie, bool> query;
+
         public IReadOnlyList<Shared.Movie> Find(ISpecification<Shared.Movie> specification)
         {
+            query = query ?? specification.Compile();
+
             // BTW: Session will be something like an EF Context, but for Neo4j
             //TODO: find a way to convert a Specification to one that uses Data.Movie and can be used in IQueryable filters.
             using (var timer = TimeIt.GetTimer())
@@ -19,7 +24,8 @@ namespace Movies.Data
             {
                 return MockDb.GetMovies()
                         .Map()
-                        .Where(specification.IsSatisfiedBy)
+                        //.Where(specification.IsSatisfiedBy)
+                        .Where(query)
                         .ToList();
             }
         }

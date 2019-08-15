@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using static System.Timers.TimeIt;
 
 namespace Tests
 {
@@ -25,15 +26,17 @@ namespace Tests
         {
             //TODO: There is an issue where compiling multiple expressions, one dealing with a
             // collection produces a strange bug.  Look into it.
-
-            for (int i = 0; i < 5; i++)
-            {
-                IReadOnlyList<Movies.Api.Movie> movies = controller.GetByRating("G", "PG13", "R");
-                Print(movies.Count);
-                //Print(movies);
-                Assert.IsNotNull(movies);
-                Assert.Greater(movies.Count, 0);
-            }
+            using (var timer = GetTimer())
+                for (int i = 0; i < 500; i++)
+                {
+                    IReadOnlyList<Movies.Api.Movie> movies = controller.GetByRating("G", "PG13", "R", "MA");
+                    if (movies.Count == 0)
+                        break;
+                    //Print(movies.Count);
+                    //Print(movies);
+                    Assert.IsNotNull(movies);
+                    Assert.Greater(movies.Count, 0);
+                }
         }
 
         private void Print(params object[] array)

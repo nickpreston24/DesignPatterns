@@ -7,6 +7,8 @@
     /// </summary>
     public partial interface ISpecification<in TSubject>
     {
+        System.Func<TSubject, bool> Compile();
+
         bool IsSatisfiedBy(TSubject candidate);
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Movies.Data;
 using Movies.Shared;
 using System.Collections.Generic;
 
@@ -29,15 +28,15 @@ namespace Movies.Api
         [HttpGet("{mpaa-rating}")]
         public IReadOnlyList<Movie> GetByRating(params string[] mpaaRatings)
         {
-            var mpaaSpec = new MpaaRatingSpecification(mpaaRatings);
-            var goodSpec = new GoodMovieSpecification(threshold: Shared.Movie.MAX_RATING - 2);
+            var goodMpaaRating = new MpaaRatingSpecification(mpaaRatings);
+            var goodMovie = new GoodMovieSpecification(threshold: Shared.Movie.MAX_RATING - 2);
 
-            var compoundSpecification = new MpaaRatingSpecification(mpaaRatings)
-                .And(new GoodMovieSpecification(threshold: Data.Movie.MAX_RATING - 2));
+            var moviePick = goodMpaaRating.And(goodMovie);
 
-            //var movies = service.Find(compoundSpecification).ToDto();
-            //var movies = service.Find(mpaaSpec).ToDto();
-            var movies = service.Find(mpaaSpec.And(goodSpec)).ToDto();
+            var movies = service
+                .Find(moviePick)
+                .ToDto();
+
             return movies;
         }
 
