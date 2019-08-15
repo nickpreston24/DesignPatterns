@@ -3,9 +3,9 @@
 The purpose of this project is to store common and create Design Patterns for use by anyone.
 
 Items to store:
-- [ ] Full C# implementations of design patterns (e.g. my ISingleton)
-- [ ] Templated implementations of GOF (Gang of Four) design patterns.
-- [ ] Custom or WIP DPs like my 'Minion' pattern.
+- [X] Full C# implementations of design patterns (e.g. my ISingleton)
+- [X] Templated implementations of GOF (Gang of Four) design patterns.
+- [X] Custom or WIP DPs like my 'Minion' pattern.
 - [ ] Code snippets of any of the above!
 
 Future iterations:
