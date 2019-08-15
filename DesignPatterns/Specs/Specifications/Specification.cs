@@ -7,8 +7,6 @@ namespace DesignPatterns
     {
         public abstract Expression<Func<T, bool>> Condition();
 
-        public Func<T, bool> Compile() => Condition().Compile();
-
         public bool IsSatisfiedBy(T candidate)
         {
             var predicate = Condition().Compile();

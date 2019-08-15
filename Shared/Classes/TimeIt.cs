@@ -10,6 +10,8 @@ namespace System.Timers
         private readonly TimeSpanUnit timeSpanUnit;
         private readonly Stopwatch watch;
         private TimeSpan elapsed;
+        private int units;
+
         public TimeSpan Elapsed => elapsed;
 
         public static TimeIt GetTimer(
@@ -44,13 +46,24 @@ namespace System.Timers
         {
             watch.Stop();
             elapsed = watch.Elapsed;
+            units = spans[timeSpanUnit](elapsed);
+            Print();
+        }
 
-            int units = spans[timeSpanUnit](elapsed);
+        private void Print()
+        {
+            //Don't print zeroes:
+            if (units == 0)
+                return;
+
+            Console.WriteLine(ToString());
+            Debug.WriteLine(ToString());
+        }
+
+        public override string ToString()
+        {
             string unitName = timeSpanUnit.GetDescription();
-            string message = $"{name} took {units} {unitName}";
-
-            Console.WriteLine(message);
-            Debug.WriteLine(message);
+            return $"{name} took {units} {unitName}";
         }
 
         public enum TimeSpanUnit

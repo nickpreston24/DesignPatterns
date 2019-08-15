@@ -27,7 +27,7 @@ namespace Tests
             //TODO: There is an issue where compiling multiple expressions, one dealing with a
             // collection produces a strange bug.  Look into it.
             using (var timer = GetTimer())
-                for (int i = 0; i < 500; i++)
+                for (int i = 0; i < 1000; i++)
                 {
                     IReadOnlyList<Movies.Api.Movie> movies = controller.GetByRating("G", "PG13", "R", "MA");
                     if (movies.Count == 0)
