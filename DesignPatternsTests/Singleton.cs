@@ -5,14 +5,16 @@ namespace DesignPatterns
 {
     //original source: http://richardpianka.com/2011/01/generic-singleton-pattern-in-c-with-reflection/
 
-    /// Factory    
+    /// Factory
     public static class Singleton<T> where T : class, ISingleton
     {
-        static volatile T instance;
-        static readonly object @lock = new object();
-        const BindingFlags FLAGS = BindingFlags.Instance | BindingFlags.NonPublic;
+        private static volatile T instance;
+        private static readonly object @lock = new object();
+        private const BindingFlags FLAGS = BindingFlags.Instance | BindingFlags.NonPublic;
 
-        static Singleton() { }
+        static Singleton()
+        {
+        }
 
         public static T Instance
         {
@@ -56,6 +58,7 @@ namespace DesignPatterns
         }
 
         #region For Use in C# 8
+
         //Todo: Replace with Selector's implementation when C# 8.0 comes out.
         /////Wrapper-Instance (Holds Implemenation)
         //class Selector : ISelector
@@ -72,6 +75,7 @@ namespace DesignPatterns
         //        return Implementation.GetInstance<T>();
         //    }
         //}
+
         #endregion For Use in C# 8
     }
 

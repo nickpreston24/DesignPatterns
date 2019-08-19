@@ -6,7 +6,7 @@ namespace Movies.Shared
     {
         public static int MAX_RATING { get; set; }
         public string Title { get; set; }
-        public MpaaRating MpaaRating { get; set; }
+        public MPAARating MpaaRating { get; set; }
         public double Rating { get; set; }
     }
 }

@@ -1,25 +1,60 @@
 ﻿using DesignPatterns;
 using System;
-using System.Linq.Expressions;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Graphs
 {
     /// <summary>
     /// A Relationship should:
-    /// Tell if it is an edge on a given Node.
+    /// Tell if it is an Relationship on a given Node.
     /// Chain to another specification
     /// Compile its expression(s)
     /// </summary>
-    /// <typeparam name="TNode">The type of the node.</typeparam>
-    /// <seealso cref="Movies.Api.Graphs.IRelationship" />
-    ///
-
-    public abstract class Relationship<TNode> : Specification<TNode>, IRelationship
+    public abstract class Relationship<TNode> : Specification<TNode>, IEdge<TNode>
         where TNode : INode
     {
+        private Func<TNode, bool> condition;
+        private INode subject;
+
+        protected Relationship(INode target)
+        {
+            Neighbor = target;
+            condition = condition ?? Condition().Compile();
+        }
+
+        public string Name { get; set; }
+
+        public INode Neighbor { get; set; }
+
+        public INode Subject => subject;
+
+        public bool HasSubject(TNode node) => Subject.Equals(node);
+
+        public bool IsEdgeOf(INode node) =>
+            //return node.Relationships.Any(edge => edge.Subject.Equals(subject));
+            //return this.Subject.Relationships.Any(x => x.Neighbor.Equals(node));
+            //node.Relationships.Any(relationship => relationship.Equals(this));
+            Neighbor.Equals(node) || Subject.Equals(node);
+
+        protected Relationship<TNode> Link(INode subject)
+        {
+            this.subject = subject;
+            return this;
+        }
+
         #region IDisposable Support
 
         private bool disposedValue = false; // To detect redundant calls
+
+        // This code added to correctly implement the disposable pattern.
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+            // TODO: uncomment the following line if the finalizer is overridden above.
+            // GC.SuppressFinalize(this);
+        }
 
         protected virtual void Dispose(bool disposing)
         {
@@ -44,15 +79,6 @@ namespace Graphs
         //   Dispose(false);
         // }
 
-        // This code added to correctly implement the disposable pattern.
-        public void Dispose()
-        {
-            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-            Dispose(true);
-            // TODO: uncomment the following line if the finalizer is overridden above.
-            // GC.SuppressFinalize(this);
-        }
-
         #endregion IDisposable Support
     }
 
@@ -67,13 +93,13 @@ namespace Graphs
     //        return predicate(node, neighbor);
     //    }
 
-    //    // Relate a given node to his neighbor by establishing a relationship between the two
-    //    // Add this relationship to both nodes' edges (collection of relationships)
+    //    // Relate a given node to his neighbor by establishing a Relationship between the two
+    //    // Add this Relationship to both nodes' Relationships (collection of Relationships)
     //    IRelationship IRelationship<TNode>.Relate(TNode node, TNode neighbor)
     //    {
     //        //TODO:
 
-    //        //node.Edges(this);
+    //        //node.Relationships(this);
     //        throw new NotImplementedException();
     //    }
 
@@ -84,9 +110,9 @@ namespace Graphs
     //    //    return predicate(node, neighbor);
     //    //}
 
-    //    public Relationship<TNode> And(Relationship<TNode> relationship) => new AndRelationship<TNode>(this, relationship);
+    //    public Relationship<TNode> And(Relationship<TNode> Relationship) => new AndRelationship<TNode>(this, Relationship);
 
-    //    public Relationship<TNode> Or(Relationship<TNode> relationship) => new OrRelationship<TNode>(this, relationship);
+    //    public Relationship<TNode> Or(Relationship<TNode> Relationship) => new OrRelationship<TNode>(this, Relationship);
     //}
 
     //public abstract class Relationship<TNode, Other> : IRelationship<TNode, Other>
@@ -112,26 +138,26 @@ namespace Graphs
     //    //    return predicate(node, other);
     //    //}
 
-    //    public Relationship<TNode, Other> And(Relationship<TNode, Other> relationship)
-    //        => new AndRelationship<TNode, Other>(this, relationship);
+    //    public Relationship<TNode, Other> And(Relationship<TNode, Other> Relationship)
+    //        => new AndRelationship<TNode, Other>(this, Relationship);
 
-    //    public Relationship<TNode, Other> Or(Relationship<TNode, Other> relationship)
-    //        => new OrRelationship<TNode, Other>(this, relationship);
+    //    public Relationship<TNode, Other> Or(Relationship<TNode, Other> Relationship)
+    //        => new OrRelationship<TNode, Other>(this, Relationship);
     //}
 
     //internal sealed class RelationshipAdapter
     //{
-    //    private IRelationship relationship;
+    //    private IRelationship Relationship;
 
     //    //private INode subject;
 
-    //    public RelationshipAdapter(IRelationship relationship) => this.relationship = relationship;
+    //    public RelationshipAdapter(IRelationship Relationship) => this.Relationship = Relationship;
 
-    //    public bool IsEdgeOf(INode subject)
+    //    public bool IsRelationshipOf(INode subject)
     //    {
-    //        //var relationships = subject.Edges.SelectMany(edge => edge.Relationships).ToArray();
-    //        //return relationships.Any(relationship => relationship.IsEdgeOf(subject));
-    //        //return this.IsEdgeOf(subject);
+    //        //var Relationships = subject.Relationships.SelectMany(Relationship => Relationship.Relationships).ToArray();
+    //        //return Relationships.Any(Relationship => Relationship.IsRelationshipOf(subject));
+    //        //return this.IsRelationshipOf(subject);
     //        //throw new NotImplementedException();
     //    }
     //}

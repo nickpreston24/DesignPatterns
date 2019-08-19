@@ -13,9 +13,9 @@
 
         public T Build() => root;
 
-        public IGraphBuilder<T> AddEdge(IRelationship edge)
+        public IGraphBuilder<T> AddEdge(IEdge edge)
         {
-            root.Edges.Add(edge);
+            root.Relationships.Add(edge);
             return this;
         }
 

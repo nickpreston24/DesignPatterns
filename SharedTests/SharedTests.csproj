@@ -56,12 +56,17 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Extensions\ExtensionsTests.cs" />
+    <Compile Include="Extensions\ExtractorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Regex\RegexBuilder.csproj">
+      <Project>{3f60fb8f-68f8-446b-9cb1-8958f7454c5b}</Project>
+      <Name>RegexBuilder</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Shared\Shared.csproj">
       <Project>{5E4D9F12-A069-4979-9EE1-944FF27C1BF0}</Project>
       <Name>Shared</Name>

@@ -82,6 +82,8 @@
     <Compile Include="SqlParameters\ParameterCreationOption.cs" />
     <Compile Include="SqlParameters\SqlParametersBuilder.cs" />
     <Compile Include="SqlParameters\SqlQueryOperator.cs" />
+    <Compile Include="Utils\CompareObjectsUtility.cs" />
+    <Compile Include="Utils\DeepCopyUtility.cs" />
     <Compile Include="ViewModel\ViewableCollectionBase.cs" />
     <Compile Include="Classes\ConsoleColor.cs" />
     <Compile Include="Classes\InstanceExtractor.cs" />

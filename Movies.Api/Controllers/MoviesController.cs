@@ -28,7 +28,7 @@ namespace Movies.Api
         [HttpGet("{mpaa-rating}")]
         public IReadOnlyList<Movie> GetByRating(params string[] mpaaRatings)
         {
-            var goodMpaaRating = new MpaaRatingSpecification(mpaaRatings);
+            var goodMpaaRating = new MpaaRating(mpaaRatings);
             var goodMovie = new GoodMovieSpecification(threshold: Shared.Movie.MAX_RATING - 2);
 
             var moviePick = goodMpaaRating.And(goodMovie);

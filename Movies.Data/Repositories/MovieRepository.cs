@@ -23,7 +23,7 @@ namespace Movies.Data
             using (ISession session = SessionFactory.OpenSession())
             {
                 return MockDb.GetMovies()
-                        .Map()
+                        .Map() //Map from Data.Movie -> Shared.Movie on the way out.
                         .Where(condition)
                         .ToList();
             }

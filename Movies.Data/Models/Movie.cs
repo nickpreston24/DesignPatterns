@@ -9,7 +9,7 @@ namespace Movies.Data
 
         public DateTime ReleaseDate { get; internal set; }
 
-        public MpaaRating MpaaRating { get; internal set; }
+        public MPAARating MpaaRating { get; internal set; }
 
         public string Genre { get; internal set; }
 

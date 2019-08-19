@@ -335,7 +335,8 @@ namespace System
             return item;
         }
 
-        public static bool IsNullable<T>(this T @object) where T : class => typeof(T).GetGenericTypeDefinition() == typeof(Nullable<>);
+        public static bool IsNullable<T>(this T @object) where T : class
+            => typeof(T).GetGenericTypeDefinition() == typeof(Nullable<>);
     }
 
     public enum LogTo

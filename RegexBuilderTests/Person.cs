@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
-namespace Shared.Classes
+namespace RegexBuilder
 {
     ///Common test class
-    public class Person : IEquatable<Person>
+    public class Person : RegexPart, IEquatable<Person>
     {
         public string FirstName { get; set; }
         public uint Age { get; set; }
@@ -18,17 +19,10 @@ namespace Shared.Classes
             => other != null
             && FirstName == other.FirstName
             && Age == other.Age
-            && GPA == other.GPA
-            && Country == other.Country;
+            && Country == other.Country
+            && GPA == other.GPA;
 
-        public override int GetHashCode()
-        {
-            var hashCode = 75998067;
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(FirstName);
-            hashCode = hashCode * -1521134295 + Age.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Country);
-            return hashCode;
-        }
+        public override int GetHashCode() => HashCode.Combine(FirstName, Age, Country, GPA);
 
         public override string ToString()
             => new StringBuilder()
@@ -38,10 +32,10 @@ namespace Shared.Classes
             .AppendLine($"{nameof(Country)}: {Country}")
             .ToString();
 
-        public static bool operator ==(Person left, Person right)
-            => EqualityComparer<Person>.Default.Equals(left, right);
+        protected override Regex Generate() => throw new NotImplementedException();
 
-        public static bool operator !=(Person left, Person right)
-            => !(left == right);
+        public static bool operator ==(Person left, Person right) => EqualityComparer<Person>.Default.Equals(left, right);
+
+        public static bool operator !=(Person left, Person right) => !(left == right);
     }
 }
