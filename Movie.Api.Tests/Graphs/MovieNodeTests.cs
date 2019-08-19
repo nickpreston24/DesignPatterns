@@ -13,10 +13,10 @@ using Movies.Client;
 using System.Text;
 using System.Timers;
 
-namespace Movie.Api.Tests.Graphs
+namespace MoviesApi.Tests
 {
     [TestClass]
-    public class MovieNodeTests
+    public partial class MovieNodeTests
     {
         [TestMethod]
         public void CanIterateMovieGraph()
@@ -166,7 +166,7 @@ namespace Movie.Api.Tests.Graphs
             //TODO: node.Relate(...graphbuilder.addEdge(n1,n2)..., IRelationship r)
             // TODO: may have to use Visitor here:
             //actor.Relate(new WorksWith(actor2), actor, actor2);  //I'd like to use a delegate to hold & obfuscate the relationship
-            actor.WorksWith(actor2); //Delegate to a the WorksWith<T> relationship
+            //actor.WorksWith(actor2); //Delegate to a the WorksWith<T> relationship
 
             Print(actor, actor2);
             return movieGraph;

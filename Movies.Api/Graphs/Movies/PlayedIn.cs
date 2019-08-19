@@ -4,11 +4,13 @@ using System.Linq.Expressions;
 
 namespace Movies.Api.Graphs
 {
-    internal sealed class PlayedIn : Relationship<MovieNode>
+    public sealed class PlayedIn : Relationship<MovieNode>
     {
         private object actor;
 
-        public PlayedIn(object actor) => this.actor = actor;
+        public PlayedIn(Actor actor)
+            : base(actor)
+            => this.actor = actor;
 
         public override Expression<Func<MovieNode, bool>> Condition()
             => (film)

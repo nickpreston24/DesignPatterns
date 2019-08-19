@@ -2,6 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Authors>Michael Preston</Authors>
+    <Company>Harvest Haven</Company>
+    <Description>A set of Graph templates for use with any in-memory algorithms.</Description>
+    <RepositoryUrl>https://github.com/MikePreston17/DesignPatterns</RepositoryUrl>
+    <RepositoryType>github</RepositoryType>
+    <PackageTags>C#, .NET Core, Graphs, API</PackageTags>
+    <PackageReleaseNotes>This is the initial release</PackageReleaseNotes>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>

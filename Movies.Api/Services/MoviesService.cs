@@ -15,7 +15,7 @@ namespace Movies.Api
             assembler = new MovieAssembler();
         }
 
-        internal IReadOnlyList<Shared.Movie> Find(ISpecification<Shared.Movie> specification)
+        internal IReadOnlyList<Shared.Movie> Find(Specification<Shared.Movie> specification)
         {
             IReadOnlyList<Shared.Movie> movies = this.movies.Find(specification);
             return movies;

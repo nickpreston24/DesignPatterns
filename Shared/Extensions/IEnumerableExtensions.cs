@@ -95,7 +95,7 @@ namespace System
             return ExtremumBy(source, selector, (x, y) => comparer.Compare(x, y));
         }
 
-        static TSource ExtremumBy<TSource, TKey>(IEnumerable<TSource> source,
+        private static TSource ExtremumBy<TSource, TKey>(IEnumerable<TSource> source,
             Func<TSource, TKey> selector, Func<TKey, TKey, int> comparer)
         {
             using (var sourceIterator = source.GetEnumerator())

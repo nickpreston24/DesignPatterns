@@ -31,8 +31,8 @@ namespace Graphs
         {
             return (Nodes == null
                 ? Enumerable.Empty<IEdge>()
-                : Nodes.Where(n => n.Edges != null)
-                    .SelectMany(n => n.Edges)
+                : Nodes.Where(n => n.Relationships != null)
+                    .SelectMany(n => n.Relationships)
                 )
                 .ToList();
         }

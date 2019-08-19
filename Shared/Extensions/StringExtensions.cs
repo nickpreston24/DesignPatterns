@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -13,7 +14,8 @@ namespace System
 {
     public static partial class Extensions
     {
-        public static string Append(this string input, string text) => new StringBuilder(input).Append(text).ToString();
+        public static string Append(this string origin, string text)
+            => new StringBuilder(origin).Append(text).ToString();
 
         public static string Reverse(this string text) => new string(text.ToCharArray().Reverse().ToArray());
 
@@ -39,18 +41,11 @@ namespace System
         public static string SerializeToXml<T>(this T @object)
             where T : class
         {
-            try
+            var serializer = new XmlSerializer(typeof(T));
+            using (var writer = new StringWriter())
             {
-                var serializer = new XmlSerializer(typeof(T));
-                using (var writer = new StringWriter())
-                {
-                    serializer.Serialize(writer, @object);
-                    return writer.ToString();
-                }
-            }
-            catch (Exception)
-            {
-                throw;
+                serializer.Serialize(writer, @object);
+                return writer.ToString();
             }
         }
 
@@ -64,109 +59,6 @@ namespace System
             writer.Flush();
             stream.Position = 0;
             return stream;
-        }
-
-        // Extracts Object T from RegEx pattern
-        // TODO: rewrite using the 'Slurp' method
-        public static T Extract<T>(this string text, string regexPattern,
-            bool matchExactPattern = true, bool matchCount = true)
-        {
-            if (string.IsNullOrWhiteSpace(text))
-            {
-                return default(T);
-            }
-
-            var properties = typeof(T).GetProperties(BindingFlags.Instance | BindingFlags.Public);
-
-            if (properties?.Count() == 0)
-            {
-                return default(T);
-            }
-
-            var errors = new StringBuilder();
-
-            try
-            {
-                var regex = new Regex(regexPattern, RegexOptions.Singleline);
-                var match = regex.Match(text);
-
-                if (!match.Success)
-                {
-                    errors.AppendLine($"No matches found! Could not extract a '{typeof(T).Name}' instance from regex pattern:\n{regexPattern}.\n");
-                    errors.AppendLine(text);
-                    errors.AppendLine("Properties without a mapped Group:");
-                    properties.Select(property => property.Name)
-                            .Except(regex.GetGroupNames())
-                            .ToList()
-                            .ForEach(name => errors.Append(name + '\t'));
-                    errors.AppendLine();
-
-                    if (errors.Length > 0)
-                    {
-                        throw new Exception(errors.ToString());
-                    }
-                }
-
-                if (matchExactPattern && match.Groups.Count - 1 != properties.Length)
-                {
-                    if (matchCount)
-                    {
-                        errors.AppendLine($"{MethodBase.GetCurrentMethod().Name}() WARNING: Number of Matched Groups ({match.Groups.Count}) does not equal the number of properties for the given class '{typeof(T).Name}'({properties.Length})!  Check the class type and regex pattern for errors and try again.");
-
-                        errors.AppendLine("Values Parsed Successfully:");
-                    }
-
-                    for (int groupIndex = 1; groupIndex < match.Groups.Count; groupIndex++)
-                    {
-                        errors.Append($"{match.Groups[groupIndex].Value}\t");
-                    }
-
-                    errors.AppendLine();
-
-                    if (errors.Length >= 0)
-                    {
-                        throw new Exception(errors.ToString());
-                    }
-                }
-
-                //object instance = Activator.CreateInstance(typeof(T));
-                object instance = Activator.CreateInstance(GetAssignableTypes<T>().FirstOrDefault());
-                //T instance = default(T);
-
-                foreach (var property in properties)
-                {
-                    try
-                    {
-                        string value = match?.Groups[property.Name]?.Value?.Trim();
-
-                        if (!string.IsNullOrWhiteSpace(value))
-                        {
-                            property.SetValue(instance, TypeDescriptor.GetConverter(property.PropertyType).ConvertFrom(value), null);
-                        }
-                        else
-                        {
-                            property.SetValue(instance, null, null);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        errors.AppendLine(ex.ToString());
-                        continue;
-                    }
-                }
-
-                if (errors.Length >= 0)
-                {
-                    throw new Exception(errors.ToString());
-                }
-
-                return (T)instance;
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.ToString());
-                throw ex;
-            }
         }
 
         /// <summary>
@@ -232,16 +124,24 @@ namespace System
         /// Returns characters from right of specified length
         /// </summary>
         /// <param name="value">String value</param>
-        /// <param name="length">Max number of charaters to return</param>
+        /// <param name="length">Max number of characters to return</param>
         /// <returns>Returns string from right</returns>
-        public static string Right(this string value, int length) => value != null && value.Length > length ? value.Substring(value.Length - length) : value;
+        public static string Right(this string value, int length)
+            => value != null
+            && value.Length > length
+                ? value.Substring(value.Length - length)
+                : value;
 
         /// <summary>
         /// Returns characters from left of specified length
         /// </summary>
         /// <param name="value">String value</param>
-        /// <param name="length">Max number of charaters to return</param>
+        /// <param name="length">Max number of characters to return</param>
         /// <returns>Returns string from left</returns>
-        public static string Left(this string value, int length) => value != null && value.Length > length ? value.Substring(0, length) : value;
+        public static string Left(this string value, int length)
+            => value != null
+            && value.Length > length
+                ? value.Substring(0, length)
+                : value;
     }
 }

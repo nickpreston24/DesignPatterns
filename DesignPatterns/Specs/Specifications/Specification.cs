@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace DesignPatterns
@@ -19,8 +18,6 @@ namespace DesignPatterns
 
         public Specification<T> Or(Specification<T> specification)
             => new OrSpecification<T>(this, specification);
-
-        public void Compile() => Condition().Compile();
     }
 
     internal class AndSpecification<T> : Specification<T>

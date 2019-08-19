@@ -1,6 +1,6 @@
 ﻿namespace Movies.Shared
 {
-    public enum MpaaRating
+    public enum MPAARating
     {
         G,
         PG13,

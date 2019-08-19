@@ -5,24 +5,24 @@ using System.Linq.Expressions;
 
 namespace Movies.Shared
 {
-    public class MpaaRatingSpecification : Specification<Movie>
+    public partial class MpaaRating : Specification<Movie>
     {
         // TODO: Add some currying here
         private Func<Movie, bool> nonAdult = movie
-             => movie.MpaaRating != MpaaRating.R
-             && movie.MpaaRating != MpaaRating.MA;
+             => movie.MpaaRating != MPAARating.R
+             && movie.MpaaRating != MPAARating.MA;
 
-        public MpaaRating[] Ratings { get; private set; }
+        public MPAARating[] Ratings { get; private set; }
 
-        public MpaaRatingSpecification(MpaaRating mpaaRating)
-            : this(new MpaaRating[] { mpaaRating })
+        public MpaaRating(MPAARating mpaaRating)
+            : this(new MPAARating[] { mpaaRating })
         {
         }
 
-        public MpaaRatingSpecification(params MpaaRating[] ratings)
+        public MpaaRating(params MPAARating[] ratings)
             => Ratings = ratings.Distinct().ToArray();
 
-        public MpaaRatingSpecification(params string[] mpaaRatings)
+        public MpaaRating(params string[] mpaaRatings)
             : this(mpaaRatings.Select(rating => DetectRating(rating)).ToArray())
         {
         }
@@ -32,9 +32,9 @@ namespace Movies.Shared
                 => Ratings.Any(rating => movie.MpaaRating.Equals(rating))
                    && nonAdult(movie);
 
-        private static MpaaRating DetectRating(string rating)
+        private static MPAARating DetectRating(string rating)
         {
-            Enum.TryParse(rating, true, out MpaaRating selectedRating);
+            Enum.TryParse(rating, true, out MPAARating selectedRating);
             return selectedRating;
         }
     }

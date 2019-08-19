@@ -5,7 +5,7 @@ namespace Graphs
     public interface IGraphBuilder<T> : ISingleton
         where T : INode
     {
-        IGraphBuilder<T> AddEdge(IRelationship edge);
+        IGraphBuilder<T> AddEdge(IEdge edge);
 
         T Build();
 

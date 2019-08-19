@@ -27,7 +27,7 @@ namespace Movies.Data
 
         private static int GetRating() => Enumerable.Range(1, Movie.MAX_RATING - 1).FirstRandom();
 
-        private static MpaaRating GetMpaaRating() => EnumExtensions.GetRandom<MpaaRating>();
+        private static MPAARating GetMpaaRating() => EnumExtensions.GetRandom<MPAARating>();
 
         private static string GetTitle() => alphabet.TakeRandom(10)
             .Aggregate(new StringBuilder(), (res, nxt) =>

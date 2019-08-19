@@ -4,11 +4,10 @@ namespace Movies.Api
 {
     public class Movie
     {
-        //public int Id { get; internal set; }
-        public string Title { get; internal set; }
+        public string Title { get; set; }
 
-        public MpaaRating MpaaRating { get; internal set; }
-        public double Rating { get; internal set; }
+        public MPAARating MpaaRating { get; set; }
+        public double Rating { get; set; }
 
         public override string ToString() =>
             $"{nameof(Title)}: '{Title}'," +

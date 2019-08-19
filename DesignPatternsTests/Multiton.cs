@@ -3,11 +3,13 @@ using System.Collections.Concurrent;
 
 namespace DesignPatterns
 {
-    public sealed class Multiton
+    internal sealed class Multiton
     {
         private static readonly ConcurrentDictionary<Type, ISingleton> instances = new ConcurrentDictionary<Type, ISingleton>();
 
-        private Multiton() { }
+        private Multiton()
+        {
+        }
 
         public static T GetInstance<T>() where T : class, ISingleton
         {
