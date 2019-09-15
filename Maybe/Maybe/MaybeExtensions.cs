@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
-namespace System
+namespace Shared.Maybe
 {
     public static class MaybeExtensions
     {
@@ -39,9 +40,16 @@ namespace System
             => value != null
                 ? new Maybe<T>(value)
                 : Maybe<T>.None;
-    }
 
-    public static class FutureExtensions
-    {
+        /// <summary>
+        /// Unwraps the specified Maybe<typeparamref name="TResult"/>.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="maybe">The maybe.</param>
+        /// <returns></returns>
+        public static Maybe<TResult> Unwrap<TResult>(this Maybe<Maybe<TResult>> maybe)
+            => maybe.HasValue
+                ? new Maybe<TResult>(maybe.Value.Value)
+                : throw new ArgumentNullException(nameof(maybe));
     }
 }

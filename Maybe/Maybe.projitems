@@ -10,7 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Future\Future.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MaybeExtensionsTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Maybe\Maybe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Maybe\MaybeExtensions.cs" />
   </ItemGroup>

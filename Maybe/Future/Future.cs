@@ -1,6 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
-namespace System
+namespace Shared
 {
     /// <summary>
     /// Source: https://mikhail.io/2018/07/monads-explained-in-csharp-again/
@@ -22,6 +23,6 @@ namespace System
             return new Future<U>(nextTask);
         }
 
-        public void OnComplete(Action<T> action) => currentTask.ContinueWith(t => action(t.Result));
+        public void OnComplete(Action<T> action) => currentTask.ContinueWith(task => action(task.Result));
     }
 }

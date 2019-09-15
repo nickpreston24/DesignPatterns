@@ -71,6 +71,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csp
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Maybe", "Maybe\Maybe.shproj", "{75CDF10E-151A-41F9-9636-6EAC6F2DB24F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCustomNuget", "MyCustomNuget\MyCustomNuget.csproj", "{42F274F3-E81B-49AB-959F-DFD6E72871EF}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Maybe\Maybe.projitems*{75cdf10e-151a-41f9-9636-6eac6f2db24f}*SharedItemsImports = 13
@@ -140,6 +142,10 @@ Global
 		{5E4D9F12-A069-4979-9EE1-944FF27C1BF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E4D9F12-A069-4979-9EE1-944FF27C1BF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E4D9F12-A069-4979-9EE1-944FF27C1BF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42F274F3-E81B-49AB-959F-DFD6E72871EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42F274F3-E81B-49AB-959F-DFD6E72871EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42F274F3-E81B-49AB-959F-DFD6E72871EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42F274F3-E81B-49AB-959F-DFD6E72871EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
