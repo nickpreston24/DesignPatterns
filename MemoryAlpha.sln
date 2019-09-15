@@ -70,11 +70,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectPools", "DesignPatter
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{5E4D9F12-A069-4979-9EE1-944FF27C1BF0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RegexBuilder", "Regex\RegexBuilder.csproj", "{3F60FB8F-68F8-446B-9CB1-8958F7454C5B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RegexBuilderTests", "RegexBuilderTests\RegexBuilderTests.csproj", "{B0ADEF2E-230D-4CB5-A887-5B6C6E783DC7}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Maybe", "Maybe\Maybe.shproj", "{75CDF10E-151A-41F9-9636-6EAC6F2DB24F}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Maybe\Maybe.projitems*{75cdf10e-151a-41f9-9636-6eac6f2db24f}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -140,14 +141,6 @@ Global
 		{5E4D9F12-A069-4979-9EE1-944FF27C1BF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E4D9F12-A069-4979-9EE1-944FF27C1BF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E4D9F12-A069-4979-9EE1-944FF27C1BF0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3F60FB8F-68F8-446B-9CB1-8958F7454C5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3F60FB8F-68F8-446B-9CB1-8958F7454C5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3F60FB8F-68F8-446B-9CB1-8958F7454C5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3F60FB8F-68F8-446B-9CB1-8958F7454C5B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B0ADEF2E-230D-4CB5-A887-5B6C6E783DC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B0ADEF2E-230D-4CB5-A887-5B6C6E783DC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B0ADEF2E-230D-4CB5-A887-5B6C6E783DC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B0ADEF2E-230D-4CB5-A887-5B6C6E783DC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

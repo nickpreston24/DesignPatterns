@@ -8,13 +8,12 @@ namespace System.Linq.Expressions
         {
             try
             {
-                return System.Linq.Dynamic.DynamicExpression.ParseLambda(typeof(T), typeof(bool), condition, values);
+                return Dynamic.DynamicExpression.ParseLambda(typeof(T), typeof(bool), condition, values);
             }
             catch (Exception)
             {
                 throw;
             }
-
         }
 
         public static bool CheckCondition<T>(T instance, string condition, params object[] values)
@@ -41,7 +40,6 @@ namespace System.Linq.Expressions
                 throw;
             }
         }
-
     }
 
     public static partial class ExpressionExtensions
@@ -98,7 +96,5 @@ namespace System.Linq.Expressions
                 throw;
             }
         }
-
     }
-
 }

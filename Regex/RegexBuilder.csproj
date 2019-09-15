@@ -1,9 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
-    <RootNamespace>RegexBuilder</RootNamespace>
-    <AssemblyName>RegexBuilder</AssemblyName>
-  </PropertyGroup>
-
-</Project>
