@@ -21,7 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>preview</LangVersion>
+    <LangVersion>default</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -75,6 +75,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\ApiMethodController.cs" />
+    <Compile Include="Classes\Future.cs" />
+    <Compile Include="Classes\Print.cs" />
     <Compile Include="Classes\Range.cs" />
     <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="MaybeExtensionsTests.cs" />

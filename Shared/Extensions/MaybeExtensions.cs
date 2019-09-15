@@ -5,22 +5,27 @@ namespace System
 {
     public static class MaybeExtensions
     {
-        public static Maybe<T> ToMaybe<T>(this T value) where T : class => value != null
+        public static Maybe<T> ToMaybe<T>(this T value) where T : class
+            => value != null
                 ? Maybe.Some(value)
                 : Maybe<T>.None;
 
-        public static Maybe<T> ToMaybe<T>(this T? nullable) where T : struct => nullable.HasValue
+        public static Maybe<T> ToMaybe<T>(this T? nullable) where T : struct
+            => nullable.HasValue
                 ? Maybe.Some(nullable.Value)
                 : Maybe<T>.None;
 
-        public static Maybe<string> NoneIfEmpty(this string s) => string.IsNullOrEmpty(s)
+        public static Maybe<string> NoneIfEmpty(this string text)
+            => string.IsNullOrEmpty(text)
                 ? Maybe<string>.None
-                : Maybe.Some(s);
+                : Maybe.Some(text);
 
-        public static Maybe<T> FirstOrNone<T>(this IEnumerable<T> self) where T : class => self.FirstOrDefault()
-                .ToMaybe();
+        public static Maybe<T> FirstOrNone<T>(this IEnumerable<T> self) where T : class
+            => self.FirstOrDefault()
+                   .ToMaybe();
 
-        public static Maybe<T> FirstOrNone<T>(this IEnumerable<T?> self) where T : struct => self.FirstOrDefault()
+        public static Maybe<T> FirstOrNone<T>(this IEnumerable<T?> self) where T : struct
+            => self.FirstOrDefault()
                 .ToMaybe();
 
         /// <summary>
@@ -30,8 +35,13 @@ namespace System
         ///
         /// The Return extension method combines both of them in one call.
         /// </summary>
-        public static Maybe<T> Return<T>(this T value) where T : class => value != null
+        public static Maybe<T> Return<T>(this T value) where T : class
+            => value != null
                 ? new Maybe<T>(value)
                 : Maybe<T>.None;
+    }
+
+    public static class FutureExtensions
+    {
     }
 }

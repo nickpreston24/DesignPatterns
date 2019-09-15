@@ -70,9 +70,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectPools", "DesignPatter
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{5E4D9F12-A069-4979-9EE1-944FF27C1BF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegexBuilder", "Regex\RegexBuilder.csproj", "{3F60FB8F-68F8-446B-9CB1-8958F7454C5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RegexBuilder", "Regex\RegexBuilder.csproj", "{3F60FB8F-68F8-446B-9CB1-8958F7454C5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegexBuilderTests", "RegexBuilderTests\RegexBuilderTests.csproj", "{B0ADEF2E-230D-4CB5-A887-5B6C6E783DC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RegexBuilderTests", "RegexBuilderTests\RegexBuilderTests.csproj", "{B0ADEF2E-230D-4CB5-A887-5B6C6E783DC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

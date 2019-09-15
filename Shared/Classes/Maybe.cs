@@ -13,14 +13,14 @@ namespace System
         public static implicit operator Maybe<T>(T value) => Some(value);
 
         public static Maybe<T> Some(T value) => value == null
-                ? throw new InvalidOperationException("Cannot add a null value for a reference type")
+                ? throw new ArgumentNullException($"Cannot add a null value for a reference type like {typeof(T).Name}")
                 : new Maybe<T>(new[] { value });
 
         public static Maybe<T> None => new Maybe<T>(new T[0]);
 
-        public T Value => (HasValue)
+        public T Value => HasValue
                 ? values.Single()
-                : throw new InvalidOperationException($"Maybe of type {typeof(T).Name} does not have a value");
+                : throw new Exception($"Maybe of type {typeof(T).Name} does not have a value");
 
         /// Source from: https://mikhail.io/2016/01/monads-explained-in-csharp/
         /// https://mikhail.io/2018/07/monads-explained-in-csharp-again/
@@ -44,14 +44,9 @@ namespace System
         public Maybe<T> Case(Action<T> some, Action none)
         {
             if (HasValue)
-            {
                 some(Value);
-            }
             else
-            {
                 none();
-            }
-
             return this;
         }
 
