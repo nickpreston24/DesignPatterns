@@ -9,7 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snippets", "Snippets\Snippe
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VSSettings", "VSSettings", "{C7D77295-071B-4205-B444-CB335A913C59}"
 	ProjectSection(SolutionItems) = preProject
-		Snippets\MySnippets\.editorconfig = Snippets\MySnippets\.editorconfig
 		Snippets\MySnippets\README.MD = Snippets\MySnippets\README.MD
 	EndProjectSection
 EndProject
