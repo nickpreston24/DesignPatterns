@@ -15,9 +15,9 @@ namespace DesignPatterns.Tests
             }
         }
 
-        public ISelector Selector { get; set; }
-
-        private ClientLogger() { }
+        private ClientLogger()
+        {
+        }
 
         public void Log(Exception exception) => Console.WriteLine(exception.ToString());
 
@@ -28,11 +28,11 @@ namespace DesignPatterns.Tests
     {
         public string Name { get; set; } = nameof(EmailLogger);
 
-        public ISelector Selector { get; set; }
-
         public static EmailLogger Instance => Singleton<EmailLogger>.Instance;
 
-        private EmailLogger() { }
+        private EmailLogger()
+        {
+        }
 
         public void Log(Exception exception) => Debug.WriteLine(exception.ToString());
 

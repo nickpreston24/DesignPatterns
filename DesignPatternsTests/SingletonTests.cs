@@ -51,7 +51,6 @@ namespace DesignPatterns.Tests
             logger.Log("hello");
             Debug.WriteLine(logger.Name);
             Debug.WriteLine(emaillogger.Name);
-
         }
 
         [TestMethod]

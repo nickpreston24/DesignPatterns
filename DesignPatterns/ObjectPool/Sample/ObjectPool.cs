@@ -20,7 +20,9 @@ namespace DesignPatterns.WebSamples
             {
                 get { return _InstancesCreated - _InstancesDestroyed; }
             }
+
             internal int _ObjectResetFailedCount;
+
             /// <summary>
             /// gets the count of object reset failures occured while the pool tried to re-add the object into the pool.
             /// </summary>
@@ -28,15 +30,19 @@ namespace DesignPatterns.WebSamples
             {
                 get { return _ObjectResetFailedCount; }
             }
+
             internal int _ReturnedToPoolByRessurectionCount;
+
             /// <summary>
-            /// gets the total count of object that has been picked up by the GC, and returned to pool. 
+            /// gets the total count of object that has been picked up by the GC, and returned to pool.
             /// </summary>
             public int ReturnedToPoolByRessurectionCount
             {
                 get { return _ReturnedToPoolByRessurectionCount; }
             }
+
             internal int _PoolObjectHitCount;
+
             /// <summary>
             /// gets the total count of successful accesses. The pool had a spare object to provide to the user without creating it on demand.
             /// </summary>
@@ -44,7 +50,9 @@ namespace DesignPatterns.WebSamples
             {
                 get { return _PoolObjectHitCount; }
             }
+
             internal int _PoolObjectMissCount;
+
             /// <summary>
             /// gets the total count of unsuccessful accesses. The pool had to create an object in order to satisfy the user request. If the number is high, consider increasing the object minimum limit.
             /// </summary>
@@ -52,7 +60,9 @@ namespace DesignPatterns.WebSamples
             {
                 get { return _PoolObjectMissCount; }
             }
+
             internal int _InstancesCreated;
+
             /// <summary>
             /// gets the total number of pooled objected created
             /// </summary>
@@ -60,7 +70,9 @@ namespace DesignPatterns.WebSamples
             {
                 get { return _InstancesCreated; }
             }
+
             internal int _InstancesDestroyed;
+
             /// <summary>
             /// gets the total number of objects destroyes, both in case of an pool overflow, and state corruption.
             /// </summary>
@@ -68,7 +80,9 @@ namespace DesignPatterns.WebSamples
             {
                 get { return _InstancesDestroyed; }
             }
+
             internal int _PoolOverflowCount;
+
             /// <summary>
             /// gets the number of objects been destroyed because the pool was full at the time of returning the object to the pool.
             /// </summary>
@@ -76,7 +90,9 @@ namespace DesignPatterns.WebSamples
             {
                 get { return _PoolOverflowCount; }
             }
+
             internal int _ReturnedToPoolCount;
+
             /// <summary>
             /// gets the total count of objects that been successfully returned to the pool
             /// </summary>
@@ -89,30 +105,37 @@ namespace DesignPatterns.WebSamples
             {
                 Interlocked.Increment(ref _InstancesCreated);
             }
+
             internal void IncrementObjectsDestroyedCount()
             {
                 Interlocked.Increment(ref _InstancesDestroyed);
             }
+
             internal void IncrementPoolObjectHitCount()
             {
                 Interlocked.Increment(ref _PoolObjectHitCount);
             }
+
             internal void IncrementPoolObjectMissCount()
             {
                 Interlocked.Increment(ref _PoolObjectMissCount);
             }
+
             internal void IncrementPoolOverflowCount()
             {
                 Interlocked.Increment(ref _PoolOverflowCount);
             }
+
             internal void IncrementResetStateFailedCount()
             {
                 Interlocked.Increment(ref _ObjectResetFailedCount);
             }
+
             internal void IncrementObjectRessurectionCount()
             {
                 Interlocked.Increment(ref _ReturnedToPoolByRessurectionCount);
             }
+
             internal void IncrementReturnedToPoolCount()
             {
                 Interlocked.Increment(ref _ReturnedToPoolCount);
@@ -124,8 +147,10 @@ namespace DesignPatterns.WebSamples
 
         // Pool internal data structure
         private ConcurrentQueue<T> PooledObjects { get; set; }
+
         // Action to be passed to the pooled objects to allow them to return to the pool
         private Action<PooledObject, bool> ReturnToPoolAction;
+
         // Indication flag that states whether Adjusting operating is in progress.
         // The type is Int, altought it looks like it should be bool - this was done for Interlocked CAS operation (CompareExchange)
         private int AdjustPoolSizeIsInProgressCASFlag = 0; // 0 state false
@@ -134,6 +159,7 @@ namespace DesignPatterns.WebSamples
         /// Gets the Diagnostics class for the current Object Pool.
         /// </summary>
         public ObjectPoolDiagnostics Diagnostics { get; private set; }
+
         /// <summary>
         /// Gets the count of the objects currently in the pool.
         /// </summary>
@@ -141,7 +167,9 @@ namespace DesignPatterns.WebSamples
         {
             get { return PooledObjects.Count; }
         }
+
         private int _MinimumPoolSize;
+
         /// <summary>
         /// Gets or sets the minimum number of objects in the pool.
         /// </summary>
@@ -156,7 +184,9 @@ namespace DesignPatterns.WebSamples
                 AdjustPoolSizeToBounds();
             }
         }
+
         private int _MaximumPoolSize;
+
         /// <summary>
         /// Gets or sets the maximum number of objects that could be available at the same time in the pool.
         /// </summary>
@@ -171,9 +201,11 @@ namespace DesignPatterns.WebSamples
                 AdjustPoolSizeToBounds();
             }
         }
+
         private Func<T> _FactoryMethod = null;
+
         /// <summary>
-        /// Gets the Factory method that will be used for creating new objects. 
+        /// Gets the Factory method that will be used for creating new objects.
         /// </summary>
         public Func<T> FactoryMethod
         {
@@ -185,17 +217,20 @@ namespace DesignPatterns.WebSamples
         /// Initializes a new pool with default settings.
         /// </summary>
         public ObjectPool() => InitializePool(DefaultPoolMinimumSize, DefaultPoolMaximumSize, null);
+
         /// <summary>
         /// Initializes a new pool with specified minimum pool size and maximum pool size
         /// </summary>
         /// <param name="minimumPoolSize">The minimum pool size limit.</param>
         /// <param name="maximumPoolSize">The maximum pool size limit</param>
         public ObjectPool(int minimumPoolSize, int maximumPoolSize) => InitializePool(minimumPoolSize, maximumPoolSize, null);
+
         /// <summary>
         /// Initializes a new pool with specified factory method.
         /// </summary>
         /// <param name="factoryMethod">The factory method that will be used to create new objects.</param>
         public ObjectPool(Func<T> factoryMethod) => InitializePool(DefaultPoolMinimumSize, DefaultPoolMaximumSize, factoryMethod);
+
         /// <summary>
         /// Initializes a new pool with specified factory method and minimum and maximum size.
         /// </summary>
@@ -203,6 +238,7 @@ namespace DesignPatterns.WebSamples
         /// <param name="maximumPoolSize">The maximum pool size limit</param>
         /// <param name="factoryMethod">The factory method that will be used to create new objects.</param>
         public ObjectPool(int minimumPoolSize, int maximumPoolSize, Func<T> factoryMethod) => InitializePool(minimumPoolSize, maximumPoolSize, factoryMethod);
+
         private void InitializePool(int minimumPoolSize, int maximumPoolSize, Func<T> factoryMethod)
         {
             // Validating pool limits, exception is thrown if invalid
@@ -236,6 +272,7 @@ namespace DesignPatterns.WebSamples
                 throw new ArgumentException("Maximum pool size must be greater than the maximum pool size.");
             }
         }
+
         private void AdjustPoolSizeToBounds()
         {
             // If there is an Adjusting operation in progress, skip and return.
@@ -262,6 +299,7 @@ namespace DesignPatterns.WebSamples
                 AdjustPoolSizeIsInProgressCASFlag = 0;
             }
         }
+
         private T CreatePooledObject()
         {
             T newObject;
@@ -280,6 +318,7 @@ namespace DesignPatterns.WebSamples
             newObject.ReturnToPool = (Action<PooledObject, bool>)ReturnToPoolAction;
             return newObject;
         }
+
         private void DestroyPooledObject(PooledObject objectToDestroy)
         {
             // Making sure that the object is only disposed once (in case of application shutting down and we don't control the order of the finalization)
@@ -296,7 +335,7 @@ namespace DesignPatterns.WebSamples
         }
 
         /// <summary>
-        /// Get a monitored object from the pool. 
+        /// Get a monitored object from the pool.
         /// </summary>
         /// <returns></returns>
         public T GetObject()
@@ -320,6 +359,7 @@ namespace DesignPatterns.WebSamples
                 return CreatePooledObject();
             }
         }
+
         internal void ReturnObjectToPool(PooledObject objectToReturnToPool, bool reRegisterForFinalization)
         {
             var returnedObject = (T)objectToReturnToPool;
@@ -346,7 +386,7 @@ namespace DesignPatterns.WebSamples
                 }
                 // Diagnostics update
                 Diagnostics.IncrementReturnedToPoolCount();
-                // Adding the object back to the pool 
+                // Adding the object back to the pool
                 PooledObjects.Enqueue(returnedObject);
             }
             else
