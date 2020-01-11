@@ -1,9 +1,0 @@
-/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Flyweights/bin/Debug/netstandard2.0/Flyweights.deps.json
-/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Flyweights/bin/Debug/netstandard2.0/Flyweights.dll
-/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Flyweights/bin/Debug/netstandard2.0/Flyweights.pdb
-/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Flyweights/obj/Debug/netstandard2.0/Flyweights.csprojAssemblyReference.cache
-/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Flyweights/obj/Debug/netstandard2.0/Flyweights.csproj.CoreCompileInputs.cache
-/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Flyweights/obj/Debug/netstandard2.0/Flyweights.AssemblyInfoInputs.cache
-/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Flyweights/obj/Debug/netstandard2.0/Flyweights.AssemblyInfo.cs
-/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Flyweights/obj/Debug/netstandard2.0/Flyweights.dll
-/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Flyweights/obj/Debug/netstandard2.0/Flyweights.pdb

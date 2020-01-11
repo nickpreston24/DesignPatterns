@@ -272,5 +272,6 @@ __pycache__/
 # binaries
 .dll
 .pdb
-**/*bin/
-**/*obj/
+bin/
+obj/
+node_modules/

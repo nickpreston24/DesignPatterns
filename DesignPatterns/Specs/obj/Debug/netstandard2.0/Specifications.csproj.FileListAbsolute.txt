@@ -1,9 +1,0 @@
-/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Specs/bin/Debug/netstandard2.0/Specifications.deps.json
-/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Specs/bin/Debug/netstandard2.0/Specifications.dll
-/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Specs/bin/Debug/netstandard2.0/Specifications.pdb
-/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Specs/obj/Debug/netstandard2.0/Specifications.csprojAssemblyReference.cache
-/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Specs/obj/Debug/netstandard2.0/Specifications.csproj.CoreCompileInputs.cache
-/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Specs/obj/Debug/netstandard2.0/Specifications.AssemblyInfoInputs.cache
-/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Specs/obj/Debug/netstandard2.0/Specifications.AssemblyInfo.cs
-/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Specs/obj/Debug/netstandard2.0/Specifications.dll
-/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Specs/obj/Debug/netstandard2.0/Specifications.pdb
