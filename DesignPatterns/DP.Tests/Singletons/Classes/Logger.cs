@@ -7,13 +7,7 @@ namespace DesignPatterns.Tests
     {
         public string Name { get; set; } = nameof(ClientLogger);
 
-        public static ClientLogger Instance
-        {
-            get
-            {
-                return Singleton<ClientLogger>.Instance;
-            }
-        }
+        public static ClientLogger Instance => Singleton<ClientLogger>.Instance;
 
         private ClientLogger()
         {

@@ -75,14 +75,11 @@ namespace DesignPatterns
         #endregion For Use in C# 8
     }
 
-    /////Implements
-    //internal class SelectorImplementation : ISelector
-    //{
-    //    public virtual ISingleton GetInstance<T>() where T : class, ISingleton
-    //    {
-    //        return Multiton.GetInstance<T>();
-    //    }
-    //}
+    ///Implements
+    internal class SelectorImplementation : ISelector
+    {
+        public virtual ISingleton GetInstance<T>() where T : class, ISingleton => Multiton.GetInstance<T>();
+    }
 
     public static class SingletonExtensions
     {

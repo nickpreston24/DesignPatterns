@@ -17,10 +17,8 @@ namespace DesignPatterns.Flyweights
     public class Forest
     {
         public Tree[] Trees;
-        public Tree Plant(int x, int y, string name, string color, string texture)
-        {
-            throw new NotImplementedException(MethodBase.GetCurrentMethod().Name);
-        }
+        public Tree Plant(int x, int y, string name, string color, string texture) => throw new NotImplementedException(MethodBase.GetCurrentMethod().Name);
+
         public void Draw(object canvas)
         {
 
@@ -60,14 +58,12 @@ namespace DesignPatterns.Flyweights
         public string Name { get; set; }
         public string Color { get; set; }
         public string Texture { get; set; }
-        public TreeType Tree(string name, string color, string texture)
-        {
-            return new TreeType
+        public TreeType Tree(string name, string color, string texture) =>
+            new TreeType
             {
                 Name = name,
                 Color = color,
                 Texture = texture
             };
-        }
     }
 }

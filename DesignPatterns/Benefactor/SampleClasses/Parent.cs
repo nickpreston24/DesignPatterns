@@ -54,18 +54,12 @@ public class Child //: BenefactorLogic, IParent
 
 public class BenefactorA
 {
-    public virtual string Foo()
-    {
-        return "Foo()";
-    }
+    public virtual string Foo() => "Foo()";
 }
 
 public class BenefactorB
 {
-    public virtual string Bar()
-    {
-        return "Bar()";
-    }
+    public virtual string Bar() => "Bar()";
 }
 
 //Holds common benefactor behaviors (optional and not entirely necessary).
@@ -80,9 +74,8 @@ public static class InheritanceExtensions
 {
     //Inject T's base class (Benefactor) with explicitly implemented methods, each paired with an exposed (public) method of the same name in their base class.
     public static Child Benefit<Child, Parent, Benefactor>(this Child child)// where Child : Benefactor
-    {
-        //keep a dictionary of types and their invokable methods (explicit and implicit methods will have the same name)
-        //T inherits B's methods, where B is a benefactor of T and T is a Child class derived from a Parent.
-        return child; //the modified child who got Benefactor's powers.
-    }
+        =>
+            //keep a dictionary of types and their invokable methods (explicit and implicit methods will have the same name)
+            //T inherits B's methods, where B is a benefactor of T and T is a Child class derived from a Parent.
+            child; //the modified child who got Benefactor's powers.
 }

@@ -7,10 +7,7 @@ namespace DesignPatterns.Tests
         private Apple apple;
         public string OwnerName { get; set; } = "Bob";
 
-        public static LunchBox Instance
-        {
-            get { return Singleton<LunchBox>.Instance; }
-        }
+        public static LunchBox Instance => Singleton<LunchBox>.Instance;
 
         private LunchBox() => apple = new Apple();
 
@@ -21,9 +18,6 @@ namespace DesignPatterns.Tests
     }
     public class Apple
     {
-        public override string ToString()
-        {
-            return "I am an apple! :D";
-        }
+        public override string ToString() => "I am an apple! :D";
     }
 }

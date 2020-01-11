@@ -13,7 +13,11 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Benefactor\Benefactor.csproj" />
+      <ProjectReference Include="..\ChainOfResponsibility\ChainOfResponsibility.csproj" />
+      <ProjectReference Include="..\Flyweights\Flyweights.csproj" />
       <ProjectReference Include="..\Singleton\Singletons.csproj" />
+      <ProjectReference Include="..\Specs\Specifications.csproj" />
     </ItemGroup>
 
 </Project>

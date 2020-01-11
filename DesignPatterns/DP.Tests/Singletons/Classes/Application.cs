@@ -12,7 +12,6 @@ namespace DesignPatterns.Tests
         public static Application Instance => Singleton<Application>.Instance; //use this with generic singleton
         public string Name { get; } = "Notepad++";
         public string Version { get; } = "1.0.0";
-        public ISelector Selector { get; set; }
 
         public static event EventHandler<QueryTypeEventArgs> QueryType;
 

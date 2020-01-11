@@ -6,7 +6,7 @@ namespace DesignPatterns.Tests
     ///From: https://www.codeproject.com/Articles/630324/Dependency-Injected-Singletons-What
     ///https://effectivesoftwaredesign.com/2015/06/11/the-solid-principles-illustrated-by-design-patterns/
     ///https://stackoverflow.com/questions/18488522/how-to-use-interface-with-singleton-class
-    public class Application : IApplication
+    public class Application : IApplication, ISingleton
     {
         private Application() { }  //permitted.
         public static Application Instance => Singleton<Application>.Instance; //use this with generic singleton
@@ -60,5 +60,9 @@ namespace DesignPatterns.Tests
 
             return (IApplication)constructors[0].Invoke(null);
         }
+    }
+    public class QueryTypeEventArgs
+    {
+        public Type Type { get; internal set; }
     }
 }

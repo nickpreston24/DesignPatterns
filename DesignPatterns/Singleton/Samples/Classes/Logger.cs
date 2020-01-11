@@ -3,17 +3,11 @@ using System.Diagnostics;
 
 namespace DesignPatterns.Tests
 {
-    public class ClientLogger : ILogger
+    public class ClientLogger : ILogger, ISingleton
     {
         public string Name { get; set; } = nameof(ClientLogger);
 
-        public static ClientLogger Instance
-        {
-            get
-            {
-                return Singleton<ClientLogger>.Instance;
-            }
-        }
+        public static ClientLogger Instance => Singleton<ClientLogger>.Instance;
 
         private ClientLogger()
         {
@@ -22,9 +16,10 @@ namespace DesignPatterns.Tests
         public void Log(Exception exception) => Console.WriteLine(exception.ToString());
 
         public void Log(string message) => Console.WriteLine(message);
+        public ISelector Selector { get; set; }
     }
 
-    public class EmailLogger : ILogger
+    public class EmailLogger : ILogger, ISingleton
     {
         public string Name { get; set; } = nameof(EmailLogger);
 
@@ -37,5 +32,6 @@ namespace DesignPatterns.Tests
         public void Log(Exception exception) => Debug.WriteLine(exception.ToString());
 
         public void Log(string message) => Debug.WriteLine(message);
+        public ISelector Selector { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿﻿namespace DesignPatterns
+﻿﻿namespace DesignPatterns.Tests
 {
     public interface IApplication : ISingleton
     {
