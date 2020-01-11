@@ -4,6 +4,7 @@
 #Projects
 /Pipeline.Test
 /ProducerConsumer
+**/*packages
 
 # User-specific files
 *.suo
@@ -271,3 +272,5 @@ __pycache__/
 # binaries
 .dll
 .pdb
+**/*bin/
+**/*obj/
