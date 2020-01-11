@@ -254,7 +254,7 @@ paket-files/
 .fake/
 
 # JetBrains Rider
-.idea/
+**/*.idea/
 *.sln.iml
 
 # CodeRush
@@ -265,3 +265,8 @@ __pycache__/
 *.pyc
 *.ncrunchproject
 *.ncrunchsolution
+
+
+# binaries
+.dll
+.pdb
