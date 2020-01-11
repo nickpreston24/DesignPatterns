@@ -7,7 +7,7 @@ namespace Pools.TestClient
 {
     internal class Program
     {
-        private static void Main(string[] args)
+        static void Main(string[] args)
         {
             var token = new CancellationTokenSource();
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace DesignPatterns
+namespace DesignPatterns.Specifications
 {
     public abstract class Specification<T> : ISpecification<T>
     {
@@ -22,8 +22,8 @@ namespace DesignPatterns
 
     internal class AndSpecification<T> : Specification<T>
     {
-        private readonly Specification<T> left;
-        private readonly Specification<T> right;
+        readonly Specification<T> left;
+        readonly Specification<T> right;
 
         public AndSpecification(Specification<T> left, Specification<T> right)
         {
@@ -36,12 +36,12 @@ namespace DesignPatterns
             var leftExpression = left.Condition();
             var rightExpression = right.Condition();
 
-            ///Working advanced, but slow code
+            //Working advanced, but slow code
 
             var invokedExpression = Expression.Invoke(rightExpression, leftExpression.Parameters);
             return (Expression<Func<T, bool>>)Expression.Lambda(Expression.AndAlso(leftExpression.Body, invokedExpression), leftExpression.Parameters);
 
-            ///Original Git? code (Has the replacement error):
+            //Original Git? code (Has the replacement error):
 
             //var paramExpr = Expression.Parameter(typeof(T));
             //var exprBody = Expression.AndAlso(leftExpression.Body, rightExpression.Body);
@@ -49,7 +49,7 @@ namespace DesignPatterns
             //var finalExpr = Expression.Lambda<Func<T, bool>>(exprBody, paramExpr);
             //return finalExpr;
 
-            ///Article code:
+            //Article code:
             //BinaryExpression andExpression = Expression.AndAlso(leftExpression.Body, rightExpression.Body);
             //return Expression.Lambda<Func<T, bool>>(andExpression, leftExpression.Parameters.Single());
         }
@@ -57,8 +57,8 @@ namespace DesignPatterns
 
     internal class OrSpecification<T> : Specification<T>
     {
-        private readonly Specification<T> left;
-        private readonly Specification<T> right;
+        readonly Specification<T> left;
+        readonly Specification<T> right;
 
         public OrSpecification(Specification<T> left, Specification<T> right)
         {
@@ -85,8 +85,8 @@ namespace DesignPatterns
 
     internal class NotSpecification<T> : Specification<T>
     {
-        private readonly Specification<T> left;
-        private readonly Specification<T> right;
+        readonly Specification<T> left;
+        readonly Specification<T> right;
 
         public NotSpecification(Specification<T> left, Specification<T> right)
         {

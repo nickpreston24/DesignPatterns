@@ -1,0 +1,51 @@
+﻿{
+  "version": "1.0.0",
+  "restore": {
+    "projectUniqueName": "/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/ObjectPool/TestClient/TestClient.csproj",
+    "projectName": "Test.Console",
+    "projectPath": "/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/ObjectPool/TestClient/TestClient.csproj",
+    "outputPath": "/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/ObjectPool/TestClient/obj/",
+    "projectStyle": "PackageReference",
+    "fallbackFolders": [
+      "/opt/dotnet/sdk/NuGetFallbackFolder"
+    ],
+    "originalTargetFrameworks": [
+      "netcoreapp2.2"
+    ],
+    "sources": {
+      "/home/michael/Desktop/CodeProjects/nuget_repo": {},
+      "https://api.nuget.org/v3/index.json": {}
+    },
+    "frameworks": {
+      "netcoreapp2.2": {
+        "projectReferences": {
+          "/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/ObjectPool/Pools/Pools.csproj": {
+            "projectPath": "/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/ObjectPool/Pools/Pools.csproj"
+          }
+        }
+      }
+    },
+    "warningProperties": {
+      "warnAsError": [
+        "NU1605"
+      ]
+    }
+  },
+  "frameworks": {
+    "netcoreapp2.2": {
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "suppressParent": "All",
+          "target": "Package",
+          "version": "[2.2.0, )",
+          "autoReferenced": true
+        }
+      },
+      "imports": [
+        "net461"
+      ],
+      "assetTargetFallback": true,
+      "warn": true
+    }
+  }
+}

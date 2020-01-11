@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DesignPatterns.Flyweight
+namespace DesignPatterns.Flyweights
 {
     //https://refactoring.guru/design-patterns/flyweight
     public class Tree
@@ -36,15 +36,11 @@ namespace DesignPatterns.Flyweight
         TreeType GetTreeType(string name, string color, string texture)
         {
             var existingType = Types
-                .Where(tree => tree.Color.Equals(color))
-                .Where(tree => tree.Name.Equals(name))
-                .Where(tree => tree.Texture.Equals(texture))
-                .SingleOrDefault();
-
+                .SingleOrDefault(tree => tree.Color.Equals(color) 
+                                         && tree.Name.Equals(name) 
+                                         && tree.Texture.Equals(texture));
             if (existingType != null)
-            {
                 return existingType;
-            }
 
             var nextType = new TreeType
             {
@@ -55,7 +51,7 @@ namespace DesignPatterns.Flyweight
 
             Types.Add(nextType);
 
-            return existingType;
+            return null;
         }
     }
 

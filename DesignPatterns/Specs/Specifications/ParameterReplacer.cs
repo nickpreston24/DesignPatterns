@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace DesignPatterns
+namespace DesignPatterns.Specifications
 {
     internal class ParameterReplacer : ExpressionVisitor
     {

@@ -1,0 +1,59 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Specs/Specifications.csproj": {}
+  },
+  "projects": {
+    "/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Specs/Specifications.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Specs/Specifications.csproj",
+        "projectName": "Specifications",
+        "projectPath": "/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Specs/Specifications.csproj",
+        "packagesPath": "/home/michael/.nuget/packages/",
+        "outputPath": "/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Specs/obj/",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/opt/dotnet/sdk/NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "/home/michael/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "/home/michael/Desktop/CodeProjects/nuget_repo": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}

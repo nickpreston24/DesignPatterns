@@ -4,6 +4,8 @@
         <OutputType>Exe</OutputType>
         <TargetFramework>netcoreapp2.2</TargetFramework>
         <LangVersion>7.3</LangVersion>
+        <AssemblyName>Test.Console</AssemblyName>
+        <RootNamespace>Test.Console</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

@@ -1,0 +1,14 @@
+/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/ObjectPool/TestClient/bin/Debug/netcoreapp2.2/Test.Console.deps.json
+/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/ObjectPool/TestClient/bin/Debug/netcoreapp2.2/Test.Console.runtimeconfig.json
+/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/ObjectPool/TestClient/bin/Debug/netcoreapp2.2/Test.Console.runtimeconfig.dev.json
+/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/ObjectPool/TestClient/bin/Debug/netcoreapp2.2/Test.Console.dll
+/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/ObjectPool/TestClient/bin/Debug/netcoreapp2.2/Test.Console.pdb
+/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/ObjectPool/TestClient/bin/Debug/netcoreapp2.2/Pools.dll
+/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/ObjectPool/TestClient/bin/Debug/netcoreapp2.2/Pools.pdb
+/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/ObjectPool/TestClient/obj/Debug/netcoreapp2.2/TestClient.csprojAssemblyReference.cache
+/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/ObjectPool/TestClient/obj/Debug/netcoreapp2.2/TestClient.csproj.CoreCompileInputs.cache
+/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/ObjectPool/TestClient/obj/Debug/netcoreapp2.2/TestClient.AssemblyInfoInputs.cache
+/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/ObjectPool/TestClient/obj/Debug/netcoreapp2.2/TestClient.AssemblyInfo.cs
+/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/ObjectPool/TestClient/obj/Debug/netcoreapp2.2/TestClient.csproj.CopyComplete
+/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/ObjectPool/TestClient/obj/Debug/netcoreapp2.2/Test.Console.dll
+/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/ObjectPool/TestClient/obj/Debug/netcoreapp2.2/Test.Console.pdb

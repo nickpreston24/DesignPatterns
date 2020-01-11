@@ -1,0 +1,9 @@
+/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Specs/bin/Debug/netcoreapp2.1/Specifications.deps.json
+/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Specs/bin/Debug/netcoreapp2.1/Specifications.dll
+/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Specs/bin/Debug/netcoreapp2.1/Specifications.pdb
+/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Specs/obj/Debug/netcoreapp2.1/Specifications.csprojAssemblyReference.cache
+/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Specs/obj/Debug/netcoreapp2.1/Specifications.csproj.CoreCompileInputs.cache
+/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Specs/obj/Debug/netcoreapp2.1/Specifications.AssemblyInfoInputs.cache
+/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Specs/obj/Debug/netcoreapp2.1/Specifications.AssemblyInfo.cs
+/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Specs/obj/Debug/netcoreapp2.1/Specifications.dll
+/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Specs/obj/Debug/netcoreapp2.1/Specifications.pdb

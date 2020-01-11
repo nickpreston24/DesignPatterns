@@ -1,0 +1,47 @@
+﻿{
+  "version": "1.0.0",
+  "restore": {
+    "projectUniqueName": "/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Flyweights/Flyweights.csproj",
+    "projectName": "Flyweights",
+    "projectPath": "/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Flyweights/Flyweights.csproj",
+    "outputPath": "/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/Flyweights/obj/",
+    "projectStyle": "PackageReference",
+    "fallbackFolders": [
+      "/opt/dotnet/sdk/NuGetFallbackFolder"
+    ],
+    "originalTargetFrameworks": [
+      "netstandard2.0"
+    ],
+    "sources": {
+      "/home/michael/Desktop/CodeProjects/nuget_repo": {},
+      "https://api.nuget.org/v3/index.json": {}
+    },
+    "frameworks": {
+      "netstandard2.0": {
+        "projectReferences": {}
+      }
+    },
+    "warningProperties": {
+      "warnAsError": [
+        "NU1605"
+      ]
+    }
+  },
+  "frameworks": {
+    "netstandard2.0": {
+      "dependencies": {
+        "NETStandard.Library": {
+          "suppressParent": "All",
+          "target": "Package",
+          "version": "[2.0.3, )",
+          "autoReferenced": true
+        }
+      },
+      "imports": [
+        "net461"
+      ],
+      "assetTargetFallback": true,
+      "warn": true
+    }
+  }
+}
