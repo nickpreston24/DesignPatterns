@@ -1,8 +1,10 @@
-﻿﻿namespace DesignPatterns.Tests
+﻿﻿ using DesignPatterns.Singletons;
+
+  namespace DP.Tests.Singletons.Classes
 {
     public interface ILogger : ISingleton
     {
-        string Name { get; set; }
+        string Provider { get; set; }
         void Log(string message);
     }
 }

@@ -1,4 +1,6 @@
-﻿﻿namespace DesignPatterns.Tests
+﻿using DesignPatterns.Singletons;
+
+ namespace DP.Tests.Singletons.Classes
 {
     public interface IApplication : ISingleton
     {

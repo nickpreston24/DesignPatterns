@@ -27,9 +27,9 @@ namespace DesignPatterns.Flyweights
 
     public class TreeFactory
     {
-        private ICollection<TreeType> Types = new List<TreeType>();
+        ICollection<TreeType> Types = new List<TreeType>();
 
-        private Func<TreeType, string, bool> IsColor = (tree, color) => tree.Color.Equals(color);
+        Func<TreeType, string, bool> IsColor = (tree, color) => tree.Color.Equals(color);
 
         TreeType GetTreeType(string name, string color, string texture)
         {

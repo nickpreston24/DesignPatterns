@@ -4,7 +4,7 @@ using System.Collections.Generic;
 /* Keep this namespace as is, refers to src from: 
    https://www.codeproject.com/Articles/1104555/Function-Decorator-Pattern-Reanimation-of-Function
 */
-namespace Decorators.FunctionInterceptors
+namespace Decorators.Interceptors
 {
     public static partial class FunctionInterceptors
     {
@@ -63,14 +63,6 @@ namespace Decorators.FunctionInterceptors
         /// <returns></returns>
         public static Func<A, Result> With<A, Result>(this Func<A, Result> action) =>
             arg => action(arg);
-
-        // public static Func<A, Result> UnCurry<A, Result>(this Func<A, Func<A, Result>> curriedFunc) => 
-        //     arg => curriedFunc(arg)();
-
-        // class SampleCurrying
-        // {
-        //     
-        // }
 
         #endregion My Interceptor Attempts
 

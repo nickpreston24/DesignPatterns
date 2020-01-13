@@ -1,15 +1,12 @@
-﻿﻿using System.Diagnostics;
-
-namespace DesignPatterns.Tests
+﻿﻿ namespace DP.Tests.Singletons.Classes
 {
-    class EmailService : IEmailService
+    internal class EmailService : IEmailService, ILogger
     {
+        public string Provider { get; set; }
         public ILogger Logger { get; }
+        
+        public EmailService(ILogger logger) => Logger = logger;
 
-        public EmailService(ILogger logger)
-        {
-            Logger = logger;
-            Debug.WriteLine(logger.Name);
-        }
+        public void Log(string message) => Logger.Log(message);
     }
 }

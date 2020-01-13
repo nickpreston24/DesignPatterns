@@ -1,14 +1,15 @@
-﻿﻿using System;
+﻿using System;
 using System.Reflection;
+using DesignPatterns.Singletons;
 
-namespace DesignPatterns.Tests
+namespace DP.Tests.Singletons.Classes
 {
     ///From: https://www.codeproject.com/Articles/630324/Dependency-Injected-Singletons-What
     ///https://effectivesoftwaredesign.com/2015/06/11/the-solid-principles-illustrated-by-design-patterns/
     ///https://stackoverflow.com/questions/18488522/how-to-use-interface-with-singleton-class
     public class Application : IApplication
     {
-        private Application() { }  //permitted.
+        Application() { }  //permitted.
         public static Application Instance => Singleton<Application>.Instance; //use this with generic singleton
         public string Name { get; } = "Notepad++";
         public string Version { get; } = "1.0.0";
@@ -16,7 +17,7 @@ namespace DesignPatterns.Tests
         public static event EventHandler<QueryTypeEventArgs> QueryType;
 
         //use to make Interface singletons
-        private static IApplication CreateInstance()
+        static IApplication CreateInstance()
         {
             var handler = QueryType;
             if (handler == null)

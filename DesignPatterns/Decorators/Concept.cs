@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Decorators.Conceptual
 {
-    static class Client
+    internal static class Client
     {
         public static void SendOutAlerts()
         {
@@ -21,7 +21,7 @@ namespace Decorators.Conceptual
     }
     
     //Concrete Component
-    class Toast : Notifier
+    internal class Toast : Notifier
     {
         public static Notifier Popup() => new Toast();
         public override ISendNotifications Send(string message)
@@ -33,7 +33,7 @@ namespace Decorators.Conceptual
   
 
     // Base Decorator
-    abstract class NotifierDecorator : ISendNotifications
+    internal abstract class NotifierDecorator : ISendNotifications
     {
         protected  ISendNotifications wrappee;
         public NotifierDecorator(ISendNotifications notifier) => wrappee = notifier;
@@ -51,7 +51,7 @@ namespace Decorators.Conceptual
     /*
      * Concrete Decorators
      */
-    class SMS : NotifierDecorator
+    internal class SMS : NotifierDecorator
     {
         // public ISendNotifications Send(string message)
         // {
@@ -72,7 +72,7 @@ namespace Decorators.Conceptual
         }
     }
 
-    class Facebook : NotifierDecorator
+    internal class Facebook : NotifierDecorator
     {
         // public ISendNotifications Send(string message)
         // {
@@ -85,7 +85,7 @@ namespace Decorators.Conceptual
         }
     }
 
-    class Slack : NotifierDecorator
+    internal class Slack : NotifierDecorator
     {
         // public ISendNotifications Send(string message)
         // {

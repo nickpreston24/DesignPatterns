@@ -1,4 +1,4 @@
-﻿namespace DesignPatterns
+﻿namespace DesignPatterns.Singletons
 {
     public interface ISingleton
     {

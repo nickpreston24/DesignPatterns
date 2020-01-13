@@ -1,22 +1,21 @@
 using System;
 using System.Collections.Generic;
-using Decorators.FunctionInterceptors;
 
 namespace Decorators
 {
-    class Client
+    public static class Client
     {
-        public void Run()
+        public static void Run()
         {
             // Conventional use:
             IProcess process = new Process();
             Console.WriteLine("Simplest process running: " + process.Start("Notepad++.exe"));
-            
+
             var decorator1 = new RetryableProcess(process);
             var decorator2 = new CacheableProcess(decorator1);
 
             decorator2.Start("Kitties!");
-            
+
             // Using a builder:
             IProcess compoundProcess = ProcessBuilder.Process
                 .Cache()
@@ -48,9 +47,9 @@ namespace Decorators
         public IProcess Build()
         {
             IProcess result = process;
-            
+
             process = new Process(); //Clears for reuse.
-            
+
             return result;
         }
     }
@@ -126,7 +125,7 @@ namespace Decorators
     }
 
     //Concrete Decorator
-    class CacheableProcess : ProcessDecorator
+    internal class CacheableProcess : ProcessDecorator
     {
         public CacheableProcess(IProcess process)
             : base(process)
@@ -139,7 +138,7 @@ namespace Decorators
         // public override ProcessStats GetStatistics() => throw new System.NotImplementedException();
 
         // Some other extra for this class only :)
-        public IDictionary<ProcessInfo, string> Cache() => throw new System.NotImplementedException();
+        public IDictionary<ProcessInfo, string> Cache() => throw new NotImplementedException();
     }
 
     public class ProcessInfo

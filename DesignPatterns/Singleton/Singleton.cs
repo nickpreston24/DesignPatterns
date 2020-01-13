@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace DesignPatterns
+namespace DesignPatterns.Singletons
 {
     //original source: http://richardpianka.com/2011/01/generic-singleton-pattern-in-c-with-reflection/
 

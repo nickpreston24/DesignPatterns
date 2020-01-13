@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DesignPatterns
+namespace DesignPatterns.Singletons
 {
     public class SingletonException : Exception
     {

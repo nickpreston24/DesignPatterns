@@ -1,21 +1,23 @@
-﻿﻿using System.Diagnostics;
+﻿using System.Diagnostics;
+using DesignPatterns.Singletons;
 
-namespace DesignPatterns.Tests
+namespace DP.Tests.Singletons.Classes
 {
     public class LunchBox : ISingleton
     {
-        private Apple apple;
+        Apple apple;
         public string OwnerName { get; set; } = "Bob";
 
         public static LunchBox Instance => Singleton<LunchBox>.Instance;
 
-        private LunchBox() => apple = new Apple();
+        LunchBox() => apple = new Apple();
 
         internal void Open()
         {
             Debug.WriteLine(apple.ToString());
         }
     }
+
     public class Apple
     {
         public override string ToString() => "I am an apple! :D";

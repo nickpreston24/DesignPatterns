@@ -1,6 +1,6 @@
 ﻿﻿using System;
 
-namespace DesignPatterns.Tests
+ namespace DP.Tests.Singletons.Classes
 {
     public class QueryTypeEventArgs
     {

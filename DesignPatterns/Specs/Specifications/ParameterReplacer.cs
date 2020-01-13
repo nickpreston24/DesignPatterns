@@ -4,7 +4,7 @@ namespace DesignPatterns.Specifications
 {
     internal class ParameterReplacer : ExpressionVisitor
     {
-        private readonly ParameterExpression parameter;
+        readonly ParameterExpression parameter;
 
         protected override Expression VisitParameter(ParameterExpression node)
             => base.VisitParameter(parameter);

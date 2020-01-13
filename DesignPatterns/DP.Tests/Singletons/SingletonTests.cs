@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using DesignPatterns.Singletons;
+using DP.Tests.Singletons.Classes;
 using Xunit;
 
 namespace DesignPatterns.Tests
@@ -26,14 +28,14 @@ namespace DesignPatterns.Tests
         [Fact]
         public void CanInjectSingletons()
         {
-            var logger = ClientLogger.Instance;
-            logger.Name = "┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴";
+            ClientLogger logger = ClientLogger.Instance;
+            logger.Provider = "┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴";
             var logger2 = ClientLogger.Instance;
 
             var emailService = new EmailService(logger);
             emailService.Logger.Log("Hi, from the email service.");
 
-            Assert.Equal(logger2.Name, logger.Name);
+            Assert.Equal(logger2.Provider, logger.Provider);
         }
 
         [Fact]
@@ -42,14 +44,14 @@ namespace DesignPatterns.Tests
             var logger = Multiton.GetInstance<ClientLogger>();
             ILogger emaillogger = Multiton.GetInstance<EmailLogger>();
 
-            Debug.WriteLine(logger.Name);
-            Debug.WriteLine(emaillogger.Name);
+            Debug.WriteLine(logger.Provider);
+            Debug.WriteLine(emaillogger.Provider);
 
             emaillogger.Log("hi from email logger");
-            emaillogger.Name = "new name";
+            emaillogger.Provider = "new name";
             logger.Log("hello");
-            Debug.WriteLine(logger.Name);
-            Debug.WriteLine(emaillogger.Name);
+            Debug.WriteLine(logger.Provider);
+            Debug.WriteLine(emaillogger.Provider);
         }
 
         [Fact]
@@ -67,16 +69,16 @@ namespace DesignPatterns.Tests
             Assert.True(lunchbox is ISingleton);
 
             string thiefName = "Jack", originalOwner = lunchbox.OwnerName;
-            Assert.True(lunchbox.OwnerName.Equals(originalOwner));
+            Assert.Equal(lunchbox.OwnerName,originalOwner);
 
             lunchbox.OwnerName = thiefName;
-            Assert.True(lunchbox.OwnerName.Equals(thiefName));
+            Assert.Equal(lunchbox.OwnerName,thiefName);
         }
 
         [Fact]
         public void Can_CreateMultithreadSingletons()
         {
-            EmailLogger.Instance.Name = "start";
+            EmailLogger.Instance.Provider = "start";
             var thread = new Thread(Write1);
             thread.Start();
             Write2();
@@ -89,9 +91,9 @@ namespace DesignPatterns.Tests
             {
                 var emailLogger = EmailLogger.Instance;
 
-                if (!string.IsNullOrWhiteSpace(emailLogger.Name))
+                if (!string.IsNullOrWhiteSpace(emailLogger.Provider))
                 {
-                    emailLogger.Name = "mike";
+                    emailLogger.Provider = "mike";
                 }
 
                 emailLogger.Log($"Thread 2, count {count}");
@@ -103,9 +105,9 @@ namespace DesignPatterns.Tests
             foreach (int count in Enumerable.Range(1, maxCount))
             {
                 var emailLogger = EmailLogger.Instance;
-                if (!string.IsNullOrWhiteSpace(emailLogger.Name))
+                if (!string.IsNullOrWhiteSpace(emailLogger.Provider))
                 {
-                    emailLogger.Name = "bob";
+                    emailLogger.Provider = "bob";
                 }
 
                 emailLogger.Log($"Thread 1, count {count}");
