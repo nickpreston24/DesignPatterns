@@ -2,17 +2,22 @@
 {
     public static partial class Extensions
     {
-        public static string ToLetter(this bool value, bool isUpper) => value ? isUpper ? "T" : "t" : isUpper ? "F" : "f";
-        public static string ToYesOrNo(this bool value, bool isLetter, bool isUpper)
+        public static string ToLetter(this bool value, bool capitalize = true) => value ? capitalize ? "T" : "t" : capitalize ? "F" : "f";
+        public static string ToYesOrNo(this bool value, bool isLetter = true, bool capitalize = true)
         {
             if (isLetter)
             {
-                return value ? isUpper ? "Y" : "y" : isUpper ? "N" : "n";
+                return value ? capitalize ? "Y" : "y" : capitalize ? "N" : "n";
             }
             else
             {
-                return value ? isUpper ? "Yes" : "yes" : isUpper ? "No" : "no";
+                return value ? capitalize ? "Yes" : "yes" : capitalize ? "No" : "no";
             }
         }
+
+        public static bool ToBoolean(this string text) =>
+            (text.ToLower().Equals("yes") || text.ToLower().Equals("y"))
+            ? true
+            : (text.ToLower().Equals("no") || text.ToLower().Equals("n")) ? false : true;
     }
 }
