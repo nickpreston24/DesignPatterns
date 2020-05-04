@@ -8,6 +8,21 @@ namespace Common.Extensions
 {
     public static partial class Extensions
     {
+        public static FileInfo CleanFile(string filePath, Dictionary<string, string> replacements)
+        {
+            var reader = new StreamReader(filePath);
+            string content = reader.ReadToEnd();
+            reader.Close();
+
+            content = content.ReplaceAll(replacements);
+
+            var writer = new StreamWriter(filePath);
+            writer.Write(content);
+            writer.Close();
+
+            return new FileInfo(filePath);
+        }
+
         public static void CreateStartupFolderShortcut()
         {
             var wshShell = new WshShellClass();
@@ -72,5 +87,7 @@ namespace Common.Extensions
                 }
             }
         }
+
+
     }
 }

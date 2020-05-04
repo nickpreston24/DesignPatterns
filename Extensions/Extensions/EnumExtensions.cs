@@ -11,8 +11,31 @@ namespace Common.Extensions
 {
     public static partial class Extensions
     {
+        public static T ToEnum<T>(this string input)
+            where T : struct =>
+            (T)Enum.Parse(typeof(T), input, true);
         public static IEnumerable<TEnum> GetValues<TEnum>()
             where TEnum : struct, IConvertible, IFormattable, IComparable => Enum.GetValues(typeof(TEnum)).Cast<TEnum>();
+
+        public static TValue GetValueOrDefault<TKey, TValue>
+            (this IDictionary<TKey, TValue> dictionary,
+                TKey key,
+                TValue defaultValue)
+        {
+            return dictionary.TryGetValue(key, out TValue value)
+                ? value
+                : defaultValue;
+        }
+
+        public static TValue GetValueOrDefault<TKey, TValue>
+            (this IDictionary<TKey, TValue> dictionary,
+             TKey key,
+             Func<TValue> defaultValueProvider)
+        {
+            return dictionary.TryGetValue(key, out TValue value)
+                ? value
+                : defaultValueProvider();
+        }
 
         public static Dictionary<int, string> ToDictionary(this Enum @enum)
         {
