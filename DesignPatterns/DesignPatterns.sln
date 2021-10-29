@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapter", "Adapter\Adapter.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iterable", "Iterable\Iterable.csproj", "{532E3A35-4080-4862-B457-635993F9E3EC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clevertech-Assesment", "Clevertech-Assesment\Clevertech-Assesment.csproj", "{0875A6C9-2675-4D6B-B30E-E45928B8CC67}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -142,5 +144,17 @@ Global
 		{532E3A35-4080-4862-B457-635993F9E3EC}.Release|x64.Build.0 = Release|Any CPU
 		{532E3A35-4080-4862-B457-635993F9E3EC}.Release|x86.ActiveCfg = Release|Any CPU
 		{532E3A35-4080-4862-B457-635993F9E3EC}.Release|x86.Build.0 = Release|Any CPU
+		{0875A6C9-2675-4D6B-B30E-E45928B8CC67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0875A6C9-2675-4D6B-B30E-E45928B8CC67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0875A6C9-2675-4D6B-B30E-E45928B8CC67}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0875A6C9-2675-4D6B-B30E-E45928B8CC67}.Debug|x64.Build.0 = Debug|Any CPU
+		{0875A6C9-2675-4D6B-B30E-E45928B8CC67}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0875A6C9-2675-4D6B-B30E-E45928B8CC67}.Debug|x86.Build.0 = Debug|Any CPU
+		{0875A6C9-2675-4D6B-B30E-E45928B8CC67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0875A6C9-2675-4D6B-B30E-E45928B8CC67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0875A6C9-2675-4D6B-B30E-E45928B8CC67}.Release|x64.ActiveCfg = Release|Any CPU
+		{0875A6C9-2675-4D6B-B30E-E45928B8CC67}.Release|x64.Build.0 = Release|Any CPU
+		{0875A6C9-2675-4D6B-B30E-E45928B8CC67}.Release|x86.ActiveCfg = Release|Any CPU
+		{0875A6C9-2675-4D6B-B30E-E45928B8CC67}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

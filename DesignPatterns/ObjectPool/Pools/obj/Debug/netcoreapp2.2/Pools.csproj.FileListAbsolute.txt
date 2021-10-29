@@ -1,9 +1,0 @@
-/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/ObjectPool/Pools/bin/Debug/netcoreapp2.2/Pools.deps.json
-/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/ObjectPool/Pools/bin/Debug/netcoreapp2.2/Pools.dll
-/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/ObjectPool/Pools/bin/Debug/netcoreapp2.2/Pools.pdb
-/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/ObjectPool/Pools/obj/Debug/netcoreapp2.2/Pools.csprojAssemblyReference.cache
-/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/ObjectPool/Pools/obj/Debug/netcoreapp2.2/Pools.csproj.CoreCompileInputs.cache
-/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/ObjectPool/Pools/obj/Debug/netcoreapp2.2/Pools.AssemblyInfoInputs.cache
-/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/ObjectPool/Pools/obj/Debug/netcoreapp2.2/Pools.AssemblyInfo.cs
-/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/ObjectPool/Pools/obj/Debug/netcoreapp2.2/Pools.dll
-/home/michael/Desktop/CodeProjects/DesignPatterns/DesignPatterns/ObjectPool/Pools/obj/Debug/netcoreapp2.2/Pools.pdb
