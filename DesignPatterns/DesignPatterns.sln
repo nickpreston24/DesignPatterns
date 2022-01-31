@@ -1,27 +1,29 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Specifications", "Specs\Specifications.csproj", "{AD92C36D-7273-49F0-82A7-4EACD2EE310E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Specifications", "Specs\Specifications.csproj", "{AD92C36D-7273-49F0-82A7-4EACD2EE310E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flyweights", "Flyweights\Flyweights.csproj", "{BD71D8E3-F4FB-420A-9A81-41E8410F49A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flyweights", "Flyweights\Flyweights.csproj", "{BD71D8E3-F4FB-420A-9A81-41E8410F49A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benefactor", "Benefactor\Benefactor.csproj", "{868799B2-91D5-4A20-80E2-9B89A4BC94E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benefactor", "Benefactor\Benefactor.csproj", "{868799B2-91D5-4A20-80E2-9B89A4BC94E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DP.Tests", "DP.Tests\DP.Tests.csproj", "{75796D6E-9841-4AF4-9589-A0E20568D613}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DP.Tests", "DP.Tests\DP.Tests.csproj", "{75796D6E-9841-4AF4-9589-A0E20568D613}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Singletons", "Singleton\Singletons.csproj", "{8A2EDB7C-5598-42B8-A5E0-5BFA1FE44B14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Singletons", "Singleton\Singletons.csproj", "{8A2EDB7C-5598-42B8-A5E0-5BFA1FE44B14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChainOfResponsibility", "ChainOfResponsibility\ChainOfResponsibility.csproj", "{79D249F9-832F-48A2-8F22-59AAFD2B2EEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChainOfResponsibility", "ChainOfResponsibility\ChainOfResponsibility.csproj", "{79D249F9-832F-48A2-8F22-59AAFD2B2EEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Decorators", "Decorators\Decorators.csproj", "{FBF4181F-0193-4BB0-A719-095D0CB7BCD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Decorators", "Decorators\Decorators.csproj", "{FBF4181F-0193-4BB0-A719-095D0CB7BCD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapter", "Adapter\Adapter.csproj", "{8E824870-B529-4E7C-B3CB-2F25FA07B0D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adapter", "Adapter\Adapter.csproj", "{8E824870-B529-4E7C-B3CB-2F25FA07B0D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iterable", "Iterable\Iterable.csproj", "{532E3A35-4080-4862-B457-635993F9E3EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iterable", "Iterable\Iterable.csproj", "{532E3A35-4080-4862-B457-635993F9E3EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clevertech-Assesment", "Clevertech-Assesment\Clevertech-Assesment.csproj", "{0875A6C9-2675-4D6B-B30E-E45928B8CC67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clevertech-Assesment", "Clevertech-Assesment\Clevertech-Assesment.csproj", "{0875A6C9-2675-4D6B-B30E-E45928B8CC67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtensionsTests", "ExtensionsTests\ExtensionsTests.csproj", "{FE592527-B484-4DDD-9E0F-BB1D654B320E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,9 +33,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{AD92C36D-7273-49F0-82A7-4EACD2EE310E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -156,5 +155,23 @@ Global
 		{0875A6C9-2675-4D6B-B30E-E45928B8CC67}.Release|x64.Build.0 = Release|Any CPU
 		{0875A6C9-2675-4D6B-B30E-E45928B8CC67}.Release|x86.ActiveCfg = Release|Any CPU
 		{0875A6C9-2675-4D6B-B30E-E45928B8CC67}.Release|x86.Build.0 = Release|Any CPU
+		{FE592527-B484-4DDD-9E0F-BB1D654B320E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE592527-B484-4DDD-9E0F-BB1D654B320E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE592527-B484-4DDD-9E0F-BB1D654B320E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FE592527-B484-4DDD-9E0F-BB1D654B320E}.Debug|x64.Build.0 = Debug|Any CPU
+		{FE592527-B484-4DDD-9E0F-BB1D654B320E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FE592527-B484-4DDD-9E0F-BB1D654B320E}.Debug|x86.Build.0 = Debug|Any CPU
+		{FE592527-B484-4DDD-9E0F-BB1D654B320E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE592527-B484-4DDD-9E0F-BB1D654B320E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE592527-B484-4DDD-9E0F-BB1D654B320E}.Release|x64.ActiveCfg = Release|Any CPU
+		{FE592527-B484-4DDD-9E0F-BB1D654B320E}.Release|x64.Build.0 = Release|Any CPU
+		{FE592527-B484-4DDD-9E0F-BB1D654B320E}.Release|x86.ActiveCfg = Release|Any CPU
+		{FE592527-B484-4DDD-9E0F-BB1D654B320E}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {53D40BEE-7695-4865-B185-F05AC4A96838}
 	EndGlobalSection
 EndGlobal
